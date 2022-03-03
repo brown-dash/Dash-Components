@@ -1,0 +1,30 @@
+@import '../../global/globalCssVariables.scss';
+
+.button-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 5px 20px;
+  color: white;
+  cursor: pointer;
+  transition: 0.1s;
+  overflow: hidden;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  font-size: $default-fontSize;
+  white-space: nowrap;
+  transition: 0.4s;
+  z-index: 1;
+
+  &:hover::before {
+    opacity: 1;
+  }
+
+  &:active,
+  &:focus {
+    // box-shadow: 0 5px 11px 0 rgb(0 0 0 / 18%), 0 4px 15px 0 rgb(0 0 0 / 15%);
+  }
+}

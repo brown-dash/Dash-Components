@@ -1,0 +1,50 @@
+@import '../../global/globalCssVariables.scss';
+
+.dropdown {
+  margin-top: 10px;
+}
+
+.dropdown-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  .dropdown-toggle {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    border: solid 1px black;
+    position: relative;
+  }
+
+  .dropdown-popup {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    min-width: fit-content;
+    background-color: $white;
+    background-color: $white;
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.3);
+    padding: 1px;
+    height: fit-content;
+
+    .list-item {
+      color: $black;
+      width: 100%;
+      height: 25px;
+      font-weight: 400;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+    }
+
+    .list-item:hover {
+        background-color: lightgrey;
+    }
+  }
+}
