@@ -1,7 +1,7 @@
 import React from 'react'
 import './EditableText.scss'
 
-interface IEditableTextProps {
+export interface IEditableTextProps {
   text: string
   editing: boolean
   onEdit: (newText: string) => void

@@ -8,7 +8,7 @@ import './Dropdown.scss'
 export interface IDropdownIconProps {
   val: any,
   text?: string,
-  icon?: string,
+  icon?: JSX.Element,
   style?: React.CSSProperties
 }
 

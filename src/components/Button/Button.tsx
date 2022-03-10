@@ -10,6 +10,7 @@ export interface IButtonProps {
   onClick: (event: React.MouseEvent) => void
   type?: 'outline' | 'gradient' | 'fill'
   primaryColor?: string
+  ripple?: boolean
   rounded?: boolean
   textColor?: string
   secondaryColor?: string
@@ -30,6 +31,7 @@ export const Button = (props: IButtonProps) => {
     rounded,
     secondaryColor,
     hoverStyle,
+    ripple,
     iconPosition,
     fontSize,
     height,
@@ -41,35 +43,39 @@ export const Button = (props: IButtonProps) => {
   const [rippleLeft, setRippleLeft] = useState<number>(0)
 
   const click = (e: React.MouseEvent) => {
-    // const rectEle = e.target as HTMLElement
-    // const rectBounds = rectEle.getBoundingClientRect()
-    // const left = rectBounds.left
-    // const top = rectBounds.top
-    // const offsetX = (e.clientX - left) - 50
-    // const offsetY = (e.clientY - top) - 50
-    // console.log('offsetX: ' + offsetX, 'offsetY: ' + offsetY)
-    // setRippleDisplay(true)
-    // setRippleOpacity(1)
-    // setTimeout(() => {
-    //   setRippleSize(1)
-    // }, 100)
-    // setRippleTop(offsetY)
-    // setRippleLeft(offsetX)
-    // setTimeout(() => {
-    //   setRippleOpacity(0)
-    //   setTimeout(() => {
-    //     setRippleSize(0)
-    //     setRippleDisplay(false)
-    //   }, 300)
-    // }, 300)
+    if (ripple) {
+      setRippleDisplay(false)
+      setRippleSize(0)
+      setRippleOpacity(0)
+      const rectEle = e.target as HTMLElement
+      const rectBounds = rectEle.getBoundingClientRect()
+      const left = rectBounds.left
+      const top = rectBounds.top
+      const offsetX = (e.clientX - left) - 50
+      const offsetY = (e.clientY - top) - 50
+      setRippleDisplay(true)
+      setRippleOpacity(1)
+      setTimeout(() => {
+        setRippleSize(1)
+      }, 100)
+      setRippleTop(offsetY)
+      setRippleLeft(offsetX)
+      setTimeout(() => {
+        setRippleOpacity(0)
+        setTimeout(() => {
+          setRippleSize(0)
+          setRippleDisplay(false)
+        }, 300)
+      }, 300)
+    }
     onClick(e)
   }
 
-  const ripple: JSX.Element = (
+  const rippleEle: JSX.Element = (
     <div
       className="button-ripple"
       style={{
-        display: rippleDisplay ? 'block' : 'none',
+        display: rippleDisplay ? 'block' : 'null',
         top: rippleTop,
         left: rippleLeft,
         transform: `scale(${rippleSize})`,
@@ -117,7 +123,6 @@ export const Button = (props: IButtonProps) => {
 
   const defaultProperties: React.CSSProperties = {
     borderRadius: rounded ? 20 : undefined,
-    width: '100%',
     fontSize: fontSize ? fontSize : undefined,
     background: primaryColor ? primaryColor : Colors.BLACK,
     color: textColor,
@@ -142,6 +147,7 @@ export const Button = (props: IButtonProps) => {
   }
   return (
     <div className={'button-container'} onClick={click} style={cssProperties()}>
+      {ripple && rippleEle}
       {iconPosition == 'right' ? null : icon}
       {text}
       {iconPosition == 'right' ? icon : null}
