@@ -1,22 +1,32 @@
 import { useState } from 'react'
 import React from 'react';
-import { Colors } from '../../global/globalEnums';
+import { Colors, FontSize } from '../../global/globalEnums';
 import './Button.scss'
 import { Story, Meta } from '@storybook/react';
 
 export interface IButtonProps {
+  onClick?: (event: React.MouseEvent) => void
+  onDoubleClick?: (event: React.MouseEvent) => void
+  type?: 'outline' | 'gradient' | 'fill' | 'icon'
+
+  // Content
   text?: string
   icon?: JSX.Element | string
-  onClick: (event: React.MouseEvent) => void
-  type?: 'outline' | 'gradient' | 'fill'
-  primaryColor?: string
-  ripple?: boolean
-  rounded?: boolean
-  textColor?: string
-  secondaryColor?: string
-  hoverStyle?: 'hover' | 'none'
-  iconPosition?: 'left' | 'right' | 'top' | 'bottom'
   fontSize?: number | string
+
+  // Colors
+  primaryColor?: string
+  secondaryColor?: string
+  color?: string
+
+  // Hover style
+  hoverStyle?: 'shadow' | 'darken' | 'lighten' | 'none'
+
+  // Additional stylization
+  isRipple?: boolean
+  rounded?: boolean
+  borderRadius?: number
+  iconPosition?: 'left' | 'right' | 'top' | 'bottom'
   height?: number
 }
 
@@ -27,11 +37,12 @@ export const Button = (props: IButtonProps) => {
     onClick,
     type,
     primaryColor,
-    textColor,
+    color,
     rounded,
+    borderRadius,
     secondaryColor,
     hoverStyle,
-    ripple,
+    isRipple,
     iconPosition,
     fontSize,
     height,
@@ -42,9 +53,8 @@ export const Button = (props: IButtonProps) => {
   const [rippleTop, setRippleTop] = useState<number>(0)
   const [rippleLeft, setRippleLeft] = useState<number>(0)
 
-  const click = (e: React.MouseEvent) => {
-    if (ripple) {
-      setRippleDisplay(false)
+  const handleRipple = (e: React.MouseEvent) => {
+    setRippleDisplay(false)
       setRippleSize(0)
       setRippleOpacity(0)
       const rectEle = e.target as HTMLElement
@@ -67,11 +77,9 @@ export const Button = (props: IButtonProps) => {
           setRippleDisplay(false)
         }, 300)
       }, 300)
-    }
-    onClick(e)
   }
 
-  const rippleEle: JSX.Element = (
+  const rippleHelperElement: JSX.Element = (
     <div
       className="button-ripple"
       style={{
@@ -83,6 +91,17 @@ export const Button = (props: IButtonProps) => {
       }}
     />
   )
+
+  /**
+   * In the event that there is a single click
+   * @param e 
+   */
+  const handleClick = (e: React.MouseEvent) => {
+    if (isRipple) {
+      handleRipple(e)
+    }
+    onClick && onClick(e)
+  }
 
   const outlineProperties: React.CSSProperties = {
     backgroundColor: 'transparent',
@@ -96,8 +115,8 @@ export const Button = (props: IButtonProps) => {
   const gradientProperties: React.CSSProperties = {
     background: `linear-gradient(${
       Math.random() * 360
-    }deg, ${primaryColor} 0%, ${secondaryColor} 100%)`,
-    color: textColor,
+    } deg, ${primaryColor} 0%, ${secondaryColor} 100%)`,
+    color: color,
     borderRadius: rounded ? 20 : undefined,
     fontSize: fontSize ? fontSize : undefined,
     height: height,
@@ -107,17 +126,17 @@ export const Button = (props: IButtonProps) => {
     height: height ? height : 40,
     width: height ? height : 40,
     padding: 0,
-    borderRadius: rounded ? '100%' : undefined,
-    fontSize: fontSize ? fontSize : '1.3rem',
-    background: primaryColor ? primaryColor : 'black',
-    color: textColor,
+    borderRadius: rounded ? '100%' : borderRadius ? borderRadius : undefined,
+    fontSize: fontSize ? fontSize : FontSize.HEADER,
+    background: primaryColor ? primaryColor : 'transparent',
+    color: color,
   }
 
   const fillProperties: React.CSSProperties = {
     borderRadius: rounded ? 20 : undefined,
     fontSize: fontSize ? fontSize : undefined,
     background: primaryColor ? primaryColor : 'black',
-    color: textColor,
+    color: color,
     height: height,
   }
 
@@ -125,12 +144,25 @@ export const Button = (props: IButtonProps) => {
     borderRadius: rounded ? 20 : undefined,
     fontSize: fontSize ? fontSize : undefined,
     background: primaryColor ? primaryColor : Colors.BLACK,
-    color: textColor,
+    color: color,
     height: height,
     boxShadow: 'none',
   }
 
-  const cssProperties = (): React.CSSProperties => {
+  const getHoverStyle = () => {
+    switch (hoverStyle) {
+      case 'shadow':
+        return 'shadow'
+      case 'darken':
+        return 'darken'
+      case 'lighten':
+        return 'lighten'
+      default:
+        return ''
+    }
+  }
+
+  const getCssProperties = (): React.CSSProperties => {
     if (icon && !text) {
       return iconProperties
     }
@@ -141,13 +173,15 @@ export const Button = (props: IButtonProps) => {
         return gradientProperties
       case 'outline':
         return outlineProperties
+      case 'icon':
+        return iconProperties
       default:
         return defaultProperties
     }
   }
   return (
-    <div className={'button-container'} onClick={click} style={cssProperties()}>
-      {ripple && rippleEle}
+    <div className={`button-container ${getHoverStyle()}`} onClick={handleClick} style={getCssProperties()}>
+      {isRipple && rippleHelperElement}
       {iconPosition == 'right' ? null : icon}
       {text}
       {iconPosition == 'right' ? icon : null}

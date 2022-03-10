@@ -7,7 +7,6 @@
   padding: 5px 20px;
   color: white;
   cursor: pointer;
-  transition: 0.1s;
   overflow: hidden;
   user-select: none;
   display: flex;
@@ -30,7 +29,17 @@
     transition: 0.2s;
   }
 
-  &:hover{
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  &.shadow {
+    &:hover{
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
   }
+
+  &.darken {
+    &:hover{
+      background-color: rgba(0,0,0,0.2);
+    }
+  }
+
+  
 }
