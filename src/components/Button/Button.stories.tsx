@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
 import { Button, IButtonProps } from '..';
-import { Colors } from '../../global/globalEnums';
+import { Colors, FontSize } from '../../global/globalEnums';
 import * as fa from 'react-icons/fa'
 import * as bi from 'react-icons/bi'
 
@@ -18,35 +18,39 @@ export const Fill = Template.bind({});
 Fill.args = {
     onClick: () => {},
     text: 'Fill',
-    type: 'fill'
+    type: 'fill',
+    backgroundColor: Colors.BLACK,
+    color: Colors.WHITE,
 };
 
 export const Outline = Template.bind({});
 Outline.args = {
     onClick: () => {},
     text: "Outline",
-    primaryColor: Colors.BLACK,
-    type: 'outline' 
+    hasBorder: true,
+    color: Colors.BLACK,
+    hoverStyle: 'shadow'
 };
 
 export const Icon = Template.bind({});
 Icon.args = {
+    height: 40,
     onClick: () => {},
     icon: <bi.BiPlus/>,
-    primaryColor: Colors.TRANSPARENT,
     color: Colors.BLACK,
+    fontSize: FontSize.HEADER,
     hoverStyle: 'darken',
     borderRadius: 10,
-    type: 'icon'
+    tooltip: 'Add button',
+    label: 'Test'
 };
 
 export const Ripple = Template.bind({});
 Ripple.args = {
     onClick: () => {},
     text: "Ripple",
-    primaryColor: Colors.BLACK,
-    type: 'outline',
+    color: Colors.BLACK,
     icon: <fa.FaAccusoft/>,
-    ripple: true,
+    hasRipple: true,
     rounded: true
 };
