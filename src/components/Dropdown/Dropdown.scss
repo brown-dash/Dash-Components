@@ -13,11 +13,14 @@
   position: relative;
 
   .dropdown-toggle {
-    width: 100%;
-    height: 100%;
-    border-radius: 100%;
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    border-radius: 0;
     border: solid 1px black;
     position: relative;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .dropdown-popup {

@@ -4,20 +4,16 @@ import * as fa from 'react-icons/fa'
 import { Colors } from '../../global/globalEnums';
 import { Button } from '../Button'
 import './Dropdown.scss'
-
-export interface IDropdownIconProps {
-  val: any,
-  text?: string,
-  icon?: JSX.Element,
-  style?: React.CSSProperties
-}
+import { IListBoxItem, ListBox } from '../ListBox/ListBox';
+import { EditableText } from '..';
 
 export interface IDropdownProps {
   title?: string
-  items: IDropdownIconProps[]
+  items: IListBoxItem[]
   onSelect: (val: any) => void
   location: 'left' | 'right' | 'below' | 'above'
   iconOnly?: boolean
+  type: 'search' | 'select' | 'click'
 }
 
 /**
@@ -29,71 +25,44 @@ export interface IDropdownProps {
  * Look at: import Select from "react-select";
  */
 export const Dropdown = (props: IDropdownProps) => {
-  const { title, onSelect, items, location, iconOnly } = props
+  const { title, onSelect, items, location, iconOnly, type } = props
   const [isOpen, setOpen] = useState<boolean>(false)
+  const [selectedItem, setSelectedItem] = useState<IListBoxItem | undefined>(undefined)
+  const [searchTerm, setSearchTerm] = useState<string | undefined>(undefined)
 
-  const itemElements: JSX.Element[] = items.map((item, ind) => {
-    return (
-      <div key={item.text! + ind} className='list-item'>
-        <Button
-          primaryColor={Colors.TRANSPARENT}
-          textColor={Colors.BLACK}
-          icon={item.icon}
-          text={iconOnly ? undefined : item.text}
-          onClick={() => {
-            setOpen(false)
-            onSelect(item.val)
-          }}
-        />
-      </div>
-    )
-  })
-
-  const leftProperties: React.CSSProperties = {
-    right: 'calc(100% + 5px)', 
-    top: 'calc(100% + 10px)'
-  }
-
-  const rightProperties: React.CSSProperties = {
-    right: 'calc(100% + 5px)', 
-    top: 'calc(100% + 10px)'
-  }
-
-  const belowProperties: React.CSSProperties = {
-    left: 0, 
-    top: 'calc(100% + 10px)'
-  }
-
-  const aboveProperties: React.CSSProperties = {
-    right: 'calc(100% + 5px)', 
-    top: 'calc(100% + 10px)'
-  }
-
-  const cssProperties = (): React.CSSProperties => {
-    switch (location) {
-      case 'left':
-        return leftProperties
-      case 'right':
-        return rightProperties
-      case 'above':
-        return aboveProperties
+  const getToggle = () => {
+    switch (type) {
+      case 'search':
+        return <div className="dropdown-toggle">
+          <EditableText 
+            text={searchTerm}  
+            placeholder={'...'}
+            editing={true} 
+            onEdit={(val) => {
+              setSearchTerm(val)
+              setOpen(true)
+            }}
+            setEditing={() => {}}
+          />
+          <Button icon={<fa.FaSearch/>}/>
+        </div> 
+      case 'select':
+        return <div className="dropdown-toggle">
+          <Button icon={selectedItem ? selectedItem.icon : undefined} text={selectedItem ? selectedItem.text : title} onClick={() => setOpen(!isOpen)} />
+          <Button icon={<fa.FaCaretDown/>}/>
+        </div> 
       default:
-        return belowProperties
+        return <div className="dropdown-toggle">
+          <Button icon={selectedItem ? selectedItem.icon : undefined} text={selectedItem ? selectedItem.text : title} onClick={() => setOpen(!isOpen)} />
+          <Button icon={<fa.FaCaretDown/>}/>
+        </div> 
     }
   }
 
   return (
     <div className="dropdown-container">
-      <Button iconPosition={'right'} icon={<fa.FaCaretDown/>} text={title} rounded={true} onClick={() => setOpen(!isOpen)} />
-      {isOpen && (
-        <div
-          className={'dropdown-popup'}
-          style={cssProperties()}
-          onPointerDown={(e) => e.stopPropagation()}
-        >
-          {itemElements}
-        </div>
-      )}
+      {getToggle()}
+      <ListBox isOpen={isOpen} items={items} filter={searchTerm} onSelect={onSelect} setIsOpen={setOpen} selectedItem={selectedItem} setSelectedItem={setSelectedItem}/>
     </div>
   )
 }

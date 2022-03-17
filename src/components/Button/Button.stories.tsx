@@ -51,6 +51,7 @@ Ripple.args = {
     text: "Ripple",
     color: Colors.BLACK,
     icon: <fa.FaAccusoft/>,
+    hasBorder: true,
     hasRipple: true,
     rounded: true
 };

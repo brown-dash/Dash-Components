@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react';
 import { Colors } from '../../global/globalEnums';
 import * as fa from 'react-icons/fa'
 import { Dropdown, IDropdownProps } from '..';
-import { IDropdownIconProps } from '.';
+import { IListBoxItem } from '../ListBox/ListBox';
 
 export default {
   title: 'Dash/Dropdown',
@@ -12,36 +12,52 @@ export default {
 } as Meta<typeof Dropdown>;
 
 const Template: Story<IDropdownProps> = (args) => <Dropdown {...args}/>;
-const dropdownItems: IDropdownIconProps[] = [
+const dropdownItems: IListBoxItem[] = [
     {
-        val: 'hi',
-        text: 'Say hello',
-        icon: <fa.FaAddressBook/>
+        val: 'facebook',
+        text: 'Facebook',
+        icon: <fa.FaFacebook/>
     },
     {
-        val: 'hi',
-        text: 'Say hello',
+        val: 'google',
+        text: 'Google',
+        icon: <fa.FaGoogle/>
+    },
+    {
+        val: 'airbnb',
+        text: 'Airbnb',
         icon: <fa.FaAirbnb/>
+    },
+    {
+        val: 'salesforce',
+        text: 'Salesforce',
+        icon: <fa.FaSalesforce/>,
+        items: [
+            {
+                val: 'slack',
+                text: 'Slack',
+                icon: <fa.FaSlack/>
+            }
+        ]
+    },
+    {
+        val: 'microsoft',
+        text: 'Microsoft',
+        icon: <fa.FaMicrosoft/>
     }
 ]
 
 export const Primary = Template.bind({});
 Primary.args = {
     onClick: () => {},
-    title: 'Current item',
+    title: 'Select company',
     items: dropdownItems
 };
 
-export const Secondary = Template.bind({});
-Secondary.args = {
+export const Search = Template.bind({});
+Search.args = {
     onClick: () => {},
-    title: 'Current item',
+    type: 'search',
+    title: 'Search company action',
     items: dropdownItems 
-};
-
-export const Ripple = Template.bind({});
-Ripple.args = {
-    onClick: () => {},
-    title: 'Current item',
-    items: dropdownItems
 };
