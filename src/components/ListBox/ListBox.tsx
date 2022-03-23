@@ -3,6 +3,7 @@ import React from 'react';
 import { Colors } from '../../global/globalEnums';
 import { Button } from '../Button'
 import './ListBox.scss'
+import * as fa from 'react-icons/fa'
 
 export interface IListBoxItem {
   val: any,
@@ -50,6 +51,13 @@ export const ListBox = (props: IListBoxProps) => {
                                 setSelectedItem && setSelectedItem(item)
                             }}
                         />
+                        {item.items && 
+                <div>
+                    <fa.FaCaretRight/>
+                </div>}
+                {item.items && <div className='sub-list'>
+                    <ListBox items={item.items} isOpen={true} setIsOpen={() => {}} onSelect={onSelect}/>
+                </div>}
                     </div>
                 )
             }
@@ -66,6 +74,13 @@ export const ListBox = (props: IListBoxProps) => {
                         setSelectedItem && setSelectedItem(item)
                     }}
                 />
+                {item.items && 
+                <div>
+                    <fa.FaCaretRight/>
+                </div>}
+                {item.items && <div className='sub-list'>
+                    <ListBox items={item.items} isOpen={true} setIsOpen={() => {}} onSelect={onSelect}/>
+                </div>}
             </div>
             )
         } else {
@@ -74,9 +89,8 @@ export const ListBox = (props: IListBoxProps) => {
     } else {    
         if (item === selectedItem) {
             return (
-                <div key={item.text! + ind} className='list-item'>
+                <div key={item.text! + ind} className='list-item' style={{backgroundColor: Colors.SUCCESS_GREEN}}>
                     <Button
-                        backgroundColor={Colors.SUCCESS_GREEN}
                         color={Colors.BLACK}
                         icon={item.icon}
                         text={item.text}
@@ -86,6 +100,13 @@ export const ListBox = (props: IListBoxProps) => {
                             setSelectedItem && setSelectedItem(item)
                         }}
                     />
+                    {item.items && 
+                <div>
+                    <fa.FaCaretRight/>
+                </div>}
+                {item.items && <div className='sub-list'>
+                    <ListBox items={item.items} isOpen={true} setIsOpen={() => {}} onSelect={onSelect}/>
+                </div>}                 
                 </div>
             )
         }
@@ -102,21 +123,26 @@ export const ListBox = (props: IListBoxProps) => {
                     setSelectedItem && setSelectedItem(item)
                 }}
             />
+            {item.items && 
+            <div>
+                <fa.FaCaretRight/>
+            </div>}
+            {item.items && <div className='sub-list'>
+                <ListBox items={item.items} isOpen={true} setIsOpen={() => {}} onSelect={onSelect}/>
+            </div>}
         </div>
         )
     }
   })
 
   return (
-    <div className="listBox-container">
-      {isOpen && (
+    isOpen ? <div className="listBox-container">
         <div
           className={'listBox-popup'}
           onPointerDown={(e) => e.stopPropagation()}
         >
           {itemElements}
         </div>
-      )}
-    </div>
+    </div> : (null)
   )
 }

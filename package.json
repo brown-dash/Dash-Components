@@ -1,5 +1,5 @@
 {
-  "name": "Dash-Components",
+  "name": "browndash-components",
   "version": "1.0.0",
   "description": "Component library as used by Dash",
   "main": "dist/cjs/index.js",

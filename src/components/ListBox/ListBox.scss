@@ -1,0 +1,28 @@
+.listBox-container {
+    position: relative;
+    width: 100%;
+    border-radius: 5px;
+    // border: solid 1px black;
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.3);
+}
+
+.list-item {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    justify-content: flex-start;
+
+    &:hover{
+        .sub-list{
+            display: block;
+        }
+    }
+
+    .sub-list {
+        display: none;
+        position: absolute;
+        left: 100%;
+    }
+}
