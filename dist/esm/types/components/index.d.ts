@@ -1,4 +1,4 @@
-export * from './TextInput';
-export * from './Button/Button';
-export * from './Modal';
+export * from './Button';
 export * from './ColorPicker';
+export * from './Dropdown';
+export * from './EditableText';

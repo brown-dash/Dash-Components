@@ -1,37 +1,27 @@
 import React from 'react';
 
-interface ITextInputProps {
-    placeholder?: string;
-    value?: string;
-    title?: string;
-    type?: string;
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
-declare const TextInput: (props: ITextInputProps) => JSX.Element;
-
 interface IButtonProps {
+    onClick?: (event: React.MouseEvent) => void;
+    onDoubleClick?: (event: React.MouseEvent) => void;
+    type?: 'outline' | 'gradient' | 'fill' | 'icon';
     text?: string;
     icon?: JSX.Element | string;
-    onClick: (event: React.MouseEvent) => void;
-    type?: 'outline' | 'gradient' | 'fill';
-    primaryColor?: string;
-    rounded?: boolean;
-    textColor?: string;
-    secondaryColor?: string;
-    hoverStyle?: 'hover' | 'none';
-    iconPosition?: 'left' | 'right' | 'top' | 'bottom';
     fontSize?: number | string;
+    tooltip?: string;
+    backgroundColor?: string;
+    primaryColor?: string;
+    secondaryColor?: string;
+    color?: string;
+    hoverStyle?: 'shadow' | 'darken' | 'lighten' | 'none';
+    hasLabel?: boolean;
+    label?: string;
+    hasRipple?: boolean;
+    hasBorder?: boolean;
+    borderRadius?: number;
+    iconPosition?: 'left' | 'right' | 'top' | 'bottom';
     height?: number;
 }
 declare const Button: (props: IButtonProps) => JSX.Element;
-
-interface IModalProps {
-    children: JSX.Element;
-    isOpen?: boolean;
-    setOpen?: (status: boolean) => void;
-    title?: string;
-}
-declare const Modal: (props: IModalProps) => JSX.Element | null;
 
 interface IColorPickerProps {
     title?: string;
@@ -39,4 +29,39 @@ interface IColorPickerProps {
 }
 declare const ColorPicker: (props: IColorPickerProps) => JSX.Element;
 
-export { Button, ColorPicker, IButtonProps, IColorPickerProps, IModalProps, ITextInputProps, Modal, TextInput };
+interface IListBoxItem {
+    val: any;
+    text?: string;
+    items?: IListBoxItem[];
+    icon?: JSX.Element;
+    style?: React.CSSProperties;
+}
+
+interface IDropdownProps {
+    title?: string;
+    items: IListBoxItem[];
+    onSelect: (val: any) => void;
+    location: 'left' | 'right' | 'below' | 'above';
+    iconOnly?: boolean;
+    type: 'search' | 'select' | 'click';
+}
+/**
+ *
+ * @param props
+ * @returns
+ *
+ * TODO: add support for isMulti, isSearchable
+ * Look at: import Select from "react-select";
+ */
+declare const Dropdown: (props: IDropdownProps) => JSX.Element;
+
+interface IEditableTextProps {
+    text?: string;
+    placeholder?: string;
+    editing: boolean;
+    onEdit: (newText: string) => void;
+    setEditing: (editing: boolean) => void;
+}
+declare const EditableText: (props: IEditableTextProps) => JSX.Element;
+
+export { Button, ColorPicker, Dropdown, EditableText, IButtonProps, IColorPickerProps, IDropdownProps, IEditableTextProps };

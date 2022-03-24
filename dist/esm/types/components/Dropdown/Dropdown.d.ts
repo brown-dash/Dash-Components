@@ -1,17 +1,13 @@
-import React from 'react';
+/// <reference types="react" />
 import './Dropdown.scss';
-export interface IDropdownIconProps {
-    val: any;
-    text?: string;
-    icon?: string;
-    style?: React.CSSProperties;
-}
+import { IListBoxItem } from '../ListBox/ListBox';
 export interface IDropdownProps {
     title?: string;
-    items: IDropdownIconProps[];
+    items: IListBoxItem[];
     onSelect: (val: any) => void;
     location: 'left' | 'right' | 'below' | 'above';
     iconOnly?: boolean;
+    type: 'search' | 'select' | 'click';
 }
 /**
  *
