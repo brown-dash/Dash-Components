@@ -16,53 +16,6 @@
   TREE_BULLET_WIDTH: 20px;
 }
 
-.colorPicker {
-  margin-top: 10px;
-  color: gray;
-  transition: 0.3s ease;
-}
-.colorPicker.true {
-  color: black;
-  font-weight: bold;
-}
-
-.colorPicker-container {
-  display: flex;
-  flex-direction: column;
-  width: 40px;
-  height: 40px;
-  position: relative;
-}
-.colorPicker-container .colorPicker-toggle {
-  width: 100%;
-  height: 100%;
-  border-radius: 100%;
-  border: solid 1px black;
-  position: relative;
-  cursor: pointer;
-}
-.colorPicker-container .colorPicker-popup {
-  position: absolute;
-  left: calc(100% + 10px);
-  top: 0;
-  width: fit-content;
-  height: fit-content;
-}
-
-:export {
-  contextMenuZindex: 100000;
-  SCHEMA_DIVIDER_WIDTH: 4;
-  COLLECTION_BORDER_WIDTH: 0;
-  MINIMIZED_ICON_SIZE: 24;
-  MAX_ROW_HEIGHT: 44px;
-  SEARCH_THUMBNAIL_SIZE: 130;
-  ANTIMODEMENU_HEIGHT: 36px;
-  DASHBOARD_SELECTOR_HEIGHT: 32px;
-  DFLT_IMAGE_NATIVE_DIM: 900px;
-  LEFT_MENU_WIDTH: 60px;
-  TREE_BULLET_WIDTH: 20px;
-}
-
 .button-container {
   position: relative;
   width: fit-content;
@@ -140,6 +93,53 @@
   position: relative;
   justify-content: space-between;
   align-items: center;
+}
+
+:export {
+  contextMenuZindex: 100000;
+  SCHEMA_DIVIDER_WIDTH: 4;
+  COLLECTION_BORDER_WIDTH: 0;
+  MINIMIZED_ICON_SIZE: 24;
+  MAX_ROW_HEIGHT: 44px;
+  SEARCH_THUMBNAIL_SIZE: 130;
+  ANTIMODEMENU_HEIGHT: 36px;
+  DASHBOARD_SELECTOR_HEIGHT: 32px;
+  DFLT_IMAGE_NATIVE_DIM: 900px;
+  LEFT_MENU_WIDTH: 60px;
+  TREE_BULLET_WIDTH: 20px;
+}
+
+.colorPicker {
+  margin-top: 10px;
+  color: gray;
+  transition: 0.3s ease;
+}
+.colorPicker.true {
+  color: black;
+  font-weight: bold;
+}
+
+.colorPicker-container {
+  display: flex;
+  flex-direction: column;
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+.colorPicker-container .colorPicker-toggle {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  border: solid 1px black;
+  position: relative;
+  cursor: pointer;
+}
+.colorPicker-container .colorPicker-popup {
+  position: absolute;
+  left: calc(100% + 10px);
+  top: 0;
+  width: fit-content;
+  height: fit-content;
 }
 
 :export {
