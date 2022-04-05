@@ -8,6 +8,7 @@ import * as fa from 'react-icons/fa'
 export interface IListBoxItem {
   val: any,
   text?: string,
+  shortcut?: string,
   items?: IListBoxItem[],
   icon?: JSX.Element,
   style?: React.CSSProperties
@@ -40,47 +41,55 @@ export const ListBox = (props: IListBoxProps) => {
             if (item === selectedItem) {
                 return (
                     <div key={item.text! + ind} className='list-item'>
-                        <Button
-                            backgroundColor={Colors.SUCCESS_GREEN}
-                            color={Colors.BLACK}
-                            icon={item.icon}
-                            text={item.text}
-                            onClick={() => {
-                                setIsOpen(false)
-                                onSelect(item.val)
-                                setSelectedItem && setSelectedItem(item)
-                            }}
-                        />
-                        {item.items && 
-                <div>
-                    <fa.FaCaretRight/>
-                </div>}
-                {item.items && <div className='sub-list'>
-                    <ListBox items={item.items} isOpen={true} setIsOpen={() => {}} onSelect={onSelect}/>
-                </div>}
+                        {<div className={'button'}><Button
+                primaryColor={Colors.TRANSPARENT}
+                color={Colors.BLACK}
+                icon={item.icon}
+                text={item.text}
+                padding={0}
+                onClick={() => {
+                    setIsOpen(false)
+                    onSelect(item.val)
+                    setSelectedItem && setSelectedItem(item)
+                }}
+            /></div>}
+            {item.shortcut && <div className='shortcut'>
+                {item.shortcut}
+            </div>}
+            {item.items && 
+            <div className={'caret'}>
+                <fa.FaCaretRight/>
+            </div>}
+            {item.items && <div className='sub-list'>
+                <ListBox items={item.items} isOpen={true} setIsOpen={() => {}} onSelect={onSelect}/>
+            </div>}
                     </div>
                 )
             }
             return (
             <div key={item.text! + ind} className='list-item'>
-                <Button
-                    primaryColor={Colors.TRANSPARENT}
-                    color={Colors.BLACK}
-                    icon={item.icon}
-                    text={item.text}
-                    onClick={() => {
-                        setIsOpen(false)
-                        onSelect(item.val)
-                        setSelectedItem && setSelectedItem(item)
-                    }}
-                />
-                {item.items && 
-                <div>
-                    <fa.FaCaretRight/>
-                </div>}
-                {item.items && <div className='sub-list'>
-                    <ListBox items={item.items} isOpen={true} setIsOpen={() => {}} onSelect={onSelect}/>
-                </div>}
+                {<div className={'button'}><Button
+                primaryColor={Colors.TRANSPARENT}
+                color={Colors.BLACK}
+                icon={item.icon}
+                text={item.text}
+                padding={0}
+                onClick={() => {
+                    setIsOpen(false)
+                    onSelect(item.val)
+                    setSelectedItem && setSelectedItem(item)
+                }}
+            /></div>}
+            {item.shortcut && <div className='shortcut'>
+                {item.shortcut}
+            </div>}
+            {item.items && 
+            <div className={'caret'}>
+                <fa.FaCaretRight/>
+            </div>}
+            {item.items && <div className='sub-list'>
+                <ListBox items={item.items} isOpen={true} setIsOpen={() => {}} onSelect={onSelect}/>
+            </div>}
             </div>
             )
         } else {
@@ -89,42 +98,51 @@ export const ListBox = (props: IListBoxProps) => {
     } else {    
         if (item === selectedItem) {
             return (
-                <div key={item.text! + ind} className='list-item' style={{backgroundColor: Colors.SUCCESS_GREEN}}>
-                    <Button
-                        color={Colors.BLACK}
-                        icon={item.icon}
-                        text={item.text}
-                        onClick={() => {
-                            setIsOpen(false)
-                            onSelect(item.val)
-                            setSelectedItem && setSelectedItem(item)
-                        }}
-                    />
-                    {item.items && 
-                <div>
+                <div key={item.text! + ind} className='list-item' style={{backgroundColor: Colors.MEDIUM_BLUE}}>
+                        {<div className={'button'}><Button
+                    primaryColor={Colors.TRANSPARENT}
+                    color={Colors.BLACK}
+                    icon={item.icon}
+                    text={item.text}
+                    padding={0}
+                    onClick={() => {
+                        setIsOpen(false)
+                        onSelect(item.val)
+                        setSelectedItem && setSelectedItem(item)
+                    }}
+                /></div>}
+                {item.shortcut && <div className='shortcut'>
+                    {item.shortcut}
+                </div>}
+                {item.items && 
+                <div className={'caret'}>
                     <fa.FaCaretRight/>
                 </div>}
                 {item.items && <div className='sub-list'>
                     <ListBox items={item.items} isOpen={true} setIsOpen={() => {}} onSelect={onSelect}/>
-                </div>}                 
+                </div>}               
                 </div>
             )
         }
         return (
         <div key={item.text! + ind} className='list-item'>
-            <Button
+            {<div className={'button'}><Button
                 primaryColor={Colors.TRANSPARENT}
                 color={Colors.BLACK}
                 icon={item.icon}
                 text={item.text}
+                padding={0}
                 onClick={() => {
                     setIsOpen(false)
                     onSelect(item.val)
                     setSelectedItem && setSelectedItem(item)
                 }}
-            />
+            /></div>}
+            {item.shortcut && <div className='shortcut'>
+                {item.shortcut}
+            </div>}
             {item.items && 
-            <div>
+            <div className={'caret'}>
                 <fa.FaCaretRight/>
             </div>}
             {item.items && <div className='sub-list'>

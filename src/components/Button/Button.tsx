@@ -30,6 +30,7 @@ export interface IButtonProps {
   label?: string
 
   // Additional stylization
+  padding?: number
   hasRipple?: boolean
   hasBorder?: boolean
   borderRadius?: number
@@ -45,6 +46,7 @@ export const Button = (props: IButtonProps) => {
     type,
     backgroundColor,
     color,
+    padding,
     borderRadius,
     primaryColor,
     secondaryColor,
@@ -115,18 +117,15 @@ export const Button = (props: IButtonProps) => {
 
   const defaultProperties = {
     fontSize: fontSize ? fontSize : undefined,
-    background: backgroundColor ? backgroundColor : undefined,
     borderRadius: borderRadius ? borderRadius : undefined,
     color: color,
     height: height,
-    border: hasBorder ? `solid 2px ${color}` : undefined
+    padding: padding,
+    border: hasBorder ? `solid 1px ${color}` : undefined
   }
 
   const gradientProperties: React.CSSProperties = {
-    ...defaultProperties,
-    background: `linear-gradient(${
-      Math.random() * 360
-    } deg, ${primaryColor} 0%, ${secondaryColor} 100%)`,
+    ...defaultProperties
   }
 
   const iconProperties: React.CSSProperties = {
@@ -152,7 +151,23 @@ export const Button = (props: IButtonProps) => {
     }
   }
 
-  const getCssProperties = (): React.CSSProperties => {
+  const gradientBackground: React.CSSProperties = {
+    background: `linear-gradient(${
+      Math.random() * 360
+    }deg, ${primaryColor} 0%, ${secondaryColor} 100%)`
+  }
+
+  const getBackgroundStyle = (): React.CSSProperties => {
+    if (primaryColor && secondaryColor) {
+      return gradientBackground
+    } else {
+      return {
+        background: backgroundColor
+      }
+    }
+  }
+
+  const getButtonStyle = (): React.CSSProperties => {
     if (icon && !text) {
       return iconProperties
     }
@@ -166,14 +181,20 @@ export const Button = (props: IButtonProps) => {
     }
   }
   return (
-      <div className={`button-container ${getHoverStyle()}`} onClick={handleClick} style={getCssProperties()}>
+      <div className={`button-container ${getHoverStyle()}`} onClick={handleClick} style={getButtonStyle()}>
         {hasRipple && rippleHelperElement}
         {iconPosition == 'right' ? null : icon}
         {text}
         {iconPosition == 'right' ? icon : null}
-        {hasLabel && <div className={'button-label'}>
-          {label}
-        </div>}
+        {hasLabel && 
+          <div className={'button-label'}>
+            {label}
+          </div>
+        }
+        <div 
+          className={`button-background`}
+          style={getBackgroundStyle()}
+        />
       </div>
   )
 }

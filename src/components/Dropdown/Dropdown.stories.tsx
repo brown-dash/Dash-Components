@@ -16,6 +16,7 @@ const dropdownItems: IListBoxItem[] = [
     {
         val: 'facebook',
         text: 'Facebook',
+        shortcut: '⌘F',
         icon: <fa.FaFacebook/>
     },
     {

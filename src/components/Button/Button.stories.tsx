@@ -53,5 +53,15 @@ Ripple.args = {
     icon: <fa.FaAccusoft/>,
     hasBorder: true,
     hasRipple: true,
-    rounded: true
+    borderRadius: 10,
+};
+
+export const Gradient = Template.bind({});
+Gradient.args = {
+    onClick: () => {},
+    text: "Gradient",
+    type: 'gradient',
+    primaryColor: Colors.BLACK,
+    secondaryColor: Colors.MEDIUM_BLUE,
+    borderRadius: 10
 };

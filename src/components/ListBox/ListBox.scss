@@ -1,28 +1,59 @@
+@import '../../global/globalCssVariables.scss';
+
 .listBox-container {
     position: relative;
     width: 100%;
     border-radius: 5px;
+    padding: 3px;
     // border: solid 1px black;
     box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.3);
 }
 
 .list-item {
     position: relative;
-    display: flex;
+    display: grid;
+    border-radius: 5px;
+    width: 100%;
+    grid-template-columns: 5% 75% 20%;
+    grid-template-areas: 
+    "start-gap button end";
+    grid-template-rows: 1fr;
     flex-direction: row;
     justify-content: left;
     align-items: center;
     justify-content: flex-start;
 
     &:hover{
+        background: $light-gray;
         .sub-list{
             display: block;
         }
     }
 
+    .button {
+        grid-area: button;
+    }
+
+    .shortcut {
+        grid-area: end;
+        color: $medium-gray;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        font-size: $label-fontSize;
+        font-family: $default-font;
+    }
+
+    .caret {
+        grid-area: end;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+    }
+
     .sub-list {
         display: none;
         position: absolute;
-        left: 100%;
+        left: calc(100% + 5px);
     }
 }
