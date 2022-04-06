@@ -4,6 +4,12 @@
   margin-top: 10px;
 }
 
+.divider {
+  height: 1px;
+  width: 100%;
+  background: $medium-gray;
+}
+
 .dropdown-container {
   display: flex;
   flex-direction: column;
@@ -11,15 +17,32 @@
   width: fit-content;
   height: 100%;
   position: relative;
+  // border: solid 1px black;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.3);
 
   .dropdown-toggle {
-    width: fit-content;
-    display: flex;
-    flex-direction: row;
+    width: 100%;
+    padding: 3px;
+    display: grid;
+    grid-template-columns: 5% 75% 20%;
+    grid-template-areas: 
+    "start-gap button end";
+    grid-template-rows: 1fr;
     border-radius: 5px;
-    border: solid 1px black;
     position: relative;
     justify-content: space-between;
     align-items: center;
+
+    .button {
+      grid-area: button;
+      min-width: 70px;
+    }
+
+    .caret {
+      grid-area: end;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
   }
 }

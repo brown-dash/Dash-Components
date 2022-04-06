@@ -6,14 +6,20 @@
     border-radius: 5px;
     padding: 3px;
     // border: solid 1px black;
-    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.3);
+    // box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.3);
+
+    .listBox-popup {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
 }
 
 .list-item {
     position: relative;
     display: grid;
     border-radius: 5px;
-    width: 100%;
+    width: calc(100% - 6px);
     grid-template-columns: 5% 75% 20%;
     grid-template-areas: 
     "start-gap button end";
@@ -22,6 +28,7 @@
     justify-content: left;
     align-items: center;
     justify-content: flex-start;
+    cursor: pointer;
 
     &:hover{
         background: $light-gray;

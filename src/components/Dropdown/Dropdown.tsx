@@ -40,7 +40,7 @@ export const Dropdown = (props: IDropdownProps) => {
     switch (type) {
       case 'search':
         return <div className="dropdown-toggle" onClick={() => setIsEditing(true)}>
-          <EditableText 
+          <div className='button'><EditableText 
             text={searchTerm}  
             placeholder={'...'}
             editing={isEditing} 
@@ -49,18 +49,18 @@ export const Dropdown = (props: IDropdownProps) => {
               setOpen(true)
             }}
             setEditing={setIsEditing}
-          />
-          <Button icon={<fa.FaSearch/>}/>
+          /></div>
+          <div className='caret'><Button icon={<fa.FaSearch/>}/></div>
         </div> 
       case 'select':
         return <div className="dropdown-toggle" onClick={() => setOpen(!isOpen)}>
-          <Button icon={selectedItem ? selectedItem.icon : undefined} text={selectedItem ? selectedItem.text : title} />
-          <Button icon={<fa.FaCaretDown/>}/>
+          <div className='button'><Button icon={selectedItem ? selectedItem.icon : undefined} text={selectedItem ? selectedItem.text : title} padding={0}/></div>
+          <div className='caret'><Button icon={<fa.FaCaretDown/>}/></div>
         </div> 
       default:
         return <div className="dropdown-toggle" onClick={() => setOpen(!isOpen)}>
-          <Button icon={selectedItem ? selectedItem.icon : undefined} text={selectedItem ? selectedItem.text : title} />
-          <Button icon={<fa.FaCaretDown/>}/>
+          <div className='button'><Button icon={selectedItem ? selectedItem.icon : undefined} text={selectedItem ? selectedItem.text : title} padding={0}/></div>
+          <div className='caret'><Button icon={<fa.FaCaretDown/>}/></div>
         </div> 
     }
   }
@@ -68,6 +68,7 @@ export const Dropdown = (props: IDropdownProps) => {
   return (
     <div className="dropdown-container">
       {getToggle()}
+      {isOpen && <div className='divider'/>}
       <ListBox isOpen={isOpen} items={items} filter={searchTerm} onSelect={onItemSelect} setIsOpen={setOpen} selectedItem={selectedItem} setSelectedItem={setSelectedItem}/>
     </div>
   )

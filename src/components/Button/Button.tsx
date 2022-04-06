@@ -152,9 +152,7 @@ export const Button = (props: IButtonProps) => {
   }
 
   const gradientBackground: React.CSSProperties = {
-    background: `linear-gradient(${
-      Math.random() * 360
-    }deg, ${primaryColor} 0%, ${secondaryColor} 100%)`
+    background: `linear-gradient(${70}deg, ${primaryColor} 0%, ${secondaryColor} 100%)`
   }
 
   const getBackgroundStyle = (): React.CSSProperties => {

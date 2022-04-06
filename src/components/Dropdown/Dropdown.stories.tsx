@@ -22,7 +22,6 @@ const dropdownItems: IListBoxItem[] = [
     {
         val: 'google',
         text: 'Google',
-        icon: <fa.FaGoogle/>
     },
     {
         val: 'airbnb',
