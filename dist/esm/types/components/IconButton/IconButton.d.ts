@@ -1,6 +1,6 @@
 import React from 'react';
-import './Button.scss';
-export interface IButtonProps {
+import './IconButton.scss';
+export interface IIconButtonProps {
     onClick?: (event: React.MouseEvent) => void;
     onDoubleClick?: (event: React.MouseEvent) => void;
     type?: 'outline' | 'gradient' | 'fill' | 'icon';
@@ -22,4 +22,4 @@ export interface IButtonProps {
     iconPosition?: 'left' | 'right' | 'top' | 'bottom';
     height?: number;
 }
-export declare const Button: (props: IButtonProps) => JSX.Element;
+export declare const IconButton: (props: IIconButtonProps) => JSX.Element;

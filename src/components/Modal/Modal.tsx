@@ -23,7 +23,6 @@ export const Modal = (props: IModalProps) => {
           <Button
             onClick={() => setOpen && setOpen(false)}
             icon={<FaTimes />}
-            rounded={true}
           />
         </div>
       </div>

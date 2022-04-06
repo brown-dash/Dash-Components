@@ -3,6 +3,7 @@ import './ListBox.scss';
 export interface IListBoxItem {
     val: any;
     text?: string;
+    shortcut?: string;
     items?: IListBoxItem[];
     icon?: JSX.Element;
     style?: React.CSSProperties;
@@ -11,6 +12,7 @@ export interface IListBoxProps {
     items: IListBoxItem[];
     isOpen: boolean;
     filter?: string;
+    hasShadow?: boolean;
     setIsOpen: (bool: boolean) => void;
     onSelect: (val: any) => void;
     selectedItem?: IListBoxItem;

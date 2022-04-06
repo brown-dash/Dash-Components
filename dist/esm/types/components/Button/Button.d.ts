@@ -12,10 +12,11 @@ export interface IButtonProps {
     primaryColor?: string;
     secondaryColor?: string;
     color?: string;
-    hoverStyle?: 'shadow' | 'darken' | 'lighten' | 'none';
+    hoverStyle?: 'shadow' | 'darken' | 'lighten' | 'gray' | 'none';
+    size?: 'small' | 'medium' | 'large';
     hasLabel?: boolean;
     label?: string;
-    hasRipple?: boolean;
+    padding?: number;
     hasBorder?: boolean;
     borderRadius?: number;
     iconPosition?: 'left' | 'right' | 'top' | 'bottom';

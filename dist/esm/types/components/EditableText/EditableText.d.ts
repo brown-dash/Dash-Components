@@ -6,5 +6,6 @@ export interface IEditableTextProps {
     editing: boolean;
     onEdit: (newText: string) => void;
     setEditing: (editing: boolean) => void;
+    backgroundColor?: string;
 }
 export declare const EditableText: (props: IEditableTextProps) => JSX.Element;
