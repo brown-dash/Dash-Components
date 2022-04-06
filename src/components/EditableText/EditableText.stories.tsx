@@ -14,25 +14,17 @@ const Template: Story<IEditableTextProps> = (args) => <EditableText {...args}/>;
 
 export const Primary = Template.bind({});
 Primary.args = {
-    onClick: () => {},
-    title: 'Current item',
+    text: 'hello', 
+    placeholder: '...',
+    editing: true,
+    onEdit: (val) => console.log(val),
 };
 
-export const Secondary = Template.bind({});
-Secondary.args = {
-    onClick: () => {},
-    text: "Outline",
-    primaryColor: Colors.BLACK,
-    type: 'outline' 
-};
-
-export const Ripple = Template.bind({});
-Ripple.args = {
-    onClick: () => {},
-    text: "Ripple",
-    primaryColor: Colors.BLACK,
-    type: 'outline',
-    icon: <fa.FaAccusoft/>,
-    ripple: true,
-    rounded: true
+export const Background = Template.bind({});
+Background.args = {
+    text: 'hello', 
+    placeholder: '...',
+    editing: true,
+    backgroundColor: Colors.LIGHT_GRAY,
+    onEdit: (val) => console.log(val),
 };

@@ -4,6 +4,7 @@ import { Colors } from '../../global/globalEnums';
 import { Button } from '../Button'
 import './ListBox.scss'
 import * as fa from 'react-icons/fa'
+import { IconButton } from '../IconButton';
 
 export interface IListBoxItem {
   val: any,
@@ -18,6 +19,7 @@ export interface IListBoxProps {
   items: IListBoxItem[]
   isOpen: boolean
   filter?: string
+  hasShadow?: boolean
   setIsOpen: (bool: boolean) => void
   onSelect: (val: any) => void
   selectedItem?: IListBoxItem
@@ -33,7 +35,7 @@ export interface IListBoxProps {
  * Look at: import Select from "react-select";
  */
 export const ListBox = (props: IListBoxProps) => {
-  const { items, onSelect, isOpen, setIsOpen, selectedItem, setSelectedItem, filter } = props
+  const { items, onSelect, isOpen, setIsOpen, selectedItem, setSelectedItem, filter, hasShadow } = props
 
   const getListItem = (item: IListBoxItem, ind: number, selected: boolean):JSX.Element | null => {
         return (
@@ -55,10 +57,10 @@ export const ListBox = (props: IListBoxProps) => {
     </div>}
     {item.items && 
     <div className={'caret'}>
-        <Button icon={<fa.FaCaretRight/>}/>
+        <IconButton size={'small'} icon={<fa.FaCaretRight/>}/>
     </div>}
     {item.items && <div className='sub-list'>
-        <ListBox items={item.items} isOpen={true} setIsOpen={() => {}} onSelect={onSelect}/>
+        <ListBox items={item.items} isOpen={true} setIsOpen={() => {}} onSelect={onSelect} hasShadow={true}/>
     </div>}
             </div>
         )
@@ -77,7 +79,7 @@ export const ListBox = (props: IListBoxProps) => {
   })
 
   return (
-    isOpen ? <div className="listBox-container">
+    isOpen ? <div className="listBox-container" style={{boxShadow: hasShadow ? '0px 3px 4px rgba(0, 0, 0, 0.3)' : undefined}}>
         <div
           className={'listBox-popup'}
           onPointerDown={(e) => e.stopPropagation()}

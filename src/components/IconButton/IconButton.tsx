@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import React from 'react';
 import { Colors, FontSize } from '../../global/globalEnums';
-import './Button.scss'
+import './IconButton.scss'
 import { Story, Meta } from '@storybook/react';
 
-export interface IButtonProps {
+export interface IIconButtonProps {
   onClick?: (event: React.MouseEvent) => void
   onDoubleClick?: (event: React.MouseEvent) => void
   type?: 'outline' | 'gradient' | 'fill' | 'icon'
@@ -39,7 +39,7 @@ export interface IButtonProps {
   height?: number
 }
 
-export const Button = (props: IButtonProps) => {
+export const IconButton = (props: IIconButtonProps) => {
   const {
     text,
     icon,
@@ -55,8 +55,6 @@ export const Button = (props: IButtonProps) => {
     hasBorder,
     hasLabel,
     label,
-    iconPosition,
-    fontSize,
     height,
     size
   } = props
@@ -70,7 +68,7 @@ export const Button = (props: IButtonProps) => {
     onClick && onClick(e)
   }
 
-  const getHeight = () => {
+  const getHeight = (): number => {
     if (height) return height
     switch(size) {
       case 'small':
@@ -80,13 +78,15 @@ export const Button = (props: IButtonProps) => {
       case 'large':
         return 50
     }
+    return 40
   }
 
   const defaultProperties = {
-    fontSize: fontSize ? fontSize : undefined,
+    fontSize: getHeight() - 15,
     borderRadius: borderRadius ? borderRadius : undefined,
     color: color,
     height: getHeight(),
+    width: getHeight(),
     padding: padding,
     border: hasBorder ? `solid 1px ${color}` : undefined
   }
@@ -113,7 +113,7 @@ export const Button = (props: IButtonProps) => {
     }
   }
 
-  const getButtonStyle = (): React.CSSProperties => {
+  const getIconButtonStyle = (): React.CSSProperties => {
     switch (type) {
       case 'fill':
         return fillProperties
@@ -123,18 +123,17 @@ export const Button = (props: IButtonProps) => {
         return defaultProperties
     }
   }
+
   return (
-      <div className={`button-container ${hoverStyle}`} onClick={handleClick} style={getButtonStyle()}>
-        {iconPosition == 'right' ? null : icon}
-        {text}
-        {iconPosition == 'right' ? icon : null}
+      <div className={`iconbutton-container ${hoverStyle}`} onClick={handleClick} style={getIconButtonStyle()}>
+        {icon}
         {hasLabel && 
-          <div className={'button-label'}>
+          <div className={'iconbutton-label'}>
             {label}
           </div>
         }
         <div 
-          className={`button-background`}
+          className={`iconbutton-background`}
           style={getBackgroundStyle()}
         />
       </div>

@@ -1,23 +1,22 @@
 @import '../../global/globalCssVariables.scss';
 
-.button-container {
+.iconbutton-container {
   position: relative;
-  width: fit-content;
-  height: 30px;
-  padding: 0px 20px;
+  height: 40px;
+  width: 40px;
   cursor: pointer;
   overflow: hidden;
   user-select: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 5px;
   font-family: $default-font;
   font-size: $default-fontSize;
+  border-radius: 5px;
   white-space: nowrap;
   transition: 0.4s;
 
-  .button-background {
+  .iconbutton-background {
     width: 100%;
     height: 100%;
     z-index: -1;
@@ -38,7 +37,7 @@
   }
   &.darken {
     &:hover{
-      .button-background {
+      .iconbutton-background {
         filter: brightness(80%);
       }
     }
@@ -50,8 +49,9 @@
       }
     }
   }
+  
 
-  .button-ripple {
+  .iconbutton-ripple {
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 100%;
     z-index: 2;
@@ -61,7 +61,7 @@
     transition: 0.2s;
   }
 
-  .button-label {
+  .iconbutton-label {
     position: absolute;
     bottom: 0;
     width: 100%;

@@ -37,6 +37,12 @@ const dropdownItems: IListBoxItem[] = [
                 val: 'slack',
                 text: 'Slack',
                 icon: <fa.FaSlack/>
+            },
+            {
+                val: 'heroku',
+                text: 'Heroku',
+                shortcut: 'Cmmd+H',
+                icon: <fa.FaAirFreshener/>
             }
         ]
     },

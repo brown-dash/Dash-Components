@@ -19,7 +19,7 @@
     position: relative;
     display: grid;
     border-radius: 5px;
-    width: calc(100% - 6px);
+    width: calc(100%);
     grid-template-columns: 5% 75% 20%;
     grid-template-areas: 
     "start-gap button end";
@@ -61,6 +61,7 @@
     .sub-list {
         display: none;
         position: absolute;
+        width: 200px;
         left: calc(100% + 5px);
     }
 }

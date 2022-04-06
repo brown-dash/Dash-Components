@@ -32,36 +32,42 @@ Outline.args = {
     hoverStyle: 'shadow'
 };
 
-export const Icon = Template.bind({});
-Icon.args = {
-    height: 40,
-    onClick: () => {},
-    icon: <bi.BiPlus/>,
-    color: Colors.BLACK,
-    fontSize: FontSize.HEADER,
-    hoverStyle: 'darken',
-    borderRadius: 10,
-    tooltip: 'Add button',
-    label: 'Test'
-};
-
-export const Ripple = Template.bind({});
-Ripple.args = {
-    onClick: () => {},
-    text: "Ripple",
-    color: Colors.BLACK,
-    icon: <fa.FaAccusoft/>,
-    hasBorder: true,
-    hasRipple: true,
-    borderRadius: 10,
-};
-
 export const Gradient = Template.bind({});
 Gradient.args = {
     onClick: () => {},
     text: "Gradient",
     type: 'gradient',
+    color: Colors.WHITE,
     primaryColor: Colors.BLACK,
     secondaryColor: Colors.MEDIUM_BLUE,
-    borderRadius: 10
+};
+
+export const Small = Template.bind({});
+Small.args = {
+    onClick: () => {},
+    text: "Small",
+    type: 'fill',
+    hoverStyle: 'darken',
+    backgroundColor: Colors.LIGHT_BLUE,
+    size: 'small'
+};
+
+export const Medium = Template.bind({});
+Medium.args = {
+    onClick: () => {},
+    text: "Medium",
+    type: 'fill',
+    hoverStyle: 'darken',
+    backgroundColor: Colors.ERROR_RED,
+    size: 'medium'
+};
+
+export const Large = Template.bind({});
+Large.args = {
+    onClick: () => {},
+    text: "Large",
+    type: 'fill',
+    hoverStyle: 'darken',
+    backgroundColor: Colors.SUCCESS_GREEN,
+    size: 'large'
 };

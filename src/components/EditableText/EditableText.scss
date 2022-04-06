@@ -1,10 +1,27 @@
 @import '../../global/globalCssVariables.scss';
 
 .editableText {
-  width: 100%;
+  width: 100px;
+  height: 100%;
   overflow: hidden;
   font-size: inherit;
+  font-family: $default-font;  
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  box-shadow: none !important;
+  padding: 10px;
+  border-radius: 5px;
+
+  &:focus {
+    background-color: $light-gray;
+  }
 }
 
 .displayText {
+  width: 100px;
+  height: 20px;
+  padding: 10px;
+  font-size: inherit;
+  font-family: $default-font;  
 }

@@ -6,6 +6,7 @@ import { Button } from '../Button'
 import './Dropdown.scss'
 import { IListBoxItem, ListBox } from '../ListBox/ListBox';
 import { EditableText } from '..';
+import { IconButton } from '../IconButton';
 
 export interface IDropdownProps {
   title?: string
@@ -50,17 +51,17 @@ export const Dropdown = (props: IDropdownProps) => {
             }}
             setEditing={setIsEditing}
           /></div>
-          <div className='caret'><Button icon={<fa.FaSearch/>}/></div>
+          <div className='caret'><IconButton size='small' hoverStyle='gray' icon={<fa.FaSearch/>}/></div>
         </div> 
       case 'select':
         return <div className="dropdown-toggle" onClick={() => setOpen(!isOpen)}>
           <div className='button'><Button icon={selectedItem ? selectedItem.icon : undefined} text={selectedItem ? selectedItem.text : title} padding={0}/></div>
-          <div className='caret'><Button icon={<fa.FaCaretDown/>}/></div>
+          <div className='caret'><IconButton size='small' hoverStyle='gray' icon={<fa.FaCaretDown/>}/></div>
         </div> 
       default:
         return <div className="dropdown-toggle" onClick={() => setOpen(!isOpen)}>
           <div className='button'><Button icon={selectedItem ? selectedItem.icon : undefined} text={selectedItem ? selectedItem.text : title} padding={0}/></div>
-          <div className='caret'><Button icon={<fa.FaCaretDown/>}/></div>
+          <div className='caret'><IconButton size='small' icon={<fa.FaCaretDown/>} hoverStyle='gray' type={'icon'}/></div>
         </div> 
     }
   }
