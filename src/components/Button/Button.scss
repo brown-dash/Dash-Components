@@ -17,17 +17,29 @@
   white-space: nowrap;
   transition: 0.4s;
 
+  .button-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    gap: 10px;
+  }
+
   .button-background {
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: 0;
     position: absolute;
     transition: 0.4s;
   }
 
   &.gray {
     &:hover {
-      background: $light-gray;
+      .button-background {
+        background: rgba(0, 0, 0, 0.3) !important;
+      }
     }
   }
 

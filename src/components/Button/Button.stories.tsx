@@ -37,6 +37,8 @@ Gradient.args = {
     onClick: () => {},
     text: "Gradient",
     type: 'gradient',
+    hoverStyle: 'darken',
+    borderRadius: 10,
     color: Colors.WHITE,
     primaryColor: Colors.BLACK,
     secondaryColor: Colors.MEDIUM_BLUE,
@@ -70,4 +72,29 @@ Large.args = {
     hoverStyle: 'darken',
     backgroundColor: Colors.SUCCESS_GREEN,
     size: 'large'
+};
+
+export const ButtonWithLeftIcon = Template.bind({});
+ButtonWithLeftIcon.args = {
+    onClick: () => {},
+    text: "New",
+    icon: <bi.BiPlus/>,
+    iconPosition: 'left',
+    type: 'fill',
+    hoverStyle: 'darken',
+    backgroundColor: Colors.SUCCESS_GREEN,
+    size: 'small',
+    borderRadius: 10,
+};
+
+export const ButtonWithRightIcon = Template.bind({});
+ButtonWithRightIcon.args = {
+    onClick: () => {},
+    text: "New",
+    icon: <bi.BiAddToQueue/>,
+    iconPosition: 'right',
+    type: 'fill',
+    hoverStyle: 'gray',
+    borderRadius: 10,
+    size: 'small'
 };

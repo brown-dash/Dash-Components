@@ -125,9 +125,11 @@ export const Button = (props: IButtonProps) => {
   }
   return (
       <div className={`button-container ${hoverStyle}`} onClick={handleClick} style={getButtonStyle()}>
-        {iconPosition == 'right' ? null : icon}
-        {text}
-        {iconPosition == 'right' ? icon : null}
+        <div className='button-content'>
+          {iconPosition == 'right' ? null : icon}
+            {text}
+          {iconPosition == 'right' ? icon : null}
+        </div>
         {hasLabel && 
           <div className={'button-label'}>
             {label}

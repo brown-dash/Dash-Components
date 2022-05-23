@@ -1,11 +1,11 @@
 {
   "name": "browndash-components",
-  "version": "1.0.9",
+  "version": "1.0.11",
   "description": "Component library as used by Dash.",
   "main": "dist/cjs/index.js",
   "types": "dist/cjs/types/index.d.ts",
   "module": "dist/esm/index.js",
-  "style": "dist/cjs/index.css",
+  "style": "dist/styles/global.min.css",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rollup -c",

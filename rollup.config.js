@@ -23,7 +23,10 @@ export default [
             },
         ],
         plugins: [
-            scss(),
+            scss({
+                    output: 'dist/styles/global.min.css',
+                    outputStyle: "compressed"
+            }),
             peerDepsExternal(),
             resolve(),
             commonjs(),

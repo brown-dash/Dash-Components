@@ -34,6 +34,7 @@ export interface IIconButtonProps {
   // Additional stylization
   padding?: number
   hasBorder?: boolean
+  isCircle?: boolean
   borderRadius?: number
   iconPosition?: 'left' | 'right' | 'top' | 'bottom'
   height?: number
@@ -48,6 +49,7 @@ export const IconButton = (props: IIconButtonProps) => {
     backgroundColor,
     color,
     padding,
+    isCircle,
     borderRadius,
     primaryColor,
     secondaryColor,
@@ -83,7 +85,7 @@ export const IconButton = (props: IIconButtonProps) => {
 
   const defaultProperties = {
     fontSize: getHeight() - 15,
-    borderRadius: borderRadius ? borderRadius : undefined,
+    borderRadius: isCircle ? '100%' : borderRadius ? borderRadius : undefined,
     color: color,
     height: getHeight(),
     width: getHeight(),
@@ -126,7 +128,7 @@ export const IconButton = (props: IIconButtonProps) => {
 
   return (
       <div className={`iconbutton-container ${hoverStyle}`} onClick={handleClick} style={getIconButtonStyle()}>
-        {icon}
+        <div className={`iconbutton-icon`}>{icon}</div>
         {hasLabel && 
           <div className={'iconbutton-label'}>
             {label}
