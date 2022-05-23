@@ -1,7 +1,7 @@
 @import '../../global/globalCssVariables.scss';
 
 .editableText {
-  width: 100px;
+  width: 100%;
   height: 100%;
   overflow: hidden;
   font-size: inherit;
@@ -10,18 +10,22 @@
   outline: none;
   -webkit-appearance: none;
   box-shadow: none !important;
-  padding: 10px;
   border-radius: 5px;
+  padding:5px;
 
   &:focus {
-    background-color: $light-gray;
+    outline: solid 2px $light-blue;
+    // background-color: $light-gray;
   }
 }
 
 .displayText {
-  width: 100px;
-  height: 20px;
-  padding: 10px;
+  cursor: text !important;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
   font-size: inherit;
-  font-family: $default-font;  
+  font-family: $default-font;
+  padding:5px;  
 }

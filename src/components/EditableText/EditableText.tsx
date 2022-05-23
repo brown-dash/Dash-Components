@@ -8,28 +8,21 @@ export interface IEditableTextProps {
   onEdit: (newText: string) => void
   setEditing: (editing: boolean) => void
   backgroundColor?: string
+
 }
 
 export const EditableText = (props: IEditableTextProps) => {
-  const { editing, text, onEdit, setEditing, backgroundColor } = props
+  const { editing, text, onEdit, setEditing, backgroundColor, placeholder } = props
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onEdit(event.target.value)
   }
 
-  // return (
-  //   <input
-  //     className="editableText"
-  //     autoFocus
-  //     onChange={handleOnChange}
-  //     onBlur={() => setEditing(false)}
-  //     defaultValue={text}
-  //   ></input>
-  // )
-
   return editing ? (
     <input
       style={{background: backgroundColor}}
+      placeholder={placeholder}
+      size={1}
       className="editableText"
       autoFocus
       onChange={handleOnChange}

@@ -1,22 +1,15 @@
-import React from 'react';
+/// <reference types="react" />
 import './ListBox.scss';
-export interface IListBoxItem {
-    val: any;
-    text?: string;
-    shortcut?: string;
-    items?: IListBoxItem[];
-    icon?: JSX.Element;
-    style?: React.CSSProperties;
-}
+import { IListBoxItemProps } from '../ListItem';
 export interface IListBoxProps {
-    items: IListBoxItem[];
+    items: IListBoxItemProps[];
     isOpen: boolean;
     filter?: string;
     hasShadow?: boolean;
     setIsOpen: (bool: boolean) => void;
-    onSelect: (val: any) => void;
-    selectedItem?: IListBoxItem;
-    setSelectedItem?: (item: IListBoxItem) => void;
+    onSelect: (val: any) => unknown;
+    selectedItem?: IListBoxItemProps;
+    setSelectedItem?: (item: IListBoxItemProps) => void;
 }
 /**
  *

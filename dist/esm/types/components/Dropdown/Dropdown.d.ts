@@ -1,9 +1,9 @@
 /// <reference types="react" />
 import './Dropdown.scss';
-import { IListBoxItem } from '../ListBox/ListBox';
+import { IListBoxItemProps } from '../ListItem';
 export interface IDropdownProps {
     title?: string;
-    items: IListBoxItem[];
+    items: IListBoxItemProps[];
     onSelect: (val: any) => void;
     location: 'left' | 'right' | 'below' | 'above';
     iconOnly?: boolean;

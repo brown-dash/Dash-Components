@@ -30,37 +30,20 @@ interface IColorPickerProps {
 }
 declare const ColorPicker: (props: IColorPickerProps) => JSX.Element;
 
-interface IListBoxItem {
+interface IListBoxItemProps {
     val: any;
     text?: string;
     shortcut?: string;
-    items?: IListBoxItem[];
+    items?: IListBoxItemProps[];
+    selected?: boolean;
     icon?: JSX.Element;
     style?: React.CSSProperties;
+    onSelect: (val: any) => unknown;
 }
-interface IListBoxProps {
-    items: IListBoxItem[];
-    isOpen: boolean;
-    filter?: string;
-    hasShadow?: boolean;
-    setIsOpen: (bool: boolean) => void;
-    onSelect: (val: any) => void;
-    selectedItem?: IListBoxItem;
-    setSelectedItem?: (item: IListBoxItem) => void;
-}
-/**
- *
- * @param props
- * @returns
- *
- * TODO: add support for isMulti, isSearchable
- * Look at: import Select from "react-select";
- */
-declare const ListBox: (props: IListBoxProps) => JSX.Element | null;
 
 interface IDropdownProps {
     title?: string;
-    items: IListBoxItem[];
+    items: IListBoxItemProps[];
     onSelect: (val: any) => void;
     location: 'left' | 'right' | 'below' | 'above';
     iconOnly?: boolean;
@@ -110,4 +93,24 @@ interface IIconButtonProps {
 }
 declare const IconButton: (props: IIconButtonProps) => JSX.Element;
 
-export { Button, ColorPicker, Dropdown, EditableText, IButtonProps, IColorPickerProps, IDropdownProps, IEditableTextProps, IIconButtonProps, IListBoxItem, IListBoxProps, IconButton, ListBox };
+interface IListBoxProps {
+    items: IListBoxItemProps[];
+    isOpen: boolean;
+    filter?: string;
+    hasShadow?: boolean;
+    setIsOpen: (bool: boolean) => void;
+    onSelect: (val: any) => unknown;
+    selectedItem?: IListBoxItemProps;
+    setSelectedItem?: (item: IListBoxItemProps) => void;
+}
+/**
+ *
+ * @param props
+ * @returns
+ *
+ * TODO: add support for isMulti, isSearchable
+ * Look at: import Select from "react-select";
+ */
+declare const ListBox: (props: IListBoxProps) => JSX.Element | null;
+
+export { Button, ColorPicker, Dropdown, EditableText, IButtonProps, IColorPickerProps, IDropdownProps, IEditableTextProps, IIconButtonProps, IListBoxProps, IconButton, ListBox };

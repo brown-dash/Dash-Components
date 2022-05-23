@@ -5,25 +5,17 @@ import { Button } from '../Button'
 import './ListBox.scss'
 import * as fa from 'react-icons/fa'
 import { IconButton } from '../IconButton';
-
-export interface IListBoxItem {
-  val: any,
-  text?: string,
-  shortcut?: string,
-  items?: IListBoxItem[],
-  icon?: JSX.Element,
-  style?: React.CSSProperties
-}
+import { IListBoxItemProps, ListItem } from '../ListItem';
 
 export interface IListBoxProps {
-  items: IListBoxItem[]
+  items: IListBoxItemProps[]
   isOpen: boolean
   filter?: string
   hasShadow?: boolean
   setIsOpen: (bool: boolean) => void
-  onSelect: (val: any) => void
-  selectedItem?: IListBoxItem
-  setSelectedItem?: (item: IListBoxItem) => void
+  onSelect: (val: any) => unknown
+  selectedItem?: IListBoxItemProps
+  setSelectedItem?: (item: IListBoxItemProps) => void
 }
 
 /**
@@ -37,32 +29,9 @@ export interface IListBoxProps {
 export const ListBox = (props: IListBoxProps) => {
   const { items, onSelect, isOpen, setIsOpen, selectedItem, setSelectedItem, filter, hasShadow } = props
 
-  const getListItem = (item: IListBoxItem, ind: number, selected: boolean):JSX.Element | null => {
+  const getListItem = (item: IListBoxItemProps, ind: number, selected: boolean):JSX.Element | null => {
         return (
-            <div key={item.text! + ind} className='list-item' style={{background: selected ? Colors.MEDIUM_BLUE : undefined}}>
-                {<div className={'button'}><Button
-        primaryColor={Colors.TRANSPARENT}
-        color={Colors.BLACK}
-        icon={item.icon}
-        text={item.text}
-        padding={0}
-        onClick={() => {
-            setIsOpen(false)
-            onSelect(item.val)
-            setSelectedItem && setSelectedItem(item)
-        }}
-    /></div>}
-    {item.shortcut && <div className='shortcut'>
-        {item.shortcut}
-    </div>}
-    {item.items && 
-    <div className={'caret'}>
-        <IconButton size={'small'} icon={<fa.FaCaretRight/>}/>
-    </div>}
-    {item.items && <div className='sub-list'>
-        <ListBox items={item.items} isOpen={true} setIsOpen={() => {}} onSelect={onSelect} hasShadow={true}/>
-    </div>}
-            </div>
+          <ListItem key={item.val + ind} val={item.val} selected={selected} icon={item.icon} text={item.text} shortcut={item.shortcut} items={item.items} onSelect={onSelect}/>
         )
   }
 
