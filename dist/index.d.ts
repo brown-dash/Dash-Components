@@ -1,9 +1,16 @@
 import React from 'react';
 
+declare enum Size {
+    SMALL = "30px",
+    MEDIUM = "35px",
+    LARGE = "40px"
+}
+
 interface IButtonProps {
     onClick?: (event: React.MouseEvent) => void;
     onDoubleClick?: (event: React.MouseEvent) => void;
     type?: 'outline' | 'gradient' | 'fill' | 'icon';
+    isActive?: boolean;
     text?: string;
     icon?: JSX.Element | string;
     fontSize?: number | string;
@@ -11,9 +18,10 @@ interface IButtonProps {
     backgroundColor?: string;
     primaryColor?: string;
     secondaryColor?: string;
+    activeColor?: string;
     color?: string;
     hoverStyle?: 'shadow' | 'darken' | 'lighten' | 'gray' | 'none';
-    size?: 'small' | 'medium' | 'large';
+    size?: Size;
     hasLabel?: boolean;
     label?: string;
     padding?: number;
@@ -38,16 +46,20 @@ interface IListBoxItemProps {
     selected?: boolean;
     icon?: JSX.Element;
     style?: React.CSSProperties;
-    onSelect: (val: any) => unknown;
+    setSelectedItem?: (item: IListBoxItemProps) => void;
+    onClick?: () => void;
+    preventClick?: boolean;
+    backgroundColor?: string;
 }
 
 interface IDropdownProps {
     title?: string;
     items: IListBoxItemProps[];
-    onSelect: (val: any) => void;
+    backgroundColor?: string;
+    selected?: IListBoxItemProps;
     location: 'left' | 'right' | 'below' | 'above';
-    iconOnly?: boolean;
     type: 'search' | 'select' | 'click';
+    maxItems?: number;
 }
 /**
  *
@@ -66,6 +78,8 @@ interface IEditableTextProps {
     onEdit: (newText: string) => void;
     setEditing: (editing: boolean) => void;
     backgroundColor?: string;
+    size?: Size;
+    height?: number | string;
 }
 declare const EditableText: (props: IEditableTextProps) => JSX.Element;
 
@@ -73,6 +87,7 @@ interface IIconButtonProps {
     onClick?: (event: React.MouseEvent) => void;
     onDoubleClick?: (event: React.MouseEvent) => void;
     type?: 'outline' | 'gradient' | 'fill' | 'icon';
+    isActive?: boolean;
     text?: string;
     icon?: JSX.Element | string;
     fontSize?: number | string;
@@ -80,6 +95,7 @@ interface IIconButtonProps {
     backgroundColor?: string;
     primaryColor?: string;
     secondaryColor?: string;
+    activeColor?: string;
     color?: string;
     hoverStyle?: 'shadow' | 'darken' | 'lighten' | 'gray' | 'none';
     size?: 'small' | 'medium' | 'large';
@@ -87,7 +103,8 @@ interface IIconButtonProps {
     label?: string;
     padding?: number;
     hasBorder?: boolean;
-    borderRadius?: number;
+    isCircle?: boolean;
+    borderRadius?: number | string;
     iconPosition?: 'left' | 'right' | 'top' | 'bottom';
     height?: number;
 }
@@ -99,9 +116,10 @@ interface IListBoxProps {
     filter?: string;
     hasShadow?: boolean;
     setIsOpen: (bool: boolean) => void;
-    onSelect: (val: any) => unknown;
     selectedItem?: IListBoxItemProps;
     setSelectedItem?: (item: IListBoxItemProps) => void;
+    backgroundColor?: string;
+    maxItems?: number;
 }
 /**
  *

@@ -1,13 +1,12 @@
-import { useState } from 'react'
 import React from 'react';
-import { Colors, FontSize } from '../../global/globalEnums';
-import './Button.scss'
-import { Story, Meta } from '@storybook/react';
+import { Colors, Size } from '../../global/globalEnums';
+import './Button.scss';
 
 export interface IButtonProps {
   onClick?: (event: React.MouseEvent) => void
   onDoubleClick?: (event: React.MouseEvent) => void
   type?: 'outline' | 'gradient' | 'fill' | 'icon'
+  isActive?: boolean
 
   // Content
   text?: string
@@ -19,13 +18,14 @@ export interface IButtonProps {
   backgroundColor?: string
   primaryColor?: string
   secondaryColor?: string
+  activeColor?: string
   color?: string
 
   // Hover style
   hoverStyle?: 'shadow' | 'darken' | 'lighten' | 'gray' | 'none'
 
   // Size
-  size?: 'small' | 'medium' | 'large'
+  size?: Size
 
   // Label
   hasLabel?: boolean
@@ -44,6 +44,7 @@ export const Button = (props: IButtonProps) => {
     text,
     icon,
     onClick,
+    isActive,
     type,
     backgroundColor,
     color,
@@ -51,6 +52,7 @@ export const Button = (props: IButtonProps) => {
     borderRadius,
     primaryColor,
     secondaryColor,
+    activeColor,
     hoverStyle,
     hasBorder,
     hasLabel,
@@ -73,11 +75,11 @@ export const Button = (props: IButtonProps) => {
   const getHeight = () => {
     if (height) return height
     switch(size) {
-      case 'small':
+      case Size.SMALL:
         return 30
-      case 'medium':
+      case Size.MEDIUM:
         return 40
-      case 'large':
+      case Size.LARGE:
         return 50
     }
   }
@@ -104,6 +106,16 @@ export const Button = (props: IButtonProps) => {
   }
 
   const getBackgroundStyle = (): React.CSSProperties => {
+    if (isActive) {
+      if (activeColor) {
+        return {
+          background: activeColor
+        }
+      }
+      else return  {
+        background: Colors.MEDIUM_BLUE
+      }
+    }
     if (primaryColor && secondaryColor) {
       return gradientBackground
     } else {

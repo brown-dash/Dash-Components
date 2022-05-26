@@ -98,3 +98,16 @@ ButtonWithRightIcon.args = {
     borderRadius: 10,
     size: 'small'
 };
+
+export const ActiveButton = Template.bind({});
+ActiveButton.args = {
+    onClick: () => {},
+    text: "New",
+    icon: <bi.BiAddToQueue/>,
+    isActive: true,
+    iconPosition: 'right',
+    type: 'fill',
+    hoverStyle: 'gray',
+    borderRadius: 10,
+    size: 'small'
+};

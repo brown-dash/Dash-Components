@@ -1,15 +1,16 @@
 /// <reference types="react" />
-import './ListBox.scss';
 import { IListBoxItemProps } from '../ListItem';
+import './ListBox.scss';
 export interface IListBoxProps {
     items: IListBoxItemProps[];
     isOpen: boolean;
     filter?: string;
     hasShadow?: boolean;
     setIsOpen: (bool: boolean) => void;
-    onSelect: (val: any) => unknown;
     selectedItem?: IListBoxItemProps;
     setSelectedItem?: (item: IListBoxItemProps) => void;
+    backgroundColor?: string;
+    maxItems?: number;
 }
 /**
  *

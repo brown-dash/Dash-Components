@@ -1,9 +1,11 @@
 import React from 'react';
+import { Size } from '../../global/globalEnums';
 import './Button.scss';
 export interface IButtonProps {
     onClick?: (event: React.MouseEvent) => void;
     onDoubleClick?: (event: React.MouseEvent) => void;
     type?: 'outline' | 'gradient' | 'fill' | 'icon';
+    isActive?: boolean;
     text?: string;
     icon?: JSX.Element | string;
     fontSize?: number | string;
@@ -11,9 +13,10 @@ export interface IButtonProps {
     backgroundColor?: string;
     primaryColor?: string;
     secondaryColor?: string;
+    activeColor?: string;
     color?: string;
     hoverStyle?: 'shadow' | 'darken' | 'lighten' | 'gray' | 'none';
-    size?: 'small' | 'medium' | 'large';
+    size?: Size;
     hasLabel?: boolean;
     label?: string;
     padding?: number;

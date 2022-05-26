@@ -6,7 +6,6 @@ $light-gray: #dfdfdf;
 $medium-gray: #9f9f9f;
 $dark-gray: #323232;
 $black: #000000;
-
 $light-blue: #bdddf5;
 $light-blue-transparent: #bdddf590;
 $medium-blue: #4476f7;
@@ -17,6 +16,10 @@ $yellow: #f5d747;
 $close-red: #e48282;
 
 $drop-shadow: "#32323215";
+
+// background
+$hover-background: rgba(0, 0, 0, 0.3);
+$modal-background: rgba(0, 0, 0, 0.3);
 
 //popup
 $success-green: #4BB543;
@@ -49,7 +52,6 @@ $small-text: 9px;
 // $sans-serif: "Roboto Slab", sans-serif;
 
 // misc values
-$border-radius: 0.3em;
 $search-thumnail-size: 130;
 $topbar-height: 50px;
 $antimodemenu-height: 36px;
@@ -62,11 +64,11 @@ $radialMenu-zindex: 100000; // context menu shows up over everything
 $standard-border: solid 1px #9f9f9f;
 
 // border radius
-$standard-border-radius: 3px;
+$standard-border-radius: 5px;
 
 // shadow
-$standard-box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.3);
-
+$standard-shadow: 0px 3px 4px rgba(0, 0, 0, 0.3);
+$standard-button-shadow: rgb(0 0 0 / 20%) 0px 2px 4px -1px, rgb(0 0 0 / 14%) 0px 4px 5px 0px, rgb(0 0 0 / 12%) 0px 1px 10px 0px;
 
 $dashboardselector-height: 32px;
 $mainTextInput-zindex: 999; // then text input overlay so that it's context menu will appear over decorations, etc

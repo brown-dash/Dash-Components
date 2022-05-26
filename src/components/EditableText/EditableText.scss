@@ -1,21 +1,23 @@
 @import '../../global/globalCssVariables.scss';
 
 .editableText {
-  width: 100%;
-  height: 100%;
+  -webkit-appearance: none;
+  width: calc(100% - 20px);
   overflow: hidden;
   font-size: inherit;
   font-family: $default-font;  
   border: none;
   outline: none;
-  -webkit-appearance: none;
+  margin: 0px !important;
+  padding: 0px !important;
+  padding-left: 20px !important;
   box-shadow: none !important;
-  border-radius: 5px;
-  padding:5px;
+  border-radius: $standard-border-radius;
+  background: none;
 
   &:focus {
-    outline: solid 2px $light-blue;
-    // background-color: $light-gray;
+    outline: solid 1px $medium-blue;
+    // background-color: $light-blue;
   }
 }
 

@@ -1,13 +1,14 @@
 /// <reference types="react" />
-import './Dropdown.scss';
 import { IListBoxItemProps } from '../ListItem';
+import './Dropdown.scss';
 export interface IDropdownProps {
     title?: string;
     items: IListBoxItemProps[];
-    onSelect: (val: any) => void;
+    backgroundColor?: string;
+    selected?: IListBoxItemProps;
     location: 'left' | 'right' | 'below' | 'above';
-    iconOnly?: boolean;
     type: 'search' | 'select' | 'click';
+    maxItems?: number;
 }
 /**
  *

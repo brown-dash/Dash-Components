@@ -15,7 +15,10 @@ export interface IListBoxItemProps {
   selected?: boolean,
   icon?: JSX.Element,
   style?: React.CSSProperties,
-  onSelect: (val: any) => unknown
+  setSelectedItem?: (item: IListBoxItemProps) => void,
+  onClick?: () => void
+  preventClick?: boolean
+  backgroundColor?: string
 }
 
 /**
@@ -27,27 +30,29 @@ export interface IListBoxItemProps {
  * Look at: import Select from "react-select";
  */
 export const ListItem = (props: IListBoxItemProps) => {
-  const { val, text, shortcut, items, icon, style, selected, onSelect } = props
+  const { val, text, shortcut, items, icon, style, selected, setSelectedItem, onClick, preventClick, backgroundColor } = props
 
-        return (
-            <div className='list-item' style={{background: selected ? Colors.MEDIUM_BLUE : undefined}}>
+  return (
+            <div className='list-item' onClick={(e: React.MouseEvent) => {
+                    onClick && onClick()
+                    onClick && e.stopPropagation()
+                }} style={{background: selected ? Colors.LIGHT_BLUE : undefined}}>
                 {<div className={'button'}><Button
         primaryColor={Colors.TRANSPARENT}
         color={Colors.BLACK}
         icon={icon}
         text={text}
         padding={0}
-        onClick={() => onSelect(props)}
     /></div>}
-    {shortcut && <div className='shortcut'>
+    {!preventClick && shortcut && <div className='shortcut'>
         {shortcut}
     </div>}
-    {items && 
+    {!preventClick && items && 
     <div className={'caret'}>
         <IconButton size={'small'} icon={<fa.FaCaretRight/>}/>
     </div>}
-    {items && <div className='sub-list'>
-        <ListBox items={items} isOpen={true} setIsOpen={() => {}} onSelect={onSelect} hasShadow={true}/>
+    {!preventClick && items && <div className='sub-list'>
+        <ListBox items={items} isOpen={true} setIsOpen={() => {}} backgroundColor={backgroundColor} setSelectedItem={setSelectedItem}/>
     </div>}
             </div>
         )

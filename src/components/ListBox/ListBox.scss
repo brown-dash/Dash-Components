@@ -2,12 +2,16 @@
 
 .listBox-container {
     position: relative;
-    width: 100%;
-    min-width: 170px;
-    border-radius: 5px;
+    z-index: 100;
+    width: calc(100% - 3px);
+    // min-width: 170px;
+    padding: 1.5px;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 100000;
+    overflow-y: scroll;
+    overflow-x: visible;
 
     .listBox-popup {
         display: flex;
@@ -15,58 +19,6 @@
         width: 100%;
         justify-content: center;
         align-items: center;
-    }
-}
-
-.list-item {
-    position: relative;
-    display: grid;
-    margin: 1.5px 0px;
-    width: calc(100% - 3px);
-    border-radius: 5px;
-    grid-template-columns: 80% 20%;
-    grid-template-areas: 
-    "button end";
-    grid-template-rows: 1fr;
-    flex-direction: row;
-    justify-content: left;
-    align-items: center;
-    justify-content: flex-start;
-    cursor: pointer;
-
-    &:hover{
-        background: $light-gray;
-        .sub-list{
-            display: block;
-        }
-    }
-
-    .button {
-        grid-area: button;
-        margin-left: 20px;
-    }
-
-    .shortcut {
-        grid-area: end;
-        color: $medium-gray;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        font-size: $label-fontSize;
-        font-family: $default-font;
-    }
-
-    .caret {
-        grid-area: end;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-    }
-
-    .sub-list {
-        display: none;
-        position: absolute;
-        width: 200px;
-        left: calc(100% + 5px);
+        gap: 1.5px;
     }
 }

@@ -15,11 +15,15 @@
   flex-direction: column;
   justify-content: center;
   min-width: 170px;
-  width: 100%;
+  width: fit-content;
   height: 100%;
   position: relative;
-  // border: solid 1px black;
-  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.3);
+
+  .dropdown-list {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+  }
 
   .dropdown-toggle {
     width: 100%;
@@ -28,14 +32,19 @@
     grid-template-areas: 
     "button end";
     grid-template-rows: 1fr;
-    border-radius: 5px;
     position: relative;
     align-items: center;
 
-    .button {
+    .toggle-button {
       grid-area: button;
-      margin-left: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 1.5px 0px;
+      width: calc(100% - 3px);
+      height: 100%;
       min-width: 70px;
+      justify-self: center;
     }
 
     .caret {
@@ -44,6 +53,7 @@
       display: flex;
       justify-content: flex-end;
       align-items: center;
+      justify-self: center;
     }
   }
 }

@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react';
 import { Colors } from '../../global/globalEnums';
 import * as fa from 'react-icons/fa'
 import { Dropdown, IDropdownProps } from '..';
-import { IListBoxItem } from '../ListBox/ListBox';
+import { IListBoxItemProps } from '../ListItem';
 
 export default {
   title: 'Dash/Dropdown',
@@ -12,7 +12,7 @@ export default {
 } as Meta<typeof Dropdown>;
 
 const Template: Story<IDropdownProps> = (args) => <Dropdown {...args}/>;
-const dropdownItems: IListBoxItem[] = [
+const dropdownItems: IListBoxItemProps[] = [
     {
         val: 'facebook',
         text: 'Facebook',
@@ -41,7 +41,7 @@ const dropdownItems: IListBoxItem[] = [
             {
                 val: 'heroku',
                 text: 'Heroku',
-                shortcut: 'Cmmd+H',
+                shortcut: '⌘H',
                 icon: <fa.FaAirFreshener/>
             }
         ]
@@ -55,15 +55,29 @@ const dropdownItems: IListBoxItem[] = [
 
 export const Primary = Template.bind({});
 Primary.args = {
-    onClick: () => {},
+    backgroundColor: Colors.LIGHT_GRAY,
     title: 'Select company',
-    items: dropdownItems
+    items: dropdownItems,
+    maxItems: 3,
+    selected: {
+        val: 'facebook',
+        text: 'Facebook',
+        shortcut: '⌘F',
+        icon: <fa.FaFacebook/>
+    }
 };
 
 export const Search = Template.bind({});
 Search.args = {
-    onClick: () => {},
     type: 'search',
+    backgroundColor: Colors.LIGHT_GRAY,
     title: 'Search company action',
-    items: dropdownItems 
+    items: dropdownItems,
+    maxItems: 3,
+    selected: {
+        val: 'facebook',
+        text: 'Facebook',
+        shortcut: '⌘F',
+        icon: <fa.FaFacebook/>
+    }
 };

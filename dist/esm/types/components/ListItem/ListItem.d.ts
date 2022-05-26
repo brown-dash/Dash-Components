@@ -8,7 +8,10 @@ export interface IListBoxItemProps {
     selected?: boolean;
     icon?: JSX.Element;
     style?: React.CSSProperties;
-    onSelect: (val: any) => unknown;
+    setSelectedItem?: (item: IListBoxItemProps) => void;
+    onClick?: () => void;
+    preventClick?: boolean;
+    backgroundColor?: string;
 }
 /**
  *

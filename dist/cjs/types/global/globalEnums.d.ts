@@ -32,8 +32,14 @@ export declare enum IconSizes {
     ICON_SIZE = "28px"
 }
 export declare enum Borders {
-    STANDARD = "solid 1px #9F9F9F"
+    STANDARD = "solid 1px #9F9F9F",
+    STANDARD_BORDER_RADIUS = "5px"
 }
 export declare enum Shadows {
     STANDARD_SHADOW = "0px 3px 4px rgba(0, 0, 0, 0.3)"
+}
+export declare enum Size {
+    SMALL = "30px",
+    MEDIUM = "35px",
+    LARGE = "40px"
 }

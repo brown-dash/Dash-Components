@@ -8,6 +8,7 @@ export interface IIconButtonProps {
   onClick?: (event: React.MouseEvent) => void
   onDoubleClick?: (event: React.MouseEvent) => void
   type?: 'outline' | 'gradient' | 'fill' | 'icon'
+  isActive?: boolean
 
   // Content
   text?: string
@@ -19,6 +20,7 @@ export interface IIconButtonProps {
   backgroundColor?: string
   primaryColor?: string
   secondaryColor?: string
+  activeColor?: string
   color?: string
 
   // Hover style
@@ -35,7 +37,7 @@ export interface IIconButtonProps {
   padding?: number
   hasBorder?: boolean
   isCircle?: boolean
-  borderRadius?: number
+  borderRadius?: number | string
   iconPosition?: 'left' | 'right' | 'top' | 'bottom'
   height?: number
 }
@@ -45,6 +47,7 @@ export const IconButton = (props: IIconButtonProps) => {
     text,
     icon,
     onClick,
+    isActive,
     type,
     backgroundColor,
     color,
@@ -53,6 +56,7 @@ export const IconButton = (props: IIconButtonProps) => {
     borderRadius,
     primaryColor,
     secondaryColor,
+    activeColor,
     hoverStyle,
     hasBorder,
     hasLabel,
@@ -106,6 +110,18 @@ export const IconButton = (props: IIconButtonProps) => {
   }
 
   const getBackgroundStyle = (): React.CSSProperties => {
+    // handle case where button is active
+    if (isActive) {
+      if (activeColor) {
+        return {
+          background: activeColor
+        }
+      }
+      else return  {
+        background: Colors.MEDIUM_BLUE
+      }
+    }
+
     if (primaryColor && secondaryColor) {
       return gradientBackground
     } else {

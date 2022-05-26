@@ -1,29 +1,11 @@
 @import '../../global/globalCssVariables.scss';
 
-.listBox-container {
-    position: relative;
-    width: 100%;
-    min-width: 170px;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .listBox-popup {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-    }
-}
-
 .list-item {
     position: relative;
     display: grid;
-    margin: 1.5px 0px;
-    width: calc(100% - 3px);
-    border-radius: 5px;
+    height: 30px;
+    width: 100%;
+    border-radius: $standard-border-radius;
     grid-template-columns: 80% 20%;
     grid-template-areas: 
     "button end";
@@ -32,10 +14,11 @@
     justify-content: left;
     align-items: center;
     justify-content: flex-start;
+    justify-self: center;
     cursor: pointer;
 
     &:hover{
-        background: $light-gray;
+        background: $hover-background;
         .sub-list{
             display: block;
         }
@@ -48,9 +31,9 @@
 
     .shortcut {
         grid-area: end;
-        color: $medium-gray;
+        color: $black;
         display: flex;
-        justify-content: flex-end;
+        justify-content: center;
         align-items: center;
         font-size: $label-fontSize;
         font-family: $default-font;
@@ -61,6 +44,7 @@
         display: flex;
         justify-content: flex-end;
         align-items: center;
+        justify-self: center;
     }
 
     .sub-list {
