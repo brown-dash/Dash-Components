@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import React from 'react';
+import React from 'react'
 import './ColorPicker.scss'
 import { GithubPicker } from 'react-color'
 
@@ -26,7 +26,10 @@ export const ColorPicker = (props: IColorPickerProps) => {
           onClick={() => setOpen(!isOpen)}
         />
         {isOpen && (
-          <div className={'colorPicker-popup'} onPointerDown={(e) => e.stopPropagation()}>
+          <div
+            className={'colorPicker-popup'}
+            onPointerDown={(e) => e.stopPropagation()}
+          >
             <GithubPicker
               color={color}
               triangle={'hide'}

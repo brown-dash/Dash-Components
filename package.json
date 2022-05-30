@@ -1,6 +1,6 @@
 {
   "name": "browndash-components",
-  "version": "0.0.4",
+  "version": "0.0.8",
   "description": "Component library as used by Dash.",
   "main": "dist/cjs/index.js",
   "types": "dist/cjs/types/index.d.ts",
@@ -34,9 +34,21 @@
     "@storybook/addon-links": "^6.4.19",
     "@storybook/react": "^6.4.19",
     "@storybook/testing-library": "0.0.9",
+    "@storybook/preset-scss": "^1.0.3",
     "@types/react": "^17.0.39",
     "@types/react-color": "^3.0.6",
     "babel-loader": "^8.2.3",
+    "eslint": "^8.16.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-node": "^4.1.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-react-hooks": "^4.5.0",
+    "prettier": "^2.6.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "rollup": "^2.69.0",
@@ -50,11 +62,6 @@
     "typescript": "^4.6.2"
   },
   "dependencies": {
-    "@emotion/css": "^11.9.0",
-    "@emotion/react": "^11.8.2",
-    "@emotion/styled": "^11.8.1",
-    "@mui/material": "^5.5.0",
-    "@storybook/preset-scss": "^1.0.3",
     "react-color": "^2.19.3",
     "react-icons": "^4.3.1"
   }

@@ -3,13 +3,12 @@
 .listBox-container {
     position: relative;
     z-index: 100;
-    width: calc(100% - 3px);
-    // min-width: 170px;
-    padding: 1.5px;
+    width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     z-index: 100000;
+    border-radius: $standard-border-radius;
     overflow-y: scroll;
     overflow-x: visible;
 

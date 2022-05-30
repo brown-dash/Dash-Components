@@ -19,15 +19,14 @@
     z-index: 10;
     width: 400px;
     height: fit-content;
-    background-color: white;
     padding: 20px;
-    border-radius: 20px;
+    border-radius: $standard-border-radius;
     font-weight: bold;
     font-size: 1.5rem;
 
     .modal-closeButton {
-      top: -20px;
-      right: -20px;
+      top: -15px;
+      right: -15px;
       position: absolute;
       width: fit-content;
       height: fit-content;

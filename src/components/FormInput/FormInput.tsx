@@ -1,7 +1,7 @@
 import React from 'react'
-import './TextInput.scss'
+import './FormInput.scss'
 
-export interface ITextInputProps {
+export interface IFormInputProps {
   placeholder?: string
   value?: string
   title?: string
@@ -9,19 +9,19 @@ export interface ITextInputProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-export const TextInput = (props: ITextInputProps) => {
+export const FormInput = (props: IFormInputProps) => {
   const { placeholder, type, value, title, onChange } = props
   return (
-    <div className="textInput-container">
+    <div className="formInput-container">
       <input
-        className={'textInput'}
+        className={'formInput'}
         type={type ? type : 'text'}
         value={value}
         onChange={onChange}
         placeholder={title}
         required={true}
       />
-      <label className={'textInput-label'}>{title}</label>
+      <label className={'formInput-label'}>{title}</label>
     </div>
   )
 }

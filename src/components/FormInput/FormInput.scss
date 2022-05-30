@@ -1,6 +1,6 @@
 @import '../../global/globalCssVariables.scss';
 
-.textInput-container {
+.formInput-container {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -8,7 +8,7 @@
   position: relative;
   margin-top: 20px;
 
-  .textInput {
+  .formInput {
     font-family: inherit;
     width: 100%;
     border: 0;
@@ -25,7 +25,7 @@
     }
 
     &:focus {
-      ~ .textInput-label {
+      ~ .formInput-label {
         position: absolute;
         transform: translate(0px, -13px);
         display: block;
@@ -41,7 +41,7 @@
     }
 
     &:valid {
-      ~ .textInput-label {
+      ~ .formInput-label {
         position: absolute;
         transform: translate(0px, -13px);
         display: block;
@@ -56,7 +56,7 @@
     }
   }
 
-  .textInput-label {
+  .formInput-label {
     position: absolute;
     top: 0;
     transform: translate(0px, 8px);

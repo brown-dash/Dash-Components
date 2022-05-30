@@ -3,6 +3,7 @@ import './ListItem.scss';
 export interface IListBoxItemProps {
     val: any;
     text?: string;
+    description?: string;
     shortcut?: string;
     items?: IListBoxItemProps[];
     selected?: boolean;

@@ -1,14 +1,17 @@
 /// <reference types="react" />
+import { Size } from '../../global/globalEnums';
 import { IListBoxItemProps } from '../ListItem';
 import './Dropdown.scss';
 export interface IDropdownProps {
     title?: string;
     items: IListBoxItemProps[];
-    backgroundColor?: string;
+    toggleBackgroundColor?: string;
+    boxBackgroundColor?: string;
     selected?: IListBoxItemProps;
     location: 'left' | 'right' | 'below' | 'above';
     type: 'search' | 'select' | 'click';
     maxItems?: number;
+    size?: Size;
 }
 /**
  *

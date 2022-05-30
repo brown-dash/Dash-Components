@@ -1,32 +1,36 @@
-import { FaTimes } from 'react-icons/fa'
-import { Button } from '../Button'
-import { useState } from 'react'
-import React from 'react';
-import './Modal.scss'
+import React, { useState } from 'react';
+import { FaTimes } from 'react-icons/fa';
+import { Colors, Size } from '../../global';
+import { IconButton } from '../IconButton';
+import './Modal.scss';
 
 export interface IModalProps {
   children: JSX.Element
-  isOpen?: boolean
-  setOpen?: (status: boolean) => void
+  initialIsOpen: boolean
   title?: string
+  backgroundColor?: string
 }
 
 export const Modal = (props: IModalProps) => {
-  const { children, isOpen, setOpen, title } = props
+  const { children, initialIsOpen, title, backgroundColor } = props
+
+  const [ isOpen, setIsOpen ] = useState<boolean>(initialIsOpen)
+  
   if (!isOpen) return null
   return (
     <div className="modal-container">
-      <div className={'modal-popup'}>
-        {title}
+      <div className={'modal-popup'} style={{backgroundColor: backgroundColor ? backgroundColor : Colors.WHITE}}>
         {children}
         <div className={'modal-closeButton'}>
-          <Button
-            onClick={() => setOpen && setOpen(false)}
+          <IconButton
+            size={Size.SMALL}
+            hoverStyle='gray'
+            onClick={() => setIsOpen(false)}
             icon={<FaTimes />}
           />
         </div>
       </div>
-      <div className={'modal-background'} onClick={() => setOpen && setOpen(false)} />
+      <div className={'modal-background'} onClick={() => setIsOpen(false)} />
     </div>
   )
 }

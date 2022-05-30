@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import React from 'react';
-import { Colors, FontSize } from '../../global/globalEnums';
+import { Colors, FontSize, Size } from '../../global/globalEnums';
 import './IconButton.scss'
 import { Story, Meta } from '@storybook/react';
 
@@ -27,7 +27,7 @@ export interface IIconButtonProps {
   hoverStyle?: 'shadow' | 'darken' | 'lighten' | 'gray' | 'none'
 
   // Size
-  size?: 'small' | 'medium' | 'large'
+  size?: Size
 
   // Label
   hasLabel?: boolean
@@ -77,14 +77,15 @@ export const IconButton = (props: IIconButtonProps) => {
   const getHeight = (): number => {
     if (height) return height
     switch(size) {
-      case 'small':
+      case Size.SMALL:
         return 30
-      case 'medium':
+      case Size.MEDIUM:
         return 40
-      case 'large':
+      case Size.LARGE:
         return 50
+      default:
+        return 40
     }
-    return 40
   }
 
   const defaultProperties = {
