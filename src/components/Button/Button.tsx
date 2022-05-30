@@ -1,6 +1,6 @@
-import React from 'react';
-import { Colors, Size } from '../../global/globalEnums';
-import './Button.scss';
+import React from 'react'
+import { Colors, Size } from '../../global/globalEnums'
+import './Button.scss'
 
 export interface IButtonProps {
   onClick?: (event: React.MouseEvent) => void
@@ -34,7 +34,7 @@ export interface IButtonProps {
   // Additional stylization
   padding?: number
   hasBorder?: boolean
-  borderRadius?: number
+  borderRadius?: number | string
   iconPosition?: 'left' | 'right' | 'top' | 'bottom'
   height?: number
 }
@@ -60,13 +60,12 @@ export const Button = (props: IButtonProps) => {
     iconPosition,
     fontSize,
     height,
-    size
+    size,
   } = props
-
 
   /**
    * In the event that there is a single click
-   * @param e 
+   * @param e
    */
   const handleClick = (e: React.MouseEvent) => {
     onClick && onClick(e)
@@ -74,7 +73,7 @@ export const Button = (props: IButtonProps) => {
 
   const getHeight = () => {
     if (height) return height
-    switch(size) {
+    switch (size) {
       case Size.SMALL:
         return 30
       case Size.MEDIUM:
@@ -90,11 +89,11 @@ export const Button = (props: IButtonProps) => {
     color: color,
     height: getHeight(),
     padding: padding,
-    border: hasBorder ? `solid 1px ${color}` : undefined
+    border: hasBorder ? `solid 1px ${color}` : undefined,
   }
 
   const gradientProperties: React.CSSProperties = {
-    ...defaultProperties
+    ...defaultProperties,
   }
 
   const fillProperties: React.CSSProperties = {
@@ -102,25 +101,25 @@ export const Button = (props: IButtonProps) => {
   }
 
   const gradientBackground: React.CSSProperties = {
-    background: `linear-gradient(${70}deg, ${primaryColor} 0%, ${secondaryColor} 100%)`
+    background: `linear-gradient(${70}deg, ${primaryColor} 0%, ${secondaryColor} 100%)`,
   }
 
   const getBackgroundStyle = (): React.CSSProperties => {
     if (isActive) {
       if (activeColor) {
         return {
-          background: activeColor
+          background: activeColor,
         }
-      }
-      else return  {
-        background: Colors.MEDIUM_BLUE
-      }
+      } else
+        return {
+          background: Colors.MEDIUM_BLUE,
+        }
     }
     if (primaryColor && secondaryColor) {
       return gradientBackground
     } else {
       return {
-        background: backgroundColor
+        background: backgroundColor,
       }
     }
   }
@@ -136,21 +135,18 @@ export const Button = (props: IButtonProps) => {
     }
   }
   return (
-      <div className={`button-container ${hoverStyle}`} onClick={handleClick} style={getButtonStyle()}>
-        <div className='button-content'>
-          {iconPosition == 'right' ? null : icon}
-            {text}
-          {iconPosition == 'right' ? icon : null}
-        </div>
-        {hasLabel && 
-          <div className={'button-label'}>
-            {label}
-          </div>
-        }
-        <div 
-          className={`button-background`}
-          style={getBackgroundStyle()}
-        />
+    <div
+      className={`button-container ${hoverStyle}`}
+      onClick={handleClick}
+      style={getButtonStyle()}
+    >
+      <div className="button-content">
+        {iconPosition == 'right' ? null : icon}
+        {text}
+        {iconPosition == 'right' ? icon : null}
       </div>
+      {hasLabel && <div className={'button-label'}>{label}</div>}
+      <div className={`button-background`} style={getBackgroundStyle()} />
+    </div>
   )
 }

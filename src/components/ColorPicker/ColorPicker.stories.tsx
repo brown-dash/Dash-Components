@@ -14,14 +14,17 @@ const Template: Story<IColorPickerProps> = (args) => <ColorPicker {...args} />
 
 export const Primary = Template.bind({})
 Primary.args = {
-  title: 'Select company',
-  boxBackgroundColor: Colors.LIGHT_BLUE,
-  maxItems: 3,
-  size: Size.SMALL,
-  selected: {
-    val: 'facebook',
-    text: 'Facebook',
-    shortcut: '⌘F',
-    icon: <fa.FaFacebook />,
+  text: 'Background',
+  icon: <fa.FaPaintBrush />,
+  onChange: (color) => {
+    console.log(color)
+  },
+}
+
+export const Icon = Template.bind({})
+Icon.args = {
+  icon: <fa.FaPaintBrush />,
+  onChange: (color) => {
+    console.log(color)
   },
 }
