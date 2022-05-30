@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import * as fa from 'react-icons/fa'
 import { EditableText } from '..'
-import { Borders, Size } from '../../global/globalEnums'
+import { Borders, Size, getHeight } from '../../global'
 import { IconButton } from '../IconButton'
-import { ListBox } from '../ListBox/ListBox'
+import { ListBox } from '../ListBox'
 import { IListBoxItemProps, ListItem } from '../ListItem'
 import './Dropdown.scss'
 
@@ -16,6 +16,7 @@ export interface IDropdownProps {
   location: 'left' | 'right' | 'below' | 'above'
   type: 'search' | 'select' | 'click'
   maxItems?: number
+  height?: number
   size?: Size
 }
 
@@ -31,6 +32,7 @@ export const Dropdown = (props: IDropdownProps) => {
   const {
     title,
     size,
+    height,
     maxItems,
     toggleBackgroundColor,
     boxBackgroundColor,
@@ -50,24 +52,13 @@ export const Dropdown = (props: IDropdownProps) => {
     type == 'search' && setSearchTerm(item.val)
   }
 
-  const getHeight = () => {
-    switch (size) {
-      case Size.SMALL:
-        return 30
-      case Size.MEDIUM:
-        return 40
-      case Size.LARGE:
-        return 50
-    }
-  }
-
   const getToggle = () => {
     switch (type) {
       case 'search':
         return (
           <div
             className="dropdown-toggle"
-            style={{ height: getHeight() }}
+            style={{ height: getHeight(height, size) }}
             onClick={(e) => {
               e.stopPropagation()
               !isEditing && setIsEditing(true)
@@ -107,7 +98,7 @@ export const Dropdown = (props: IDropdownProps) => {
         return (
           <div
             className="dropdown-toggle"
-            style={{ height: getHeight() }}
+            style={{ height: getHeight(height, size) }}
             onClick={() => setOpen(!isOpen)}
           >
             {selectedItem && (
@@ -129,7 +120,7 @@ export const Dropdown = (props: IDropdownProps) => {
         return (
           <div
             className="dropdown-toggle"
-            style={{ height: getHeight() }}
+            style={{ height: getHeight(height, size) }}
             onClick={() => setOpen(!isOpen)}
           >
             {selectedItem && (

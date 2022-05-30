@@ -1,5 +1,6 @@
 import React from 'react'
 import { Colors, Size } from '../../global/globalEnums'
+import { getHeight } from '../../global/globalUtils'
 import './Button.scss'
 
 export interface IButtonProps {
@@ -71,23 +72,11 @@ export const Button = (props: IButtonProps) => {
     onClick && onClick(e)
   }
 
-  const getHeight = () => {
-    if (height) return height
-    switch (size) {
-      case Size.SMALL:
-        return 30
-      case Size.MEDIUM:
-        return 40
-      case Size.LARGE:
-        return 50
-    }
-  }
-
   const defaultProperties = {
     fontSize: fontSize ? fontSize : undefined,
     borderRadius: borderRadius ? borderRadius : undefined,
     color: color,
-    height: getHeight(),
+    height: getHeight(height, size),
     padding: padding,
     border: hasBorder ? `solid 1px ${color}` : undefined,
   }

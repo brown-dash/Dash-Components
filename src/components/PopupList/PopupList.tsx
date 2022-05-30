@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
+import { getHeight } from '../../global'
 import { Borders, Size } from '../../global/globalEnums'
+import { Button } from '../Button'
 import { IconButton } from '../IconButton'
 import { ListBox } from '../ListBox/ListBox'
 import { IListBoxItemProps } from '../ListItem'
 import './PopupList.scss'
 
 export interface IPopupListProps {
-  title?: string
+  text?: string
   icon: JSX.Element
   items: IListBoxItemProps[]
   toggleBackgroundColor?: string
@@ -15,6 +17,7 @@ export interface IPopupListProps {
   location: 'left' | 'right' | 'below' | 'above'
   maxItems?: number
   size?: Size
+  height?: number
 }
 
 /**
@@ -27,8 +30,9 @@ export interface IPopupListProps {
  */
 export const PopupList = (props: IPopupListProps) => {
   const {
-    title,
+    text,
     size,
+    height,
     maxItems,
     toggleBackgroundColor,
     icon,
@@ -41,32 +45,35 @@ export const PopupList = (props: IPopupListProps) => {
     IListBoxItemProps | undefined
   >(selected)
 
-  const getHeight = () => {
-    switch (size) {
-      case Size.SMALL:
-        return 30
-      case Size.MEDIUM:
-        return 40
-      case Size.LARGE:
-        return 50
-    }
-  }
-
   const getToggle = () => {
-    return (
-      <div
-        className="popupList-toggle"
-        style={{ height: getHeight() }}
-        onClick={() => setOpen(!isOpen)}
-      >
+    if (icon && !text) {
+      return (
         <IconButton
-          size={Size.SMALL}
-          hoverStyle="gray"
-          icon={icon}
           borderRadius={Borders.STANDARD_BORDER_RADIUS}
+          size={Size.SMALL}
+          backgroundColor={toggleBackgroundColor}
+          icon={icon}
         />
-      </div>
-    )
+      )
+    } else if (text) {
+      return (
+        <Button
+          borderRadius={Borders.STANDARD_BORDER_RADIUS}
+          size={Size.SMALL}
+          backgroundColor={toggleBackgroundColor}
+          text={text}
+          icon={icon}
+        />
+      )
+    } else {
+      return (
+        <IconButton
+          borderRadius={Borders.STANDARD_BORDER_RADIUS}
+          size={Size.SMALL}
+          backgroundColor={toggleBackgroundColor}
+        />
+      )
+    }
   }
 
   return (
@@ -76,7 +83,13 @@ export const PopupList = (props: IPopupListProps) => {
         background: toggleBackgroundColor ? toggleBackgroundColor : undefined,
       }}
     >
-      {getToggle()}
+      <div
+        className="popupList-toggle"
+        style={{ height: getHeight(height, size) }}
+        onClick={() => setOpen(!isOpen)}
+      >
+        {getToggle()}
+      </div>
       <div className="popupList-list">
         <ListBox
           maxItems={maxItems}

@@ -33,6 +33,7 @@ export interface IListBoxItemProps {
 export const ListItem = (props: IListBoxItemProps) => {
   const {
     val,
+    description,
     text,
     shortcut,
     items,
@@ -47,32 +48,37 @@ export const ListItem = (props: IListBoxItemProps) => {
 
   return (
     <div
-      className="list-item"
+      className="listItem-container"
       onClick={(e: React.MouseEvent) => {
         onClick && onClick()
         onClick && e.stopPropagation()
       }}
       style={{ background: selected ? Colors.LIGHT_BLUE : undefined }}
     >
-      {
-        <div className={'button'}>
-          <Button
-            primaryColor={Colors.TRANSPARENT}
-            color={Colors.BLACK}
-            icon={icon}
-            text={text}
-            padding={0}
-          />
-        </div>
-      }
-      {!preventClick && shortcut && <div className="shortcut">{shortcut}</div>}
+      <div className="listItem-top">
+        {
+          <div className={'button'}>
+            <Button
+              primaryColor={Colors.TRANSPARENT}
+              color={Colors.BLACK}
+              icon={icon}
+              text={text}
+              padding={0}
+            />
+          </div>
+        }
+        {!preventClick && shortcut && (
+          <div className="shortcut">{shortcut}</div>
+        )}
+        {!preventClick && items && (
+          <div className={'caret'}>
+            <IconButton size={Size.SMALL} icon={<fa.FaCaretRight />} />
+          </div>
+        )}
+      </div>
+      {description && <div className="listItem-description">{description}</div>}
       {!preventClick && items && (
-        <div className={'caret'}>
-          <IconButton size={Size.SMALL} icon={<fa.FaCaretRight />} />
-        </div>
-      )}
-      {!preventClick && items && (
-        <div className="sub-list">
+        <div className="listItem-sublist">
           <ListBox
             items={items}
             isOpen={true}

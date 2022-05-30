@@ -3,7 +3,7 @@ import React from 'react'
 import './ColorPicker.scss'
 import { GithubPicker } from 'react-color'
 import { IconButton } from '../IconButton'
-import { Borders, Size } from '../../global'
+import { Borders, Colors, isDark, Size } from '../../global'
 import { Button } from '../Button'
 
 export interface IColorPickerProps {
@@ -29,6 +29,7 @@ export const ColorPicker = (props: IColorPickerProps) => {
           borderRadius={Borders.STANDARD_BORDER_RADIUS}
           size={Size.SMALL}
           backgroundColor={color}
+          color={isDark(color) ? Colors.WHITE : Colors.BLACK}
           icon={icon}
         />
       )
@@ -38,12 +39,19 @@ export const ColorPicker = (props: IColorPickerProps) => {
           borderRadius={Borders.STANDARD_BORDER_RADIUS}
           size={Size.SMALL}
           backgroundColor={color}
+          color={isDark(color) ? Colors.WHITE : Colors.BLACK}
           text={text}
           icon={icon}
         />
       )
     } else {
-      return null
+      return (
+        <IconButton
+          borderRadius={Borders.STANDARD_BORDER_RADIUS}
+          size={Size.SMALL}
+          backgroundColor={color}
+        />
+      )
     }
   }
 
