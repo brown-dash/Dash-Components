@@ -9,5 +9,15 @@ export default {
 } as Meta<typeof Slider>
 
 const Template: Story<ISliderProps> = (args) => <Slider {...args} />
-export const Primary = Template.bind({})
-Primary.args = {}
+export const Value = Template.bind({})
+Value.args = {}
+
+export const MultiThumb = Template.bind({})
+MultiThumb.args = {
+  multithumb: true,
+  initialVal: 2,
+  min: 0,
+  max: 10,
+  step: 0.1,
+  minDiff: 0.3,
+}

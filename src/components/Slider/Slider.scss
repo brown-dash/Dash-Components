@@ -1,0 +1,69 @@
+@import '../../global/globalCssVariables.scss';
+$height: 20px;
+
+.multiThumb-slider {
+  display: grid;
+  background-color: $light-gray;
+  height: $height;
+  border-radius: 10px;
+  overflow: hidden;
+
+  .toolbar-slider {
+    margin-top: 0px;
+    background: none;
+    -webkit-appearance: none;
+    pointer-events: none;
+  }
+
+  .toolbar-slider.start::-webkit-slider-thumb {
+    width: $height;
+    pointer-events: auto;
+    -webkit-appearance: none;
+    height: $height;
+    cursor: ew-resize;
+    background: $medium-blue;
+    box-shadow: -100vw 0 0 100vw $light-gray;
+  }
+
+  .toolbar-slider.end::-webkit-slider-thumb {
+    width: $height;
+    pointer-events: auto;
+    -webkit-appearance: none;
+    height: $height;
+    cursor: ew-resize;
+    background: $medium-blue;
+    box-shadow: -100vw 0 0 100vw $light-blue;
+  }
+}
+
+.toolbar-slider {
+  position: relative;
+  align-self: center;
+  justify-self: left;
+  overflow: hidden;
+  width: 100%;
+  height: $height;
+  border-radius: 10px;
+  -webkit-appearance: none;
+  background-color: $light-gray;
+}
+
+.toolbar-slider:focus {
+  outline: none;
+}
+
+.toolbar-slider::-webkit-slider-runnable-track {
+  height: $height;
+  -webkit-appearance: none;
+  margin-top: -1px;
+}
+
+.toolbar-slider::-webkit-slider-thumb {
+  width: $height;
+  pointer-events: auto;
+  -webkit-appearance: none;
+  height: $height;
+  cursor: ew-resize;
+  background: $medium-blue;
+  box-shadow: -100vw 0 0 100vw $light-blue;
+}
