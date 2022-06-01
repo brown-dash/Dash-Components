@@ -13,6 +13,12 @@ export interface IEditableTextProps {
   height?: number
 }
 
+/**
+ * Editable Text is used for inline renaming of some text.
+ * It appears as normal UI text but transforms into a text input field when the user clicks on or focuses it.
+ * @param props
+ * @returns
+ */
 export const EditableText = (props: IEditableTextProps) => {
   const {
     editing,

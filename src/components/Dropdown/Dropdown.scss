@@ -19,6 +19,7 @@
   border-radius: $standard-border-radius;
   height: 100%;
   position: relative;
+  transition: 0.4s;
 
   &:hover {
     background: $hover-background !important;
@@ -34,8 +35,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: auto 30px;
-    grid-template-areas: 
-    "button end";
+    grid-template-areas: 'button end';
     grid-template-rows: 1fr;
     position: relative;
     align-items: center;

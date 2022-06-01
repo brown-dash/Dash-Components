@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 // colors
 $white: #ffffff;
 $off-white: #fdfdfd;
@@ -15,15 +15,15 @@ $yellow: #f5d747;
 
 $close-red: #e48282;
 
-$drop-shadow: "#32323215";
+$drop-shadow: '#32323215';
 
 // background
 $hover-background: rgba(0, 0, 0, 0.3);
 $modal-background: rgba(0, 0, 0, 0.3);
 
 //popup
-$success-green: #4BB543;
-$error-red: #FF9494;
+$success-green: #4bb543;
+$error-red: #ff9494;
 
 // text-sizes
 $icon-fontSize: 3rem;
@@ -44,8 +44,7 @@ $large-padding: 32px;
 $icon-size: 28px;
 
 // fonts
-$sans-serif: "Roboto",
-sans-serif;
+$sans-serif: 'Roboto', sans-serif;
 $large-header: 16px;
 $body-text: 12px;
 $small-text: 9px;
@@ -68,7 +67,8 @@ $standard-border-radius: 5px;
 
 // shadow
 $standard-shadow: 0px 3px 4px rgba(0, 0, 0, 0.3);
-$standard-button-shadow: rgb(0 0 0 / 20%) 0px 2px 4px -1px, rgb(0 0 0 / 14%) 0px 4px 5px 0px, rgb(0 0 0 / 12%) 0px 1px 10px 0px;
+$standard-button-shadow: rgb(0 0 0 / 20%) 0px 2px 4px -1px,
+  rgb(0 0 0 / 14%) 0px 4px 5px 0px, rgb(0 0 0 / 12%) 0px 1px 10px 0px;
 
 $dashboardselector-height: 32px;
 $mainTextInput-zindex: 999; // then text input overlay so that it's context menu will appear over decorations, etc
@@ -83,15 +83,15 @@ $LEFT_MENU_WIDTH: 60px;
 $TREE_BULLET_WIDTH: 20px;
 
 :export {
-    contextMenuZindex: $contextMenu-zindex;
-    SCHEMA_DIVIDER_WIDTH: $SCHEMA_DIVIDER_WIDTH;
-    COLLECTION_BORDER_WIDTH: $COLLECTION_BORDER_WIDTH;
-    MINIMIZED_ICON_SIZE: $MINIMIZED_ICON_SIZE;
-    MAX_ROW_HEIGHT: $MAX_ROW_HEIGHT;
-    SEARCH_THUMBNAIL_SIZE: $search-thumnail-size;
-    ANTIMODEMENU_HEIGHT: $antimodemenu-height;
-    DASHBOARD_SELECTOR_HEIGHT: $dashboardselector-height;
-    DFLT_IMAGE_NATIVE_DIM: $DFLT_IMAGE_NATIVE_DIM;
-    LEFT_MENU_WIDTH: $LEFT_MENU_WIDTH;
-    TREE_BULLET_WIDTH: $TREE_BULLET_WIDTH;
+  contextMenuZindex: $contextMenu-zindex;
+  SCHEMA_DIVIDER_WIDTH: $SCHEMA_DIVIDER_WIDTH;
+  COLLECTION_BORDER_WIDTH: $COLLECTION_BORDER_WIDTH;
+  MINIMIZED_ICON_SIZE: $MINIMIZED_ICON_SIZE;
+  MAX_ROW_HEIGHT: $MAX_ROW_HEIGHT;
+  SEARCH_THUMBNAIL_SIZE: $search-thumnail-size;
+  ANTIMODEMENU_HEIGHT: $antimodemenu-height;
+  DASHBOARD_SELECTOR_HEIGHT: $dashboardselector-height;
+  DFLT_IMAGE_NATIVE_DIM: $DFLT_IMAGE_NATIVE_DIM;
+  LEFT_MENU_WIDTH: $LEFT_MENU_WIDTH;
+  TREE_BULLET_WIDTH: $TREE_BULLET_WIDTH;
 }

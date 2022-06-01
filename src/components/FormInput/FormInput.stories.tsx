@@ -7,15 +7,15 @@ import { FormInput, IFormInputProps } from './FormInput';
 import { IconButton } from '../IconButton';
 
 export default {
-  title: 'Dash/Text Input',
+  title: 'Dash/Form Input',
   component: FormInput,
   argTypes: {},
 } as Meta<typeof FormInput>;
 
 const Template: Story<IFormInputProps> = (args) => <FormInput {...args}/>;
 
-export const Primary = Template.bind({});
-Primary.args = {
-    title: 'Hello World!',
-    initialIsOpen: true,
-};
+// export const Primary = Template.bind({});
+// Primary.args = {
+//     title: 'Hello World!',
+//     initialIsOpen: true,
+// };
