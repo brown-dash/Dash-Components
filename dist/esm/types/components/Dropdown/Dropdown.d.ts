@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { Size } from '../../global/globalEnums';
+import { Size, ILocation } from '../../global';
 import { IListBoxItemProps } from '../ListItem';
 import './Dropdown.scss';
 export interface IDropdownProps {
@@ -11,7 +11,10 @@ export interface IDropdownProps {
     location: 'left' | 'right' | 'below' | 'above';
     type: 'search' | 'select' | 'click';
     maxItems?: number;
+    height?: number;
     size?: Size;
+    color?: string;
+    toggleOverlay?: (key: string, location: ILocation, element: JSX.Element) => void;
 }
 /**
  *

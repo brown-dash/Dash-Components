@@ -4,21 +4,24 @@ import { Button } from '../Button'
 import { IconButton } from '../IconButton'
 import { ListBox } from '../ListBox/ListBox'
 import { IListBoxItemProps } from '../ListItem'
-import './PopupList.scss'
+import './Popup.scss'
 import Measure from 'react-measure'
 
-export interface IPopupListProps {
+export interface IPopupProps {
   text?: string
-  icon: JSX.Element
-  items: IListBoxItemProps[]
+  icon: JSX.Element | string
+  toggleBorderRadius?: number | string
   toggleBackgroundColor?: string
   boxBackgroundColor?: string
-  selected?: IListBoxItemProps
+  children?: any
   location?: 'left' | 'right' | 'below' | 'above'
-  maxItems?: number
   size?: Size
   height?: number
-  addToOverlay?: (location: ILocation, element: JSX.Element) => void
+  toggleOverlay?: (
+    key: string,
+    location: ILocation,
+    element: JSX.Element
+  ) => void
 }
 
 /**
@@ -29,23 +32,19 @@ export interface IPopupListProps {
  * TODO: add support for isMulti, isSearchable
  * Look at: import Select from "react-select";
  */
-export const PopupList = (props: IPopupListProps) => {
+export const Popup = (props: IPopupProps) => {
   const {
     text,
     size,
     height,
-    maxItems,
+    toggleBorderRadius,
     toggleBackgroundColor,
     icon,
     boxBackgroundColor,
-    items,
-    selected,
-    addToOverlay,
+    children,
+    toggleOverlay,
   } = props
   const [isOpen, setOpen] = useState<boolean>(false)
-  const [selectedItem, setSelectedItem] = useState<
-    IListBoxItemProps | undefined
-  >(selected)
   const [location, setLocation] = useState<ILocation>({
     top: 0,
     left: 0,
@@ -57,7 +56,7 @@ export const PopupList = (props: IPopupListProps) => {
     if (icon && !text) {
       return (
         <IconButton
-          borderRadius={Borders.STANDARD_BORDER_RADIUS}
+          borderRadius={toggleBorderRadius}
           size={Size.SMALL}
           backgroundColor={toggleBackgroundColor}
           icon={icon}
@@ -66,7 +65,7 @@ export const PopupList = (props: IPopupListProps) => {
     } else if (text) {
       return (
         <Button
-          borderRadius={Borders.STANDARD_BORDER_RADIUS}
+          borderRadius={toggleBorderRadius}
           size={Size.SMALL}
           backgroundColor={toggleBackgroundColor}
           text={text}
@@ -86,11 +85,12 @@ export const PopupList = (props: IPopupListProps) => {
 
   return (
     <Measure
+      bounds
       offset
       onResize={(r: any) => {
         setLocation({
-          top: r.offset.top,
-          left: r.offset.left,
+          top: r.bounds.top,
+          left: r.bounds.left,
           width: r.offset.width,
           height: r.offset.height,
         })
@@ -98,7 +98,7 @@ export const PopupList = (props: IPopupListProps) => {
     >
       {({ measureRef }) => (
         <div
-          className="popupList-container"
+          className="popup-container"
           ref={measureRef}
           style={{
             background: toggleBackgroundColor
@@ -107,27 +107,20 @@ export const PopupList = (props: IPopupListProps) => {
           }}
         >
           <div
-            className="popupList-toggle"
+            className="popup-toggle"
             style={{ height: getHeight(height, size) }}
             onClick={() => {
+              toggleOverlay &&
+                toggleOverlay(
+                  'popup1',
+                  location,
+                  <div className="popup-box">{children}</div>
+                )
               setOpen(!isOpen)
             }}
           >
             {getToggle()}
           </div>
-          {addToOverlay &&
-            addToOverlay(
-              location,
-              <ListBox
-                maxItems={maxItems}
-                backgroundColor={boxBackgroundColor}
-                isOpen={isOpen}
-                items={items}
-                setIsOpen={setOpen}
-                selectedItem={selectedItem}
-                setSelectedItem={setSelectedItem}
-              />
-            )}
         </div>
       )}
     </Measure>

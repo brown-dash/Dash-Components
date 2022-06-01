@@ -6,9 +6,10 @@ import './ListItem.scss'
 import * as fa from 'react-icons/fa'
 import { IconButton } from '../IconButton'
 import { ListBox } from '../ListBox'
+import { isDark } from '../../global'
 
 export interface IListBoxItemProps {
-  val: any
+  ind?: number
   text?: string
   description?: string
   shortcut?: string
@@ -32,7 +33,7 @@ export interface IListBoxItemProps {
  */
 export const ListItem = (props: IListBoxItemProps) => {
   const {
-    val,
+    ind,
     description,
     text,
     shortcut,
@@ -53,18 +54,15 @@ export const ListItem = (props: IListBoxItemProps) => {
         onClick && onClick()
         onClick && e.stopPropagation()
       }}
-      style={{ background: selected ? Colors.LIGHT_BLUE : undefined }}
+      style={{
+        background: selected ? Colors.LIGHT_BLUE : undefined,
+        color: selected ? Colors.BLACK : undefined,
+      }}
     >
       <div className="listItem-top">
         {
           <div className={'button'}>
-            <Button
-              primaryColor={Colors.TRANSPARENT}
-              color={Colors.BLACK}
-              icon={icon}
-              text={text}
-              padding={0}
-            />
+            <Button icon={icon} text={text} padding={0} />
           </div>
         }
         {!preventClick && shortcut && (

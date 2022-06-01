@@ -1,10 +1,9 @@
+import { Meta, Story } from '@storybook/react'
 import React from 'react'
-import { Story, Meta } from '@storybook/react'
-import { Colors, Size } from '../../global/globalEnums'
 import * as fa from 'react-icons/fa'
+import { Colors, Size } from '../../global/globalEnums'
 import { IListBoxItemProps } from '../ListItem'
-import { PopupList, IPopupListProps } from './PopupList'
-import { IconButton } from '../IconButton'
+import { IPopupListProps, PopupList } from './PopupList'
 
 export default {
   title: 'Dash/Popup List',
@@ -15,33 +14,30 @@ export default {
 const Template: Story<IPopupListProps> = (args) => <PopupList {...args} />
 const PopupListItems: IListBoxItemProps[] = [
   {
-    val: 'facebook',
+    ind: 1,
     text: 'Facebook',
     shortcut: '⌘F',
     icon: <fa.FaFacebook />,
   },
   {
-    val: 'google',
+    ind: 2,
     text: 'Google',
   },
   {
-    val: 'airbnb',
+    ind: 3,
     text: 'Airbnb',
     icon: <fa.FaAirbnb />,
     description: 'Airbnb was founded in the United Kingdom',
   },
   {
-    val: 'salesforce',
     text: 'Salesforce',
     icon: <fa.FaSalesforce />,
     items: [
       {
-        val: 'slack',
         text: 'Slack',
         icon: <fa.FaSlack />,
       },
       {
-        val: 'heroku',
         text: 'Heroku',
         shortcut: '⌘H',
         icon: <fa.FaAirFreshener />,
@@ -49,7 +45,6 @@ const PopupListItems: IListBoxItemProps[] = [
     ],
   },
   {
-    val: 'microsoft',
     text: 'Microsoft',
     icon: <fa.FaMicrosoft />,
     description: 'Microsoft is a company founded by Bill Gates',

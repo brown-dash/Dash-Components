@@ -21,8 +21,7 @@
   position: relative;
 
   &:hover {
-    outline: solid 1px $light-gray;
-    outline-offset: -1px;
+    background: $hover-background !important;
   }
 
   .dropdown-list {
@@ -52,7 +51,7 @@
       justify-self: center;
     }
 
-    .caret {
+    .toggle-caret {
       cursor: pointer;
       grid-area: end;
       display: flex;

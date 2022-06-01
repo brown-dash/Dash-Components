@@ -1,7 +1,7 @@
 import React from 'react';
 import './ListItem.scss';
 export interface IListBoxItemProps {
-    val: any;
+    ind?: number;
     text?: string;
     description?: string;
     shortcut?: string;

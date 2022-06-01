@@ -66,20 +66,31 @@ interface IButtonProps {
     label?: string;
     padding?: number;
     hasBorder?: boolean;
-    borderRadius?: number;
+    borderRadius?: number | string;
     iconPosition?: 'left' | 'right' | 'top' | 'bottom';
     height?: number;
 }
 declare const Button: (props: IButtonProps) => JSX.Element;
 
 interface IColorPickerProps {
-    title?: string;
+    text?: string;
+    icon?: string;
     onChange: (color: any) => void;
 }
 declare const ColorPicker: (props: IColorPickerProps) => JSX.Element;
 
+interface ILocation {
+    top: number;
+    left: number;
+    width: number;
+    height: number;
+}
+declare const getHeight: (height: number | undefined, size: Size | undefined) => number;
+declare const colorConvert: (color: any) => any;
+declare const isDark: (color: any) => boolean;
+
 interface IListBoxItemProps {
-    val: any;
+    ind?: number;
     text?: string;
     description?: string;
     shortcut?: string;
@@ -102,7 +113,10 @@ interface IDropdownProps {
     location: 'left' | 'right' | 'below' | 'above';
     type: 'search' | 'select' | 'click';
     maxItems?: number;
+    height?: number;
     size?: Size;
+    color?: string;
+    toggleOverlay?: (key: string, location: ILocation, element: JSX.Element) => void;
 }
 /**
  *
@@ -122,7 +136,7 @@ interface IEditableTextProps {
     setEditing: (editing: boolean) => void;
     backgroundColor?: string;
     size?: Size;
-    height?: number | string;
+    height?: number;
 }
 declare const EditableText: (props: IEditableTextProps) => JSX.Element;
 
@@ -141,7 +155,7 @@ interface IIconButtonProps {
     activeColor?: string;
     color?: string;
     hoverStyle?: 'shadow' | 'darken' | 'lighten' | 'gray' | 'none';
-    size?: 'small' | 'medium' | 'large';
+    size?: Size;
     hasLabel?: boolean;
     label?: string;
     padding?: number;
@@ -174,4 +188,57 @@ interface IListBoxProps {
  */
 declare const ListBox: (props: IListBoxProps) => JSX.Element | null;
 
-export { Borders, Button, ColorPicker, Colors, Dropdown, EditableText, FontSize, IButtonProps, IColorPickerProps, IDropdownProps, IEditableTextProps, IIconButtonProps, IListBoxProps, IconButton, IconSizes, ListBox, Padding, Shadows, Size };
+interface IPopupProps {
+    text?: string;
+    icon: JSX.Element | string;
+    toggleBorderRadius?: number | string;
+    toggleBackgroundColor?: string;
+    boxBackgroundColor?: string;
+    children?: any;
+    location?: 'left' | 'right' | 'below' | 'above';
+    size?: Size;
+    height?: number;
+    toggleOverlay?: (key: string, location: ILocation, element: JSX.Element) => void;
+}
+/**
+ *
+ * @param props
+ * @returns
+ *
+ * TODO: add support for isMulti, isSearchable
+ * Look at: import Select from "react-select";
+ */
+declare const Popup: (props: IPopupProps) => JSX.Element;
+
+interface IPopupListProps {
+    text?: string;
+    icon: JSX.Element;
+    items: IListBoxItemProps[];
+    toggleBackgroundColor?: string;
+    boxBackgroundColor?: string;
+    selected?: IListBoxItemProps;
+    location?: 'left' | 'right' | 'below' | 'above';
+    maxItems?: number;
+    size?: Size;
+    height?: number;
+    addToOverlay?: (location: ILocation, element: JSX.Element) => void;
+}
+/**
+ *
+ * @param props
+ * @returns
+ *
+ * TODO: add support for isMulti, isSearchable
+ * Look at: import Select from "react-select";
+ */
+declare const PopupList: (props: IPopupListProps) => JSX.Element;
+
+interface IModalProps {
+    children: JSX.Element;
+    initialIsOpen: boolean;
+    title?: string;
+    backgroundColor?: string;
+}
+declare const Modal: (props: IModalProps) => JSX.Element | null;
+
+export { Borders, Button, ColorPicker, Colors, Dropdown, EditableText, FontSize, IButtonProps, IColorPickerProps, IDropdownProps, IEditableTextProps, IIconButtonProps, IListBoxProps, ILocation, IModalProps, IPopupListProps, IPopupProps, IconButton, IconSizes, ListBox, Modal, Padding, Popup, PopupList, Shadows, Size, colorConvert, getHeight, isDark };

@@ -1,5 +1,6 @@
 import React from 'react'
-import { Shadows } from '../../global/globalEnums'
+import { isDark } from '../../global'
+import { Colors, Shadows } from '../../global/globalEnums'
 import { IListBoxItemProps, ListItem } from '../ListItem'
 import './ListBox.scss'
 
@@ -43,8 +44,8 @@ export const ListBox = (props: IListBoxProps) => {
   ): JSX.Element => {
     return (
       <ListItem
-        key={item.val + ind}
-        val={item.val}
+        key={ind}
+        ind={ind}
         selected={selected}
         setSelectedItem={setSelectedItem}
         icon={item.icon}
@@ -73,7 +74,6 @@ export const ListBox = (props: IListBoxProps) => {
       itemElements.push(getListItem(item, ind, item === selectedItem))
     }
   })
-  console.log('maxItems: ', maxItems, itemElements.length)
   return isOpen ? (
     <div
       className="listBox-container"
@@ -84,6 +84,7 @@ export const ListBox = (props: IListBoxProps) => {
             : undefined,
         boxShadow: hasShadow ? Shadows.STANDARD_SHADOW : undefined,
         background: backgroundColor ? backgroundColor : undefined,
+        color: isDark(backgroundColor) ? Colors.WHITE : Colors.BLACK,
       }}
     >
       <div

@@ -2,8 +2,8 @@
 import './Modal.scss';
 export interface IModalProps {
     children: JSX.Element;
-    isOpen?: boolean;
-    setOpen?: (status: boolean) => void;
+    initialIsOpen: boolean;
     title?: string;
+    backgroundColor?: string;
 }
 export declare const Modal: (props: IModalProps) => JSX.Element | null;

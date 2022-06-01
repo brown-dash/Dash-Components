@@ -1,6 +1,13 @@
 import { Colors, Size } from './globalEnums'
 const Color = require('color')
 
+export interface ILocation {
+  top: number
+  left: number
+  width: number
+  height: number
+}
+
 export const getHeight = (
   height: number | undefined,
   size: Size | undefined
@@ -28,6 +35,7 @@ export const colorConvert = (color: any) => {
 }
 
 export const isDark = (color: any): boolean => {
+  if (color === undefined) return false
   if (color === 'transparent') return false
   if (color.startsWith?.('linear')) return false
   const nonAlphaColor = color.startsWith('#')

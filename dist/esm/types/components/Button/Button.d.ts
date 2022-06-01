@@ -21,7 +21,7 @@ export interface IButtonProps {
     label?: string;
     padding?: number;
     hasBorder?: boolean;
-    borderRadius?: number;
+    borderRadius?: number | string;
     iconPosition?: 'left' | 'right' | 'top' | 'bottom';
     height?: number;
 }

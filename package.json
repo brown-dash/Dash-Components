@@ -1,6 +1,6 @@
 {
   "name": "browndash-components",
-  "version": "0.0.8",
+  "version": "0.0.14",
   "description": "Component library as used by Dash.",
   "main": "dist/cjs/index.js",
   "types": "dist/cjs/types/index.d.ts",
@@ -37,6 +37,7 @@
     "@storybook/testing-library": "0.0.9",
     "@types/react": "^17.0.39",
     "@types/react-color": "^3.0.6",
+    "@types/react-measure": "^2.0.8",
     "babel-loader": "^8.2.3",
     "eslint": "^8.16.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -64,6 +65,7 @@
   "dependencies": {
     "color": "^4.2.3",
     "react-color": "^2.19.3",
-    "react-icons": "^4.3.1"
+    "react-icons": "^4.3.1",
+    "react-measure": "^2.5.2"
   }
 }

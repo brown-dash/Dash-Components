@@ -1,4 +1,5 @@
 import React from 'react';
+import { Size } from '../../global/globalEnums';
 import './IconButton.scss';
 export interface IIconButtonProps {
     onClick?: (event: React.MouseEvent) => void;
@@ -15,7 +16,7 @@ export interface IIconButtonProps {
     activeColor?: string;
     color?: string;
     hoverStyle?: 'shadow' | 'darken' | 'lighten' | 'gray' | 'none';
-    size?: 'small' | 'medium' | 'large';
+    size?: Size;
     hasLabel?: boolean;
     label?: string;
     padding?: number;
