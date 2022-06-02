@@ -6,7 +6,8 @@ import './ListItem.scss'
 import * as fa from 'react-icons/fa'
 import { IconButton } from '../IconButton'
 import { ListBox } from '../ListBox'
-import { isDark } from '../../global'
+import { ILocation, isDark } from '../../global'
+import Measure from 'react-measure'
 
 export interface IListBoxItemProps {
   ind?: number
@@ -21,6 +22,11 @@ export interface IListBoxItemProps {
   onClick?: () => void
   preventClick?: boolean
   backgroundColor?: string
+  toggleOverlay?: (
+    key: string,
+    location: ILocation,
+    element: JSX.Element
+  ) => void
 }
 
 /**
@@ -45,47 +51,77 @@ export const ListItem = (props: IListBoxItemProps) => {
     onClick,
     preventClick,
     backgroundColor,
+    toggleOverlay,
   } = props
 
+  const [location, setLocation] = useState<ILocation>({
+    top: 0,
+    left: 0,
+    width: 0,
+    height: 0,
+  })
+
+  const onToggleClick = () => {
+    items &&
+      toggleOverlay &&
+      toggleOverlay(
+        'listItem' + { text },
+        location,
+        <ListBox
+          items={items}
+          backgroundColor={backgroundColor}
+          setSelectedItem={setSelectedItem}
+        />
+      )
+  }
+
   return (
-    <div
-      className="listItem-container"
-      onClick={(e: React.MouseEvent) => {
-        onClick && onClick()
-        onClick && e.stopPropagation()
-      }}
-      style={{
-        background: selected ? Colors.LIGHT_BLUE : undefined,
-        color: selected ? Colors.BLACK : undefined,
+    <Measure
+      bounds
+      onResize={(r: any) => {
+        setLocation({
+          top: r.bounds.top,
+          left: r.bounds.left,
+          width: r.bounds.width,
+          height: r.bounds.height,
+          override: 'right',
+        })
       }}
     >
-      <div className="listItem-top">
-        {
-          <div className={'button'}>
-            <Button icon={icon} text={text} padding={0} />
+      {({ measureRef }) => (
+        <div
+          className="listItem-container"
+          ref={measureRef}
+          onClick={(e: React.MouseEvent) => {
+            onClick && onClick()
+            onClick && e.stopPropagation()
+            items && onToggleClick()
+          }}
+          style={{
+            background: selected ? Colors.LIGHT_BLUE : undefined,
+            color: selected ? Colors.BLACK : undefined,
+          }}
+        >
+          <div className="listItem-top">
+            {
+              <div className={'button'}>
+                <Button icon={icon} text={text} padding={0} />
+              </div>
+            }
+            {!preventClick && shortcut && (
+              <div className="shortcut">{shortcut}</div>
+            )}
+            {!preventClick && items && (
+              <div className={'caret'}>
+                <IconButton size={Size.SMALL} icon={<fa.FaCaretRight />} />
+              </div>
+            )}
           </div>
-        }
-        {!preventClick && shortcut && (
-          <div className="shortcut">{shortcut}</div>
-        )}
-        {!preventClick && items && (
-          <div className={'caret'}>
-            <IconButton size={Size.SMALL} icon={<fa.FaCaretRight />} />
-          </div>
-        )}
-      </div>
-      {description && <div className="listItem-description">{description}</div>}
-      {!preventClick && items && (
-        <div className="listItem-sublist">
-          <ListBox
-            items={items}
-            isOpen={true}
-            setIsOpen={() => {}}
-            backgroundColor={backgroundColor}
-            setSelectedItem={setSelectedItem}
-          />
+          {description && (
+            <div className="listItem-description">{description}</div>
+          )}
         </div>
       )}
-    </div>
+    </Measure>
   )
 }

@@ -84,6 +84,7 @@ interface ILocation {
     left: number;
     width: number;
     height: number;
+    override?: 'left' | 'bottom' | 'top' | 'right';
 }
 declare const getHeight: (height: number | undefined, size: Size | undefined) => number;
 declare const colorConvert: (color: any) => any;
@@ -102,6 +103,7 @@ interface IListBoxItemProps {
     onClick?: () => void;
     preventClick?: boolean;
     backgroundColor?: string;
+    toggleOverlay?: (key: string, location: ILocation, element: JSX.Element) => void;
 }
 
 interface IDropdownProps {
@@ -175,14 +177,13 @@ declare const IconButton: (props: IIconButtonProps) => JSX.Element;
 
 interface IListBoxProps {
     items: IListBoxItemProps[];
-    isOpen: boolean;
     filter?: string;
     hasShadow?: boolean;
-    setIsOpen: (bool: boolean) => void;
     selectedItem?: IListBoxItemProps;
     setSelectedItem?: (item: IListBoxItemProps) => void;
     backgroundColor?: string;
     maxItems?: number;
+    toggleOverlay?: (key: string, location: ILocation, element: JSX.Element) => void;
 }
 /**
  *
@@ -192,7 +193,7 @@ interface IListBoxProps {
  * TODO: add support for isMulti, isSearchable
  * Look at: import Select from "react-select";
  */
-declare const ListBox: (props: IListBoxProps) => JSX.Element | null;
+declare const ListBox: (props: IListBoxProps) => JSX.Element;
 
 interface IPopupProps {
     text?: string;
@@ -247,4 +248,20 @@ interface IModalProps {
 }
 declare const Modal: (props: IModalProps) => JSX.Element | null;
 
-export { Borders, Button, ColorPicker, Colors, Dropdown, EditableText, FontSize, IButtonProps, IColorPickerProps, IDropdownProps, IEditableTextProps, IIconButtonProps, IListBoxProps, ILocation, IModalProps, IPopupListProps, IPopupProps, IconButton, IconSizes, ListBox, Modal, Padding, Popup, PopupList, Shadows, Size, colorConvert, getHeight, isDark };
+interface IMenuGroupProps {
+    orientation: 'hor' | 'vert';
+    children: any;
+}
+declare const MenuGroup: (props: IMenuGroupProps) => JSX.Element;
+
+interface ISliderProps {
+    multithumb: boolean;
+    min: number;
+    max: number;
+    initialVal?: number;
+    step?: number;
+    minDiff?: number;
+}
+declare const Slider: (props: ISliderProps) => JSX.Element;
+
+export { Borders, Button, ColorPicker, Colors, Dropdown, EditableText, FontSize, IButtonProps, IColorPickerProps, IDropdownProps, IEditableTextProps, IIconButtonProps, IListBoxProps, ILocation, IMenuGroupProps, IModalProps, IPopupListProps, IPopupProps, ISliderProps, IconButton, IconSizes, ListBox, MenuGroup, Modal, Padding, Popup, PopupList, Shadows, Size, Slider, colorConvert, getHeight, isDark };

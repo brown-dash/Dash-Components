@@ -121,9 +121,7 @@ export const PopupList = (props: IPopupListProps) => {
               <ListBox
                 maxItems={maxItems}
                 backgroundColor={boxBackgroundColor}
-                isOpen={isOpen}
                 items={items}
-                setIsOpen={setOpen}
                 selectedItem={selectedItem}
                 setSelectedItem={setSelectedItem}
               />

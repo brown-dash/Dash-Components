@@ -6,6 +6,7 @@ export interface ILocation {
   left: number
   width: number
   height: number
+  override?: 'left' | 'bottom' | 'top' | 'right'
 }
 
 export const getHeight = (

@@ -1,72 +1,69 @@
 @import '../../global/globalCssVariables.scss';
 
 .listItem-container {
-    position: relative;
-    width: 100%;
-    border-radius: $standard-border-radius;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    cursor: pointer;
-    font-size: $default-font;
-    font-family: $default-font;
+  position: relative;
+  width: 100%;
+  border-radius: $standard-border-radius;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+  font-family: $default-font;
 
-    &:hover{
-        background: $hover-background;
-        .listItem-sublist{
-            display: block;
-        }
-    }
-
-    .listItem-top {
-        display: grid;
-        height: 30px;
-        width: 100%;
-        grid-template-columns: 80% 20%;
-        grid-template-areas: 
-        "button end";
-        grid-template-rows: 1fr;
-        flex-direction: row;
-        justify-content: left;
-        align-items: center;
-        justify-content: center;
-        justify-self: center;
-
-        .button {
-            grid-area: button;
-            margin-left: 10px;
-        }
-
-        .shortcut {
-            grid-area: end;
-            color: $black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: $label-fontSize;
-            font-family: $default-font;
-        }
-
-        .caret {
-            grid-area: end;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            justify-self: center;
-        }
-    }
-
-    .listItem-description {
-        font-size: $label-fontSize;
-        padding: 0px 10px 5px 10px;
-    }
-
-
+  &:hover {
+    background: $hover-background;
     .listItem-sublist {
-        display: none;
-        position: absolute;
-        width: 200px;
-        left: calc(100% + 5px);
+      display: block;
     }
+  }
+
+  .listItem-top {
+    display: grid;
+    height: 30px;
+    width: 100%;
+    grid-template-columns: 80% 20%;
+    grid-template-areas: 'button end';
+    grid-template-rows: 1fr;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+
+    .button {
+      grid-area: button;
+      margin-left: 10px;
+    }
+
+    .shortcut {
+      grid-area: end;
+      color: $black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: $label-fontSize;
+      font-family: $default-font;
+    }
+
+    .caret {
+      grid-area: end;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      justify-self: center;
+    }
+  }
+
+  .listItem-description {
+    font-size: $label-fontSize;
+    padding: 0px 10px 5px 10px;
+  }
+
+  .listItem-sublist {
+    display: none;
+    position: absolute;
+    width: 200px;
+    left: calc(100% + 5px);
+  }
 }

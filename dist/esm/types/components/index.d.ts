@@ -7,3 +7,5 @@ export * from './ListBox';
 export * from './Popup';
 export * from './PopupList';
 export * from './Modal';
+export * from './MenuGroup';
+export * from './Slider';

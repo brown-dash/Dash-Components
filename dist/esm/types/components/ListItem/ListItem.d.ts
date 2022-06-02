@@ -1,5 +1,6 @@
 import React from 'react';
 import './ListItem.scss';
+import { ILocation } from '../../global';
 export interface IListBoxItemProps {
     ind?: number;
     text?: string;
@@ -13,6 +14,7 @@ export interface IListBoxItemProps {
     onClick?: () => void;
     preventClick?: boolean;
     backgroundColor?: string;
+    toggleOverlay?: (key: string, location: ILocation, element: JSX.Element) => void;
 }
 /**
  *

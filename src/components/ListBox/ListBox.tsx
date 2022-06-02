@@ -1,19 +1,22 @@
 import React from 'react'
-import { isDark } from '../../global'
+import { ILocation, isDark } from '../../global'
 import { Colors, Shadows } from '../../global/globalEnums'
 import { IListBoxItemProps, ListItem } from '../ListItem'
 import './ListBox.scss'
 
 export interface IListBoxProps {
   items: IListBoxItemProps[]
-  isOpen: boolean
   filter?: string
   hasShadow?: boolean
-  setIsOpen: (bool: boolean) => void
   selectedItem?: IListBoxItemProps
   setSelectedItem?: (item: IListBoxItemProps) => void
   backgroundColor?: string
   maxItems?: number
+  toggleOverlay?: (
+    key: string,
+    location: ILocation,
+    element: JSX.Element
+  ) => void
 }
 
 /**
@@ -27,14 +30,13 @@ export interface IListBoxProps {
 export const ListBox = (props: IListBoxProps) => {
   const {
     items,
-    isOpen,
-    setIsOpen,
     maxItems,
     backgroundColor,
     selectedItem,
     setSelectedItem,
     filter,
     hasShadow,
+    toggleOverlay,
   } = props
 
   const getListItem = (
@@ -68,13 +70,17 @@ export const ListBox = (props: IListBoxProps) => {
         filter.toLowerCase() ===
         item.text?.substring(0, filter.length).toLowerCase()
       ) {
-        itemElements.push(getListItem(item, ind, item === selectedItem))
+        itemElements.push(
+          getListItem(item, ind, item.text === selectedItem?.text)
+        )
       }
     } else {
-      itemElements.push(getListItem(item, ind, item === selectedItem))
+      itemElements.push(
+        getListItem(item, ind, item.text === selectedItem?.text)
+      )
     }
   })
-  return isOpen ? (
+  return (
     <div
       className="listBox-container"
       style={{
@@ -94,5 +100,5 @@ export const ListBox = (props: IListBoxProps) => {
         {itemElements}
       </div>
     </div>
-  ) : null
+  )
 }

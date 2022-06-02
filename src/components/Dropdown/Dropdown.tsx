@@ -49,16 +49,26 @@ export const Dropdown = (props: IDropdownProps) => {
     selected,
     toggleOverlay,
   } = props
-  const [isOpen, setOpen] = useState<boolean>(false)
   const [selectedItem, setSelectedItem] = useState<
     IListBoxItemProps | undefined
   >(selected)
   const [searchTerm, setSearchTerm] = useState<string | undefined>(undefined)
   const [isEditing, setIsEditing] = useState<boolean>(false)
 
-  const onItemSelect = (item: IListBoxItemProps) => {
-    type == 'select' || ('search' && setSelectedItem(item))
-    type == 'search' && setSearchTerm(item.text)
+  const onToggleClick = () => {
+    toggleOverlay &&
+      toggleOverlay(
+        'dropdown' + { title },
+        location,
+        <ListBox
+          maxItems={maxItems}
+          backgroundColor={boxBackgroundColor}
+          items={items}
+          filter={searchTerm}
+          selectedItem={selectedItem}
+          setSelectedItem={setSelectedItem}
+        />
+      )
   }
 
   const getToggle = () => {
@@ -71,7 +81,7 @@ export const Dropdown = (props: IDropdownProps) => {
             onClick={(e) => {
               e.stopPropagation()
               !isEditing && setIsEditing(true)
-              setOpen(true)
+              onToggleClick()
             }}
           >
             {selectedItem && !isEditing ? (
@@ -86,7 +96,6 @@ export const Dropdown = (props: IDropdownProps) => {
                   editing={true}
                   onEdit={(val) => {
                     setSearchTerm(val)
-                    setOpen(true)
                   }}
                   size={Size.SMALL}
                   setEditing={setIsEditing}
@@ -108,7 +117,7 @@ export const Dropdown = (props: IDropdownProps) => {
           <div
             className="dropdown-toggle"
             style={{ height: getHeight(height, size) }}
-            onClick={() => setOpen(!isOpen)}
+            onClick={onToggleClick}
           >
             {selectedItem && (
               <div className="toggle-button">
@@ -130,24 +139,7 @@ export const Dropdown = (props: IDropdownProps) => {
           <div
             className="dropdown-toggle"
             style={{ height: getHeight(height, size) }}
-            onClick={() => {
-              setOpen(!isOpen)
-              toggleOverlay &&
-                toggleOverlay(
-                  'dropdown1',
-                  location,
-                  <ListBox
-                    maxItems={maxItems}
-                    backgroundColor={boxBackgroundColor}
-                    isOpen={isOpen}
-                    items={items}
-                    filter={searchTerm}
-                    setIsOpen={setOpen}
-                    selectedItem={selectedItem}
-                    setSelectedItem={setSelectedItem}
-                  />
-                )
-            }}
+            onClick={onToggleClick}
           >
             {selectedItem && (
               <div className="toggle-button">
