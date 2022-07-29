@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import React from 'react'
-import { Colors, Size } from '../../global/globalEnums'
+import { Colors, FontSize, Size } from '../../global/globalEnums'
 import { Button } from '../Button'
 import './ListItem.scss'
 import * as fa from 'react-icons/fa'
@@ -105,7 +105,7 @@ export const ListItem = (props: IListBoxItemProps) => {
           <div className="listItem-top">
             {
               <div className={'button'}>
-                <Button icon={icon} text={text} padding={0} />
+                <Button icon={icon} text={text} fontSize={FontSize.SECONDARY} padding={0} />
               </div>
             }
             {!preventClick && shortcut && (

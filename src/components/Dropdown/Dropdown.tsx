@@ -56,9 +56,9 @@ export const Dropdown = (props: IDropdownProps) => {
   const [isEditing, setIsEditing] = useState<boolean>(false)
 
   const onToggleClick = () => {
-    toggleOverlay &&
+    if (toggleOverlay) {
       toggleOverlay(
-        'dropdown' + { title },
+        'dropdown' + title ,
         location,
         <ListBox
           maxItems={maxItems}
@@ -69,6 +69,9 @@ export const Dropdown = (props: IDropdownProps) => {
           setSelectedItem={setSelectedItem}
         />
       )
+      } else {
+        
+    }
   }
 
   const getToggle = () => {

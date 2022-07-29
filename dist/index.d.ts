@@ -264,4 +264,8 @@ interface ISliderProps {
 }
 declare const Slider: (props: ISliderProps) => JSX.Element;
 
-export { Borders, Button, ColorPicker, Colors, Dropdown, EditableText, FontSize, IButtonProps, IColorPickerProps, IDropdownProps, IEditableTextProps, IIconButtonProps, IListBoxProps, ILocation, IMenuGroupProps, IModalProps, IPopupListProps, IPopupProps, ISliderProps, IconButton, IconSizes, ListBox, MenuGroup, Modal, Padding, Popup, PopupList, Shadows, Size, Slider, colorConvert, getHeight, isDark };
+declare const Overlay: (props: {
+    elementMap?: Map<string, JSX.Element>;
+}) => JSX.Element;
+
+export { Borders, Button, ColorPicker, Colors, Dropdown, EditableText, FontSize, IButtonProps, IColorPickerProps, IDropdownProps, IEditableTextProps, IIconButtonProps, IListBoxProps, ILocation, IMenuGroupProps, IModalProps, IPopupListProps, IPopupProps, ISliderProps, IconButton, IconSizes, ListBox, MenuGroup, Modal, Overlay, Padding, Popup, PopupList, Shadows, Size, Slider, colorConvert, getHeight, isDark };

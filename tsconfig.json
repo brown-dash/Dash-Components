@@ -1,24 +1,6 @@
-// {
-//   "compilerOptions": {
-//       "target": "es5",
-//       // "module": "system",
-//       "removeComments": true,
-//       "experimentalDecorators": true,
-//       "allowSyntheticDefaultImports": true,
-//       "strict": true,
-//       "jsx": "react",
-//       "allowJs": true,
-//       "sourceMap": true,
-//       "outDir": "dist",
-//       "lib": [
-//           "dom",
-//           "es2015"
-//       ],
-//   }
-// }
-
 {
   "compilerOptions": {
+    "experimentalDecorators": true,
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true,
