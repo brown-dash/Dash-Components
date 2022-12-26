@@ -1,9 +1,12 @@
 import React from "react"
+import "./Overlay.scss"
 
-export const Overlay = (props: {elementMap?: Map<string, JSX.Element>}) => {
+export interface IOverlayProps {
+    elementMap?: Map<string, JSX.Element>
+}
 
-    console.log(props.elementMap);
-    return <div>
+export const Overlay = (props: IOverlayProps) => {
+    return <div id="browndashComponents-overlay" className="overlay-container">
 
     </div>
 }

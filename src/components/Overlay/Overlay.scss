@@ -1,18 +1,9 @@
-.overlayView-container {
+.overlay-container {
     width: 100vw;
     height: 100vh;
+    top: 0;
+    left: 0;
+    background: pink;
     position: absolute;
     pointer-events: none;
-
-    .overlayView-eleWrapper {
-        z-index: 80000;
-        position: absolute;
-        width: fit-content;
-        height: fit-content;
-        pointer-events: auto;
-    }
-
-    .overlayView-doc {
-        pointer-events: auto;
-    }
 }

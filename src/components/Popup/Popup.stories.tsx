@@ -3,6 +3,7 @@ import React from 'react'
 import * as fa from 'react-icons/fa'
 import { Colors, Size } from '../../global/globalEnums'
 import { IPopupProps, Popup } from './Popup'
+import { Overlay } from '../Overlay'
 
 export default {
   title: 'Dash/Popup',
@@ -11,7 +12,10 @@ export default {
 } as Meta<typeof Popup>
 
 const Template: Story<IPopupProps> = (args) => (
-  <Popup {...args}>HELLO WORLD!</Popup>
+  <div>
+    <Popup {...args}>HELLO WORLD!</Popup>
+    <Overlay/>
+  </div>
 )
 
 export const Primary = Template.bind({})
@@ -23,6 +27,9 @@ Primary.args = {
   toggleOverlay: (key, location, ele) => {
     console.log(key, location)
   },
+  popup: <div style={{background: "blue"}}>
+    HELLO WORLD MY NAME IS GUPTA!
+  </div>
 }
 
 export const Text = Template.bind({})
