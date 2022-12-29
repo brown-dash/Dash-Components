@@ -198,14 +198,9 @@ declare const ListBox: (props: IListBoxProps) => JSX.Element;
 interface IPopupProps {
     text?: string;
     icon: JSX.Element | string;
-    toggleBorderRadius?: number | string;
-    toggleBackgroundColor?: string;
-    boxBackgroundColor?: string;
-    children?: any;
     location?: 'left' | 'right' | 'below' | 'above';
     size?: Size;
     height?: number;
-    toggleOverlay?: (key: string, location: ILocation, element: JSX.Element) => void;
 }
 /**
  *
@@ -264,8 +259,9 @@ interface ISliderProps {
 }
 declare const Slider: (props: ISliderProps) => JSX.Element;
 
-declare const Overlay: (props: {
+interface IOverlayProps {
     elementMap?: Map<string, JSX.Element>;
-}) => JSX.Element;
+}
+declare const Overlay: (props: IOverlayProps) => JSX.Element;
 
-export { Borders, Button, ColorPicker, Colors, Dropdown, EditableText, FontSize, IButtonProps, IColorPickerProps, IDropdownProps, IEditableTextProps, IIconButtonProps, IListBoxProps, ILocation, IMenuGroupProps, IModalProps, IPopupListProps, IPopupProps, ISliderProps, IconButton, IconSizes, ListBox, MenuGroup, Modal, Overlay, Padding, Popup, PopupList, Shadows, Size, Slider, colorConvert, getHeight, isDark };
+export { Borders, Button, ColorPicker, Colors, Dropdown, EditableText, FontSize, IButtonProps, IColorPickerProps, IDropdownProps, IEditableTextProps, IIconButtonProps, IListBoxProps, ILocation, IMenuGroupProps, IModalProps, IOverlayProps, IPopupListProps, IPopupProps, ISliderProps, IconButton, IconSizes, ListBox, MenuGroup, Modal, Overlay, Padding, Popup, PopupList, Shadows, Size, Slider, colorConvert, getHeight, isDark };

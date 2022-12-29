@@ -56,22 +56,14 @@ export const Dropdown = (props: IDropdownProps) => {
   const [isEditing, setIsEditing] = useState<boolean>(false)
 
   const onToggleClick = () => {
-    if (toggleOverlay) {
-      toggleOverlay(
-        'dropdown' + title ,
-        location,
-        <ListBox
-          maxItems={maxItems}
-          backgroundColor={boxBackgroundColor}
-          items={items}
-          filter={searchTerm}
-          selectedItem={selectedItem}
-          setSelectedItem={setSelectedItem}
-        />
-      )
-      } else {
-        
-    }
+    <ListBox
+      maxItems={maxItems}
+      backgroundColor={boxBackgroundColor}
+      items={items}
+      filter={searchTerm}
+      selectedItem={selectedItem}
+      setSelectedItem={setSelectedItem}
+    />
   }
 
   const getToggle = () => {
@@ -162,38 +154,17 @@ export const Dropdown = (props: IDropdownProps) => {
     }
   }
 
-  const [location, setLocation] = useState<ILocation>({
-    top: 0,
-    left: 0,
-    width: 0,
-    height: 0,
-  })
 
   return (
-    <Measure
-      bounds
-      onResize={(r: any) => {
-        setLocation({
-          top: r.bounds.top,
-          left: r.bounds.left,
-          width: r.bounds.width,
-          height: r.bounds.height,
-        })
+    <div
+      className="dropdown-container"
+      style={{
+        background: toggleBackgroundColor
+          ? toggleBackgroundColor
+          : undefined,
       }}
     >
-      {({ measureRef }) => (
-        <div
-          ref={measureRef}
-          className="dropdown-container"
-          style={{
-            background: toggleBackgroundColor
-              ? toggleBackgroundColor
-              : undefined,
-          }}
-        >
-          {getToggle()}
-        </div>
-      )}
-    </Measure>
+      {getToggle()}
+    </div>
   )
 }

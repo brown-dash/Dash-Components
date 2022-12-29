@@ -3,41 +3,39 @@ import { Colors, Size } from '../../global/globalEnums'
 import { getHeight } from '../../global/globalUtils'
 import './Button.scss'
 
+export enum ButtonType {
+  PRIM = "primary",
+  SEC = "secondary",
+  TERT = "tertiary",
+}
+
+export enum OrientationType {
+  LEFT = "left",
+  RIGHT = "right",
+  TOP = "top",
+  BOTTOM = "bottom"
+}
+
 export interface IButtonProps {
   onClick?: (event: React.MouseEvent) => void
   onDoubleClick?: (event: React.MouseEvent) => void
-  type?: 'outline' | 'gradient' | 'fill' | 'icon'
-  isActive?: boolean
+  type?: ButtonType
+  inactive?: boolean
 
   // Content
   text?: string
   icon?: JSX.Element | string
-  fontSize?: number | string
   tooltip?: string
-
-  // Colors
-  backgroundColor?: string
-  primaryColor?: string
-  secondaryColor?: string
-  activeColor?: string
-  color?: string
-
-  // Hover style
-  hoverStyle?: 'shadow' | 'darken' | 'lighten' | 'gray' | 'none'
 
   // Size
   size?: Size
+  height?: number
 
   // Label
-  hasLabel?: boolean
   label?: string
 
   // Additional stylization
-  padding?: number
-  hasBorder?: boolean
-  borderRadius?: number | string
-  iconPosition?: 'left' | 'right' | 'top' | 'bottom'
-  height?: number
+  iconPosition?: OrientationType
 }
 
 export const Button = (props: IButtonProps) => {
@@ -45,97 +43,50 @@ export const Button = (props: IButtonProps) => {
     text,
     icon,
     onClick,
-    isActive,
+    onDoubleClick,
+    height,
+    inactive,
     type,
-    backgroundColor,
-    color,
-    padding,
-    borderRadius,
-    primaryColor,
-    secondaryColor,
-    activeColor,
-    hoverStyle,
-    hasBorder,
-    hasLabel,
     label,
     iconPosition,
-    fontSize,
-    height,
     size,
   } = props
 
   /**
-   * In the event that there is a single click
+   * Single click
    * @param e
    */
   const handleClick = (e: React.MouseEvent) => {
-    onClick && onClick(e)
+    if (!inactive && onClick) onClick(e)
+  }
+
+  /**
+   * Double click
+   * @param e
+   */
+  const handleDoubleClick = (e: React.MouseEvent) => {
+    if (!inactive && onDoubleClick) onDoubleClick(e)
   }
 
   const defaultProperties = {
-    fontSize: fontSize ? fontSize : undefined,
-    borderRadius: borderRadius ? borderRadius : undefined,
-    color: color,
     height: getHeight(height, size),
-    padding: padding,
-    border: hasBorder ? `solid 1px ${color}` : undefined,
   }
 
-  const gradientProperties: React.CSSProperties = {
-    ...defaultProperties,
-  }
 
-  const fillProperties: React.CSSProperties = {
-    ...defaultProperties,
-  }
-
-  const gradientBackground: React.CSSProperties = {
-    background: `linear-gradient(${70}deg, ${primaryColor} 0%, ${secondaryColor} 100%)`,
-  }
-
-  const getBackgroundStyle = (): React.CSSProperties => {
-    if (isActive) {
-      if (activeColor) {
-        return {
-          background: activeColor,
-        }
-      } else
-        return {
-          background: Colors.MEDIUM_BLUE,
-        }
-    }
-    if (primaryColor && secondaryColor) {
-      return gradientBackground
-    } else {
-      return {
-        background: backgroundColor,
-      }
-    }
-  }
-
-  const getButtonStyle = (): React.CSSProperties => {
-    switch (type) {
-      case 'fill':
-        return fillProperties
-      case 'gradient':
-        return gradientProperties
-      default:
-        return defaultProperties
-    }
-  }
   return (
     <div
-      className={`button-container ${hoverStyle}`}
+      className={`button-container ${type}`}
       onClick={handleClick}
-      style={getButtonStyle()}
+      onDoubleClick={handleDoubleClick}
+      style={defaultProperties}
     >
       <div className="button-content">
         {iconPosition == 'right' ? null : icon}
         {text}
         {iconPosition == 'right' ? icon : null}
       </div>
-      {hasLabel && <div className={'button-label'}>{label}</div>}
-      <div className={`button-background`} style={getBackgroundStyle()} />
+      {label && <div className={'button-label'}>{label}</div>}
+      <div className={`button-background`}/>
     </div>
   )
 }

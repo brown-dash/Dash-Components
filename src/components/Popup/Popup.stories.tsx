@@ -14,7 +14,6 @@ export default {
 const Template: Story<IPopupProps> = (args) => (
   <div>
     <Popup {...args}>HELLO WORLD!</Popup>
-    <Overlay/>
   </div>
 )
 

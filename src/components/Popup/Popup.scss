@@ -3,16 +3,16 @@
 .popup-overlay {
   width: 100vw;
   height: 100vh;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  background: pink;
 
   .popup {
     position: absolute;
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     border: solid 2px black;
+    background: white;
   }
 }
 

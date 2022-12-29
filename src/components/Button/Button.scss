@@ -3,7 +3,6 @@
 .button-container {
   position: relative;
   width: fit-content;
-  height: 30px;
   padding: 0px 20px;
   cursor: pointer;
   overflow: hidden;
@@ -14,6 +13,7 @@
   gap: 5px;
   font-family: $default-font;
   font-size: $default-fontSize;
+  border-radius: $standard-border-radius;
   white-space: nowrap;
   transition: 0.4s;
 
@@ -35,7 +35,29 @@
     transition: 0.4s;
   }
 
-  &.gray {
+  &.primary {
+    color: $white;
+
+    .button-background {
+      background: $medium-blue;
+    }
+
+    &:hover{
+      .button-background {
+        filter: brightness(80%);
+      }
+    }
+
+  }
+
+  &.secondary {
+    .button-background {
+      background: transparent;
+    }
+
+    border: solid 1px $dark-gray;
+    color: $black;
+
     &:hover {
       .button-background {
         background: $hover-background !important;
@@ -43,34 +65,15 @@
     }
   }
 
-  &.shadow {
+  &.tertiary {
+    .button-background {
+      background: $light-gray;
+      color: $black;
+    }
+
     &:hover{
       box-shadow: $standard-button-shadow;
     }
-  }
-  &.darken {
-    &:hover{
-      .button-background {
-        filter: brightness(80%);
-      }
-    }
-  }
-  &.lighten {
-    &:hover{
-      .iconbutton-background {
-        background: lighten(black, 20%) !important;
-      }
-    }
-  }
-
-  .button-ripple {
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 100%;
-    z-index: 2;
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    transition: 0.2s;
   }
 
   .button-label {
