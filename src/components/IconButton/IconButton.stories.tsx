@@ -1,81 +1,58 @@
-import React from 'react';
-import { Story, Meta } from '@storybook/react';
-import { Colors, FontSize } from '../../global/globalEnums';
-import * as fa from 'react-icons/fa';
-import * as bi from 'react-icons/bi';
-import {IIconButtonProps, IconButton} from './IconButton';
+import { Meta, Story } from '@storybook/react'
+import React from 'react'
+import * as bi from 'react-icons/bi'
+import { Button, ButtonType, IButtonProps, IconButton, OrientationType } from '..'
+import { Colors, Size } from '../../global/globalEnums'
 
 export default {
   title: 'Dash/Icon Button',
   component: IconButton,
-  argTypes: {
-  },
-} as Meta<typeof IconButton>;
+  argTypes: {},
+} as Meta<typeof IconButton>
 
-const Template: Story<IIconButtonProps> = (args) => <IconButton {...args}/>;
+const Template: Story<IButtonProps> = (args) => <IconButton {...args} />
 
+export const Primary = Template.bind({})
+Primary.args = {
+  onClick: () => {},
+  icon: <bi.BiAngry/>,
+  type: ButtonType.PRIM
+}
 
-export const BasicIcon = Template.bind({});
-BasicIcon.args = {
-    padding: 0,
-    onClick: () => {},
-    icon: <bi.BiPlus/>,
-    color: Colors.BLACK,
-    hoverStyle: 'gray',
-};
+export const Secondary = Template.bind({})
+Secondary.args = {
+  onClick: () => {},
+  icon: <bi.BiAngry/>,
+  type: ButtonType.SEC
+}
 
-export const DarkIcon = Template.bind({});
-DarkIcon.args = {
-    padding: 0,
-    onClick: () => {},
-    icon: <bi.BiPlus/>,
-    backgroundColor: Colors.BLACK,
-    color: Colors.WHITE,
-    hoverStyle: 'lighten',
-};
+export const Tertiary = Template.bind({})
+Tertiary.args = {
+  onClick: () => {},
+  icon: <bi.BiAngry/>,
+  type: ButtonType.TERT
+}
 
-export const LabeledIcon = Template.bind({});
-LabeledIcon.args = {
-    onClick: () => {},
-    label: "Label",
-    color: Colors.BLACK,
-    icon: <fa.FaAccusoft/>,
-    hoverStyle: 'gray',
-    hasBorder: true,
-};
+export const Small = Template.bind({})
+Small.args = {
+  onClick: () => {},
+  icon: <bi.BiAngry/>,
+  type: ButtonType.PRIM,
+  size: Size.SMALL,
+}
 
-export const SmallIcon = Template.bind({});
-SmallIcon.args = {
-    onClick: () => {},
-    icon: <fa.FaAddressCard/>,
-    size: 'small',
-    hoverStyle: 'gray',
-};
+export const Medium = Template.bind({})
+Medium.args = {
+  onClick: () => {},
+  icon: <bi.BiAngry/>,
+  type: ButtonType.PRIM,
+  size: Size.MEDIUM,
+}
 
-export const MediumIcon = Template.bind({});
-MediumIcon.args = {
-    onClick: () => {},
-    icon: <fa.FaAddressCard/>,
-    size: 'medium',
-    hoverStyle: 'gray',
-};
-
-export const LargeIcon = Template.bind({});
-LargeIcon.args = {
-    onClick: () => {},
-    icon: <fa.FaAddressCard/>,
-    size: 'large',
-    hoverStyle: 'gray',
-};
-
-export const GradientIcon = Template.bind({});
-GradientIcon.args = {
-    onClick: () => {},
-    icon: <fa.FaAddressCard/>,
-    type: 'gradient',
-    size: 'medium',
-    color: Colors.WHITE,
-    hoverStyle: 'darken',
-    primaryColor: Colors.BLACK,
-    secondaryColor: Colors.MEDIUM_BLUE,
-};
+export const Large = Template.bind({})
+Large.args = {
+  onClick: () => {},
+  icon: <bi.BiAngry/>,
+  type: ButtonType.PRIM,
+  size: Size.LARGE,
+}

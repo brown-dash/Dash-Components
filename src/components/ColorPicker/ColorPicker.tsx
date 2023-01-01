@@ -4,7 +4,7 @@ import './ColorPicker.scss'
 import { GithubPicker } from 'react-color'
 import { IconButton } from '../IconButton'
 import { Borders, Colors, isDark, Size } from '../../global'
-import { Button } from '../Button'
+import { Button, ButtonType } from '../Button'
 
 export interface IColorPickerProps {
   text?: string
@@ -26,9 +26,7 @@ export const ColorPicker = (props: IColorPickerProps) => {
     if (icon && !text) {
       return (
         <IconButton
-          borderRadius={Borders.STANDARD_BORDER_RADIUS}
           size={Size.SMALL}
-          backgroundColor={color}
           color={isDark(color) ? Colors.WHITE : Colors.BLACK}
           icon={icon}
         />
@@ -36,9 +34,8 @@ export const ColorPicker = (props: IColorPickerProps) => {
     } else if (text) {
       return (
         <Button
-          borderRadius={Borders.STANDARD_BORDER_RADIUS}
           size={Size.SMALL}
-          backgroundColor={color}
+          type={ButtonType.TERT}
           color={isDark(color) ? Colors.WHITE : Colors.BLACK}
           text={text}
           icon={icon}
@@ -47,9 +44,7 @@ export const ColorPicker = (props: IColorPickerProps) => {
     } else {
       return (
         <IconButton
-          borderRadius={Borders.STANDARD_BORDER_RADIUS}
           size={Size.SMALL}
-          backgroundColor={color}
         />
       )
     }

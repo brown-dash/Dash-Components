@@ -100,9 +100,7 @@ export const Dropdown = (props: IDropdownProps) => {
             <div className="toggle-caret">
               <IconButton
                 size={Size.SMALL}
-                hoverStyle="gray"
                 icon={<fa.FaSearch />}
-                borderRadius={Borders.STANDARD_BORDER_RADIUS}
               />
             </div>
           </div>
@@ -122,9 +120,7 @@ export const Dropdown = (props: IDropdownProps) => {
             <div className="toggle-caret">
               <IconButton
                 size={Size.SMALL}
-                hoverStyle="gray"
                 icon={<fa.FaCaretDown />}
-                borderRadius={Borders.STANDARD_BORDER_RADIUS}
               />
             </div>
           </div>
@@ -144,9 +140,7 @@ export const Dropdown = (props: IDropdownProps) => {
             <div className="toggle-caret">
               <IconButton
                 size={Size.SMALL}
-                hoverStyle="gray"
                 icon={<fa.FaCaretDown />}
-                borderRadius={Borders.STANDARD_BORDER_RADIUS}
               />
             </div>
           </div>

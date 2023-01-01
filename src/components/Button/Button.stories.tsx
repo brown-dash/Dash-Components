@@ -71,6 +71,6 @@ ButtonWithRightIcon.args = {
   onClick: () => {},
   text: 'More',
   iconPosition: OrientationType.RIGHT,
-  icon: <bi.BiPlus />,
+  icon: <bi.BiMobile />,
   type: ButtonType.PRIM,
 }

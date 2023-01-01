@@ -9,6 +9,21 @@ export interface ILocation {
   override?: 'left' | 'bottom' | 'top' | 'right'
 }
 
+export const getFontSize = (
+  size: Size | undefined
+) => {
+  switch (size) {
+    case Size.SMALL:
+      return '0.7rem'
+    case Size.MEDIUM:
+      return '1rem'
+    case Size.LARGE:
+      return '1.3rem'
+    default:
+      return '1rem'
+  }
+}
+
 export const getHeight = (
   height: number | undefined,
   size: Size | undefined

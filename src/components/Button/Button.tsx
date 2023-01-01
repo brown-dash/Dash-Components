@@ -1,6 +1,7 @@
 import React from 'react'
 import { Colors, Size } from '../../global/globalEnums'
-import { getHeight } from '../../global/globalUtils'
+import { getFontSize, getHeight } from '../../global/globalUtils'
+import { IconButton } from '../IconButton'
 import './Button.scss'
 
 export enum ButtonType {
@@ -36,6 +37,7 @@ export interface IButtonProps {
 
   // Additional stylization
   iconPosition?: OrientationType
+  color?: string
 }
 
 export const Button = (props: IButtonProps) => {
@@ -46,11 +48,15 @@ export const Button = (props: IButtonProps) => {
     onDoubleClick,
     height,
     inactive,
-    type,
+    type = ButtonType.PRIM,
     label,
     iconPosition,
-    size,
+    size = Size.SMALL,
   } = props
+
+  if (!text) {
+    return <IconButton {...props}/>
+  }
 
   /**
    * Single click
@@ -80,7 +86,7 @@ export const Button = (props: IButtonProps) => {
       onDoubleClick={handleDoubleClick}
       style={defaultProperties}
     >
-      <div className="button-content">
+      <div className="button-content" style={{fontSize: getFontSize(size)}}>
         {iconPosition == 'right' ? null : icon}
         {text}
         {iconPosition == 'right' ? icon : null}
