@@ -16,6 +16,8 @@
   border-radius: $standard-border-radius;
   white-space: nowrap;
   transition: 0.4s;
+  border: solid 1px;
+  border-color: transparent;
 
   .button-content {
     display: flex;
@@ -36,6 +38,10 @@
     z-index: 0;
     position: absolute;
     transition: 0.4s;
+
+    &.active {
+      filter: opacity(0.2) !important;
+    }
   }
 
   &.primary {

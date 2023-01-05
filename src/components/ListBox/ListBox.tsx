@@ -1,22 +1,13 @@
 import React from 'react'
-import { ILocation, isDark } from '../../global'
-import { Colors, Shadows } from '../../global/globalEnums'
-import { IListBoxItemProps, ListItem } from '../ListItem'
+import { IListItemProps, ListItem } from '../ListItem'
 import './ListBox.scss'
 
 export interface IListBoxProps {
-  items: IListBoxItemProps[]
+  items: IListItemProps[]
   filter?: string
-  hasShadow?: boolean
-  selectedItem?: IListBoxItemProps
-  setSelectedItem?: (item: IListBoxItemProps) => void
-  backgroundColor?: string
+  selectedItem?: IListItemProps
+  setSelectedItem?: (item: IListItemProps) => void
   maxItems?: number
-  toggleOverlay?: (
-    key: string,
-    location: ILocation,
-    element: JSX.Element
-  ) => void
 }
 
 /**
@@ -31,16 +22,13 @@ export const ListBox = (props: IListBoxProps) => {
   const {
     items,
     maxItems,
-    backgroundColor,
     selectedItem,
     setSelectedItem,
     filter,
-    hasShadow,
-    toggleOverlay,
   } = props
 
   const getListItem = (
-    item: IListBoxItemProps,
+    item: IListItemProps,
     ind: number,
     selected: boolean
   ): JSX.Element => {
@@ -55,7 +43,6 @@ export const ListBox = (props: IListBoxProps) => {
         description={item.description}
         shortcut={item.shortcut}
         items={item.items}
-        backgroundColor={backgroundColor}
         onClick={() => {
           item.onClick && item.onClick()
           setSelectedItem && setSelectedItem(item)
@@ -88,17 +75,9 @@ export const ListBox = (props: IListBoxProps) => {
           maxItems && itemElements.length >= maxItems
             ? maxItems * 30
             : undefined,
-        boxShadow: hasShadow ? Shadows.STANDARD_SHADOW : undefined,
-        background: backgroundColor ? backgroundColor : undefined,
-        color: isDark(backgroundColor) ? Colors.WHITE : Colors.BLACK,
       }}
     >
-      <div
-        className={'listBox-popup'}
-        onPointerDown={(e) => e.stopPropagation()}
-      >
-        {itemElements}
-      </div>
+      {itemElements}
     </div>
   )
 }

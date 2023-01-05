@@ -1,32 +1,24 @@
-import { useState } from 'react'
-import React from 'react'
-import { Colors, FontSize, Size } from '../../global/globalEnums'
-import { Button } from '../Button'
-import './ListItem.scss'
+import React, { useState } from 'react'
 import * as fa from 'react-icons/fa'
+import Measure from 'react-measure'
+import { getFontSize, IGlobalProps, ILocation } from '../../global'
+import { Colors, Size } from '../../global/globalEnums'
+import { Button } from '../Button'
 import { IconButton } from '../IconButton'
 import { ListBox } from '../ListBox'
-import { ILocation, isDark } from '../../global'
-import Measure from 'react-measure'
+import { Popup, PopupTrigger } from '../Popup'
+import './ListItem.scss'
 
-export interface IListBoxItemProps {
+export interface IListItemProps extends IGlobalProps {
   ind?: number
   text?: string
+  icon?: JSX.Element
   description?: string
   shortcut?: string
-  items?: IListBoxItemProps[]
+  items?: IListItemProps[]
   selected?: boolean
-  icon?: JSX.Element
-  style?: React.CSSProperties
-  setSelectedItem?: (item: IListBoxItemProps) => void
+  setSelectedItem?: (item: IListItemProps) => void
   onClick?: () => void
-  preventClick?: boolean
-  backgroundColor?: string
-  toggleOverlay?: (
-    key: string,
-    location: ILocation,
-    element: JSX.Element
-  ) => void
 }
 
 /**
@@ -37,7 +29,7 @@ export interface IListBoxItemProps {
  * TODO: add support for isMulti, isSearchable
  * Look at: import Select from "react-select";
  */
-export const ListItem = (props: IListBoxItemProps) => {
+export const ListItem = (props: IListItemProps) => {
   const {
     ind,
     description,
@@ -45,57 +37,20 @@ export const ListItem = (props: IListBoxItemProps) => {
     shortcut,
     items,
     icon,
-    style,
     selected,
     setSelectedItem,
     onClick,
-    preventClick,
-    backgroundColor,
-    toggleOverlay,
+    inactive,
+    size = Size.SMALL
   } = props
 
-  const [location, setLocation] = useState<ILocation>({
-    top: 0,
-    left: 0,
-    width: 0,
-    height: 0,
-  })
-
-  const onToggleClick = () => {
-    items &&
-      toggleOverlay &&
-      toggleOverlay(
-        'listItem' + { text },
-        location,
-        <ListBox
-          items={items}
-          backgroundColor={backgroundColor}
-          setSelectedItem={setSelectedItem}
-        />
-      )
-  }
 
   return (
-    <Measure
-      bounds
-      onResize={(r: any) => {
-        setLocation({
-          top: r.bounds.top,
-          left: r.bounds.left,
-          width: r.bounds.width,
-          height: r.bounds.height,
-          override: 'right',
-        })
-      }}
-    >
-      {({ measureRef }) => (
         <div
           className="listItem-container"
-          ref={measureRef}
           onClick={(e: React.MouseEvent) => {
-            onClick && onClick()
-            onClick && e.stopPropagation()
-            items && onToggleClick()
+            onClick && !inactive && onClick()
+            onClick && !inactive &&  e.stopPropagation()
           }}
           style={{
             background: selected ? Colors.LIGHT_BLUE : undefined,
@@ -103,25 +58,28 @@ export const ListItem = (props: IListBoxItemProps) => {
           }}
         >
           <div className="listItem-top">
-            {
-              <div className={'button'}>
-                <Button icon={icon} text={text} fontSize={FontSize.SECONDARY} padding={0} />
-              </div>
-            }
-            {!preventClick && shortcut && (
+            <div className="content" 
+             style={{
+              fontSize: getFontSize(size)
+             }}>
+              {icon}
+              {text}
+            </div>
+            {shortcut && (
               <div className="shortcut">{shortcut}</div>
             )}
-            {!preventClick && items && (
-              <div className={'caret'}>
-                <IconButton size={Size.SMALL} icon={<fa.FaCaretRight />} />
-              </div>
+            {items && (
+              <Popup
+                trigger={PopupTrigger.HOVER}
+                size={Size.SMALL} icon={<fa.FaCaretRight />} popup={
+                  <ListBox items={items}/>
+              }/>
             )}
           </div>
           {description && (
             <div className="listItem-description">{description}</div>
           )}
+          <div className="listItem-background"></div>
         </div>
-      )}
-    </Measure>
   )
 }

@@ -6,8 +6,11 @@ import { Story, Meta } from '@storybook/react'
 import { getFontSize, getHeight } from '../../global'
 import { ButtonType, IButtonProps } from '../Button'
 
+export interface IIconButtonProps extends IButtonProps {}
+
 export const IconButton = (props: IButtonProps) => {
   const {
+    active,
     icon,
     onClick,
     onDoubleClick,
@@ -47,11 +50,11 @@ export const IconButton = (props: IButtonProps) => {
       onDoubleClick={handleDoubleClick}
       style={defaultProperties}
     >
-      <div className="iconButton-content" style={{fontSize: getFontSize(size)}}>
+      <div className="iconButton-content" style={{fontSize: getFontSize(size, true)}}>
         {icon}
       </div>
       {label && <div className={'iconButton-label'}>{label}</div>}
-      <div className={`iconButton-background`}/>
+      <div className={`iconButton-background ${active && 'active'}`}/>
     </div>
   )
 }

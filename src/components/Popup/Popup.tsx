@@ -1,18 +1,23 @@
 import React, { useRef, useState } from 'react'
-import { getHeight, Borders, Size, ILocation } from '../../global'
-import { Button } from '../Button'
-import { IconButton } from '../IconButton'
-import { ListBox } from '../ListBox/ListBox'
-import { IListBoxItemProps } from '../ListItem'
+import { Size } from '../../global'
+import { Toggle, ToggleType } from '../Toggle'
 import './Popup.scss'
-import Measure from 'react-measure'
+
+export enum PopupTrigger {
+  CLICK = "click",
+  HOVER = "hover",
+  HOVER_DELAY = "hover_delay"
+}
 
 export interface IPopupProps {
   text?: string
-  icon: JSX.Element | string
+  icon?: JSX.Element | string
   location?: 'left' | 'right' | 'below' | 'above'
   size?: Size
   height?: number
+  toggle?: JSX.Element;
+  popup: JSX.Element | string
+  trigger?: PopupTrigger
 }
 
 /**
@@ -27,7 +32,10 @@ export const Popup = (props: IPopupProps) => {
   const {
     text,
     size,
-    icon
+    icon,
+    popup,
+    toggle,
+    trigger = PopupTrigger.CLICK
   } = props
   const [isOpen, setOpen] = useState<boolean>(false)
   const toggleRef = useRef<HTMLDivElement>(null);
@@ -37,53 +45,79 @@ export const Popup = (props: IPopupProps) => {
   const [width, setWidth] = useState<number>(0);
   const [height, setHeight] = useState<number>(0);
 
-  // const [location, setLocation] = useState<ILocation>({
-  //   top: 0,
-  //   left: 0,
-  //   width: 0,
-  //   height: 0,
-  // })
-
-  const getToggle = () => {
-      return (
-        <Button
-          size={Size.SMALL}
-          text={text}
-          icon={icon}
-        />
-      )
+  const repositionPopup = () => {
+    if (toggleRef.current) {
+      const boundingBox = toggleRef.current.getBoundingClientRect();
+      setTop(boundingBox.y);
+      setLeft(boundingBox.x);
+      setHeight(boundingBox.height);
+      setWidth(boundingBox.width);
+    }
   }
+
+  let timeout = setTimeout(() => {});
 
   return (
     <div>
-      <div className="popup-overlay">
-        { isOpen &&
-          <div className="popup" style={{
+      {isOpen && <div className="popup-overlay">
+          <div className="popup" id="popup" style={{
             top: top + height,
             left: left,
-          }}>Hello world</div>
-        }
-      </div>
-      <div
-        className="toggle-container"
-        ref={toggleRef}
-      >
-        <div
-          className="toggle"
-          style={{ height: getHeight(height, size) }}
-          onClick={() => {
-            if (toggleRef.current) {
-              const boundingBox = toggleRef.current.getBoundingClientRect();
-              setTop(boundingBox.y);
-              setLeft(boundingBox.x);
-              setHeight(boundingBox.height);
-              setWidth(boundingBox.width);
-            }
-            setOpen(!isOpen)
           }}
-        >
-          {getToggle()}
+          onPointerEnter={() => {
+            if (trigger === PopupTrigger.HOVER || trigger === PopupTrigger.HOVER_DELAY) {
+              clearTimeout(timeout);
+              setOpen(true);
+            }
+          }}
+          onPointerLeave={() => {
+            if (trigger === PopupTrigger.HOVER || trigger === PopupTrigger.HOVER_DELAY) {
+              setOpen(false)
+            }
+          }}
+          >
+            {popup}
+          </div>
+      </div>}
+      <div
+        className="popup-container"
+        ref={toggleRef}
+        onPointerEnter={() => {
+          if (trigger === PopupTrigger.HOVER || trigger === PopupTrigger.HOVER_DELAY) {
+            repositionPopup()
+            setOpen(true)
+          }
+        }}
+        onPointerLeave={() => {
+          if (trigger === PopupTrigger.HOVER || trigger === PopupTrigger.HOVER_DELAY) {
+            timeout = setTimeout(() => setOpen(false), 1000);
+          }
+        }}
+      >
+        {toggle ? 
+          <div onClick={() => {
+            if (trigger === PopupTrigger.CLICK) {
+              repositionPopup()
+              setOpen(!isOpen)
+            }
+          }}>
+          {toggle}
         </div>
+        :
+          <Toggle
+          size={size}
+          type={ToggleType.BUTTON}
+          toggleStatus={isOpen}
+          icon={icon}
+          text={text}
+          onClick={() => {
+            if (trigger === PopupTrigger.CLICK) {
+              repositionPopup()
+              setOpen(!isOpen)
+            }
+          }}
+        />
+        }
       </div>
     </div>
   )

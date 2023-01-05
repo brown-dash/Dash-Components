@@ -33,6 +33,14 @@ Tertiary.args = {
   type: ButtonType.TERT
 }
 
+export const XSmall = Template.bind({})
+XSmall.args = {
+  onClick: () => {},
+  icon: <bi.BiAngry/>,
+  type: ButtonType.SEC,
+  size: Size.XSMALL,
+}
+
 export const Small = Template.bind({})
 Small.args = {
   onClick: () => {},

@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+import { getHeight, IGlobalProps } from '../../global'
 import './Slider.scss'
 
-export interface ISliderProps {
+export interface ISliderProps extends IGlobalProps {
   multithumb: boolean
   min: number
   max: number
@@ -11,19 +12,31 @@ export interface ISliderProps {
 }
 
 export const Slider = (props: ISliderProps) => {
-  const { multithumb, min, max, step, initialVal, minDiff } = props
+  const { multithumb, min = 0, max = 100, step, initialVal, minDiff, size, height } = props
   const [value, setValue] = useState<number>(initialVal ? initialVal : 0)
   const [endValue, setEndValue] = useState<number>(
     initialVal ? initialVal + 20 : 0
   )
-  const getSlider = (): JSX.Element => {
+
+  const getLeftPos = (locVal: number) => {
+    const container = document.getElementById("rs-container");
+    if (container) {
+      const width = container.getBoundingClientRect().width - 11;
+      return (locVal / max) * width
+    }
+    return locVal;
+  }
+
+  const getSlider = (): JSX.Element[] => {
     if (multithumb) {
-      return (
-        <div className="multiThumb-slider">
+      return [
+        <div className="range-slider">
+          <span id="rs-bullet" className="rs-label" style={{left: `${getLeftPos(endValue)}px`}}>{endValue}</span>
           <input
             type="range"
             min={min}
             max={max}
+            height={getHeight(height, size)}
             step={step}
             value={endValue}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,13 +48,17 @@ export const Slider = (props: ISliderProps) => {
               }
             }}
             style={{ gridColumn: 1, gridRow: 1 }}
-            className={`toolbar-slider ${'end'}`}
-            id="toolbar-slider"
+            className={`rs-range ${'end'}`}
+            id="rs-range"
           />
-          <input
+          </div>,
+          <div className="range-slider">
+          <span id="rs-bullet" className="rs-label" style={{left: `${getLeftPos(value)}px`}}>{value}</span>
+            <input
             type="range"
             min={min}
             max={max}
+            height={getHeight(height, size)}
             step={step}
             value={value}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,32 +70,39 @@ export const Slider = (props: ISliderProps) => {
               }
             }}
             style={{ gridColumn: 1, gridRow: 1 }}
-            className={`toolbar-slider ${'start'}`}
-            id="toolbar-slider"
+            className={`rs-range ${'start'}`}
+            id="rs-range"
           />
-        </div>
-      )
+          </div>,
+          <div className="box-minmax">
+            <span>{min}</span><span>{max}</span>
+          </div>
+          ]
     } else {
-      return (
-        <input
-          className="toolbar-slider"
-          min={min}
-          max={max}
-          step={step}
-          value={value}
-          onChange={(e) => {
-            setValue(Number(e.target.value))
-          }}
-          type="range"
-        ></input>
-      )
+      return ([
+        <div className="range-slider">
+          <span id="rs-bullet" className="rs-label" style={{left: `${getLeftPos(value)}px`}}>{value}</span>
+          <input id="rs-range-line" 
+            className="rs-range" 
+            type="range" 
+            step={step}
+            value={value}
+            min={min}
+            max={max}
+            onChange={(e) => {
+              setValue(Number(e.target.value))
+            }}
+          />
+        </div>,
+        <div className="box-minmax">
+          <span>{min}</span><span>{max}</span>
+        </div>
+        ])
     }
   }
 
   return (
-    <div className="slider-container">
-      {value}
-      {endValue}
+    <div className="slider-container" id="rs-container" style={{height: getHeight(height, size)}}>
       {getSlider()}
     </div>
   )

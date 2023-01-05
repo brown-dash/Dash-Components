@@ -21,10 +21,6 @@
   position: relative;
   transition: 0.4s;
 
-  &:hover {
-    background: $hover-background !important;
-  }
-
   .dropdown-list {
     position: absolute;
     top: 100%;

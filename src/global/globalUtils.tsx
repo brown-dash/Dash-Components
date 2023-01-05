@@ -10,16 +10,24 @@ export interface ILocation {
 }
 
 export const getFontSize = (
-  size: Size | undefined
+  size: Size | undefined,
+  icon?: boolean
 ) => {
   switch (size) {
+    case Size.XSMALL:
+      if (icon) return '1rem'
+      return '0.5rem'
     case Size.SMALL:
+      if (icon) return '1.3rem'
       return '0.7rem'
     case Size.MEDIUM:
+      if (icon) return '1.8rem'
       return '1rem'
     case Size.LARGE:
+      if (icon) return '2.3rem'
       return '1.3rem'
     default:
+      if (icon) return '1.8rem'
       return '1rem'
   }
 }
@@ -30,6 +38,8 @@ export const getHeight = (
 ) => {
   if (height) return height
   switch (size) {
+    case Size.XSMALL:
+      return 20
     case Size.SMALL:
       return 30
     case Size.MEDIUM:

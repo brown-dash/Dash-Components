@@ -1,4 +1,5 @@
 import React from 'react'
+import { IGlobalProps } from '../../global'
 import { Colors, Size } from '../../global/globalEnums'
 import { getFontSize, getHeight } from '../../global/globalUtils'
 import { IconButton } from '../IconButton'
@@ -17,23 +18,15 @@ export enum OrientationType {
   BOTTOM = "bottom"
 }
 
-export interface IButtonProps {
+export interface IButtonProps extends IGlobalProps {
   onClick?: (event: React.MouseEvent) => void
   onDoubleClick?: (event: React.MouseEvent) => void
   type?: ButtonType
-  inactive?: boolean
+  active?: boolean
 
   // Content
   text?: string
   icon?: JSX.Element | string
-  tooltip?: string
-
-  // Size
-  size?: Size
-  height?: number
-
-  // Label
-  label?: string
 
   // Additional stylization
   iconPosition?: OrientationType
@@ -46,6 +39,7 @@ export const Button = (props: IButtonProps) => {
     icon,
     onClick,
     onDoubleClick,
+    active,
     height,
     inactive,
     type = ButtonType.PRIM,
@@ -92,7 +86,7 @@ export const Button = (props: IButtonProps) => {
         {iconPosition == 'right' ? icon : null}
       </div>
       {label && <div className={'button-label'}>{label}</div>}
-      <div className={`button-background`}/>
+      <div className={`button-background ${active && 'active'}`}/>
     </div>
   )
 }

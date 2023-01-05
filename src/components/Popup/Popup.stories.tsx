@@ -21,12 +21,8 @@ export const Primary = Template.bind({})
 Primary.args = {
   icon: <fa.FaEllipsisH />,
   title: 'Select company',
-  boxBackgroundColor: Colors.LIGHT_BLUE,
   size: Size.SMALL,
-  toggleOverlay: (key, location, ele) => {
-    console.log(key, location)
-  },
-  popup: <div style={{background: "blue"}}>
+  popup: <div style={{background: "pink", padding: 10}}>
     HELLO WORLD MY NAME IS GUPTA!
   </div>
 }
@@ -35,9 +31,8 @@ export const Text = Template.bind({})
 Text.args = {
   icon: <fa.FaEllipsisH />,
   text: 'More',
-  boxBackgroundColor: Colors.LIGHT_BLUE,
   size: Size.SMALL,
-  toggleOverlay: (key, location, ele) => {
-    console.log(key, location)
-  },
+  popup: <div style={{background: "blue", padding: 10}}>
+    HELLO WORLD MY NAME IS GUPTA!
+  </div>
 }

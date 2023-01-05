@@ -9,22 +9,19 @@
 
   .popup {
     position: absolute;
-    width: 200px;
-    height: 200px;
-    border: solid 2px black;
+    width: fit-content;
+    height: fit-content;
+    box-shadow: $standard-shadow;
+    border: $standard-border;
+    border-radius: $standard-border-radius;
     background: white;
+    overflow: hidden;
   }
 }
 
-.toggle-container {
+.popup-container {
   display: flex;
-  border-radius: $standard-border-radius;
   height: fit-content;
   width: fit-content;
   position: relative;
-
-  &:hover {
-    outline: solid 1px $light-gray;
-    outline-offset: -1px;
-  }
 }

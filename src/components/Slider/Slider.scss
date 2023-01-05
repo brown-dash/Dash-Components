@@ -1,69 +1,144 @@
-// @import '../../global/globalCssVariables.scss';
-// $height: 20px;
+@import '../../global/globalCssVariables.scss';
+$height: 40px;
 
-// .multiThumb-slider {
-//   display: grid;
-//   background-color: $light-gray;
-//   height: $height;
-//   border-radius: 10px;
-//   overflow: hidden;
+.slider-container {
+  display: flex;
+}
 
-//   .toolbar-slider {
-//     margin-top: 0px;
-//     background: none;
-//     -webkit-appearance: none;
-//     pointer-events: none;
-//   }
+.toolbar-slider {
+    margin: 0px;
+    background: none;
+    // -webkit-appearance: none;
+    pointer-events: none;
+}
 
-//   .toolbar-slider.start::-webkit-slider-thumb {
-//     width: $height;
-//     pointer-events: auto;
-//     -webkit-appearance: none;
-//     height: $height;
-//     cursor: ew-resize;
-//     background: $medium-blue;
-//     box-shadow: -100vw 0 0 100vw $light-gray;
-//   }
+.toolbar-slider.start::-webkit-slider-thumb {
+width: $height;
+pointer-events: auto;
+height: $height;
+cursor: ew-resize;
+background: $medium-blue;
+// box-shadow: -100vw 0 0 100vw $light-gray;
+}
 
-//   .toolbar-slider.end::-webkit-slider-thumb {
-//     width: $height;
-//     pointer-events: auto;
-//     -webkit-appearance: none;
-//     height: $height;
-//     cursor: ew-resize;
-//     background: $medium-blue;
-//     box-shadow: -100vw 0 0 100vw $light-blue;
-//   }
-// }
+.toolbar-slider.end::-webkit-slider-thumb {
+width: $height;
+pointer-events: auto;
+height: $height;
+cursor: ew-resize;
+background: $medium-blue;
+// box-shadow: -100vw 0 0 100vw $light-blue;
+}
 
-// .toolbar-slider {
-//   position: relative;
-//   align-self: center;
-//   justify-self: left;
-//   overflow: hidden;
-//   width: 100%;
-//   height: $height;
-//   border-radius: 10px;
+.toolbar-slider:focus {
+  outline: none;
+}
+
+.toolbar-slider::-webkit-slider-thumb {
+  width: $height;
+  pointer-events: auto;
 //   -webkit-appearance: none;
-//   background-color: $light-gray;
-// }
-
-// .toolbar-slider:focus {
-//   outline: none;
-// }
-
-// .toolbar-slider::-webkit-slider-runnable-track {
-//   height: $height;
-//   -webkit-appearance: none;
-//   margin-top: -1px;
-// }
-
-// .toolbar-slider::-webkit-slider-thumb {
-//   width: $height;
-//   pointer-events: auto;
-//   -webkit-appearance: none;
-//   height: $height;
-//   cursor: ew-resize;
-//   background: $medium-blue;
+  height: $height;
+  cursor: ew-resize;
+  background: $medium-blue;
 //   box-shadow: -100vw 0 0 100vw $light-blue;
-// }
+}
+
+
+
+// TEST 2
+
+.box-minmax{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  color: blue;
+}
+.range-slider {
+  margin: 0px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+
+  .rs-label {
+      display: flex;
+      height: 20px;
+      width: 20px;
+      border-radius: 100%;
+      border: $standard-border;
+      position: absolute;
+  }
+}
+.rs-range {
+    width: 100%;
+    background: transparent;
+    pointer-events: none;
+    -webkit-appearance: none;
+    &:focus {
+        outline: none;
+        .rs-label {
+          opacity: 1 !important;
+        }
+
+        &::-webkit-slider-runnable-track {
+          background: pink;
+      }
+    }
+
+    &:active {
+      &::-webkit-slider-runnable-track {
+        background: orange;
+    }
+    }
+    &::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 2px;
+        cursor: pointer;
+        box-shadow: none;
+        background: $medium-blue;
+        border-radius: 0px;
+        border: 0px solid #010101;
+    }
+    &::-moz-range-track {
+        width: 100%;
+        height: 1px;
+        cursor: pointer;
+        box-shadow: none;
+        background: $medium-blue;
+        border-radius: 0px;
+        border: 0px solid #010101;
+    }
+  
+    &::-webkit-slider-thumb {
+        box-shadow: none;
+        border: 0px solid #ffffff;
+        box-shadow: 0px 10px 10px rgba(0,0,0,0.25);
+        height: 22px;
+        width: 11px;
+        border-radius: 22px;
+        background: $medium-blue;
+        cursor: pointer;
+        -webkit-appearance: none;
+        margin-top: -10px;
+        pointer-events: auto;
+    }
+  &::-moz-range-thumb{
+        box-shadow: none;
+        border: 0px solid #ffffff;
+        box-shadow: 0px 10px 10px rgba(0,0,0,0.25);
+        height: 22px;
+        width: 11px;
+        border-radius: 22px;
+        background: $medium-blue;
+        cursor: pointer;
+        -webkit-appearance: none;
+        pointer-events: auto;
+        margin-top: -10px;
+  }
+  &::-moz-focus-outer {
+    border: 0;
+    }
+}

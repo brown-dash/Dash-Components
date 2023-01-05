@@ -45,6 +45,7 @@ export enum Shadows {
 }
 
 export enum Size {
+    XSMALL = "20px",
     SMALL = "30px",
     MEDIUM = "35px",
     LARGE = "40px"

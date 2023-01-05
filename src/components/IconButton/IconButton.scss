@@ -13,6 +13,9 @@
   border-radius: $standard-border-radius;
   white-space: nowrap;
   transition: 0.4s;
+  border: solid 1px;
+  border-color: transparent;
+
 
   .iconButton-content {
     display: flex;
@@ -41,6 +44,10 @@
     z-index: 0;
     position: absolute;
     transition: 0.4s;
+
+    &.active {
+      filter: opacity(0.2) !important;
+    }
   }
 
   &.primary {
@@ -64,7 +71,7 @@
       filter: opacity(0);
     }
 
-    border: solid 1px $medium-blue;
+    border-color: $medium-blue;
     color: $medium-blue;
 
     &:hover{
@@ -79,10 +86,7 @@
 
     .iconButton-background {
       background: $medium-blue;
-    }
-
-    &:hover{
-      box-shadow: $standard-button-shadow;
+      filter: opacity(1) !important;
     }
 
     &:hover{

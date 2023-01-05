@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react'
 import { Colors, Size } from '../../global/globalEnums'
 import * as fa from 'react-icons/fa'
 import { Dropdown, IDropdownProps } from '..'
-import { IListBoxItemProps } from '../ListItem'
+import { IListItemProps } from '../ListItem'
 
 export default {
   title: 'Dash/Dropdown',
@@ -12,7 +12,7 @@ export default {
 } as Meta<typeof Dropdown>
 
 const Template: Story<IDropdownProps> = (args) => <Dropdown {...args} />
-const dropdownItems: IListBoxItemProps[] = [
+const dropdownItems: IListItemProps[] = [
   {
     text: 'Facebook',
     shortcut: '⌘F',
