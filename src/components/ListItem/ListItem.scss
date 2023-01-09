@@ -12,18 +12,13 @@
   font-family: $default-font;
   overflow: hidden;
 
-  &:hover {
-    .listItem-background {
-      filter: opacity(0.2);
-    }
-  }
-
   .listItem-background {
     position: absolute;
     width: 100%;
     height: 100%;
     background: $medium-blue;
     filter: opacity(0);
+    transition: 0.4s;
   }
 
   .listItem-top {
@@ -56,7 +51,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: $label-fontSize;
+      font-size: $xsmall-fontSize;
       font-family: $default-font;
     }
 
@@ -70,10 +65,10 @@
   }
 
   .listItem-description {
-    font-size: $label-fontSize;
+    font-size: $xsmall-fontSize;
     display: flex;
-    padding: 0px 20px 5px 20px;
+    padding: 0px 20px 10px 20px;
     justify-content: flex-start;
-    width: 100%;
+    width: calc(100% - 40px);
   }
 }

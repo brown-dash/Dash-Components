@@ -3,7 +3,7 @@ import * as fa from 'react-icons/fa'
 import Measure from 'react-measure'
 import { getFontSize, IGlobalProps, ILocation } from '../../global'
 import { Colors, Size } from '../../global/globalEnums'
-import { Button } from '../Button'
+import { Button, Type } from '../Button'
 import { IconButton } from '../IconButton'
 import { ListBox } from '../ListBox'
 import { Popup, PopupTrigger } from '../Popup'
@@ -44,6 +44,8 @@ export const ListItem = (props: IListItemProps) => {
     size = Size.SMALL
   } = props
 
+  const [isHovered, setIsHovered] = useState<boolean>(false);
+
 
   return (
         <div
@@ -55,6 +57,12 @@ export const ListItem = (props: IListItemProps) => {
           style={{
             background: selected ? Colors.LIGHT_BLUE : undefined,
             color: selected ? Colors.BLACK : undefined,
+          }}
+          onPointerEnter={() => {
+            setIsHovered(true)
+          }}
+          onPointerLeave={() => {
+            setIsHovered(false)
           }}
         >
           <div className="listItem-top">
@@ -68,9 +76,10 @@ export const ListItem = (props: IListItemProps) => {
             {shortcut && (
               <div className="shortcut">{shortcut}</div>
             )}
-            {items && (
+            {items && !inactive && (
               <Popup
-                trigger={PopupTrigger.HOVER}
+                trigger={PopupTrigger.CLICK}
+                type={Type.PRIM}
                 size={Size.SMALL} icon={<fa.FaCaretRight />} popup={
                   <ListBox items={items}/>
               }/>
@@ -79,7 +88,11 @@ export const ListItem = (props: IListItemProps) => {
           {description && (
             <div className="listItem-description">{description}</div>
           )}
-          <div className="listItem-background"></div>
+          <div className="listItem-background" 
+            style={{
+              filter: isHovered ? 'opacity(0.2)' : 'opacity(0)'
+            }}
+          ></div>
         </div>
   )
 }

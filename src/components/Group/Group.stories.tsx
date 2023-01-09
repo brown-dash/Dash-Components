@@ -5,7 +5,7 @@ import { IconButton } from '../IconButton'
 import { Dropdown } from '../Dropdown'
 import { IGroupProps, Group } from './Group'
 import { Borders } from '../../global'
-import { ButtonType } from '../Button'
+import { Type } from '../Button'
 import { Popup, PopupTrigger } from '../Popup'
 
 export default {
@@ -18,23 +18,23 @@ const Template: Story<IGroupProps> = (args) => (
   <Group {...args}>
     <IconButton
       icon={<bi.BiAddToQueue />}
-      type={ButtonType.SEC}
+      type={Type.SEC}
     />
     <IconButton
       icon={<bi.BiPlus />}
-      type={ButtonType.SEC}
+      type={Type.SEC}
     />
     <IconButton
       icon={<bi.BiAlarmSnooze />}
-      type={ButtonType.SEC}
+      type={Type.SEC}
     />
     <IconButton
       icon={<bi.BiAlarmAdd />}
-      type={ButtonType.SEC}
+      type={Type.SEC}
     />
     <IconButton
       icon={<bi.BiAlarmExclamation />}
-      type={ButtonType.SEC}
+      type={Type.SEC}
     />
     <Popup
       icon={<bi.BiBookOpen />}
@@ -43,23 +43,23 @@ const Template: Story<IGroupProps> = (args) => (
         <Group gap={10} width={150}>
           <IconButton
             icon={<bi.BiAddToQueue />}
-            type={ButtonType.SEC}
+            type={Type.SEC}
           />
           <IconButton
             icon={<bi.BiPlus />}
-            type={ButtonType.SEC}
+            type={Type.SEC}
           />
           <IconButton
             icon={<bi.BiAlarmSnooze />}
-            type={ButtonType.SEC}
+            type={Type.SEC}
           />
           <IconButton
             icon={<bi.BiAlarmAdd />}
-            type={ButtonType.SEC}
+            type={Type.SEC}
           />
           <IconButton
             icon={<bi.BiAlarmExclamation />}
-            type={ButtonType.SEC}
+            type={Type.SEC}
           />
         </Group>
       }

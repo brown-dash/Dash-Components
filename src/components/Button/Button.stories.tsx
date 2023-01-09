@@ -1,7 +1,7 @@
 import { Meta, Story } from '@storybook/react'
 import React from 'react'
 import * as bi from 'react-icons/bi'
-import { Button, ButtonType, IButtonProps, OrientationType } from '..'
+import { Button, Type, IButtonProps, OrientationType } from '..'
 import { Colors, Size } from '../../global/globalEnums'
 
 export default {
@@ -16,28 +16,28 @@ export const Primary = Template.bind({})
 Primary.args = {
   onClick: () => {},
   text: 'Primary',
-  type: ButtonType.PRIM
+  type: Type.PRIM
 }
 
 export const Secondary = Template.bind({})
 Secondary.args = {
   onClick: () => {},
   text: 'Secondary',
-  type: ButtonType.SEC
+  type: Type.SEC
 }
 
 export const Tertiary = Template.bind({})
 Tertiary.args = {
   onClick: () => {},
   text: 'Tertiary',
-  type: ButtonType.TERT
+  type: Type.TERT
 }
 
 export const Small = Template.bind({})
 Small.args = {
   onClick: () => {},
   text: 'Small',
-  type: ButtonType.PRIM,
+  type: Type.PRIM,
   size: Size.SMALL,
 }
 
@@ -45,7 +45,7 @@ export const Medium = Template.bind({})
 Medium.args = {
   onClick: () => {},
   text: 'Medium',
-  type: ButtonType.PRIM,
+  type: Type.PRIM,
   size: Size.MEDIUM,
 }
 
@@ -53,7 +53,7 @@ export const Large = Template.bind({})
 Large.args = {
   onClick: () => {},
   text: 'Large',
-  type: ButtonType.PRIM,
+  type: Type.PRIM,
   size: Size.LARGE,
 }
 
@@ -63,7 +63,7 @@ ButtonWithLeftIcon.args = {
   text: 'New',
   icon: <bi.BiPlus />,
   iconPosition: OrientationType.LEFT,
-  type: ButtonType.PRIM,
+  type: Type.PRIM,
 }
 
 export const ButtonWithRightIcon = Template.bind({})
@@ -72,5 +72,5 @@ ButtonWithRightIcon.args = {
   text: 'More',
   iconPosition: OrientationType.RIGHT,
   icon: <bi.BiMobile />,
-  type: ButtonType.PRIM,
+  type: Type.PRIM,
 }

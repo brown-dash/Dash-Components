@@ -19,7 +19,7 @@ export interface IDropdownProps extends IGlobalProps {
   items: IListItemProps[]
   selected?: IListItemProps
   location: OrientationType
-  type: DropdownType
+  dropdownType: DropdownType
   maxItems?: number
 }
 
@@ -38,7 +38,7 @@ export const Dropdown = (props: IDropdownProps) => {
     height,
     maxItems,
     items,
-    type,
+    dropdownType,
     selected,
   } = props
   const [selectedItem, setSelectedItem] = useState<
@@ -48,7 +48,7 @@ export const Dropdown = (props: IDropdownProps) => {
   const [isEditing, setIsEditing] = useState<boolean>(false)
 
   const getToggle = () => {
-    switch (type) {
+    switch (dropdownType) {
       case 'search':
         return (
           <div

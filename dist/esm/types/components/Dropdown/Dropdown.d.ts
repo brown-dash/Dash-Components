@@ -1,20 +1,20 @@
 /// <reference types="react" />
-import { Size, ILocation } from '../../global';
-import { IListBoxItemProps } from '../ListItem';
+import { OrientationType } from '..';
+import { IGlobalProps } from '../../global';
+import { IListItemProps } from '../ListItem';
 import './Dropdown.scss';
-export interface IDropdownProps {
-    title?: string;
-    items: IListBoxItemProps[];
-    toggleBackgroundColor?: string;
-    boxBackgroundColor?: string;
-    selected?: IListBoxItemProps;
-    location: 'left' | 'right' | 'below' | 'above';
-    type: 'search' | 'select' | 'click';
+export declare enum DropdownType {
+    SEARCH = "search",
+    SELECT = "select",
+    CLICK = "click"
+}
+export interface IDropdownProps extends IGlobalProps {
+    text?: string;
+    items: IListItemProps[];
+    selected?: IListItemProps;
+    location: OrientationType;
+    dropdownType: DropdownType;
     maxItems?: number;
-    height?: number;
-    size?: Size;
-    color?: string;
-    toggleOverlay?: (key: string, location: ILocation, element: JSX.Element) => void;
 }
 /**
  *

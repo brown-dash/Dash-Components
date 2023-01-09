@@ -5,7 +5,7 @@ import { getFontSize, getHeight } from '../../global/globalUtils'
 import { IconButton } from '../IconButton'
 import './Button.scss'
 
-export enum ButtonType {
+export enum Type {
   PRIM = "primary",
   SEC = "secondary",
   TERT = "tertiary",
@@ -21,7 +21,7 @@ export enum OrientationType {
 export interface IButtonProps extends IGlobalProps {
   onClick?: (event: React.MouseEvent) => void
   onDoubleClick?: (event: React.MouseEvent) => void
-  type?: ButtonType
+  type?: Type
   active?: boolean
 
   // Content
@@ -42,7 +42,7 @@ export const Button = (props: IButtonProps) => {
     active,
     height,
     inactive,
-    type = ButtonType.PRIM,
+    type = Type.PRIM,
     label,
     iconPosition,
     size = Size.SMALL,

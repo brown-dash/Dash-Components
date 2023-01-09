@@ -1,20 +1,16 @@
-import React from 'react';
+/// <reference types="react" />
+import { IGlobalProps } from '../../global';
 import './ListItem.scss';
-import { ILocation } from '../../global';
-export interface IListBoxItemProps {
+export interface IListItemProps extends IGlobalProps {
     ind?: number;
     text?: string;
+    icon?: JSX.Element;
     description?: string;
     shortcut?: string;
-    items?: IListBoxItemProps[];
+    items?: IListItemProps[];
     selected?: boolean;
-    icon?: JSX.Element;
-    style?: React.CSSProperties;
-    setSelectedItem?: (item: IListBoxItemProps) => void;
+    setSelectedItem?: (item: IListItemProps) => void;
     onClick?: () => void;
-    preventClick?: boolean;
-    backgroundColor?: string;
-    toggleOverlay?: (key: string, location: ILocation, element: JSX.Element) => void;
 }
 /**
  *
@@ -24,4 +20,4 @@ export interface IListBoxItemProps {
  * TODO: add support for isMulti, isSearchable
  * Look at: import Select from "react-select";
  */
-export declare const ListItem: (props: IListBoxItemProps) => JSX.Element;
+export declare const ListItem: (props: IListItemProps) => JSX.Element;

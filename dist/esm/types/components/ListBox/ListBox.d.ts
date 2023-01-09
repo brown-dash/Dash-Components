@@ -1,16 +1,12 @@
 /// <reference types="react" />
-import { ILocation } from '../../global';
-import { IListBoxItemProps } from '../ListItem';
+import { IListItemProps } from '../ListItem';
 import './ListBox.scss';
 export interface IListBoxProps {
-    items: IListBoxItemProps[];
+    items: IListItemProps[];
     filter?: string;
-    hasShadow?: boolean;
-    selectedItem?: IListBoxItemProps;
-    setSelectedItem?: (item: IListBoxItemProps) => void;
-    backgroundColor?: string;
+    selectedItem?: IListItemProps;
+    setSelectedItem?: (item: IListItemProps) => void;
     maxItems?: number;
-    toggleOverlay?: (key: string, location: ILocation, element: JSX.Element) => void;
 }
 /**
  *

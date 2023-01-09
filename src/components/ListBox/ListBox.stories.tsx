@@ -15,6 +15,7 @@ const dropdownItems: IListItemProps[] = [
     text: 'Facebook',
     shortcut: '⌘F',
     icon: <fa.FaFacebook />,
+    description: 'A hopeless company.'
   },
   {
     text: 'Google',
@@ -24,6 +25,7 @@ const dropdownItems: IListItemProps[] = [
   {
     text: 'Airbnb',
     icon: <fa.FaAirbnb />,
+    description: 'A housing service that does not work anymore.'
   },
   {
     text: 'Salesforce',
@@ -37,6 +39,7 @@ const dropdownItems: IListItemProps[] = [
         text: 'Heroku',
         shortcut: '⌘H',
         icon: <fa.FaAirFreshener />,
+        description: 'A product that used to be brilliant - absolutely fantastic - but then decided to remove its free service.'
       },
     ],
   },

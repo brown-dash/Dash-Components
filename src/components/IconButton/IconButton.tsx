@@ -4,7 +4,7 @@ import { Colors, FontSize, Size } from '../../global/globalEnums'
 import './IconButton.scss'
 import { Story, Meta } from '@storybook/react'
 import { getFontSize, getHeight } from '../../global'
-import { ButtonType, IButtonProps } from '../Button'
+import { Type, IButtonProps } from '../Button'
 
 export interface IIconButtonProps extends IButtonProps {}
 
@@ -15,7 +15,7 @@ export const IconButton = (props: IButtonProps) => {
     onClick,
     onDoubleClick,
     inactive,
-    type = ButtonType.PRIM,
+    type = Type.PRIM,
     color,
     label,
     height,

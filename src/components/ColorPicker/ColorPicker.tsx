@@ -4,7 +4,7 @@ import './ColorPicker.scss'
 import { GithubPicker } from 'react-color'
 import { IconButton } from '../IconButton'
 import { Borders, Colors, isDark, Size } from '../../global'
-import { Button, ButtonType } from '../Button'
+import { Button, Type } from '../Button'
 
 export interface IColorPickerProps {
   text?: string
@@ -35,7 +35,7 @@ export const ColorPicker = (props: IColorPickerProps) => {
       return (
         <Button
           size={Size.SMALL}
-          type={ButtonType.TERT}
+          type={Type.TERT}
           color={isDark(color) ? Colors.WHITE : Colors.BLACK}
           text={text}
           icon={icon}

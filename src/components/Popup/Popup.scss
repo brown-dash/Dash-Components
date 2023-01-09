@@ -4,8 +4,10 @@
   width: 100vw;
   height: 100vh;
   position: fixed;
+  pointer-events: none;
   top: 0;
   left: 0;
+  z-index: 200;
 
   .popup {
     position: absolute;
@@ -14,6 +16,7 @@
     box-shadow: $standard-shadow;
     border: $standard-border;
     border-radius: $standard-border-radius;
+    pointer-events: auto;
     background: white;
     overflow: hidden;
   }

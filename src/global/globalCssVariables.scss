@@ -8,6 +8,9 @@ $black: #000000;
 $light-blue: #bdddf5;
 $light-blue-transparent: #bdddf590;
 $medium-blue: #4476f7;
+
+$medium-blue-transparent: #4477f733;
+
 $medium-blue-alt: #4476f73d;
 $pink: #e0217d;
 $yellow: #f5d747;
@@ -16,23 +19,29 @@ $close-red: #e48282;
 
 $drop-shadow: '#32323215';
 
-// background
-$hover-background: rgba(0, 0, 0, 0.2);
-$modal-background: rgba(0, 0, 0, 0.3);
-
 //popup
 $success-green: #4bb543;
 $error-red: #ff9494;
 
+// background
+$hover-background: rgba(0, 0, 0, 0.2);
+$modal-background: rgba(0, 0, 0, 0.3);
+
+// sizes
+$xsmall: 20px;
+$small: 30px;
+$medium: 40px;
+$large: 50px;
+
 // text-sizes
-$icon-fontSize: 3rem;
-$header-fontSize: 1.6rem;
-$default-fontSize: 1rem;
-$secondary-fontSize: 1.3rem;
-$label-fontSize: 0.6rem;
+$icon-fontSize: 2rem;
+$large-fontSize: 1.3rem;
+$medium-fontSize: 1rem;
+$small-fontSize: 0.7rem;
+$xsmall-fontSize: 0.5rem;
 
 // fonts
-$default-font: 'Roboto';
+$default-font: 'Roboto', Verdana, sans-serif;
 
 //padding
 $minimum-padding: 4px;

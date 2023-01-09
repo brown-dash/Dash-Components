@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PointerEventHandler } from 'react';
 
 declare enum Colors {
     BLACK = "#000000",
@@ -41,34 +41,73 @@ declare enum Shadows {
     STANDARD_SHADOW = "0px 3px 4px rgba(0, 0, 0, 0.3)"
 }
 declare enum Size {
-    SMALL = "30px",
-    MEDIUM = "35px",
-    LARGE = "40px"
+    XSMALL = "xsmall",
+    SMALL = "small",
+    MEDIUM = "medium",
+    LARGE = "large"
 }
 
-interface IButtonProps {
+interface ILocation {
+    top: number;
+    left: number;
+    width: number;
+    height: number;
+    override?: 'left' | 'bottom' | 'top' | 'right';
+}
+declare const getFontSize: (size: Size | undefined, icon?: boolean | undefined) => "1rem" | "0.5rem" | "1.3rem" | "0.7rem" | "1.8rem" | "2.3rem";
+declare const getHeight: (height: number | undefined, size: Size | undefined) => number;
+declare const colorConvert: (color: any) => any;
+declare const isDark: (color: any) => boolean;
+
+interface IGlobalProps {
+    size?: Size;
+    height?: number;
+    type?: Type;
+    inactive?: boolean;
+    tooltip?: string;
+    label?: string;
+    onPointerDown?: PointerEventHandler | undefined;
+    onPointerDownCapture?: PointerEventHandler | undefined;
+    onPointerMove?: PointerEventHandler | undefined;
+    onPointerMoveCapture?: PointerEventHandler | undefined;
+    onPointerUp?: PointerEventHandler | undefined;
+    onPointerUpCapture?: PointerEventHandler | undefined;
+    onPointerCancel?: PointerEventHandler | undefined;
+    onPointerCancelCapture?: PointerEventHandler | undefined;
+    onPointerEnter?: PointerEventHandler | undefined;
+    onPointerEnterCapture?: PointerEventHandler | undefined;
+    onPointerLeave?: PointerEventHandler | undefined;
+    onPointerLeaveCapture?: PointerEventHandler | undefined;
+    onPointerOver?: PointerEventHandler | undefined;
+    onPointerOverCapture?: PointerEventHandler | undefined;
+    onPointerOut?: PointerEventHandler | undefined;
+    onPointerOutCapture?: PointerEventHandler | undefined;
+    onGotPointerCapture?: PointerEventHandler | undefined;
+    onGotPointerCaptureCapture?: PointerEventHandler | undefined;
+    onLostPointerCapture?: PointerEventHandler | undefined;
+    onLostPointerCaptureCapture?: PointerEventHandler | undefined;
+}
+
+declare enum Type {
+    PRIM = "primary",
+    SEC = "secondary",
+    TERT = "tertiary"
+}
+declare enum OrientationType {
+    LEFT = "left",
+    RIGHT = "right",
+    TOP = "top",
+    BOTTOM = "bottom"
+}
+interface IButtonProps extends IGlobalProps {
     onClick?: (event: React.MouseEvent) => void;
     onDoubleClick?: (event: React.MouseEvent) => void;
-    type?: 'outline' | 'gradient' | 'fill' | 'icon';
-    isActive?: boolean;
+    type?: Type;
+    active?: boolean;
     text?: string;
     icon?: JSX.Element | string;
-    fontSize?: number | string;
-    tooltip?: string;
-    backgroundColor?: string;
-    primaryColor?: string;
-    secondaryColor?: string;
-    activeColor?: string;
+    iconPosition?: OrientationType;
     color?: string;
-    hoverStyle?: 'shadow' | 'darken' | 'lighten' | 'gray' | 'none';
-    size?: Size;
-    hasLabel?: boolean;
-    label?: string;
-    padding?: number;
-    hasBorder?: boolean;
-    borderRadius?: number | string;
-    iconPosition?: 'left' | 'right' | 'top' | 'bottom';
-    height?: number;
 }
 declare const Button: (props: IButtonProps) => JSX.Element;
 
@@ -79,46 +118,39 @@ interface IColorPickerProps {
 }
 declare const ColorPicker: (props: IColorPickerProps) => JSX.Element;
 
-interface ILocation {
-    top: number;
-    left: number;
-    width: number;
-    height: number;
-    override?: 'left' | 'bottom' | 'top' | 'right';
-}
-declare const getHeight: (height: number | undefined, size: Size | undefined) => number;
-declare const colorConvert: (color: any) => any;
-declare const isDark: (color: any) => boolean;
-
-interface IListBoxItemProps {
+interface IListItemProps extends IGlobalProps {
     ind?: number;
     text?: string;
+    icon?: JSX.Element;
     description?: string;
     shortcut?: string;
-    items?: IListBoxItemProps[];
+    items?: IListItemProps[];
     selected?: boolean;
-    icon?: JSX.Element;
-    style?: React.CSSProperties;
-    setSelectedItem?: (item: IListBoxItemProps) => void;
+    setSelectedItem?: (item: IListItemProps) => void;
     onClick?: () => void;
-    preventClick?: boolean;
-    backgroundColor?: string;
-    toggleOverlay?: (key: string, location: ILocation, element: JSX.Element) => void;
 }
+/**
+ *
+ * @param props
+ * @returns
+ *
+ * TODO: add support for isMulti, isSearchable
+ * Look at: import Select from "react-select";
+ */
+declare const ListItem: (props: IListItemProps) => JSX.Element;
 
-interface IDropdownProps {
-    title?: string;
-    items: IListBoxItemProps[];
-    toggleBackgroundColor?: string;
-    boxBackgroundColor?: string;
-    selected?: IListBoxItemProps;
-    location: 'left' | 'right' | 'below' | 'above';
-    type: 'search' | 'select' | 'click';
+declare enum DropdownType {
+    SEARCH = "search",
+    SELECT = "select",
+    CLICK = "click"
+}
+interface IDropdownProps extends IGlobalProps {
+    text?: string;
+    items: IListItemProps[];
+    selected?: IListItemProps;
+    location: OrientationType;
+    dropdownType: DropdownType;
     maxItems?: number;
-    height?: number;
-    size?: Size;
-    color?: string;
-    toggleOverlay?: (key: string, location: ILocation, element: JSX.Element) => void;
 }
 /**
  *
@@ -148,42 +180,16 @@ interface IEditableTextProps {
  */
 declare const EditableText: (props: IEditableTextProps) => JSX.Element;
 
-interface IIconButtonProps {
-    onClick?: (event: React.MouseEvent) => void;
-    onDoubleClick?: (event: React.MouseEvent) => void;
-    type?: 'outline' | 'gradient' | 'fill' | 'icon';
-    isActive?: boolean;
-    text?: string;
-    icon?: JSX.Element | string;
-    fontSize?: number | string;
-    tooltip?: string;
-    backgroundColor?: string;
-    primaryColor?: string;
-    secondaryColor?: string;
-    activeColor?: string;
-    color?: string;
-    hoverStyle?: 'shadow' | 'darken' | 'lighten' | 'gray' | 'none';
-    size?: Size;
-    hasLabel?: boolean;
-    label?: string;
-    padding?: number;
-    hasBorder?: boolean;
-    isCircle?: boolean;
-    borderRadius?: number | string;
-    iconPosition?: 'left' | 'right' | 'top' | 'bottom';
-    height?: number;
+interface IIconButtonProps extends IButtonProps {
 }
-declare const IconButton: (props: IIconButtonProps) => JSX.Element;
+declare const IconButton: (props: IButtonProps) => JSX.Element;
 
 interface IListBoxProps {
-    items: IListBoxItemProps[];
+    items: IListItemProps[];
     filter?: string;
-    hasShadow?: boolean;
-    selectedItem?: IListBoxItemProps;
-    setSelectedItem?: (item: IListBoxItemProps) => void;
-    backgroundColor?: string;
+    selectedItem?: IListItemProps;
+    setSelectedItem?: (item: IListItemProps) => void;
     maxItems?: number;
-    toggleOverlay?: (key: string, location: ILocation, element: JSX.Element) => void;
 }
 /**
  *
@@ -195,12 +201,20 @@ interface IListBoxProps {
  */
 declare const ListBox: (props: IListBoxProps) => JSX.Element;
 
-interface IPopupProps {
+declare enum PopupTrigger {
+    CLICK = "click",
+    HOVER = "hover",
+    HOVER_DELAY = "hover_delay"
+}
+interface IPopupProps extends IGlobalProps {
     text?: string;
-    icon: JSX.Element | string;
+    icon?: JSX.Element | string;
     location?: 'left' | 'right' | 'below' | 'above';
     size?: Size;
     height?: number;
+    toggle?: JSX.Element;
+    popup: JSX.Element | string;
+    trigger?: PopupTrigger;
 }
 /**
  *
@@ -212,29 +226,6 @@ interface IPopupProps {
  */
 declare const Popup: (props: IPopupProps) => JSX.Element;
 
-interface IPopupListProps {
-    text?: string;
-    icon: JSX.Element;
-    items: IListBoxItemProps[];
-    toggleBackgroundColor?: string;
-    boxBackgroundColor?: string;
-    selected?: IListBoxItemProps;
-    location?: 'left' | 'right' | 'below' | 'above';
-    maxItems?: number;
-    size?: Size;
-    height?: number;
-    addToOverlay?: (location: ILocation, element: JSX.Element) => void;
-}
-/**
- *
- * @param props
- * @returns
- *
- * TODO: add support for isMulti, isSearchable
- * Look at: import Select from "react-select";
- */
-declare const PopupList: (props: IPopupListProps) => JSX.Element;
-
 interface IModalProps {
     children: JSX.Element;
     initialIsOpen: boolean;
@@ -243,25 +234,47 @@ interface IModalProps {
 }
 declare const Modal: (props: IModalProps) => JSX.Element | null;
 
-interface IMenuGroupProps {
-    orientation: 'hor' | 'vert';
+interface IGroupProps {
     children: any;
+    gap?: number;
+    width?: number | string;
 }
-declare const MenuGroup: (props: IMenuGroupProps) => JSX.Element;
+declare const Group: (props: IGroupProps) => JSX.Element;
 
-interface ISliderProps {
+interface ISliderProps extends IGlobalProps {
     multithumb: boolean;
     min: number;
     max: number;
-    initialVal?: number;
+    initVal?: number;
+    initEndVal?: number;
+    setVal?: (newVal: number) => void;
+    setEndVal?: (newVal: number) => void;
     step?: number;
     minDiff?: number;
+    unit?: string;
+    onChange?: () => void;
 }
 declare const Slider: (props: ISliderProps) => JSX.Element;
+
+declare enum ToggleType {
+    BUTTON = "button",
+    CHECKBOX = "checkbox",
+    SWITCH = "switch"
+}
+interface IToggleProps extends IGlobalProps {
+    toggleStatus: boolean;
+    onClick?: (event: React.MouseEvent) => void;
+    toggleType?: ToggleType;
+    text?: string;
+    icon?: JSX.Element | string;
+    iconPosition?: OrientationType;
+    color?: string;
+}
+declare const Toggle: (props: IToggleProps) => JSX.Element;
 
 interface IOverlayProps {
     elementMap?: Map<string, JSX.Element>;
 }
 declare const Overlay: (props: IOverlayProps) => JSX.Element;
 
-export { Borders, Button, ColorPicker, Colors, Dropdown, EditableText, FontSize, IButtonProps, IColorPickerProps, IDropdownProps, IEditableTextProps, IIconButtonProps, IListBoxProps, ILocation, IMenuGroupProps, IModalProps, IOverlayProps, IPopupListProps, IPopupProps, ISliderProps, IconButton, IconSizes, ListBox, MenuGroup, Modal, Overlay, Padding, Popup, PopupList, Shadows, Size, Slider, colorConvert, getHeight, isDark };
+export { Borders, Button, ColorPicker, Colors, Dropdown, DropdownType, EditableText, FontSize, Group, IButtonProps, IColorPickerProps, IDropdownProps, IEditableTextProps, IGlobalProps, IGroupProps, IIconButtonProps, IListBoxProps, IListItemProps, ILocation, IModalProps, IOverlayProps, IPopupProps, ISliderProps, IToggleProps, IconButton, IconSizes, ListBox, ListItem, Modal, OrientationType, Overlay, Padding, Popup, PopupTrigger, Shadows, Size, Slider, Toggle, ToggleType, Type, colorConvert, getFontSize, getHeight, isDark };

@@ -12,7 +12,7 @@
   align-items: center;
   gap: 5px;
   font-family: $default-font;
-  font-size: $default-fontSize;
+  font-size: $medium-fontSize;
   border-radius: $standard-border-radius;
   white-space: nowrap;
   transition: 0.4s;
@@ -100,6 +100,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: $label-fontSize;
+    font-size: $xsmall-fontSize;
   }
 }

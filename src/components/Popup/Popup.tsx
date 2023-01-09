@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
-import { Size } from '../../global'
+import { IGlobalProps, Size } from '../../global'
+import { Type } from '../Button'
 import { Toggle, ToggleType } from '../Toggle'
 import './Popup.scss'
 
@@ -9,7 +10,7 @@ export enum PopupTrigger {
   HOVER_DELAY = "hover_delay"
 }
 
-export interface IPopupProps {
+export interface IPopupProps extends IGlobalProps {
   text?: string
   icon?: JSX.Element | string
   location?: 'left' | 'right' | 'below' | 'above'
@@ -34,6 +35,7 @@ export const Popup = (props: IPopupProps) => {
     size,
     icon,
     popup,
+    type,
     toggle,
     trigger = PopupTrigger.CLICK
   } = props
@@ -56,6 +58,13 @@ export const Popup = (props: IPopupProps) => {
   }
 
   let timeout = setTimeout(() => {});
+
+
+  // const closeIfNotPopup = (e: any) => {
+  //   setOpen(false);
+  // }
+
+  // document.addEventListener('click', closeIfNotPopup)
 
   return (
     <div>
@@ -106,7 +115,8 @@ export const Popup = (props: IPopupProps) => {
         :
           <Toggle
           size={size}
-          type={ToggleType.BUTTON}
+          type={Type.PRIM}
+          toggleType={ToggleType.BUTTON}
           toggleStatus={isOpen}
           icon={icon}
           text={text}

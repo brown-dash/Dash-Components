@@ -1,28 +1,25 @@
 import React from 'react';
-import { Size } from '../../global/globalEnums';
+import { IGlobalProps } from '../../global';
 import './Button.scss';
-export interface IButtonProps {
+export declare enum Type {
+    PRIM = "primary",
+    SEC = "secondary",
+    TERT = "tertiary"
+}
+export declare enum OrientationType {
+    LEFT = "left",
+    RIGHT = "right",
+    TOP = "top",
+    BOTTOM = "bottom"
+}
+export interface IButtonProps extends IGlobalProps {
     onClick?: (event: React.MouseEvent) => void;
     onDoubleClick?: (event: React.MouseEvent) => void;
-    type?: 'outline' | 'gradient' | 'fill' | 'icon';
-    isActive?: boolean;
+    type?: Type;
+    active?: boolean;
     text?: string;
     icon?: JSX.Element | string;
-    fontSize?: number | string;
-    tooltip?: string;
-    backgroundColor?: string;
-    primaryColor?: string;
-    secondaryColor?: string;
-    activeColor?: string;
+    iconPosition?: OrientationType;
     color?: string;
-    hoverStyle?: 'shadow' | 'darken' | 'lighten' | 'gray' | 'none';
-    size?: Size;
-    hasLabel?: boolean;
-    label?: string;
-    padding?: number;
-    hasBorder?: boolean;
-    borderRadius?: number | string;
-    iconPosition?: 'left' | 'right' | 'top' | 'bottom';
-    height?: number;
 }
 export declare const Button: (props: IButtonProps) => JSX.Element;

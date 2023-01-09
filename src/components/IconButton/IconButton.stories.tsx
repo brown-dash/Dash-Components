@@ -1,7 +1,7 @@
 import { Meta, Story } from '@storybook/react'
 import React from 'react'
 import * as bi from 'react-icons/bi'
-import { Button, ButtonType, IButtonProps, IconButton, OrientationType } from '..'
+import { Button, Type, IButtonProps, IconButton, OrientationType } from '..'
 import { Colors, Size } from '../../global/globalEnums'
 
 export default {
@@ -16,28 +16,28 @@ export const Primary = Template.bind({})
 Primary.args = {
   onClick: () => {},
   icon: <bi.BiAngry/>,
-  type: ButtonType.PRIM
+  type: Type.PRIM
 }
 
 export const Secondary = Template.bind({})
 Secondary.args = {
   onClick: () => {},
   icon: <bi.BiAngry/>,
-  type: ButtonType.SEC
+  type: Type.SEC
 }
 
 export const Tertiary = Template.bind({})
 Tertiary.args = {
   onClick: () => {},
   icon: <bi.BiAngry/>,
-  type: ButtonType.TERT
+  type: Type.TERT
 }
 
 export const XSmall = Template.bind({})
 XSmall.args = {
   onClick: () => {},
   icon: <bi.BiAngry/>,
-  type: ButtonType.SEC,
+  type: Type.SEC,
   size: Size.XSMALL,
 }
 
@@ -45,7 +45,7 @@ export const Small = Template.bind({})
 Small.args = {
   onClick: () => {},
   icon: <bi.BiAngry/>,
-  type: ButtonType.PRIM,
+  type: Type.PRIM,
   size: Size.SMALL,
 }
 
@@ -53,7 +53,7 @@ export const Medium = Template.bind({})
 Medium.args = {
   onClick: () => {},
   icon: <bi.BiAngry/>,
-  type: ButtonType.PRIM,
+  type: Type.PRIM,
   size: Size.MEDIUM,
 }
 
@@ -61,6 +61,6 @@ export const Large = Template.bind({})
 Large.args = {
   onClick: () => {},
   icon: <bi.BiAngry/>,
-  type: ButtonType.PRIM,
+  type: Type.PRIM,
   size: Size.LARGE,
 }

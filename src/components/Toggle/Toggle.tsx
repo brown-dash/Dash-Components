@@ -2,7 +2,7 @@ import React from 'react'
 import { Colors, Size } from '../../global/globalEnums'
 import { getFontSize, getHeight } from '../../global/globalUtils'
 import { IconButton } from '../IconButton'
-import { Button, ButtonType, IButtonProps, OrientationType } from '../Button'
+import { Button, Type, IButtonProps, OrientationType } from '../Button'
 import './Toggle.scss'
 import * as bi from 'react-icons/bi'
 import { IGlobalProps } from '../../global'
@@ -16,7 +16,7 @@ export enum ToggleType {
 export interface IToggleProps extends IGlobalProps {
   toggleStatus: boolean // true -> selected, false -> unselected
   onClick?: (event: React.MouseEvent) => void
-  type?: ToggleType
+  toggleType?: ToggleType
 
   // Content
   text?: string
@@ -30,13 +30,15 @@ export interface IToggleProps extends IGlobalProps {
 export const Toggle = (props: IToggleProps) => {
   const {
     toggleStatus,
-    type = ToggleType.CHECKBOX,
+    toggleType = ToggleType.CHECKBOX,
+    type = Type.SEC,
     text,
     icon,
     height,
     inactive,
     label,
     iconPosition,
+    onPointerDown,
     onClick,
     size = Size.SMALL,
   } = props
@@ -53,7 +55,7 @@ export const Toggle = (props: IToggleProps) => {
     height: getHeight(height, size),
   }
 
-  switch(type) {
+  switch(toggleType) {
     case ToggleType.BUTTON:
       return (
         <Button
@@ -61,7 +63,7 @@ export const Toggle = (props: IToggleProps) => {
           icon={icon}
           onClick={handleClick}
           active={toggleStatus}
-          type={ButtonType.SEC}
+          type={type}
           size={size}
           iconPosition={iconPosition}
         />
@@ -74,7 +76,7 @@ export const Toggle = (props: IToggleProps) => {
           }
           onClick={handleClick}
           active={toggleStatus}
-          type={ButtonType.SEC}
+          type={type}
           size={size}
         />
       );
@@ -82,7 +84,8 @@ export const Toggle = (props: IToggleProps) => {
     default:
       return (
         <div
-          className={`toggle-container ${type}`}
+          className={`toggle-container ${toggleType}`}
+          onPointerDown={onPointerDown}
           onClick={handleClick}
           style={defaultProperties}
         >

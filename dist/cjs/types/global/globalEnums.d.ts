@@ -39,7 +39,8 @@ export declare enum Shadows {
     STANDARD_SHADOW = "0px 3px 4px rgba(0, 0, 0, 0.3)"
 }
 export declare enum Size {
-    SMALL = "30px",
-    MEDIUM = "35px",
-    LARGE = "40px"
+    XSMALL = "xsmall",
+    SMALL = "small",
+    MEDIUM = "medium",
+    LARGE = "large"
 }

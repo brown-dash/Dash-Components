@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { Colors, Size } from '../../global';
+import { Type } from '../Button';
 import { IconButton } from '../IconButton';
 import './Modal.scss';
 
@@ -24,7 +25,7 @@ export const Modal = (props: IModalProps) => {
         <div className={'modal-closeButton'}>
           <IconButton
             size={Size.SMALL}
-            hoverStyle='gray'
+            type={Type.TERT}
             onClick={() => setIsOpen(false)}
             icon={<FaTimes />}
           />
