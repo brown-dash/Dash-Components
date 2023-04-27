@@ -4,6 +4,7 @@ import './Group.scss'
 export interface IGroupProps {
   children: any
   gap?: number;
+  columnGap?: number;
   width?: number | string
 }
 
@@ -12,11 +13,12 @@ export const Group = (props: IGroupProps) => {
     children, 
     width = '100%',
     gap = 10,
+    columnGap = 10,
   } = props
   return (
     <div
       className="group-container"
-      style={{ width: width, gap: gap, padding: `${gap}px 0px` }}
+      style={{ width, gap, columnGap, padding: `${gap}px 0px` }}
     >
       {children}
     </div>
