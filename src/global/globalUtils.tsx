@@ -15,20 +15,20 @@ export const getFontSize = (
 ) => {
   switch (size) {
     case Size.XSMALL:
-      if (icon) return '1rem'
-      return '0.5rem'
+      if (icon) return '13px'
+      return '7px'
     case Size.SMALL:
-      if (icon) return '1.3rem'
-      return '0.7rem'
+      if (icon) return '15px'
+      return '9px'
     case Size.MEDIUM:
-      if (icon) return '1.8rem'
-      return '1rem'
+      if (icon) return '17px'
+      return '11px'
     case Size.LARGE:
-      if (icon) return '2.3rem'
-      return '1.3rem'
+      if (icon) return '20px'
+      return '15px'
     default:
-      if (icon) return '1.8rem'
-      return '1rem'
+      if (icon) return '17px'
+      return '11px'
   }
 }
 

@@ -40,4 +40,7 @@ export interface IGlobalProps {
   onGotPointerCaptureCapture?: PointerEventHandler | undefined;
   onLostPointerCapture?: PointerEventHandler | undefined;
   onLostPointerCaptureCapture?: PointerEventHandler | undefined;
+
+  // Custom style
+  style?: React.CSSProperties
 }

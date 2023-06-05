@@ -20,6 +20,7 @@ export const IconButton = (props: IButtonProps) => {
     label,
     height,
     size = Size.SMALL,
+    style
   } = props
 
   /**
@@ -48,13 +49,13 @@ export const IconButton = (props: IButtonProps) => {
       className={`iconButton-container ${type}`}
       onClick={handleClick}
       onDoubleClick={handleDoubleClick}
-      style={defaultProperties}
+      style={{...defaultProperties, ...style}}
     >
-      <div className="iconButton-content" style={{fontSize: getFontSize(size, true)}}>
+      <div className="iconButton-content" style={{fontSize: getFontSize(size, true), color: color, borderColor: color}}>
         {icon}
       </div>
       {label && <div className={'iconButton-label'}>{label}</div>}
-      <div className={`iconButton-background ${active && 'active'}`}/>
+      <div className={`iconButton-background ${active && 'active'}`} style={{background: color}}/>
     </div>
   )
 }

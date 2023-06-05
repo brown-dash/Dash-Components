@@ -16,7 +16,10 @@ export const Primary = Template.bind({})
 Primary.args = {
   onClick: () => {},
   text: 'Primary',
-  type: Type.PRIM
+  type: Type.PRIM,
+  style: {
+    fontWeight: 600
+  }
 }
 
 export const Secondary = Template.bind({})

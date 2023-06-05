@@ -1,4 +1,4 @@
-import React, { PointerEventHandler } from 'react';
+import React$1, { PointerEventHandler } from 'react';
 
 declare enum Colors {
     BLACK = "#000000",
@@ -54,7 +54,7 @@ interface ILocation {
     height: number;
     override?: 'left' | 'bottom' | 'top' | 'right';
 }
-declare const getFontSize: (size: Size | undefined, icon?: boolean | undefined) => "1rem" | "0.5rem" | "1.3rem" | "0.7rem" | "1.8rem" | "2.3rem";
+declare const getFontSize: (size: Size | undefined, icon?: boolean | undefined) => "13px" | "7px" | "15px" | "9px" | "17px" | "11px" | "20px";
 declare const getHeight: (height: number | undefined, size: Size | undefined) => number;
 declare const colorConvert: (color: any) => any;
 declare const isDark: (color: any) => boolean;
@@ -86,6 +86,7 @@ interface IGlobalProps {
     onGotPointerCaptureCapture?: PointerEventHandler | undefined;
     onLostPointerCapture?: PointerEventHandler | undefined;
     onLostPointerCaptureCapture?: PointerEventHandler | undefined;
+    style?: React.CSSProperties;
 }
 
 declare enum Type {
@@ -100,8 +101,8 @@ declare enum OrientationType {
     BOTTOM = "bottom"
 }
 interface IButtonProps extends IGlobalProps {
-    onClick?: (event: React.MouseEvent) => void;
-    onDoubleClick?: (event: React.MouseEvent) => void;
+    onClick?: (event: React$1.MouseEvent) => void;
+    onDoubleClick?: (event: React$1.MouseEvent) => void;
     type?: Type;
     active?: boolean;
     text?: string;
@@ -237,6 +238,7 @@ declare const Modal: (props: IModalProps) => JSX.Element | null;
 interface IGroupProps {
     children: any;
     gap?: number;
+    columnGap?: number;
     width?: number | string;
 }
 declare const Group: (props: IGroupProps) => JSX.Element;
@@ -263,7 +265,7 @@ declare enum ToggleType {
 }
 interface IToggleProps extends IGlobalProps {
     toggleStatus: boolean;
-    onClick?: (event: React.MouseEvent) => void;
+    onClick?: (event: React$1.MouseEvent) => void;
     toggleType?: ToggleType;
     text?: string;
     icon?: JSX.Element | string;

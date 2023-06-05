@@ -46,6 +46,8 @@ export const Button = (props: IButtonProps) => {
     label,
     iconPosition,
     size = Size.SMALL,
+    color,
+    style
   } = props
 
   if (!text) {
@@ -68,8 +70,12 @@ export const Button = (props: IButtonProps) => {
     if (!inactive && onDoubleClick) onDoubleClick(e)
   }
 
-  const defaultProperties = {
+  const defaultProperties: React.CSSProperties = {
     height: getHeight(height, size),
+    fontWeight: 500,
+    fontSize: getFontSize(size),
+    fontFamily: 'sans-serif',
+    textTransform: 'uppercase'
   }
 
 
@@ -78,15 +84,15 @@ export const Button = (props: IButtonProps) => {
       className={`button-container ${type}`}
       onClick={handleClick}
       onDoubleClick={handleDoubleClick}
-      style={defaultProperties}
+      style={{...defaultProperties, ...style}}
     >
-      <div className="button-content" style={{fontSize: getFontSize(size)}}>
+      <div className="button-content" style={{color: color, borderColor: color}}>
         {iconPosition == 'right' ? null : icon}
         {text}
         {iconPosition == 'right' ? icon : null}
       </div>
       {label && <div className={'button-label'}>{label}</div>}
-      <div className={`button-background ${active && 'active'}`}/>
+      <div className={`button-background ${active && 'active'}`} style={{background: color}}/>
     </div>
   )
 }
