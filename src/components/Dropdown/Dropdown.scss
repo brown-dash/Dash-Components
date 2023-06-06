@@ -14,8 +14,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-width: 170px;
-  width: fit-content;
+  min-width: fit-content;
   border-radius: $standard-border-radius;
   height: 100%;
   position: relative;
@@ -30,11 +29,76 @@
   .dropdown-toggle {
     width: 100%;
     display: grid;
-    grid-template-columns: auto 30px;
+    grid-template-columns: calc(100% - 30px) 30px;
     grid-template-areas: 'button end';
     grid-template-rows: 1fr;
     position: relative;
     align-items: center;
+    border: solid 1px;
+    border-color: transparent;
+    border-radius: $standard-border-radius;
+    overflow: hidden;
+
+    .toggle-background {
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      position: absolute;
+      transition: 0.4s;
+
+      &.active {
+        filter: opacity(0.2) !important;
+      }
+    }
+
+    &.primary {
+      color: $medium-blue;
+      .toggle-background {
+        background: $medium-blue;
+        filter: opacity(0);
+      }
+  
+      &:hover{
+        .toggle-background {
+          filter: opacity(0.2)
+        }
+      }
+  
+    }
+  
+    &.secondary {
+      .toggle-background {
+        background: $medium-blue;
+        filter: opacity(0);
+      }
+  
+      border: solid 1px $medium-blue;
+      color: $medium-blue;
+  
+      &:hover{
+        .toggle-background {
+          filter: opacity(0.2)
+        }
+      }
+    }
+  
+    &.tertiary {
+      color: white;
+  
+      .toggle-background {
+        background: $medium-blue;
+      }
+  
+      &:hover{
+        box-shadow: $standard-button-shadow;
+      }
+  
+      &:hover{
+        .toggle-background {
+          filter: brightness(0.8);
+        }
+      }
+    }
 
     .toggle-button {
       grid-area: button;

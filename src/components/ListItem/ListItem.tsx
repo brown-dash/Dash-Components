@@ -38,14 +38,13 @@ export const ListItem = (props: IListItemProps) => {
     items,
     icon,
     selected,
-    setSelectedItem,
     onClick,
     inactive,
-    size = Size.SMALL
+    size = Size.SMALL,
+    style
   } = props
 
   const [isHovered, setIsHovered] = useState<boolean>(false);
-
 
   return (
         <div
@@ -54,10 +53,7 @@ export const ListItem = (props: IListItemProps) => {
             onClick && !inactive && onClick()
             onClick && !inactive &&  e.stopPropagation()
           }}
-          style={{
-            background: selected ? Colors.LIGHT_BLUE : undefined,
-            color: selected ? Colors.BLACK : undefined,
-          }}
+          style={{color: selected ? Colors.BLACK : undefined, ...style}}
           onPointerEnter={() => {
             setIsHovered(true)
           }}
@@ -73,7 +69,7 @@ export const ListItem = (props: IListItemProps) => {
               {icon}
               {text}
             </div>
-            {shortcut && (
+            {shortcut && !inactive && (
               <div className="shortcut">{shortcut}</div>
             )}
             {items && !inactive && (
@@ -90,7 +86,7 @@ export const ListItem = (props: IListItemProps) => {
           )}
           <div className="listItem-background" 
             style={{
-              filter: isHovered ? 'opacity(0.2)' : 'opacity(0)'
+              filter: selected ? 'opacity(0.4)' : isHovered && !inactive ? 'opacity(0.2)' : 'opacity(0)'
             }}
           ></div>
         </div>

@@ -19,6 +19,8 @@ export interface IPopupProps extends IGlobalProps {
   toggle?: JSX.Element;
   popup: JSX.Element | string
   trigger?: PopupTrigger
+  isOpen?: boolean;
+  setOpen?: (b: boolean) => void
 }
 
 /**
@@ -30,16 +32,20 @@ export interface IPopupProps extends IGlobalProps {
  * Look at: import Select from "react-select";
  */
 export const Popup = (props: IPopupProps) => {
+  const [locIsOpen, locSetOpen] = useState<boolean>(false)
+
   const {
     text,
     size,
     icon,
     popup,
     type,
+    isOpen = locIsOpen,
+    setOpen = locSetOpen,
     toggle,
     trigger = PopupTrigger.CLICK
   } = props
-  const [isOpen, setOpen] = useState<boolean>(false)
+  
   const toggleRef = useRef<HTMLDivElement>(null);
   const [top, setTop] = useState<number>(0);
   const [left, setLeft] = useState<number>(0);
@@ -70,8 +76,8 @@ export const Popup = (props: IPopupProps) => {
     <div>
       {isOpen && <div className="popup-overlay">
           <div className="popup" id="popup" style={{
-            top: top + height,
-            left: left,
+            top: height,
+            left: 0,
           }}
           onPointerEnter={() => {
             if (trigger === PopupTrigger.HOVER || trigger === PopupTrigger.HOVER_DELAY) {

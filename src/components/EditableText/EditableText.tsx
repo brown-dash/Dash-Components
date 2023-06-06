@@ -1,8 +1,8 @@
 import React from 'react'
-import { Size, getHeight } from '../../global'
+import { IGlobalProps, Size, getHeight } from '../../global'
 import './EditableText.scss'
 
-export interface IEditableTextProps {
+export interface IEditableTextProps extends IGlobalProps {
   text?: string
   placeholder?: string
   editing: boolean
@@ -29,6 +29,7 @@ export const EditableText = (props: IEditableTextProps) => {
     setEditing,
     backgroundColor,
     placeholder,
+    type
   } = props
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,7 +41,7 @@ export const EditableText = (props: IEditableTextProps) => {
       style={{ background: backgroundColor, height: getHeight(height, size) }}
       placeholder={placeholder}
       size={1}
-      className="editableText"
+      className={`editableText ${type}`}
       autoFocus
       onChange={handleOnChange}
       onBlur={() => setEditing(false)}

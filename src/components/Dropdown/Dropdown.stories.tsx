@@ -2,7 +2,7 @@ import React from 'react'
 import { Story, Meta } from '@storybook/react'
 import { Colors, Size } from '../../global/globalEnums'
 import * as fa from 'react-icons/fa'
-import { Dropdown, IDropdownProps } from '..'
+import { Dropdown, DropdownType, IDropdownProps, Type } from '..'
 import { IListItemProps } from '../ListItem'
 
 export default {
@@ -49,7 +49,8 @@ const dropdownItems: IListItemProps[] = [
 export const Primary = Template.bind({})
 Primary.args = {
   title: 'Select company',
-  boxBackgroundColor: Colors.LIGHT_BLUE,
+  type: Type.PRIM,
+  dropdownType: DropdownType.SELECT,
   items: dropdownItems,
   size: Size.SMALL,
   selected: {
@@ -62,9 +63,8 @@ Primary.args = {
 
 export const Search = Template.bind({})
 Search.args = {
-  type: 'search',
-  boxBackgroundColor: Colors.BLACK,
-  toggleBackgroundColor: Colors.LIGHT_GRAY,
+  type: Type.PRIM,
+  dropdownType: DropdownType.SEARCH,
   title: 'Search company action',
   items: dropdownItems,
   selected: {

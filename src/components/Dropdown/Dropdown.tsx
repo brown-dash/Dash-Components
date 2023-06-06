@@ -15,11 +15,10 @@ export enum DropdownType {
 }
 
 export interface IDropdownProps extends IGlobalProps {
-  text?: string
   items: IListItemProps[]
-  selected?: IListItemProps
   location: OrientationType
   dropdownType: DropdownType
+  selected?: IListItemProps
   maxItems?: number
 }
 
@@ -33,27 +32,31 @@ export interface IDropdownProps extends IGlobalProps {
  */
 export const Dropdown = (props: IDropdownProps) => {
   const {
-    text,
     size,
     height,
     maxItems,
     items,
     dropdownType,
     selected,
+    type, 
+    width
   } = props
+
   const [selectedItem, setSelectedItem] = useState<
     IListItemProps | undefined
   >(selected)
+
   const [searchTerm, setSearchTerm] = useState<string | undefined>(undefined)
   const [isEditing, setIsEditing] = useState<boolean>(false)
+  const [active, setActive] = useState<boolean>(false)
 
   const getToggle = () => {
     switch (dropdownType) {
       case 'search':
         return (
           <div
-            className="dropdown-toggle"
-            style={{ height: getHeight(height, size) }}
+            className={`dropdown-toggle ${type}`}
+            style={{ height: getHeight(height, size), width: width }}
             onClick={(e) => {
               e.stopPropagation()
               !isEditing && setIsEditing(true)
@@ -64,6 +67,7 @@ export const Dropdown = (props: IDropdownProps) => {
             ) : (
               <div className="toggle-button">
                 <EditableText
+                  type={type}
                   text={searchTerm}
                   placeholder={'...'}
                   editing={true}
@@ -79,47 +83,52 @@ export const Dropdown = (props: IDropdownProps) => {
               <IconButton
                 size={Size.SMALL}
                 icon={<fa.FaSearch />}
+                inactive
               />
             </div>
+            <div className={`toggle-background ${isEditing && 'active'}`}/>
           </div>
         )
       case 'select':
         return (
           <div
-            className="dropdown-toggle"
-            style={{ height: getHeight(height, size) }}
+            className={`dropdown-toggle ${type}`}
+            style={{ height: getHeight(height, size), width: width }}
           >
             {selectedItem && (
-              <ListItem {...selectedItem} inactive />
+              <ListItem size={size} {...selectedItem} inactive />
             )}
             <div className="toggle-caret">
               <IconButton
-                size={Size.SMALL}
+                size={size}
                 icon={<fa.FaCaretDown />}
+                inactive
               />
             </div>
+            <div className={`toggle-background ${active && 'active'}`}/>
           </div>
         )
       default:
         return (
           <div
-            className="dropdown-toggle"
-            style={{ height: getHeight(height, size) }}
+            className={`dropdown-toggle ${type}`}
+            style={{ height: getHeight(height, size), width: width }}
           >
             {selectedItem && (
               <ListItem {...selectedItem} inactive />
             )}
             <div className="toggle-caret">
               <IconButton
-                size={Size.SMALL}
+                size={size}
                 icon={<fa.FaCaretDown />}
+                inactive
               />
             </div>
+            <div className={`toggle-background ${active && 'active'}`}/>
           </div>
         )
     }
   }
-
 
   return (
     <div
@@ -128,6 +137,9 @@ export const Dropdown = (props: IDropdownProps) => {
       <Popup
         toggle={getToggle()}
         trigger={PopupTrigger.CLICK}
+        isOpen={active}
+        setOpen={setActive}
+        size={size}
         popup={
           <ListBox
             maxItems={maxItems}
@@ -135,6 +147,7 @@ export const Dropdown = (props: IDropdownProps) => {
             filter={searchTerm}
             selectedItem={selectedItem}
             setSelectedItem={setSelectedItem}
+            size={size}
           />
         } 
         />

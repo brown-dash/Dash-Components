@@ -6,6 +6,7 @@ export interface IGlobalProps {
   // Size
   size?: Size
   height?: number
+  width?: number
 
   // Type
   type?: Type

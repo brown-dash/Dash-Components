@@ -55,7 +55,7 @@ export const IconButton = (props: IButtonProps) => {
         {icon}
       </div>
       {label && <div className={'iconButton-label'}>{label}</div>}
-      <div className={`iconButton-background ${active && 'active'}`} style={{background: color}}/>
+      <div className={`iconButton-background ${active && 'active'} ${inactive && 'inactive'}`} style={{background: color}}/>
     </div>
   )
 }
