@@ -62,6 +62,7 @@ declare const isDark: (color: any) => boolean;
 interface IGlobalProps {
     size?: Size;
     height?: number;
+    width?: number;
     type?: Type;
     inactive?: boolean;
     tooltip?: string;
@@ -146,11 +147,10 @@ declare enum DropdownType {
     CLICK = "click"
 }
 interface IDropdownProps extends IGlobalProps {
-    text?: string;
     items: IListItemProps[];
-    selected?: IListItemProps;
     location: OrientationType;
     dropdownType: DropdownType;
+    selected?: IListItemProps;
     maxItems?: number;
 }
 /**
@@ -163,7 +163,7 @@ interface IDropdownProps extends IGlobalProps {
  */
 declare const Dropdown: (props: IDropdownProps) => JSX.Element;
 
-interface IEditableTextProps {
+interface IEditableTextProps extends IGlobalProps {
     text?: string;
     placeholder?: string;
     editing: boolean;
@@ -185,7 +185,7 @@ interface IIconButtonProps extends IButtonProps {
 }
 declare const IconButton: (props: IButtonProps) => JSX.Element;
 
-interface IListBoxProps {
+interface IListBoxProps extends IGlobalProps {
     items: IListItemProps[];
     filter?: string;
     selectedItem?: IListItemProps;
@@ -216,6 +216,8 @@ interface IPopupProps extends IGlobalProps {
     toggle?: JSX.Element;
     popup: JSX.Element | string;
     trigger?: PopupTrigger;
+    isOpen?: boolean;
+    setOpen?: (b: boolean) => void;
 }
 /**
  *

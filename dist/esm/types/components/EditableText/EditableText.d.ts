@@ -1,7 +1,7 @@
 /// <reference types="react" />
-import { Size } from '../../global';
+import { IGlobalProps, Size } from '../../global';
 import './EditableText.scss';
-export interface IEditableTextProps {
+export interface IEditableTextProps extends IGlobalProps {
     text?: string;
     placeholder?: string;
     editing: boolean;

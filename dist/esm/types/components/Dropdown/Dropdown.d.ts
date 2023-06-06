@@ -9,11 +9,10 @@ export declare enum DropdownType {
     CLICK = "click"
 }
 export interface IDropdownProps extends IGlobalProps {
-    text?: string;
     items: IListItemProps[];
-    selected?: IListItemProps;
     location: OrientationType;
     dropdownType: DropdownType;
+    selected?: IListItemProps;
     maxItems?: number;
 }
 /**

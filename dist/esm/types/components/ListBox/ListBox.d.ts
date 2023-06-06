@@ -1,7 +1,8 @@
 /// <reference types="react" />
 import { IListItemProps } from '../ListItem';
 import './ListBox.scss';
-export interface IListBoxProps {
+import { IGlobalProps } from '../../global';
+export interface IListBoxProps extends IGlobalProps {
     items: IListItemProps[];
     filter?: string;
     selectedItem?: IListItemProps;
