@@ -54,7 +54,7 @@ interface ILocation {
     height: number;
     override?: 'left' | 'bottom' | 'top' | 'right';
 }
-declare const getFontSize: (size: Size | undefined, icon?: boolean | undefined) => "13px" | "7px" | "15px" | "9px" | "17px" | "11px" | "20px";
+declare const getFontSize: (size: Size | undefined, icon?: boolean | undefined) => "15px" | "7px" | "20px" | "9px" | "25px" | "11px" | "30px";
 declare const getHeight: (height: number | undefined, size: Size | undefined) => number;
 declare const colorConvert: (color: any) => any;
 declare const isDark: (color: any) => boolean;

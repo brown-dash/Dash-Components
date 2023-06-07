@@ -1,5 +1,15 @@
 @import '../../global/globalCssVariables.scss';
 
+.toggle-label {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: $xsmall-fontSize;
+}
+
 .toggle-container {
   position: relative;
   width: fit-content;
@@ -53,15 +63,5 @@
     &.active {
       filter: opacity(0.4) !important;
     }
-  }
-
-  .toggle-label {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: $xsmall-fontSize;
   }
 }

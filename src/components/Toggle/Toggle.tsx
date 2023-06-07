@@ -32,6 +32,8 @@ export const Toggle = (props: IToggleProps) => {
     toggleStatus,
     toggleType = ToggleType.CHECKBOX,
     type = Type.SEC,
+    style,
+    color,
     text,
     icon,
     height,
@@ -66,6 +68,8 @@ export const Toggle = (props: IToggleProps) => {
           type={type}
           size={size}
           iconPosition={iconPosition}
+          color={color}
+          label={label}
         />
       );
     case ToggleType.CHECKBOX:
@@ -78,6 +82,8 @@ export const Toggle = (props: IToggleProps) => {
           active={toggleStatus}
           type={type}
           size={size}
+          color={color}
+          label={label}
         />
       );
     case ToggleType.SWITCH:
@@ -92,7 +98,6 @@ export const Toggle = (props: IToggleProps) => {
           <div className="toggle-content" style={{fontSize: getFontSize(size), width: 2*getHeight(height, size), justifyContent: toggleStatus ? 'flex-end' : 'flex-start'}}>
             <div className="toggle-switch" style={{width: getHeight(height, size), height: getHeight(height, size)}}></div>  
           </div>
-          {label && <div className={'toggle-label'}>{label}</div>}
           <div className={`toggle-background ${toggleStatus && 'active'}`}/>
         </div>
       );

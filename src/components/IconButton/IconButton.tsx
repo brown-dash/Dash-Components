@@ -39,9 +39,29 @@ export const IconButton = (props: IButtonProps) => {
     if (!inactive && onDoubleClick) onDoubleClick(e)
   }
 
-  const defaultProperties = {
+  const getBorderColor = (): Colors | string | undefined => {
+    switch(type){
+      case Type.PRIM:
+        return undefined;
+      case Type.SEC:
+        return color;
+      case Type.TERT:
+        if (active) return color;
+        else return color;
+    }
+  }
+
+  const defaultProperties: React.CSSProperties = {
     height: getHeight(height, size),
-    width: getHeight(height, size)
+    width: getHeight(height, size),
+    fontWeight: 500,
+    fontSize: getFontSize(size, true),
+    borderColor: getBorderColor(),
+    color: type == (Type.TERT) ? active ? color : Colors.WHITE : color
+  }
+
+  const backgroundProperties: React.CSSProperties = {
+    background: type == (Type.TERT) && active ? Colors.WHITE : color
   }
 
   return (
@@ -51,11 +71,11 @@ export const IconButton = (props: IButtonProps) => {
       onDoubleClick={handleDoubleClick}
       style={{...defaultProperties, ...style}}
     >
-      <div className="iconButton-content" style={{fontSize: getFontSize(size, true), color: color, borderColor: color}}>
+      <div className="iconButton-content">
         {icon}
       </div>
       {label && <div className={'iconButton-label'}>{label}</div>}
-      <div className={`iconButton-background ${active && 'active'} ${inactive && 'inactive'}`} style={{background: color}}/>
+      <div className={`iconButton-background ${active && 'active'} ${inactive && 'inactive'}`} style={backgroundProperties}/>
     </div>
   )
 }

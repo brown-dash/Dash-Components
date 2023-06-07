@@ -55,15 +55,15 @@
     .iconButton-background {
       background: $medium-blue;
       filter: opacity(0);
+
+      &.active {
+        filter: opacity(0.2) !important;
+      }
     }
 
     &:hover{
       .iconButton-background {
-        filter: opacity(0.2);
-
-        &.inactive {
-          filter: opacity(0);
-        }
+        filter: opacity(0.2)
       }
     }
 
@@ -73,6 +73,10 @@
     .iconButton-background {
       background: $medium-blue;
       filter: opacity(0);
+
+      &.active {
+        filter: opacity(0.2) !important;
+      }
     }
 
     border-color: $medium-blue;
@@ -80,30 +84,34 @@
 
     &:hover{
       .iconButton-background {
-        filter: opacity(0.2);
-
-        &.inactive {
-          filter: opacity(0);
-        }
+        filter: opacity(0.2)
       }
     }
   }
 
   &.tertiary {
     color: white;
+    border-color: $medium-blue;
+
+    &.active {
+      color: $medium-blue;
+    }
 
     .iconButton-background {
       background: $medium-blue;
-      filter: opacity(1) !important;
+
+      &.active {
+        background: white;
+      }
+    }
+
+    &:hover{
+      box-shadow: $standard-button-shadow;
     }
 
     &:hover{
       .iconButton-background {
-        filter: opacity(0.2);
-
-        &.inactive {
-          filter: opacity(0);
-        }
+        filter: brightness(0.8);
       }
     }
   }

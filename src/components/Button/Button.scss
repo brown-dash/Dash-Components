@@ -35,10 +35,6 @@
     z-index: 0;
     position: absolute;
     transition: 0.4s;
-
-    &.active {
-      filter: opacity(0.2) !important;
-    }
   }
 
   &.primary {
@@ -46,6 +42,10 @@
     .button-background {
       background: $medium-blue;
       filter: opacity(0);
+
+      &.active {
+        filter: opacity(0.2) !important;
+      }
     }
 
     &:hover{
@@ -60,9 +60,13 @@
     .button-background {
       background: $medium-blue;
       filter: opacity(0);
+
+      &.active {
+        filter: opacity(0.2) !important;
+      }
     }
 
-    border: solid 1px $medium-blue;
+    border-color: $medium-blue;
     color: $medium-blue;
 
     &:hover{
@@ -74,9 +78,18 @@
 
   &.tertiary {
     color: white;
+    border-color: $medium-blue;
+
+    &.active {
+      color: $medium-blue;
+    }
 
     .button-background {
       background: $medium-blue;
+
+      &.active {
+        background: white;
+      }
     }
 
     &:hover{
