@@ -16,7 +16,7 @@ export interface IColorPickerProps extends IGlobalProps {
 }
 
 export const ColorPicker = (props: IColorPickerProps) => {
-  const { text, size = Size.SMALL, type = Type.TERT, icon, onChange, tooltip, color='linear-gradient(#065fff, #85c1f9)' } = props
+  const { text, size = Size.SMALL, type = Type.TERT, icon, onChange, tooltip, color='black' } = props
   const [isOpen, setOpen] = useState<boolean>(false)
   const [curColor, setColor] = useState<any>(color)
   const onChangeComplete = (color: any) => {
@@ -31,9 +31,10 @@ export const ColorPicker = (props: IColorPickerProps) => {
         <IconButton
           tooltip={tooltip}
           type={type}
-          color={curColor}
+          color={color}
           size={Size.SMALL}
           icon={icon}
+          colorPicker={curColor}
         />
       )
     } else if (text) {
@@ -42,9 +43,10 @@ export const ColorPicker = (props: IColorPickerProps) => {
           tooltip={tooltip}
           size={Size.SMALL}
           type={type}
-          color={curColor}
+          color={color}
           text={text}
           icon={icon}
+          colorPicker={curColor}
         />
       )
     } else {
@@ -52,9 +54,10 @@ export const ColorPicker = (props: IColorPickerProps) => {
         <IconButton
           tooltip={tooltip}
           type={type}
-          color={curColor}
+          color={color}
           size={Size.SMALL}
           icon={icon}
+          colorPicker={curColor}
         />
       )
     }

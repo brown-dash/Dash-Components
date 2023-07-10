@@ -12,14 +12,18 @@
   align-items: center;
   gap: 5px;
   font-family: $default-font;
-  font-size: $medium-fontSize;
   border-radius: $standard-border-radius;
   white-space: nowrap;
   transition: 0.4s;
   border: solid 1px;
   border-color: transparent;
 
-  .content {
+  &.icon {
+    padding: 0;
+    gap: 0;
+  }
+
+  .button-content {
     display: flex;
     justify-content: center;
     align-items: center;

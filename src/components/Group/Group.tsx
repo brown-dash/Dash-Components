@@ -3,7 +3,7 @@ import './Group.scss'
 
 export interface IGroupProps {
   children: any
-  gap?: number;
+  rowGap?: number;
   columnGap?: number;
   width?: number | string
 }
@@ -12,15 +12,17 @@ export const Group = (props: IGroupProps) => {
   const { 
     children, 
     width = '100%',
-    gap = 10,
-    columnGap = 10,
+    rowGap = 5,
+    columnGap = 5,
   } = props
   return (
     <div
-      className="group-container"
-      style={{ width, gap, columnGap, padding: `${gap}px 0px` }}
+      className="group-wrapper"
+      style={{ width, padding: `${rowGap}px ${columnGap}px` }}
     >
-      {children}
+      <div className={`group-container`}
+        style={{ rowGap, columnGap }}
+      >{children}</div>
     </div>
   )
 }

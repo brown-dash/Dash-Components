@@ -97,12 +97,6 @@ declare enum Type {
     SEC = "secondary",
     TERT = "tertiary"
 }
-declare enum OrientationType {
-    LEFT = "left",
-    RIGHT = "right",
-    TOP = "top",
-    BOTTOM = "bottom"
-}
 interface IButtonProps extends IGlobalProps {
     onClick?: (event: React$1.MouseEvent) => void;
     onDoubleClick?: (event: React$1.MouseEvent) => void;
@@ -110,8 +104,9 @@ interface IButtonProps extends IGlobalProps {
     active?: boolean;
     text?: string;
     icon?: JSX.Element | string;
-    iconPosition?: OrientationType;
+    iconPlacement?: Placement;
     color?: string;
+    colorPicker?: string;
 }
 declare const Button: (props: IButtonProps) => JSX.Element;
 
@@ -150,7 +145,7 @@ declare enum DropdownType {
 }
 interface IDropdownProps extends IGlobalProps {
     items: IListItemProps[];
-    location: OrientationType;
+    placement?: Placement;
     dropdownType: DropdownType;
     title?: string;
     selected?: IListItemProps;
@@ -214,7 +209,7 @@ declare enum PopupTrigger {
 interface IPopupProps extends IGlobalProps {
     text?: string;
     icon?: JSX.Element | string;
-    location?: 'left' | 'right' | 'below' | 'above';
+    placement?: Placement;
     size?: Size;
     height?: number;
     toggle?: JSX.Element;
@@ -243,7 +238,7 @@ declare const Modal: (props: IModalProps) => JSX.Element | null;
 
 interface IGroupProps {
     children: any;
-    gap?: number;
+    rowGap?: number;
     columnGap?: number;
     width?: number | string;
 }
@@ -275,7 +270,8 @@ interface IToggleProps extends IGlobalProps {
     toggleType?: ToggleType;
     text?: string;
     icon?: JSX.Element | string;
-    iconPosition?: OrientationType;
+    iconFalse?: JSX.Element | string;
+    iconPlacement?: Placement;
     color?: string;
 }
 declare const Toggle: (props: IToggleProps) => JSX.Element;
@@ -285,4 +281,4 @@ interface IOverlayProps {
 }
 declare const Overlay: (props: IOverlayProps) => JSX.Element;
 
-export { Borders, Button, ColorPicker, Colors, Dropdown, DropdownType, EditableText, FontSize, Group, IButtonProps, IColorPickerProps, IDropdownProps, IEditableTextProps, IGlobalProps, IGroupProps, IIconButtonProps, IListBoxProps, IListItemProps, ILocation, IModalProps, IOverlayProps, IPopupProps, ISliderProps, IToggleProps, IconButton, IconSizes, ListBox, ListItem, Modal, OrientationType, Overlay, Padding, Placement, Popup, PopupTrigger, Shadows, Size, Slider, Toggle, ToggleType, Type, colorConvert, getFontSize, getHeight, isDark };
+export { Borders, Button, ColorPicker, Colors, Dropdown, DropdownType, EditableText, FontSize, Group, IButtonProps, IColorPickerProps, IDropdownProps, IEditableTextProps, IGlobalProps, IGroupProps, IIconButtonProps, IListBoxProps, IListItemProps, ILocation, IModalProps, IOverlayProps, IPopupProps, ISliderProps, IToggleProps, IconButton, IconSizes, ListBox, ListItem, Modal, Overlay, Padding, Placement, Popup, PopupTrigger, Shadows, Size, Slider, Toggle, ToggleType, Type, colorConvert, getFontSize, getHeight, isDark };

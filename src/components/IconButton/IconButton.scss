@@ -16,12 +16,13 @@
   border-color: transparent;
 
 
-  .content {
+  .iconButton-content {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: fit-content;
     height: 100%;
+    width: 100%;
     z-index: 1;
     gap: 5px;
     text-transform: uppercase;
@@ -97,6 +98,16 @@
         filter: brightness(0.8);
       }
     }
+  }
+
+  .color {
+    position: relative;
+    width: 70%;
+    height: 10%;
+    z-index: 3;
+    border-radius: 10px;
+    outline: solid 0.3px;
+    outline-offset: -0.3px;
   }
 
   .label {

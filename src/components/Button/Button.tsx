@@ -1,6 +1,6 @@
 import { Tooltip } from '@mui/material'
 import React from 'react'
-import { IGlobalProps } from '../../global'
+import { IGlobalProps, Placement } from '../../global'
 import { Colors, Size } from '../../global/globalEnums'
 import { getFontSize, getHeight, isDark } from '../../global/globalUtils'
 import { IconButton } from '../IconButton'
@@ -10,13 +10,6 @@ export enum Type {
   PRIM = "primary",
   SEC = "secondary",
   TERT = "tertiary",
-}
-
-export enum OrientationType {
-  LEFT = "left",
-  RIGHT = "right",
-  TOP = "top",
-  BOTTOM = "bottom"
 }
 
 export interface IButtonProps extends IGlobalProps {
@@ -30,8 +23,9 @@ export interface IButtonProps extends IGlobalProps {
   icon?: JSX.Element | string
 
   // Additional stylization
-  iconPosition?: OrientationType
+  iconPlacement?: Placement
   color?: string
+  colorPicker?: string
 }
 
 export const Button = (props: IButtonProps) => {
@@ -45,12 +39,13 @@ export const Button = (props: IButtonProps) => {
     inactive,
     type = Type.PRIM,
     label,
-    iconPosition,
+    iconPlacement = 'right',
     size = Size.SMALL,
     color = Colors.MEDIUM_BLUE,
     style,
     tooltip,
-    tooltipPlacement = 'top'
+    tooltipPlacement = 'top',
+    colorPicker
   } = props
 
   if (!text) {
@@ -80,8 +75,37 @@ export const Button = (props: IButtonProps) => {
       case Type.SEC:
         return color;
       case Type.TERT:
+        if (colorPicker) return colorPicker;
         if (active) return color;
         else return color;
+    }
+  }
+
+  const getColor = (): Colors | string | undefined => {
+    switch(type){
+      case Type.PRIM:
+        return color;
+      case Type.SEC:
+        return color;
+      case Type.TERT:
+        if (colorPicker) {
+          if (isDark(colorPicker)) return Colors.WHITE;
+          else return Colors.BLACK
+        }
+        if (isDark(color)) return Colors.WHITE;
+        else return Colors.BLACK
+    }
+  }
+
+  const getBackground = (): Colors | string | undefined => {
+    switch(type){
+      case Type.PRIM:
+        return color;
+      case Type.SEC:
+        return color;
+      case Type.TERT:
+        if (colorPicker) return colorPicker
+        else return color
     }
   }
 
@@ -92,11 +116,11 @@ export const Button = (props: IButtonProps) => {
     fontFamily: 'sans-serif',
     textTransform: 'uppercase',
     borderColor: getBorderColor(),
-    color: type == (Type.TERT) ? isDark(color) ? Colors.WHITE : Colors.BLACK : color
+    color: getColor()
   }
 
   const backgroundProperties: React.CSSProperties = {
-    background: color
+    background: getBackground()
   }
 
 
@@ -108,11 +132,12 @@ export const Button = (props: IButtonProps) => {
         onDoubleClick={handleDoubleClick}
         style={{...defaultProperties, ...style}}
       >
-        <div className={`content`}>
-          {iconPosition == 'right' ? null : icon}
+        <div className={`button-content`}>
+          {iconPlacement == 'left' ? icon : null}
           {text}
-          {iconPosition == 'right' ? icon : null}
+          {iconPlacement == 'right' ? icon : null}
         </div>
+        {colorPicker && <div className={`color`} style={{color: defaultProperties.color}}/>}
         {label && <div className={'label'} style={{color: defaultProperties.color}}>{label}</div>}
         <div className={`background ${active && 'active'}`} style={backgroundProperties}/>
       </div>

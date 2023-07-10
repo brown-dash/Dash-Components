@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import * as fa from 'react-icons/fa'
-import { EditableText, OrientationType, Popup, PopupTrigger } from '..'
-import { IGlobalProps, Size, getHeight } from '../../global'
+import { EditableText, Popup, PopupTrigger } from '..'
+import { IGlobalProps, Placement, Size, getHeight } from '../../global'
 import { IconButton } from '../IconButton'
 import { ListBox } from '../ListBox'
 import { IListItemProps, ListItem } from '../ListItem'
@@ -14,7 +14,7 @@ export enum DropdownSearchType {
 
 export interface IDropdownSearchProps extends IGlobalProps {
   items: IListItemProps[]
-  location: OrientationType
+  placement: Placement
   dropdownsearchType: DropdownSearchType
   title?: string
   selected?: IListItemProps

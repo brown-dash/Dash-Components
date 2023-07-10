@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as fa from 'react-icons/fa'
-import { OrientationType, Popup, PopupTrigger, Type } from '..'
-import { Colors, IGlobalProps, getFontSize, getHeight, isDark } from '../../global'
+import { Popup, PopupTrigger, Type } from '..'
+import { Colors, IGlobalProps, Placement, getFontSize, getHeight, isDark } from '../../global'
 import { IconButton } from '../IconButton'
 import { ListBox } from '../ListBox'
 import { IListItemProps, ListItem } from '../ListItem'
@@ -15,7 +15,7 @@ export enum DropdownType {
 
 export interface IDropdownProps extends IGlobalProps {
   items: IListItemProps[]
-  location: OrientationType
+  placement?: Placement
   dropdownType: DropdownType
   title?: string
   selected?: IListItemProps
@@ -39,6 +39,7 @@ export const Dropdown = (props: IDropdownProps) => {
     items,
     dropdownType,
     selected,
+    placement = 'bottom-start',
     tooltip,
     tooltipPlacement = 'top',
     inactive,
@@ -53,6 +54,10 @@ export const Dropdown = (props: IDropdownProps) => {
   >(selected)
 
   const [active, setActive] = useState<boolean>(false)
+
+  useEffect(() => {
+    console.log('rerender component', selected?.text, selectedItem?.text)
+  },[selected, selectedItem, active])
 
   const getBorderColor = (): Colors | string | undefined => {
     switch(type){

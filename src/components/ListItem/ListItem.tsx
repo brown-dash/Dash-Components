@@ -96,6 +96,7 @@ export const ListItem = (props: IListItemProps) => {
 )
 
   if (items && !inactive) return <Popup
+    placement={'right'}
     toggle={listItem}
     trigger={PopupTrigger.CLICK}
     popup={

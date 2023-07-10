@@ -1,10 +1,16 @@
 @import '../../global/globalCssVariables.scss';
 
-.group-container {
-  display: flex;
-  height: fit-content;
-  flex-flow: row wrap;
-  justify-content: flex-start;
-  align-items: center;
-  overflow: hidden;
+.group-wrapper {
+  overflow: scroll;
+
+  .group-container {
+    width: fit-content;
+    display: flex;
+    flex-flow: row wrap;
+    height: fit-content;
+    flex-flow: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
 }
+

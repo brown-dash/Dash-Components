@@ -1,7 +1,7 @@
 import { Meta, Story } from '@storybook/react'
 import React from 'react'
 import * as bi from 'react-icons/bi'
-import { Button, Type, IButtonProps, OrientationType } from '..'
+import { Button, Type, IButtonProps } from '..'
 import { Colors, Size } from '../../global/globalEnums'
 
 export default {
@@ -68,7 +68,7 @@ ButtonWithLeftIcon.args = {
   onClick: () => {},
   text: 'New',
   icon: <bi.BiPlus />,
-  iconPosition: OrientationType.LEFT,
+  iconPosition: 'left',
   type: Type.PRIM,
 }
 
@@ -76,7 +76,7 @@ export const ButtonWithRightIcon = Template.bind({})
 ButtonWithRightIcon.args = {
   onClick: () => {},
   text: 'More',
-  iconPosition: OrientationType.RIGHT,
+  iconPosition: 'right',
   icon: <bi.BiMobile />,
   type: Type.PRIM,
 }

@@ -1,28 +1,15 @@
 @import '../../global/globalCssVariables.scss';
 
 .popup-wrapper {
-  width: 100%;
-}
-
-.popup-overlay {
-  width: 200vw;
-  height: 200vh;
-  position: fixed;
-  pointer-events: none;
-  top: 0;
-  left: 0;
-  z-index: 200;
-
-  .popup {
-    position: absolute;
-    min-width: fit-content;
+  width: fit-content;
+  
+  .trigger-container {
+    width: fit-content;
     height: fit-content;
-    box-shadow: $standard-shadow;
-    border: $standard-border;
-    border-radius: $standard-border-radius;
-    pointer-events: auto;
-    background: white;
-    overflow: hidden;
+
+    &.custom {
+      width: 100%;
+    }
   }
 }
 
@@ -30,10 +17,8 @@
   display: flex;
   height: fit-content;
   min-width: fit-content;
-  width: 100%;
+  width: fit-content;
   position: relative;
-}
-
-.customToggle-container {
-  width: 100%;
+  border: solid 2px;
+  background: $white;
 }

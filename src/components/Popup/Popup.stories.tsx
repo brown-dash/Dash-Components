@@ -2,7 +2,7 @@ import { Meta, Story } from '@storybook/react'
 import React from 'react'
 import * as fa from 'react-icons/fa'
 import { Colors, Size } from '../../global/globalEnums'
-import { IPopupProps, Popup } from './Popup'
+import { IPopupProps, Popup, PopupTrigger } from './Popup'
 import { Overlay } from '../Overlay'
 
 export default {
@@ -33,6 +33,19 @@ Text.args = {
   icon: <fa.FaEllipsisH />,
   text: 'More',
   tooltip: 'Popup',
+  size: Size.SMALL,
+  popup: <div style={{background: "blue", padding: 10}}>
+    This is a popup element.
+  </div>
+}
+
+export const Hover = Template.bind({})
+Hover.args = {
+  icon: <fa.FaEllipsisH />,
+  trigger: PopupTrigger.HOVER,
+  text: 'More',
+  tooltip: 'Popup',
+  placement: 'right',
   size: Size.SMALL,
   popup: <div style={{background: "blue", padding: 10}}>
     This is a popup element.

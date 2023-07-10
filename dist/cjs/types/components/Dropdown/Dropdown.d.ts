@@ -1,6 +1,5 @@
 /// <reference types="react" />
-import { OrientationType } from '..';
-import { IGlobalProps } from '../../global';
+import { IGlobalProps, Placement } from '../../global';
 import { IListItemProps } from '../ListItem';
 import './Dropdown.scss';
 export declare enum DropdownType {
@@ -9,7 +8,7 @@ export declare enum DropdownType {
 }
 export interface IDropdownProps extends IGlobalProps {
     items: IListItemProps[];
-    location: OrientationType;
+    placement?: Placement;
     dropdownType: DropdownType;
     title?: string;
     selected?: IListItemProps;

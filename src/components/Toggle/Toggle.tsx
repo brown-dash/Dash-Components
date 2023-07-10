@@ -2,10 +2,10 @@ import React from 'react'
 import { Colors, Size } from '../../global/globalEnums'
 import { getFontSize, getHeight } from '../../global/globalUtils'
 import { IconButton } from '../IconButton'
-import { Button, Type, IButtonProps, OrientationType } from '../Button'
+import { Button, Type, IButtonProps } from '../Button'
 import './Toggle.scss'
 import * as bi from 'react-icons/bi'
-import { IGlobalProps } from '../../global'
+import { IGlobalProps, Placement } from '../../global'
 import { Tooltip } from '@mui/material';
 
 export enum ToggleType {
@@ -26,7 +26,7 @@ export interface IToggleProps extends IGlobalProps {
 
 
   // Additional stylization
-  iconPosition?: OrientationType
+  iconPlacement?: Placement
   color?: string
 }
 
@@ -43,7 +43,7 @@ export const Toggle = (props: IToggleProps) => {
     height,
     inactive,
     label,
-    iconPosition,
+    iconPlacement,
     onPointerDown,
     onClick,
     tooltip,
@@ -76,7 +76,7 @@ export const Toggle = (props: IToggleProps) => {
           active={toggleStatus}
           type={type}
           size={size}
-          iconPosition={iconPosition}
+          iconPlacement={iconPlacement}
           color={color}
           label={label}
         />

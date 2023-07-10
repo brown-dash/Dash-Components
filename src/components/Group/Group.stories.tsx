@@ -2,7 +2,7 @@ import { Meta, Story } from '@storybook/react'
 import React from 'react'
 import * as bi from 'react-icons/bi'
 import { IconButton } from '../IconButton'
-import { Dropdown } from '../Dropdown'
+import { Dropdown, DropdownType } from '../Dropdown'
 import { IGroupProps, Group } from './Group'
 import { Borders } from '../../global'
 import { Type } from '../Button'
@@ -16,6 +16,20 @@ export default {
 
 const Template: Story<IGroupProps> = (args) => (
   <Group {...args}>
+    <Dropdown 
+      items={[
+        {
+          text: 'Hello',
+          description: 'You need to watch out!'
+        },
+        {
+          text: 'Hello',
+          description: 'You need to watch out!'
+        }
+      ]} 
+      dropdownType={DropdownType.CLICK}
+      type={Type.SEC}
+    />
     <IconButton
       icon={<bi.BiAddToQueue />}
       type={Type.SEC}
@@ -24,9 +38,10 @@ const Template: Story<IGroupProps> = (args) => (
       icon={<bi.BiPlus />}
       type={Type.SEC}
     />
-    <IconButton
+    <Popup
       icon={<bi.BiAlarmSnooze />}
       type={Type.SEC}
+      popup={<div>HELLO</div>}
     />
     <IconButton
       icon={<bi.BiAlarmAdd />}
@@ -38,9 +53,10 @@ const Template: Story<IGroupProps> = (args) => (
     />
     <Popup
       icon={<bi.BiBookOpen />}
-      trigger={PopupTrigger.HOVER}
+      trigger={PopupTrigger.CLICK}
+      placement={'bottom'}
       popup={
-        <Group gap={10} width={150}>
+        <Group rowGap={5}>
           <IconButton
             icon={<bi.BiAddToQueue />}
             type={Type.SEC}
@@ -66,7 +82,8 @@ const Template: Story<IGroupProps> = (args) => (
     />
   </Group>
 )
+
 export const Primary = Template.bind({})
 Primary.args = {
-  orientation: 'hor',
+  width: '100%'
 }

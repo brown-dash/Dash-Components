@@ -21,7 +21,8 @@ export const IconButton = (props: IButtonProps) => {
     size = Size.SMALL,
     style,
     tooltip,
-    tooltipPlacement = 'top'
+    tooltipPlacement = 'top',
+    colorPicker
   } = props
 
   /**
@@ -29,7 +30,7 @@ export const IconButton = (props: IButtonProps) => {
    * @param e
    */
   const handleClick = (e: React.MouseEvent) => {
-    onClick && onClick(e)
+    if (!inactive && onClick) onClick(e)
   }
 
   /**
@@ -47,8 +48,37 @@ export const IconButton = (props: IButtonProps) => {
       case Type.SEC:
         return color;
       case Type.TERT:
+        if (colorPicker) return colorPicker;
         if (active) return color;
         else return color;
+    }
+  }
+
+  const getColor = (): Colors | string | undefined => {
+    switch(type){
+      case Type.PRIM:
+        return color;
+      case Type.SEC:
+        return color;
+      case Type.TERT:
+        if (colorPicker) {
+          if (isDark(colorPicker)) return Colors.WHITE;
+          else return Colors.BLACK
+        }
+        if (isDark(color)) return Colors.WHITE;
+        else return Colors.BLACK
+    }
+  }
+
+  const getBackground = (): Colors | string | undefined => {
+    switch(type){
+      case Type.PRIM:
+        return color;
+      case Type.SEC:
+        return color;
+      case Type.TERT:
+        if (colorPicker) return colorPicker
+        else return color
     }
   }
 
@@ -58,11 +88,11 @@ export const IconButton = (props: IButtonProps) => {
     fontWeight: 500,
     fontSize: getFontSize(size, true),
     borderColor: getBorderColor(),
-    color: type == (Type.TERT) ? isDark(color) ? Colors.WHITE : Colors.BLACK : color
+    color: getColor()
   }
 
   const backgroundProperties: React.CSSProperties = {
-    background: color
+    background: getBackground()
   }
 
   return (
@@ -73,8 +103,9 @@ export const IconButton = (props: IButtonProps) => {
         onDoubleClick={handleDoubleClick}
         style={{...defaultProperties, ...style}}
       >
-        <div className="content">
+        <div className="iconButton-content">
           {icon}
+          {colorPicker && type !== (Type.TERT) && <div className={`color`} style={{background: colorPicker, outlineColor: defaultProperties.color}}/>}
         </div>
         {label && <div className={'label'} style={{color: defaultProperties.color}}>{label}</div>}
         <div className={`background ${active && 'active'} ${inactive && 'inactive'}`} style={backgroundProperties}/>
