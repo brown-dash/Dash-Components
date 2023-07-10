@@ -1,10 +1,9 @@
-import { useState } from 'react'
+import { Tooltip } from '@mui/material'
 import React from 'react'
-import { Colors, FontSize, Size } from '../../global/globalEnums'
+import { getFontSize, getHeight, isDark } from '../../global'
+import { Colors, Size } from '../../global/globalEnums'
+import { IButtonProps, Type } from '../Button'
 import './IconButton.scss'
-import { Story, Meta } from '@storybook/react'
-import { getFontSize, getHeight } from '../../global'
-import { Type, IButtonProps } from '../Button'
 
 export interface IIconButtonProps extends IButtonProps {}
 
@@ -16,11 +15,13 @@ export const IconButton = (props: IButtonProps) => {
     onDoubleClick,
     inactive,
     type = Type.PRIM,
-    color,
+    color = Colors.MEDIUM_BLUE,
     label,
     height,
     size = Size.SMALL,
-    style
+    style,
+    tooltip,
+    tooltipPlacement = 'top'
   } = props
 
   /**
@@ -57,25 +58,27 @@ export const IconButton = (props: IButtonProps) => {
     fontWeight: 500,
     fontSize: getFontSize(size, true),
     borderColor: getBorderColor(),
-    color: type == (Type.TERT) ? active ? color : Colors.WHITE : color
+    color: type == (Type.TERT) ? isDark(color) ? Colors.WHITE : Colors.BLACK : color
   }
 
   const backgroundProperties: React.CSSProperties = {
-    background: type == (Type.TERT) && active ? Colors.WHITE : color
+    background: color
   }
 
   return (
-    <div
-      className={`iconButton-container ${type}`}
-      onClick={handleClick}
-      onDoubleClick={handleDoubleClick}
-      style={{...defaultProperties, ...style}}
-    >
-      <div className="iconButton-content">
-        {icon}
+    <Tooltip arrow={true} placement={tooltipPlacement} title={tooltip}>
+      <div
+        className={`iconButton-container ${type} ${inactive && 'inactive'}`}
+        onClick={handleClick}
+        onDoubleClick={handleDoubleClick}
+        style={{...defaultProperties, ...style}}
+      >
+        <div className="content">
+          {icon}
+        </div>
+        {label && <div className={'label'} style={{color: defaultProperties.color}}>{label}</div>}
+        <div className={`background ${active && 'active'} ${inactive && 'inactive'}`} style={backgroundProperties}/>
       </div>
-      {label && <div className={'iconButton-label'}>{label}</div>}
-      <div className={`iconButton-background ${active && 'active'} ${inactive && 'inactive'}`} style={backgroundProperties}/>
-    </div>
+    </Tooltip>
   )
 }

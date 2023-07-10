@@ -1,15 +1,14 @@
 import React, { useState } from 'react'
 import * as fa from 'react-icons/fa'
-import Measure from 'react-measure'
-import { EditableText, OrientationType, Popup, PopupTrigger } from '..'
-import { Borders, Size, getHeight, ILocation, IGlobalProps } from '../../global'
+import { OrientationType, Popup, PopupTrigger, Type } from '..'
+import { Colors, IGlobalProps, getFontSize, getHeight, isDark } from '../../global'
 import { IconButton } from '../IconButton'
 import { ListBox } from '../ListBox'
 import { IListItemProps, ListItem } from '../ListItem'
 import './Dropdown.scss'
+import { Tooltip } from '@mui/material'
 
 export enum DropdownType {
-  SEARCH = "search",
   SELECT = "select",
   CLICK = "click"
 }
@@ -18,8 +17,10 @@ export interface IDropdownProps extends IGlobalProps {
   items: IListItemProps[]
   location: OrientationType
   dropdownType: DropdownType
+  title?: string
   selected?: IListItemProps
-  maxItems?: number
+  maxItems?: number,
+  color?: string
 }
 
 /**
@@ -38,93 +39,86 @@ export const Dropdown = (props: IDropdownProps) => {
     items,
     dropdownType,
     selected,
+    tooltip,
+    tooltipPlacement = 'top',
+    inactive,
+    color = Colors.MEDIUM_BLUE,
+    title = "Dropdown",
     type, 
-    width
+    width,
   } = props
 
   const [selectedItem, setSelectedItem] = useState<
     IListItemProps | undefined
   >(selected)
 
-  const [searchTerm, setSearchTerm] = useState<string | undefined>(undefined)
-  const [isEditing, setIsEditing] = useState<boolean>(false)
   const [active, setActive] = useState<boolean>(false)
+
+  const getBorderColor = (): Colors | string | undefined => {
+    switch(type){
+      case Type.PRIM:
+        return undefined;
+      case Type.SEC:
+        return color;
+      case Type.TERT:
+        if (active) return color;
+        else return color;
+    }
+  }
+
+  const defaultProperties: React.CSSProperties = {
+    height: getHeight(height, size),
+    fontWeight: 500,
+    fontSize: getFontSize(size),
+    fontFamily: 'sans-serif',
+    textTransform: 'uppercase',
+    borderColor: getBorderColor(),
+    color: type == (Type.TERT) ? isDark(color) ? Colors.WHITE : Colors.BLACK : color
+  }
+
+  const backgroundProperties: React.CSSProperties = {
+    background: color
+  }
 
   const getToggle = () => {
     switch (dropdownType) {
-      case 'search':
+      case DropdownType.SELECT:
         return (
           <div
-            className={`dropdown-toggle ${type}`}
-            style={{ height: getHeight(height, size), width: width }}
-            onClick={(e) => {
-              e.stopPropagation()
-              !isEditing && setIsEditing(true)
-            }}
-          >
-            {selectedItem && !isEditing ? (
-              <ListItem {...selectedItem} inactive />
-            ) : (
-              <div className="toggle-button">
-                <EditableText
-                  type={type}
-                  text={searchTerm}
-                  placeholder={'...'}
-                  editing={true}
-                  onEdit={(val) => {
-                    setSearchTerm(val)
-                  }}
-                  size={Size.SMALL}
-                  setEditing={setIsEditing}
-                />
-              </div>
-            )}
-            <div className="toggle-caret">
-              <IconButton
-                size={Size.SMALL}
-                icon={<fa.FaSearch />}
-                inactive
-              />
-            </div>
-            <div className={`toggle-background ${isEditing && 'active'}`}/>
-          </div>
-        )
-      case 'select':
-        return (
-          <div
-            className={`dropdown-toggle ${type}`}
-            style={{ height: getHeight(height, size), width: width }}
+            className={`dropdown-toggle ${type} ${inactive && 'inactive'}`}
+            style={{...defaultProperties, height: getHeight(height, size), width: width }}
           >
             {selectedItem && (
-              <ListItem size={size} {...selectedItem} inactive />
+              <ListItem size={size} {...selectedItem} style={{ color: defaultProperties.color }} inactive />
             )}
             <div className="toggle-caret">
               <IconButton
                 size={size}
                 icon={<fa.FaCaretDown />}
+                color={defaultProperties.color}
                 inactive
               />
             </div>
-            <div className={`toggle-background ${active && 'active'}`}/>
+            <div className={`background ${active && 'active'}`} style={{...backgroundProperties}}/>
           </div>
         )
+      case DropdownType.CLICK:
       default:
         return (
           <div
-            className={`dropdown-toggle ${type}`}
-            style={{ height: getHeight(height, size), width: width }}
+            className={`dropdown-toggle ${type} ${inactive && 'inactive'}`}
+            style={{...defaultProperties, height: getHeight(height, size), width: width }}
           >
-            {selectedItem && (
-              <ListItem {...selectedItem} inactive />
-            )}
+            <ListItem text={title} size={size} style={{ color: defaultProperties.color }} inactive />
             <div className="toggle-caret">
               <IconButton
                 size={size}
                 icon={<fa.FaCaretDown />}
+                color={defaultProperties.color}
                 inactive
               />
             </div>
-            <div className={`toggle-background ${active && 'active'}`}/>
+            <div className={`background ${active && 'active'}`} style={{...backgroundProperties}}/>
           </div>
         )
     }
@@ -135,7 +129,13 @@ export const Dropdown = (props: IDropdownProps) => {
       className="dropdown-container"
     >
       <Popup
-        toggle={getToggle()}
+        toggle={
+          <Tooltip arrow={true} placement={tooltipPlacement} title={selectedItem ? selectedItem.text : title}>
+            {getToggle()}
+          </Tooltip>
+        }
+        tooltip={tooltip}
+        tooltipPlacement={tooltipPlacement}
         trigger={PopupTrigger.CLICK}
         isOpen={active}
         setOpen={setActive}
@@ -144,7 +144,6 @@ export const Dropdown = (props: IDropdownProps) => {
           <ListBox
             maxItems={maxItems}
             items={items}
-            filter={searchTerm}
             selectedItem={selectedItem}
             setSelectedItem={setSelectedItem}
             size={size}

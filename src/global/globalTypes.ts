@@ -16,6 +16,7 @@ export interface IGlobalProps {
 
   // Content
   tooltip?: string
+  tooltipPlacement?: Placement
 
   // Label
   label?: string
@@ -45,3 +46,16 @@ export interface IGlobalProps {
   // Custom style
   style?: React.CSSProperties
 }
+
+export type Placement = 'bottom-end'
+                      | 'bottom-start'
+                      | 'bottom'
+                      | 'left-end'
+                      | 'left-start'
+                      | 'left'
+                      | 'right-end'
+                      | 'right-start'
+                      | 'right'
+                      | 'top-end'
+                      | 'top-start'
+                      | 'top'

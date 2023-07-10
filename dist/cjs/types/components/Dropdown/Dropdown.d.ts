@@ -4,7 +4,6 @@ import { IGlobalProps } from '../../global';
 import { IListItemProps } from '../ListItem';
 import './Dropdown.scss';
 export declare enum DropdownType {
-    SEARCH = "search",
     SELECT = "select",
     CLICK = "click"
 }
@@ -12,8 +11,10 @@ export interface IDropdownProps extends IGlobalProps {
     items: IListItemProps[];
     location: OrientationType;
     dropdownType: DropdownType;
+    title?: string;
     selected?: IListItemProps;
     maxItems?: number;
+    color?: string;
 }
 /**
  *

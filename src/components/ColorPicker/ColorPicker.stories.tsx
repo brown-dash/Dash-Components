@@ -19,6 +19,8 @@ Primary.args = {
   onChange: (color) => {
     console.log(color)
   },
+  color: "#F9F6F2",
+  tooltip: 'Choose your color'
 }
 
 export const Icon = Template.bind({})
@@ -27,4 +29,6 @@ Icon.args = {
   onChange: (color) => {
     console.log(color)
   },
+  color: "#F9F6F2",
+  tooltip: 'Choose your color'
 }

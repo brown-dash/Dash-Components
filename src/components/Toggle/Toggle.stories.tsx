@@ -20,7 +20,8 @@ Button.args = {
   toggleStatus: false,
   type: Type.SEC,
   icon: <bi.BiAbacus/>,
-  toggleType: ToggleType.BUTTON
+  toggleType: ToggleType.BUTTON,
+  tooltip: 'Test tooltip'
 }
 
 export const Checkbox = Template.bind({})

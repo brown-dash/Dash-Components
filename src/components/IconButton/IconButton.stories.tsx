@@ -16,7 +16,7 @@ export const Primary = Template.bind({})
 Primary.args = {
   onClick: () => {},
   icon: <bi.BiAngry/>,
-  type: Type.PRIM
+  type: Type.PRIM,
 }
 
 export const Secondary = Template.bind({})
@@ -31,6 +31,14 @@ Tertiary.args = {
   onClick: () => {},
   icon: <bi.BiAngry/>,
   type: Type.TERT
+}
+
+export const Label = Template.bind({})
+Label.args = {
+  onClick: () => {},
+  icon: <bi.BiAngry/>,
+  type: Type.TERT,
+  label: "Button Label"
 }
 
 export const XSmall = Template.bind({})

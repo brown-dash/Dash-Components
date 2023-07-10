@@ -39,15 +39,11 @@ export const ListBox = (props: IListBoxProps) => {
         ind={ind}
         selected={selected}
         setSelectedItem={setSelectedItem}
-        icon={item.icon}
-        text={item.text}
-        description={item.description}
-        shortcut={item.shortcut}
-        items={item.items}
         onClick={() => {
           item.onClick && item.onClick()
           setSelectedItem && setSelectedItem(item)
         }}
+        {...item}
       />
     )
   }

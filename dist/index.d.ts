@@ -54,7 +54,7 @@ interface ILocation {
     height: number;
     override?: 'left' | 'bottom' | 'top' | 'right';
 }
-declare const getFontSize: (size: Size | undefined, icon?: boolean | undefined) => "15px" | "7px" | "20px" | "9px" | "25px" | "11px" | "30px";
+declare const getFontSize: (size: Size | undefined, icon?: boolean | undefined) => "11px" | "7px" | "15px" | "9px" | "17px" | "22px";
 declare const getHeight: (height: number | undefined, size: Size | undefined) => number;
 declare const colorConvert: (color: any) => any;
 declare const isDark: (color: any) => boolean;
@@ -66,6 +66,7 @@ interface IGlobalProps {
     type?: Type;
     inactive?: boolean;
     tooltip?: string;
+    tooltipPlacement?: Placement;
     label?: string;
     onPointerDown?: PointerEventHandler | undefined;
     onPointerDownCapture?: PointerEventHandler | undefined;
@@ -89,6 +90,7 @@ interface IGlobalProps {
     onLostPointerCaptureCapture?: PointerEventHandler | undefined;
     style?: React.CSSProperties;
 }
+declare type Placement = 'bottom-end' | 'bottom-start' | 'bottom' | 'left-end' | 'left-start' | 'left' | 'right-end' | 'right-start' | 'right' | 'top-end' | 'top-start' | 'top';
 
 declare enum Type {
     PRIM = "primary",
@@ -113,9 +115,10 @@ interface IButtonProps extends IGlobalProps {
 }
 declare const Button: (props: IButtonProps) => JSX.Element;
 
-interface IColorPickerProps {
+interface IColorPickerProps extends IGlobalProps {
     text?: string;
-    icon?: string;
+    icon?: JSX.Element | string;
+    color?: string;
     onChange: (color: any) => void;
 }
 declare const ColorPicker: (props: IColorPickerProps) => JSX.Element;
@@ -142,7 +145,6 @@ interface IListItemProps extends IGlobalProps {
 declare const ListItem: (props: IListItemProps) => JSX.Element;
 
 declare enum DropdownType {
-    SEARCH = "search",
     SELECT = "select",
     CLICK = "click"
 }
@@ -150,8 +152,10 @@ interface IDropdownProps extends IGlobalProps {
     items: IListItemProps[];
     location: OrientationType;
     dropdownType: DropdownType;
+    title?: string;
     selected?: IListItemProps;
     maxItems?: number;
+    color?: string;
 }
 /**
  *
@@ -281,4 +285,4 @@ interface IOverlayProps {
 }
 declare const Overlay: (props: IOverlayProps) => JSX.Element;
 
-export { Borders, Button, ColorPicker, Colors, Dropdown, DropdownType, EditableText, FontSize, Group, IButtonProps, IColorPickerProps, IDropdownProps, IEditableTextProps, IGlobalProps, IGroupProps, IIconButtonProps, IListBoxProps, IListItemProps, ILocation, IModalProps, IOverlayProps, IPopupProps, ISliderProps, IToggleProps, IconButton, IconSizes, ListBox, ListItem, Modal, OrientationType, Overlay, Padding, Popup, PopupTrigger, Shadows, Size, Slider, Toggle, ToggleType, Type, colorConvert, getFontSize, getHeight, isDark };
+export { Borders, Button, ColorPicker, Colors, Dropdown, DropdownType, EditableText, FontSize, Group, IButtonProps, IColorPickerProps, IDropdownProps, IEditableTextProps, IGlobalProps, IGroupProps, IIconButtonProps, IListBoxProps, IListItemProps, ILocation, IModalProps, IOverlayProps, IPopupProps, ISliderProps, IToggleProps, IconButton, IconSizes, ListBox, ListItem, Modal, OrientationType, Overlay, Padding, Placement, Popup, PopupTrigger, Shadows, Size, Slider, Toggle, ToggleType, Type, colorConvert, getFontSize, getHeight, isDark };

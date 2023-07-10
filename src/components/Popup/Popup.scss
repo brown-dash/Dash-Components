@@ -1,5 +1,9 @@
 @import '../../global/globalCssVariables.scss';
 
+.popup-wrapper {
+  width: 100%;
+}
+
 .popup-overlay {
   width: 200vw;
   height: 200vh;
@@ -11,7 +15,7 @@
 
   .popup {
     position: absolute;
-    width: fit-content;
+    min-width: fit-content;
     height: fit-content;
     box-shadow: $standard-shadow;
     border: $standard-border;
@@ -25,6 +29,11 @@
 .popup-container {
   display: flex;
   height: fit-content;
-  width: fit-content;
+  min-width: fit-content;
+  width: 100%;
   position: relative;
+}
+
+.customToggle-container {
+  width: 100%;
 }

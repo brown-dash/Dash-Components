@@ -21,9 +21,10 @@ export const Primary = Template.bind({})
 Primary.args = {
   icon: <fa.FaEllipsisH />,
   title: 'Select company',
+  tooltip: 'Popup tooltip',
   size: Size.SMALL,
   popup: <div style={{background: "pink", padding: 10}}>
-    HELLO WORLD MY NAME IS GUPTA!
+    Hello world.
   </div>
 }
 
@@ -31,8 +32,9 @@ export const Text = Template.bind({})
 Text.args = {
   icon: <fa.FaEllipsisH />,
   text: 'More',
+  tooltip: 'Popup',
   size: Size.SMALL,
   popup: <div style={{background: "blue", padding: 10}}>
-    HELLO WORLD MY NAME IS GUPTA!
+    This is a popup element.
   </div>
 }

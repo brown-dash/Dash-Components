@@ -2,22 +2,22 @@ import React from 'react'
 import { Story, Meta } from '@storybook/react'
 import { Colors, Size } from '../../global/globalEnums'
 import * as fa from 'react-icons/fa'
-import { Dropdown, DropdownType, IDropdownProps, Type } from '..'
+import { DropdownSearch, DropdownSearchType, IDropdownSearchProps} from './DropdownSearch'
 import { IListItemProps } from '../ListItem'
+import { Type } from '../Button'
 
 export default {
-  title: 'Dash/Dropdown',
-  component: Dropdown,
+  title: 'Dash/DropdownSearch',
+  component: DropdownSearch,
   argTypes: {},
-} as Meta<typeof Dropdown>
+} as Meta<typeof DropdownSearch>
 
-const Template: Story<IDropdownProps> = (args) => <Dropdown {...args} />
-const dropdownItems: IListItemProps[] = [
+const Template: Story<IDropdownSearchProps> = (args) => <DropdownSearch {...args} />
+const dropdownsearchItems: IListItemProps[] = [
   {
-    text: 'Facebook Marketplace',
+    text: 'Facebook',
     shortcut: '⌘F',
     icon: <fa.FaFacebook />,
-    description: 'This is the main component that we use in Dash.',
   },
   {
     text: 'Google',
@@ -50,10 +50,9 @@ const dropdownItems: IListItemProps[] = [
 export const Select = Template.bind({})
 Select.args = {
   title: 'Select company',
-  tooltip: "This should be a tooltip",
   type: Type.PRIM,
-  dropdownType: DropdownType.SELECT,
-  items: dropdownItems,
+  dropdownsearchType: DropdownSearchType.SELECT,
+  items: dropdownsearchItems,
   size: Size.SMALL,
   selected: {
     val: 'facebook',
@@ -67,7 +66,7 @@ export const Click = Template.bind({})
 Click.args = {
   title: 'Select company',
   type: Type.PRIM,
-  dropdownType: DropdownType.CLICK,
-  items: dropdownItems,
+  dropdownsearchType: DropdownSearchType.CLICK,
+  items: dropdownsearchItems,
   size: Size.SMALL,
 }

@@ -6,6 +6,7 @@ import { Button, Type, IButtonProps, OrientationType } from '../Button'
 import './Toggle.scss'
 import * as bi from 'react-icons/bi'
 import { IGlobalProps } from '../../global'
+import { Tooltip } from '@mui/material';
 
 export enum ToggleType {
   BUTTON = "button",
@@ -21,6 +22,8 @@ export interface IToggleProps extends IGlobalProps {
   // Content
   text?: string
   icon?: JSX.Element | string
+  iconFalse?: JSX.Element | string
+
 
   // Additional stylization
   iconPosition?: OrientationType
@@ -36,12 +39,15 @@ export const Toggle = (props: IToggleProps) => {
     color,
     text,
     icon,
+    iconFalse = icon,
     height,
     inactive,
     label,
     iconPosition,
     onPointerDown,
     onClick,
+    tooltip,
+    tooltipPlacement = 'top',
     size = Size.SMALL,
   } = props
 
@@ -57,12 +63,15 @@ export const Toggle = (props: IToggleProps) => {
     height: getHeight(height, size),
   }
 
+  let toggleElement: JSX.Element;
+
   switch(toggleType) {
     case ToggleType.BUTTON:
-      return (
+      toggleElement = (
         <Button
           text={text}
-          icon={icon}
+          tooltip={tooltip}
+          icon={toggleStatus ? icon : iconFalse}
           onClick={handleClick}
           active={toggleStatus}
           type={type}
@@ -72,12 +81,14 @@ export const Toggle = (props: IToggleProps) => {
           label={label}
         />
       );
+      break;
     case ToggleType.CHECKBOX:
-      return (
+      toggleElement = (
         <IconButton
           icon={
             toggleStatus ? <bi.BiCheck/> : undefined
           }
+          tooltip={tooltip}
           onClick={handleClick}
           active={toggleStatus}
           type={type}
@@ -86,20 +97,28 @@ export const Toggle = (props: IToggleProps) => {
           label={label}
         />
       );
+      break;
     case ToggleType.SWITCH:
     default:
-      return (
-        <div
-          className={`toggle-container ${toggleType}`}
-          onPointerDown={onPointerDown}
-          onClick={handleClick}
-          style={defaultProperties}
-        >
-          <div className="toggle-content" style={{fontSize: getFontSize(size), width: 2*getHeight(height, size), justifyContent: toggleStatus ? 'flex-end' : 'flex-start'}}>
-            <div className="toggle-switch" style={{width: getHeight(height, size), height: getHeight(height, size)}}></div>  
+      toggleElement =  (
+        <Tooltip arrow={true} placement={tooltipPlacement} title={tooltip}>
+          <div
+            className={`toggle-container ${toggleType}`}
+            onPointerDown={onPointerDown}
+            onClick={handleClick}
+            style={defaultProperties}
+          >
+            <div className="toggle-content" style={{fontSize: getFontSize(size), width: 2*getHeight(height, size), justifyContent: toggleStatus ? 'flex-end' : 'flex-start'}}>
+              <div className="toggle-switch" style={{width: getHeight(height, size), height: getHeight(height, size)}}></div>  
+            </div>
+            <div className={`toggle-background ${toggleStatus && 'active'}`}/>
           </div>
-          <div className={`toggle-background ${toggleStatus && 'active'}`}/>
-        </div>
+        </Tooltip>
       );
+      break;
   }
+
+  return (
+      <>{toggleElement}</>
+  )
 }

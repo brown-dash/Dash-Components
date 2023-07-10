@@ -46,49 +46,61 @@ export const ListItem = (props: IListItemProps) => {
 
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
-  return (
-        <div
-          className="listItem-container"
-          onClick={(e: React.MouseEvent) => {
-            onClick && !inactive && onClick()
-            onClick && !inactive &&  e.stopPropagation()
-          }}
-          style={{color: selected ? Colors.BLACK : undefined, ...style}}
-          onPointerEnter={() => {
-            setIsHovered(true)
-          }}
-          onPointerLeave={() => {
-            setIsHovered(false)
-          }}
-        >
-          <div className="listItem-top">
-            <div className="content" 
-             style={{
-              fontSize: getFontSize(size)
-             }}>
-              {icon}
-              {text}
-            </div>
-            {shortcut && !inactive && (
-              <div className="shortcut">{shortcut}</div>
-            )}
-            {items && !inactive && (
-              <Popup
-                trigger={PopupTrigger.CLICK}
-                type={Type.PRIM}
-                size={Size.SMALL} icon={<fa.FaCaretRight />} popup={
-                  <ListBox items={items}/>
-              }/>
-            )}
-          </div>
-          {description && (
-            <div className="listItem-description">{description}</div>
-          )}
-          <div className="listItem-background" 
-            style={{
-              filter: selected ? 'opacity(0.4)' : isHovered && !inactive ? 'opacity(0.2)' : 'opacity(0)'
-            }}
-          ></div>
+  let listItem:JSX.Element = (
+    <div
+      className="listItem-container"
+      onClick={(e: React.MouseEvent) => {
+        if (!items) {
+          onClick && !inactive && onClick()
+          onClick && !inactive && e.stopPropagation()
+        }
+      }}
+      style={{...style, color: selected ? Colors.BLACK : undefined, }}
+      onPointerEnter={() => {
+        setIsHovered(true)
+      }}
+      onPointerLeave={() => {
+        setIsHovered(false)
+      }}
+    >
+      <div className="listItem-top">
+        <div className="content" 
+         style={{
+          fontSize: getFontSize(size), color: style?.color
+         }}>
+          {icon}
+          <div className="text">{text}</div>
         </div>
-  )
+        {shortcut && !inactive && (
+          <div className="shortcut">{shortcut}</div>
+        )}
+        {items && !inactive && (
+          <IconButton 
+            type={Type.PRIM}
+            size={Size.SMALL} 
+            icon={<fa.FaCaretRight/>}
+            inactive
+            color={style?.color}
+          />
+        )}
+      </div>
+      {description && !inactive && (
+        <div className="listItem-description">{description}</div>
+      )}
+      <div className="listItem-background" 
+        style={{
+          filter: selected ? 'opacity(0.4)' : isHovered && !inactive ? 'opacity(0.2)' : 'opacity(0)'
+        }}
+      />
+    </div>
+)
+
+  if (items && !inactive) return <Popup
+    toggle={listItem}
+    trigger={PopupTrigger.CLICK}
+    popup={
+      <ListBox items={items}/>
+    }
+  />
+  else return <>{listItem}</>
 }

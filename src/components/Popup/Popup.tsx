@@ -3,6 +3,8 @@ import { IGlobalProps, Size } from '../../global'
 import { Type } from '../Button'
 import { Toggle, ToggleType } from '../Toggle'
 import './Popup.scss'
+import { Tooltip } from '@mui/material'
+import { createPopper } from '@popperjs/core'
 
 export enum PopupTrigger {
   CLICK = "click",
@@ -43,24 +45,30 @@ export const Popup = (props: IPopupProps) => {
     isOpen = locIsOpen,
     setOpen = locSetOpen,
     toggle,
+    tooltip,
     trigger = PopupTrigger.CLICK
   } = props
   
   const toggleRef = useRef<HTMLDivElement>(null);
+  const popupRef = useRef<HTMLDivElement>(null);
   const [top, setTop] = useState<number>(0);
   const [left, setLeft] = useState<number>(0);
+  
+  const { styles, attributes } = usePopper(toggleRef, popupRef, {
+    modifiers: [],
+  });
 
   const [width, setWidth] = useState<number>(0);
   const [height, setHeight] = useState<number>(0);
 
-  const repositionPopup = () => {
-    if (toggleRef.current) {
-      const boundingBox = toggleRef.current.getBoundingClientRect();
-      setTop(boundingBox.y);
-      setLeft(boundingBox.x);
-      setHeight(boundingBox.height);
-      setWidth(boundingBox.width);
-    }
+  const repositionPopup = async () => {
+    // if (toggleRef.current) {
+    //   const boundingBox = toggleRef.current.getBoundingClientRect();
+    //   setTop(boundingBox.y);
+    //   setLeft(boundingBox.x);
+    //   setHeight(boundingBox.height);
+    //   setWidth(boundingBox.width);
+    // }
   }
 
   let timeout = setTimeout(() => {});
@@ -72,10 +80,11 @@ export const Popup = (props: IPopupProps) => {
 
   // document.addEventListener('click', closeIfNotPopup)
 
+
   return (
-    <div>
-      {isOpen && <div className="popup-overlay">
-          <div className="popup" id="popup" style={{
+    <div className={`popup-wrapper`}>
+      <div className="popup-overlay">
+          <div className="popup" id="popup" ref={popupRef} style={{
             top: height,
             left: 0,
           }}
@@ -110,31 +119,36 @@ export const Popup = (props: IPopupProps) => {
         }}
       >
         {toggle ? 
-          <div onClick={() => {
-            if (trigger === PopupTrigger.CLICK) {
-              repositionPopup()
-              setOpen(!isOpen)
-            }
-          }}>
-          {toggle}
-        </div>
+            <div className={`customToggle-container`} onClick={() => {
+              if (trigger === PopupTrigger.CLICK) {
+                repositionPopup()
+                setOpen(!isOpen)
+              }
+            }}>
+              {toggle}
+            </div>
         :
           <Toggle
-          size={size}
-          type={Type.PRIM}
-          toggleType={ToggleType.BUTTON}
-          toggleStatus={isOpen}
-          icon={icon}
-          text={text}
-          onClick={() => {
-            if (trigger === PopupTrigger.CLICK) {
-              repositionPopup()
-              setOpen(!isOpen)
-            }
-          }}
-        />
+            tooltip={tooltip}
+            size={size}
+            type={Type.PRIM}
+            toggleType={ToggleType.BUTTON}
+            toggleStatus={isOpen}
+            icon={icon}
+            text={text}
+            onClick={() => {
+              if (trigger === PopupTrigger.CLICK) {
+                repositionPopup()
+                setOpen(!isOpen)
+              }
+            }}
+          />
         }
       </div>
     </div>
   )
 }
+function usePopper(referenceElement: any, popperElement: any, arg2: { modifiers: { name: string; options: { element: any } }[] }): { styles: any; attributes: any } {
+  throw new Error('Function not implemented.')
+}
+

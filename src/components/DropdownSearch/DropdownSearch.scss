@@ -1,6 +1,6 @@
 @import '../../global/globalCssVariables.scss';
 
-.dropdown {
+.dropdownsearch {
   margin-top: 10px;
 }
 
@@ -10,24 +10,23 @@
   background: $medium-gray;
 }
 
-.dropdown-container {
+.dropdownsearch-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   min-width: fit-content;
-  width: 100%;
   border-radius: $standard-border-radius;
   height: 100%;
   position: relative;
   transition: 0.4s;
 
-  .dropdown-list {
+  .dropdownsearch-list {
     position: absolute;
     top: 100%;
     width: 100%;
   }
 
-  .dropdown-toggle {
+  .dropdownsearch-toggle {
     width: 100%;
     display: grid;
     grid-template-columns: calc(100% - 30px) 30px;
@@ -40,67 +39,62 @@
     border-radius: $standard-border-radius;
     overflow: hidden;
 
-    &.inactive {
-      filter: opacity(0.5);
-      pointer-events: none;
-      cursor: not-allowed;
-    }
-
-    .background {
+    .toggle-background {
       width: 100%;
       height: 100%;
       z-index: 0;
       position: absolute;
       transition: 0.4s;
-    }
 
-    &.inactive {
-      &:hover {
-        .background {
-          filter: opacity(0) !important;
-        }
+      &.active {
+        filter: opacity(0.2) !important;
       }
     }
-  
+
     &.primary {
-      .background {
+      color: $medium-blue;
+      .toggle-background {
+        background: $medium-blue;
         filter: opacity(0);
-  
-        &.active {
-          filter: opacity(0.2) !important;
-        }
       }
   
       &:hover{
-        .background {
+        .toggle-background {
           filter: opacity(0.2)
         }
       }
+  
     }
   
     &.secondary {
-      .background {
+      .toggle-background {
+        background: $medium-blue;
         filter: opacity(0);
-  
-        &.active {
-          filter: opacity(0.2) !important;
-        }
       }
   
+      border: solid 1px $medium-blue;
+      color: $medium-blue;
+  
       &:hover{
-        .background {
+        .toggle-background {
           filter: opacity(0.2)
         }
       }
     }
   
-    &.tertiary {  
+    &.tertiary {
+      color: white;
+  
+      .toggle-background {
+        background: $medium-blue;
+      }
+  
       &:hover{
         box-shadow: $standard-button-shadow;
       }
   
       &:hover{
-        .background {
+        .toggle-background {
           filter: brightness(0.8);
         }
       }

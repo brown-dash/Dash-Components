@@ -7,11 +7,6 @@
   height: fit-content;
   position: relative;
 
-  &:hover {
-    outline: solid 1px $light-gray;
-    outline-offset: -1px;
-  }
-
   .colorPicker-toggle {
     width: 100%;
     height: 100%;

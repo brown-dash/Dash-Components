@@ -19,21 +19,24 @@ Primary.args = {
   type: Type.PRIM,
   style: {
     fontWeight: 600
-  }
+  },
+  tooltip: 'Primary button'
 }
 
 export const Secondary = Template.bind({})
 Secondary.args = {
   onClick: () => {},
   text: 'Secondary',
-  type: Type.SEC
+  type: Type.SEC,
+  tooltip: 'Secondary button'
 }
 
 export const Tertiary = Template.bind({})
 Tertiary.args = {
   onClick: () => {},
   text: 'Tertiary',
-  type: Type.TERT
+  type: Type.TERT,
+  size: Size.SMALL,
 }
 
 export const Small = Template.bind({})
