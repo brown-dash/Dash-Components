@@ -1,12 +1,11 @@
 import { Meta, Story } from '@storybook/react'
 import React from 'react'
 import * as bi from 'react-icons/bi'
-import { IconButton } from '../IconButton'
 import { Dropdown, DropdownType } from '../Dropdown'
-import { IGroupProps, Group } from './Group'
-import { Borders } from '../../global'
-import { Type } from '../Button'
+import { IconButton } from '../IconButton'
 import { Popup, PopupTrigger } from '../Popup'
+import { Group, IGroupProps } from './Group'
+import { Type } from '../../global'
 
 export default {
   title: 'Dash/Group',

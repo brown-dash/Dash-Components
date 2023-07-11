@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import * as fa from 'react-icons/fa'
-import { Popup, PopupTrigger, Type } from '..'
-import { Colors, IGlobalProps, Placement, getFontSize, getHeight, isDark } from '../../global'
+import { Popup, PopupTrigger } from '..'
+import { Colors, IGlobalProps, Placement, Type, getFontSize, getHeight, isDark } from '../../global'
 import { IconButton } from '../IconButton'
 import { ListBox } from '../ListBox'
 import { IListItemProps, ListItem } from '../ListItem'
@@ -47,6 +47,7 @@ export const Dropdown = (props: IDropdownProps) => {
     title = "Dropdown",
     type, 
     width,
+    formLabel
   } = props
 
   const [selectedItem, setSelectedItem] = useState<
@@ -129,7 +130,8 @@ export const Dropdown = (props: IDropdownProps) => {
     }
   }
 
-  return (
+  const dropdown: JSX.Element = 
+  (
     <div
       className="dropdown-container"
     >
@@ -139,6 +141,7 @@ export const Dropdown = (props: IDropdownProps) => {
             {getToggle()}
           </Tooltip>
         }
+        placement={placement}
         tooltip={tooltip}
         tooltipPlacement={tooltipPlacement}
         trigger={PopupTrigger.CLICK}
@@ -156,5 +159,15 @@ export const Dropdown = (props: IDropdownProps) => {
         } 
         />
     </div>
+  )
+
+  return (
+    formLabel ? 
+      <div className={'form-wrapper'}>
+        <div className={'formLabel'} style={{fontSize: getFontSize(size)}}>{formLabel}</div>
+        {dropdown}
+      </div>
+    :
+      dropdown
   )
 }

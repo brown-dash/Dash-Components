@@ -1,9 +1,8 @@
 import { Meta, Story } from '@storybook/react'
 import React from 'react'
 import * as bi from 'react-icons/bi'
-import { Colors, Size } from '../../global/globalEnums'
-import { Toggle, IToggleProps, ToggleType } from './Toggle'
-import { Type } from '../Button'
+import { IToggleProps, Toggle, ToggleType } from './Toggle'
+import { Type } from '../../global'
 
 export default {
   title: 'Dash/Toggle',

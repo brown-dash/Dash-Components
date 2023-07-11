@@ -1,8 +1,8 @@
 import { Meta, Story } from '@storybook/react'
 import React from 'react'
 import * as bi from 'react-icons/bi'
-import { Button, Type, IButtonProps, IconButton } from '..'
-import { Colors, Size } from '../../global/globalEnums'
+import { IButtonProps, IconButton } from '..'
+import { Type, Size } from '../../global'
 
 export default {
   title: 'Dash/Icon Button',

@@ -1,16 +1,10 @@
 import { Tooltip } from '@mui/material'
 import React from 'react'
-import { IGlobalProps, Placement } from '../../global'
+import { IGlobalProps, Placement, Type } from '../../global'
 import { Colors, Size } from '../../global/globalEnums'
 import { getFontSize, getHeight, isDark } from '../../global/globalUtils'
 import { IconButton } from '../IconButton'
 import './Button.scss'
-
-export enum Type {
-  PRIM = "primary",
-  SEC = "secondary",
-  TERT = "tertiary",
-}
 
 export interface IButtonProps extends IGlobalProps {
   onClick?: (event: React.MouseEvent) => void
@@ -45,7 +39,8 @@ export const Button = (props: IButtonProps) => {
     style,
     tooltip,
     tooltipPlacement = 'top',
-    colorPicker
+    colorPicker,
+    formLabel
   } = props
 
   if (!text) {
@@ -111,6 +106,7 @@ export const Button = (props: IButtonProps) => {
 
   const defaultProperties: React.CSSProperties = {
     height: getHeight(height, size),
+    minHeight: getHeight(height, size),
     fontWeight: 500,
     fontSize: getFontSize(size),
     fontFamily: 'sans-serif',
@@ -123,8 +119,7 @@ export const Button = (props: IButtonProps) => {
     background: getBackground()
   }
 
-
-  return (
+  const button: JSX.Element = (
     <Tooltip arrow={true} placement={tooltipPlacement} title={tooltip}>
       <div
         className={`button-container ${type} ${active && 'active'} ${inactive && 'inactive'}`}
@@ -142,5 +137,15 @@ export const Button = (props: IButtonProps) => {
         <div className={`background ${active && 'active'}`} style={backgroundProperties}/>
       </div>
     </Tooltip>
+  )
+
+  return (
+    formLabel ? 
+      <div className={'form-wrapper'}>
+        <div className={'formLabel'} style={{fontSize: getFontSize(size)}}>{formLabel}</div>
+        {button}
+      </div>
+    :
+      button
   )
 }

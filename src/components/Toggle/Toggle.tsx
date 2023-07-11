@@ -1,12 +1,12 @@
+import { Tooltip } from '@mui/material'
 import React from 'react'
-import { Colors, Size } from '../../global/globalEnums'
-import { getFontSize, getHeight } from '../../global/globalUtils'
-import { IconButton } from '../IconButton'
-import { Button, Type, IButtonProps } from '../Button'
-import './Toggle.scss'
 import * as bi from 'react-icons/bi'
-import { IGlobalProps, Placement } from '../../global'
-import { Tooltip } from '@mui/material';
+import { IGlobalProps, Placement, Type } from '../../global'
+import { Size } from '../../global/globalEnums'
+import { getFontSize, getHeight } from '../../global/globalUtils'
+import { Button } from '../Button'
+import { IconButton } from '../IconButton'
+import './Toggle.scss'
 
 export enum ToggleType {
   BUTTON = "button",

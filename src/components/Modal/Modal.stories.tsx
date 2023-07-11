@@ -1,10 +1,6 @@
+import { Meta, Story } from '@storybook/react';
 import React from 'react';
-import { Story, Meta } from '@storybook/react';
-import { Colors, Size } from '../../global/globalEnums';
-import * as fa from 'react-icons/fa'
-import { IListBoxItemProps } from '../ListItem';
 import { IModalProps, Modal } from './Modal';
-import { IconButton } from '../IconButton';
 
 export default {
   title: 'Dash/Modal',

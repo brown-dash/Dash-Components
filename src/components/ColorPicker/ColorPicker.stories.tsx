@@ -1,9 +1,8 @@
+import { Meta, Story } from '@storybook/react'
 import React from 'react'
-import { Story, Meta } from '@storybook/react'
-import { Colors, Size } from '../../global/globalEnums'
 import * as fa from 'react-icons/fa'
+import { Type } from '../../global'
 import { ColorPicker, IColorPickerProps } from './ColorPicker'
-import { Type } from '../Button'
 
 export default {
   title: 'Dash/Color Picker',

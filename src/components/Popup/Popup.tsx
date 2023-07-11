@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react'
 import { IGlobalProps, Placement, Size } from '../../global'
-import { Type } from '../Button'
 import { Toggle, ToggleType } from '../Toggle'
 import './Popup.scss'
 import { Popper } from '@mui/material'
@@ -47,7 +46,9 @@ export const Popup = (props: IPopupProps) => {
     toggle,
     tooltip,
     trigger = PopupTrigger.CLICK,
-    placement = 'bottom-start'
+    placement = 'bottom-start',
+    width,
+    height
   } = props
   
   const triggerRef = useRef(null);
@@ -103,6 +104,7 @@ export const Popup = (props: IPopupProps) => {
         ]}
       >
         <div className={`popup-container`}
+          style={{width: width, height: height}}
           onPointerEnter={() => {
             if (trigger === PopupTrigger.HOVER || trigger === PopupTrigger.HOVER_DELAY) {
               clearTimeout(timeout);

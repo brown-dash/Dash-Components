@@ -1,5 +1,4 @@
 import { PointerEventHandler } from "react"
-import { Type } from "../components"
 import { Size } from "./globalEnums"
 
 export interface IGlobalProps {
@@ -20,6 +19,8 @@ export interface IGlobalProps {
 
   // Label
   label?: string
+  // Label when used in forms
+  formLabel?: string
 
   // Global pointer events
   onPointerDown?: PointerEventHandler | undefined;
@@ -45,6 +46,12 @@ export interface IGlobalProps {
 
   // Custom style
   style?: React.CSSProperties
+}
+
+export enum Type {
+  PRIM = "primary",
+  SEC = "secondary",
+  TERT = "tertiary",
 }
 
 export type Placement = 'bottom-end'

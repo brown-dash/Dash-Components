@@ -1,9 +1,10 @@
+import { Meta, Story } from '@storybook/react'
 import React from 'react'
-import { Story, Meta } from '@storybook/react'
-import { Colors, Size } from '../../global/globalEnums'
 import * as fa from 'react-icons/fa'
-import { Dropdown, DropdownType, IDropdownProps, Type } from '..'
+import { Dropdown, DropdownType, IDropdownProps } from '..'
+import { Size } from '../../global/globalEnums'
 import { IListItemProps } from '../ListItem'
+import { Type } from '../../global'
 
 export default {
   title: 'Dash/Dropdown',

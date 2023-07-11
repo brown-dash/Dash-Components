@@ -1,19 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Colors, getFontSize, getHeight, IGlobalProps, Size } from '../../global'
 import './Slider.scss'
+import { INumberInputProps } from '../NumberDropdown'
 
-export interface ISliderProps extends IGlobalProps {
+export interface ISliderProps extends INumberInputProps {
   multithumb: boolean
-  min: number
-  max: number
   initVal?: number
   initEndVal?: number
   setVal?: (newVal: number) => void
   setEndVal?: (newVal: number) => void
   step?: number
   minDiff?: number
-  unit?: string
-  onChange?: () => void
 }
 
 export const Slider = (props: ISliderProps) => {

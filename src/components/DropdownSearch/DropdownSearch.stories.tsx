@@ -4,7 +4,7 @@ import { Colors, Size } from '../../global/globalEnums'
 import * as fa from 'react-icons/fa'
 import { DropdownSearch, DropdownSearchType, IDropdownSearchProps} from './DropdownSearch'
 import { IListItemProps } from '../ListItem'
-import { Type } from '../Button'
+import { Type } from '../../global'
 
 export default {
   title: 'Dash/DropdownSearch',

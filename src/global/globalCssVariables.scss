@@ -103,3 +103,10 @@ $TREE_BULLET_WIDTH: 20px;
   LEFT_MENU_WIDTH: $LEFT_MENU_WIDTH;
   TREE_BULLET_WIDTH: $TREE_BULLET_WIDTH;
 }
+
+.formLabel {
+  color: $medium-gray;
+  font-family: $default-font;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}

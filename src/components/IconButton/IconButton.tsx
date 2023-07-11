@@ -1,8 +1,7 @@
 import { Tooltip } from '@mui/material'
 import React from 'react'
-import { getFontSize, getHeight, isDark } from '../../global'
-import { Colors, Size } from '../../global/globalEnums'
-import { IButtonProps, Type } from '../Button'
+import { Colors, Size, Type, getFontSize, getHeight, isDark } from '../../global'
+import { IButtonProps } from '../Button'
 import './IconButton.scss'
 
 export interface IIconButtonProps extends IButtonProps {}
