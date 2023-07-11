@@ -11,3 +11,4 @@ export * from './Slider';
 export * from './Toggle';
 export * from './ListItem';
 export * from './Overlay';
+export * from './NumberDropdown';

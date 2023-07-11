@@ -1,6 +1,6 @@
 /// <reference types="react" />
-import './ColorPicker.scss';
 import { IGlobalProps } from '../../global';
+import './ColorPicker.scss';
 export interface IColorPickerProps extends IGlobalProps {
     text?: string;
     icon?: JSX.Element | string;

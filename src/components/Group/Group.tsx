@@ -17,6 +17,7 @@ export const Group = (props: IGroupProps) => {
     columnGap = 5,
     padding = 0,
     formLabel,
+    formLabelPlacement,
     size
   } = props
 
@@ -34,7 +35,7 @@ export const Group = (props: IGroupProps) => {
 
   return (
     formLabel ? 
-      <div className={'form-wrapper'}>
+      <div className={`form-wrapper ${formLabelPlacement}`}>
         <div className={'formLabel'} style={{fontSize: getFontSize(size)}}>{formLabel}</div>
         {group}
       </div>

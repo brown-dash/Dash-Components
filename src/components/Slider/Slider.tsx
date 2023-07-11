@@ -14,7 +14,7 @@ export interface ISliderProps extends INumberInputProps {
 }
 
 export const Slider = (props: ISliderProps) => {
-  const { multithumb, min = 0, max = 100, step = 1, initVal = 0, initEndVal = max, minDiff, size = Size.SMALL, height, unit, onPointerDown, setVal, setEndVal } = props
+  const { formLabel, formLabelPlacement, multithumb, min = 0, max = 100, step = 1, initVal = 0, initEndVal = max, minDiff, size = Size.SMALL, height, unit, onPointerDown, setVal, setEndVal } = props
   const [value, setValue] = useState<number>(initVal);
   const [endValue, setEndValue] = useState<number>(initEndVal);
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -140,7 +140,7 @@ export const Slider = (props: ISliderProps) => {
     }
   }
 
-  return (
+  const slider: JSX.Element = (
     <div className="slider-container" id="rs-container" ref={container} style={{height: getHeight(height, size)}}
       onPointerDown={onPointerDown}
     >
@@ -161,5 +161,15 @@ export const Slider = (props: ISliderProps) => {
       </div>
     </div>
   )
+
+  return (
+    formLabel ? 
+    <div className={`form-wrapper ${formLabelPlacement}`}>
+        <div className={'formLabel'} style={{fontSize: getFontSize(size)}}>{formLabel}</div>
+        {slider}
+    </div>
+    :
+    slider
+)
 }
 

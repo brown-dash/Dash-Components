@@ -21,6 +21,8 @@ export interface IGlobalProps {
   label?: string
   // Label when used in forms
   formLabel?: string
+  formLabelPlacement?: Placement
+
 
   // Global pointer events
   onPointerDown?: PointerEventHandler | undefined;

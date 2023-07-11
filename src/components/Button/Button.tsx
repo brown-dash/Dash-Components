@@ -40,7 +40,8 @@ export const Button = (props: IButtonProps) => {
     tooltip,
     tooltipPlacement = 'top',
     colorPicker,
-    formLabel
+    formLabel,
+    formLabelPlacement
   } = props
 
   if (!text) {
@@ -141,7 +142,7 @@ export const Button = (props: IButtonProps) => {
 
   return (
     formLabel ? 
-      <div className={'form-wrapper'}>
+      <div className={`form-wrapper ${formLabelPlacement}`}>
         <div className={'formLabel'} style={{fontSize: getFontSize(size)}}>{formLabel}</div>
         {button}
       </div>

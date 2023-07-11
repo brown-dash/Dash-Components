@@ -1,6 +1,6 @@
 {
   "name": "browndash-components",
-  "version": "0.0.55",
+  "version": "0.0.57",
   "description": "Component library as used by Dash.",
   "main": "dist/cjs/index.js",
   "types": "dist/cjs/types/index.d.ts",

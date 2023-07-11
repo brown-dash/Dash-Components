@@ -104,9 +104,46 @@ $TREE_BULLET_WIDTH: 20px;
   TREE_BULLET_WIDTH: $TREE_BULLET_WIDTH;
 }
 
-.formLabel {
-  color: $medium-gray;
-  font-family: $default-font;
-  text-transform: uppercase;
-  margin-bottom: 3px;
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0px;
+  padding-bottom: 5px;
+
+  &.left {
+    flex-direction: row;
+    align-items: center;
+    gap: 3px;
+  }
+
+  &.right {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 3px;
+  }
+
+  &.top {
+    flex-direction: column;
+  }
+
+  &.top-start {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &.top-end {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .formLabel {
+    display: flex;
+    color: $medium-gray;
+    font-family: $default-font;
+    text-transform: uppercase;
+  }
 }
+

@@ -29,7 +29,7 @@ export const EditableText = (props: IEditableTextProps) => {
     setEditing,
     backgroundColor,
     placeholder,
-    type
+    type,
   } = props
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {

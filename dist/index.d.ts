@@ -68,6 +68,8 @@ interface IGlobalProps {
     tooltip?: string;
     tooltipPlacement?: Placement;
     label?: string;
+    formLabel?: string;
+    formLabelPlacement?: Placement;
     onPointerDown?: PointerEventHandler | undefined;
     onPointerDownCapture?: PointerEventHandler | undefined;
     onPointerMove?: PointerEventHandler | undefined;
@@ -90,13 +92,13 @@ interface IGlobalProps {
     onLostPointerCaptureCapture?: PointerEventHandler | undefined;
     style?: React.CSSProperties;
 }
-declare type Placement = 'bottom-end' | 'bottom-start' | 'bottom' | 'left-end' | 'left-start' | 'left' | 'right-end' | 'right-start' | 'right' | 'top-end' | 'top-start' | 'top';
-
 declare enum Type {
     PRIM = "primary",
     SEC = "secondary",
     TERT = "tertiary"
 }
+declare type Placement = 'bottom-end' | 'bottom-start' | 'bottom' | 'left-end' | 'left-start' | 'left' | 'right-end' | 'right-start' | 'right' | 'top-end' | 'top-start' | 'top';
+
 interface IButtonProps extends IGlobalProps {
     onClick?: (event: React$1.MouseEvent) => void;
     onDoubleClick?: (event: React$1.MouseEvent) => void;
@@ -236,26 +238,37 @@ interface IModalProps {
 }
 declare const Modal: (props: IModalProps) => JSX.Element | null;
 
-interface IGroupProps {
+interface IGroupProps extends IGlobalProps {
     children: any;
     rowGap?: number;
     columnGap?: number;
-    width?: number | string;
+    padding?: number | string;
 }
 declare const Group: (props: IGroupProps) => JSX.Element;
 
-interface ISliderProps extends IGlobalProps {
-    multithumb: boolean;
+declare type NumberDropdownType = 'slider' | 'dropdown' | 'input';
+interface INumberInputProps extends IGlobalProps {
     min: number;
     max: number;
+    step?: number;
+    number: number;
+    setNumber?: (num: number) => unknown;
+    unit?: string;
+}
+interface INumberDropdownProps extends INumberInputProps {
+    numberDropdownType: NumberDropdownType;
+    showPlusMinus: boolean;
+}
+declare const NumberDropdown: (props: INumberDropdownProps) => JSX.Element;
+
+interface ISliderProps extends INumberInputProps {
+    multithumb: boolean;
     initVal?: number;
     initEndVal?: number;
     setVal?: (newVal: number) => void;
     setEndVal?: (newVal: number) => void;
     step?: number;
     minDiff?: number;
-    unit?: string;
-    onChange?: () => void;
 }
 declare const Slider: (props: ISliderProps) => JSX.Element;
 
@@ -281,4 +294,4 @@ interface IOverlayProps {
 }
 declare const Overlay: (props: IOverlayProps) => JSX.Element;
 
-export { Borders, Button, ColorPicker, Colors, Dropdown, DropdownType, EditableText, FontSize, Group, IButtonProps, IColorPickerProps, IDropdownProps, IEditableTextProps, IGlobalProps, IGroupProps, IIconButtonProps, IListBoxProps, IListItemProps, ILocation, IModalProps, IOverlayProps, IPopupProps, ISliderProps, IToggleProps, IconButton, IconSizes, ListBox, ListItem, Modal, Overlay, Padding, Placement, Popup, PopupTrigger, Shadows, Size, Slider, Toggle, ToggleType, Type, colorConvert, getFontSize, getHeight, isDark };
+export { Borders, Button, ColorPicker, Colors, Dropdown, DropdownType, EditableText, FontSize, Group, IButtonProps, IColorPickerProps, IDropdownProps, IEditableTextProps, IGlobalProps, IGroupProps, IIconButtonProps, IListBoxProps, IListItemProps, ILocation, IModalProps, INumberDropdownProps, INumberInputProps, IOverlayProps, IPopupProps, ISliderProps, IToggleProps, IconButton, IconSizes, ListBox, ListItem, Modal, NumberDropdown, NumberDropdownType, Overlay, Padding, Placement, Popup, PopupTrigger, Shadows, Size, Slider, Toggle, ToggleType, Type, colorConvert, getFontSize, getHeight, isDark };

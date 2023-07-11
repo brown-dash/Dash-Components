@@ -47,7 +47,8 @@ export const Dropdown = (props: IDropdownProps) => {
     title = "Dropdown",
     type, 
     width,
-    formLabel
+    formLabel,
+    formLabelPlacement
   } = props
 
   const [selectedItem, setSelectedItem] = useState<
@@ -163,7 +164,7 @@ export const Dropdown = (props: IDropdownProps) => {
 
   return (
     formLabel ? 
-      <div className={'form-wrapper'}>
+      <div className={`form-wrapper ${formLabelPlacement}`}>
         <div className={'formLabel'} style={{fontSize: getFontSize(size)}}>{formLabel}</div>
         {dropdown}
       </div>

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { IGlobalProps, Size, Type } from '../../global'
+import { IGlobalProps, Size, Type, getFontSize } from '../../global'
 import { Popup } from '../Popup'
 import { Toggle, ToggleType } from '../Toggle'
 import { useState } from 'react'
@@ -29,9 +29,9 @@ export interface INumberDropdownProps extends INumberInputProps {
 
 export const NumberDropdown = (props: INumberDropdownProps) => {
     const [numberLoc, setNumberLoc] = useState<number>(0)
-    const { numberDropdownType, showPlusMinus, min, max, unit, step = 1, number = numberLoc, setNumber = setNumberLoc, size } = props;
+    const { numberDropdownType, formLabelPlacement, showPlusMinus, min, max, unit, step = 1, number = numberLoc, setNumber = setNumberLoc, size, formLabel, tooltip } = props;
     const [isOpen, setOpen] = useState<boolean>(false);
-    let toggle = <Toggle size={size} icon={<>{number.toString()}{unit}</>} toggleType={ToggleType.BUTTON} type={Type.SEC} toggleStatus={isOpen}/>;
+    let toggle = <Toggle tooltip={tooltip} size={size} icon={<>{number.toString()}{unit}</>} toggleType={ToggleType.BUTTON} type={Type.SEC} toggleStatus={isOpen}/>;
     
     if (showPlusMinus) {
         toggle = <Group columnGap={0}>
@@ -70,7 +70,17 @@ export const NumberDropdown = (props: INumberDropdownProps) => {
             break;
     }
 
-    return <div className={`numberDropdown-container`}>
+    const numberDropdown: JSX.Element = <div className={`numberDropdown-container`}>
         <Popup setOpen={setOpen} placement={'bottom'} isOpen={isOpen} popup={popup} toggle={toggle}/>
     </div>
+
+    return (
+        formLabel ? 
+        <div className={`form-wrapper ${formLabelPlacement}`}>
+            <div className={'formLabel'} style={{fontSize: getFontSize(size)}}>{formLabel}</div>
+            {numberDropdown}
+        </div>
+        :
+        numberDropdown
+    )
 }

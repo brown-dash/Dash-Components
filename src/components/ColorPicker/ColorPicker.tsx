@@ -14,7 +14,7 @@ export interface IColorPickerProps extends IGlobalProps {
 }
 
 export const ColorPicker = (props: IColorPickerProps) => {
-  const { text, size = Size.SMALL, type = Type.TERT, icon, onChange, tooltip, color='black', formLabel } = props
+  const { text, formLabelPlacement, size = Size.SMALL, type = Type.TERT, icon, onChange, tooltip, color='black', formLabel } = props
   const [isOpen, setOpen] = useState<boolean>(false)
   const [curColor, setColor] = useState<any>(color)
   const onChangeComplete = (color: any) => {
@@ -86,7 +86,7 @@ export const ColorPicker = (props: IColorPickerProps) => {
 
   return (
     formLabel ? 
-      <div className={'form-wrapper'}>
+      <div className={`form-wrapper ${formLabelPlacement}`}>
         <div className={'formLabel'} style={{fontSize: getFontSize(size)}}>{formLabel}</div>
         {colorPicker}
       </div>

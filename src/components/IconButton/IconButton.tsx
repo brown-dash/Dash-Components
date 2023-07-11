@@ -21,7 +21,9 @@ export const IconButton = (props: IButtonProps) => {
     style,
     tooltip,
     tooltipPlacement = 'top',
-    colorPicker
+    colorPicker,
+    formLabel,
+    formLabelPlacement
   } = props
 
   /**
@@ -94,7 +96,7 @@ export const IconButton = (props: IButtonProps) => {
     background: getBackground()
   }
 
-  return (
+  const iconButton: JSX.Element = (
     <Tooltip arrow={true} placement={tooltipPlacement} title={tooltip}>
       <div
         className={`iconButton-container ${type} ${inactive && 'inactive'}`}
@@ -110,5 +112,15 @@ export const IconButton = (props: IButtonProps) => {
         <div className={`background ${active && 'active'} ${inactive && 'inactive'}`} style={backgroundProperties}/>
       </div>
     </Tooltip>
+  )
+
+  return (
+    formLabel ? 
+      <div className={`form-wrapper ${formLabelPlacement}`}>
+        <div className={'formLabel'} style={{fontSize: getFontSize(size)}}>{formLabel}</div>
+        {iconButton}
+      </div>
+    :
+      iconButton
   )
 }

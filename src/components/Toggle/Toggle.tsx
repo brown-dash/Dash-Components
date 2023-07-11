@@ -49,6 +49,8 @@ export const Toggle = (props: IToggleProps) => {
     tooltip,
     tooltipPlacement = 'top',
     size = Size.SMALL,
+    formLabel,
+    formLabelPlacement
   } = props
 
   /**
@@ -118,7 +120,14 @@ export const Toggle = (props: IToggleProps) => {
       break;
   }
 
+
   return (
-      <>{toggleElement}</>
+    formLabel ? 
+    <div className={`form-wrapper ${formLabelPlacement}`}>
+        <div className={'formLabel'} style={{fontSize: getFontSize(size)}}>{formLabel}</div>
+        {toggleElement}
+    </div>
+    :
+    toggleElement
   )
 }
