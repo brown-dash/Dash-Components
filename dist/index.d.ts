@@ -63,11 +63,13 @@ interface IGlobalProps {
     size?: Size;
     height?: number;
     width?: number;
+    color?: string;
     type?: Type;
     inactive?: boolean;
     tooltip?: string;
     tooltipPlacement?: Placement;
     label?: string;
+    hideLabel?: boolean;
     formLabel?: string;
     formLabelPlacement?: Placement;
     onPointerDown?: PointerEventHandler | undefined;
@@ -112,23 +114,26 @@ interface IButtonProps extends IGlobalProps {
 }
 declare const Button: (props: IButtonProps) => JSX.Element;
 
+declare type ColorPickerType = "chrome" | "github" | "block" | "slider";
 interface IColorPickerProps extends IGlobalProps {
     text?: string;
     icon?: JSX.Element | string;
-    color?: string;
-    onChange: (color: any) => void;
+    colorPickerType?: ColorPickerType;
+    selectedColor?: string;
+    setSelectedColor: (color: any) => unknown;
 }
 declare const ColorPicker: (props: IColorPickerProps) => JSX.Element;
 
 interface IListItemProps extends IGlobalProps {
     ind?: number;
     text?: string;
+    val: string | number;
     icon?: JSX.Element;
     description?: string;
     shortcut?: string;
     items?: IListItemProps[];
     selected?: boolean;
-    setSelectedItem?: (item: IListItemProps) => void;
+    setSelectedVal?: (val: string | number) => unknown;
     onClick?: () => void;
 }
 /**
@@ -150,9 +155,9 @@ interface IDropdownProps extends IGlobalProps {
     placement?: Placement;
     dropdownType: DropdownType;
     title?: string;
-    selected?: IListItemProps;
+    selectedVal?: string;
+    setSelectedVal?: (val: string | number) => unknown;
     maxItems?: number;
-    color?: string;
 }
 /**
  *
@@ -189,8 +194,8 @@ declare const IconButton: (props: IButtonProps) => JSX.Element;
 interface IListBoxProps extends IGlobalProps {
     items: IListItemProps[];
     filter?: string;
-    selectedItem?: IListItemProps;
-    setSelectedItem?: (item: IListItemProps) => void;
+    selectedVal?: string | number;
+    setSelectedVal?: (val: string | number) => unknown;
     maxItems?: number;
 }
 /**
@@ -285,7 +290,6 @@ interface IToggleProps extends IGlobalProps {
     icon?: JSX.Element | string;
     iconFalse?: JSX.Element | string;
     iconPlacement?: Placement;
-    color?: string;
 }
 declare const Toggle: (props: IToggleProps) => JSX.Element;
 
@@ -294,4 +298,4 @@ interface IOverlayProps {
 }
 declare const Overlay: (props: IOverlayProps) => JSX.Element;
 
-export { Borders, Button, ColorPicker, Colors, Dropdown, DropdownType, EditableText, FontSize, Group, IButtonProps, IColorPickerProps, IDropdownProps, IEditableTextProps, IGlobalProps, IGroupProps, IIconButtonProps, IListBoxProps, IListItemProps, ILocation, IModalProps, INumberDropdownProps, INumberInputProps, IOverlayProps, IPopupProps, ISliderProps, IToggleProps, IconButton, IconSizes, ListBox, ListItem, Modal, NumberDropdown, NumberDropdownType, Overlay, Padding, Placement, Popup, PopupTrigger, Shadows, Size, Slider, Toggle, ToggleType, Type, colorConvert, getFontSize, getHeight, isDark };
+export { Borders, Button, ColorPicker, ColorPickerType, Colors, Dropdown, DropdownType, EditableText, FontSize, Group, IButtonProps, IColorPickerProps, IDropdownProps, IEditableTextProps, IGlobalProps, IGroupProps, IIconButtonProps, IListBoxProps, IListItemProps, ILocation, IModalProps, INumberDropdownProps, INumberInputProps, IOverlayProps, IPopupProps, ISliderProps, IToggleProps, IconButton, IconSizes, ListBox, ListItem, Modal, NumberDropdown, NumberDropdownType, Overlay, Padding, Placement, Popup, PopupTrigger, Shadows, Size, Slider, Toggle, ToggleType, Type, colorConvert, getFontSize, getHeight, isDark };

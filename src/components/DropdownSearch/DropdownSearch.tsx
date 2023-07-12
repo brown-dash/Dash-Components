@@ -4,7 +4,7 @@ import { EditableText, Popup, PopupTrigger } from '..'
 import { IGlobalProps, Placement, Size, getHeight } from '../../global'
 import { IconButton } from '../IconButton'
 import { ListBox } from '../ListBox'
-import { IListItemProps, ListItem } from '../ListItem'
+import { IListItemProps } from '../ListItem'
 import './DropdownSearch.scss'
 
 export enum DropdownSearchType {
@@ -15,9 +15,9 @@ export enum DropdownSearchType {
 export interface IDropdownSearchProps extends IGlobalProps {
   items: IListItemProps[]
   placement: Placement
-  dropdownsearchType: DropdownSearchType
+  dropdownSearchType: DropdownSearchType
   title?: string
-  selected?: IListItemProps
+  selectedVal?: string | number
   maxItems?: number
 }
 
@@ -35,24 +35,25 @@ export const DropdownSearch = (props: IDropdownSearchProps) => {
     height,
     maxItems,
     items,
-    dropdownsearchType,
-    selected,
+    dropdownSearchType,
+    selectedVal,
+    // setSelectedVal,
     tooltip,
     title = "DropdownSearch",
     type, 
     width
   } = props
 
-  const [selectedItem, setSelectedItem] = useState<
-    IListItemProps | undefined
-  >(selected)
+  // const [selectedItem, setSelectedItem] = useState<
+  //   IListItemProps | undefined
+  // >(selectedVal)
 
   const [searchTerm, setSearchTerm] = useState<string | undefined>(undefined)
   const [isEditing, setIsEditing] = useState<boolean>(false)
   const [active, setActive] = useState<boolean>(false)
 
   const getToggle = () => {
-    switch (dropdownsearchType) {
+    switch (dropdownSearchType) {
       case DropdownSearchType.SELECT:
         return (<div
             className={`dropdownsearch-toggle ${type}`}
@@ -62,9 +63,9 @@ export const DropdownSearch = (props: IDropdownSearchProps) => {
               !isEditing && setIsEditing(true)
             }}
           >
-            {selectedItem && !isEditing ? (
+            {/* {selectedItem && !isEditing ? (
               <ListItem {...selectedItem} inactive />
-            ) : (
+            ) : ( */}
               <div className="toggle-button">
                 <EditableText
                   type={type}
@@ -78,7 +79,7 @@ export const DropdownSearch = (props: IDropdownSearchProps) => {
                   setEditing={setIsEditing}
                 />
               </div>
-            )}
+            {/* )} */}
             <div className="toggle-caret">
               <IconButton
                 size={Size.SMALL}
@@ -95,15 +96,6 @@ export const DropdownSearch = (props: IDropdownSearchProps) => {
             className={`dropdownsearch-toggle ${type}`}
             style={{ height: getHeight(height, size), width: width }}
           >
-            <ListItem text={title} size={size} inactive />
-            <div className="toggle-caret">
-              <IconButton
-                size={size}
-                icon={<fa.FaCaretDown />}
-                inactive
-              />
-            </div>
-            <div className={`toggle-background ${active && 'active'}`}/>
           </div>
         )
     }
@@ -124,8 +116,8 @@ export const DropdownSearch = (props: IDropdownSearchProps) => {
             maxItems={maxItems}
             items={items}
             filter={searchTerm}
-            selectedItem={selectedItem}
-            setSelectedItem={setSelectedItem}
+            // selectedVal={selectedVal}
+            // setSelectedVal={setSelectedItem}
             size={size}
           />
         } 

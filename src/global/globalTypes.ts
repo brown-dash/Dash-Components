@@ -6,6 +6,7 @@ export interface IGlobalProps {
   size?: Size
   height?: number
   width?: number
+  color?: string
 
   // Type
   type?: Type
@@ -19,10 +20,14 @@ export interface IGlobalProps {
 
   // Label
   label?: string
+  hideLabel?: boolean
+
   // Label when used in forms
   formLabel?: string
   formLabelPlacement?: Placement
 
+  // Custom style
+  style?: React.CSSProperties
 
   // Global pointer events
   onPointerDown?: PointerEventHandler | undefined;
@@ -45,9 +50,6 @@ export interface IGlobalProps {
   onGotPointerCaptureCapture?: PointerEventHandler | undefined;
   onLostPointerCapture?: PointerEventHandler | undefined;
   onLostPointerCaptureCapture?: PointerEventHandler | undefined;
-
-  // Custom style
-  style?: React.CSSProperties
 }
 
 export enum Type {

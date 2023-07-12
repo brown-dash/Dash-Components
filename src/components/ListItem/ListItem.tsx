@@ -10,12 +10,13 @@ import './ListItem.scss'
 export interface IListItemProps extends IGlobalProps {
   ind?: number
   text?: string
+  val: string | number
   icon?: JSX.Element
   description?: string
   shortcut?: string
   items?: IListItemProps[]
   selected?: boolean
-  setSelectedItem?: (item: IListItemProps) => void
+  setSelectedVal?: (val: string | number) => unknown
   onClick?: () => void
 }
 
@@ -30,12 +31,14 @@ export interface IListItemProps extends IGlobalProps {
 export const ListItem = (props: IListItemProps) => {
   const {
     ind,
+    val,
     description,
     text,
     shortcut,
     items,
     icon,
     selected,
+    setSelectedVal,
     onClick,
     inactive,
     size = Size.SMALL,
@@ -51,6 +54,7 @@ export const ListItem = (props: IListItemProps) => {
         if (!items) {
           onClick && !inactive && onClick()
           onClick && !inactive && e.stopPropagation()
+          setSelectedVal && setSelectedVal(val)
         }
       }}
       style={{...style, color: selected ? Colors.BLACK : undefined, }}

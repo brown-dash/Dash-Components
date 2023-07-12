@@ -4,12 +4,13 @@ import './ListItem.scss';
 export interface IListItemProps extends IGlobalProps {
     ind?: number;
     text?: string;
+    val: string | number;
     icon?: JSX.Element;
     description?: string;
     shortcut?: string;
     items?: IListItemProps[];
     selected?: boolean;
-    setSelectedItem?: (item: IListItemProps) => void;
+    setSelectedVal?: (val: string | number) => unknown;
     onClick?: () => void;
 }
 /**

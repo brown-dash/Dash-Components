@@ -41,7 +41,7 @@ export const Button = (props: IButtonProps) => {
     tooltipPlacement = 'top',
     colorPicker,
     formLabel,
-    formLabelPlacement
+    formLabelPlacement,
   } = props
 
   if (!text) {
@@ -80,8 +80,10 @@ export const Button = (props: IButtonProps) => {
   const getColor = (): Colors | string | undefined => {
     switch(type){
       case Type.PRIM:
+        if (colorPicker) return colorPicker
         return color;
       case Type.SEC:
+        if (colorPicker) return colorPicker
         return color;
       case Type.TERT:
         if (colorPicker) {
@@ -96,8 +98,10 @@ export const Button = (props: IButtonProps) => {
   const getBackground = (): Colors | string | undefined => {
     switch(type){
       case Type.PRIM:
+        if (colorPicker) return colorPicker
         return color;
       case Type.SEC:
+        if (colorPicker) return colorPicker
         return color;
       case Type.TERT:
         if (colorPicker) return colorPicker
@@ -133,8 +137,6 @@ export const Button = (props: IButtonProps) => {
           {text}
           {iconPlacement == 'right' ? icon : null}
         </div>
-        {colorPicker && <div className={`color`} style={{color: defaultProperties.color}}/>}
-        {label && <div className={'label'} style={{color: defaultProperties.color}}>{label}</div>}
         <div className={`background ${active && 'active'}`} style={backgroundProperties}/>
       </div>
     </Tooltip>

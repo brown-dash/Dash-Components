@@ -16,27 +16,33 @@ const Template: Story<IDropdownProps> = (args) => <Dropdown {...args} />
 const dropdownItems: IListItemProps[] = [
   {
     text: 'Facebook Marketplace',
+    val: 'facebook-marketplace',
     shortcut: '⌘F',
     icon: <fa.FaFacebook />,
     description: 'This is the main component that we use in Dash.',
   },
   {
     text: 'Google',
+    val: 'google',
   },
   {
     text: 'Airbnb',
+    val: 'airbnb',
     icon: <fa.FaAirbnb />,
   },
   {
     text: 'Salesforce',
+    val: 'salesforce',
     icon: <fa.FaSalesforce />,
     items: [
       {
         text: 'Slack',
+        val: 'slack',
         icon: <fa.FaSlack />,
       },
       {
         text: 'Heroku',
+        val: 'heroku',
         shortcut: '⌘H',
         icon: <fa.FaAirFreshener />,
       },
@@ -44,6 +50,7 @@ const dropdownItems: IListItemProps[] = [
   },
   {
     text: 'Microsoft',
+    val: 'microsoft',
     icon: <fa.FaMicrosoft />,
   },
 ]
@@ -56,17 +63,12 @@ Select.args = {
   dropdownType: DropdownType.SELECT,
   items: dropdownItems,
   size: Size.SMALL,
-  selected: {
-    val: 'facebook',
-    text: 'Facebook',
-    shortcut: '⌘F',
-    icon: <fa.FaFacebook />,
-  },
+  selectedVal: 'facebook-marketplace',
 }
 
 export const Click = Template.bind({})
 Click.args = {
-  title: 'Select company',
+  title: 'Scroll Options',
   type: Type.PRIM,
   dropdownType: DropdownType.CLICK,
   items: dropdownItems,

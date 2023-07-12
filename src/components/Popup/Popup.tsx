@@ -97,7 +97,7 @@ export const Popup = (props: IPopupProps) => {
       </div>
       <Popper 
         open={isOpen} 
-        style={{zIndex: 1501}}
+        style={{zIndex: 20000}}
         anchorEl={triggerRef.current} 
         placement={placement}
         modifiers={[

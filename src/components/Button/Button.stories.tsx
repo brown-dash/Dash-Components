@@ -81,3 +81,14 @@ ButtonWithRightIcon.args = {
   icon: <bi.BiMobile />,
   type: Type.PRIM,
 }
+
+export const Label = Template.bind({})
+Label.args = {
+  onClick: () => {},
+  text: 'Label',
+  type: Type.PRIM,
+  style: {
+    fontWeight: 600
+  },
+  tooltip: 'Label button'
+}

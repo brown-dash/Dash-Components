@@ -6,8 +6,8 @@ import { IGlobalProps } from '../../global'
 export interface IListBoxProps extends IGlobalProps {
   items: IListItemProps[]
   filter?: string
-  selectedItem?: IListItemProps
-  setSelectedItem?: (item: IListItemProps) => void
+  selectedVal?: string | number
+  setSelectedVal?: (val: string | number) => unknown
   maxItems?: number
 }
 
@@ -23,8 +23,8 @@ export const ListBox = (props: IListBoxProps) => {
   const {
     items,
     maxItems,
-    selectedItem,
-    setSelectedItem,
+    selectedVal,
+    setSelectedVal,
     filter,
   } = props
 
@@ -38,10 +38,9 @@ export const ListBox = (props: IListBoxProps) => {
         key={ind}
         ind={ind}
         selected={selected}
-        setSelectedItem={setSelectedItem}
         onClick={() => {
           item.onClick && item.onClick()
-          setSelectedItem && setSelectedItem(item)
+          setSelectedVal && setSelectedVal(item.val)
         }}
         {...item}
       />
@@ -55,12 +54,12 @@ export const ListBox = (props: IListBoxProps) => {
         item.text?.substring(0, filter.length).toLowerCase()
       ) {
         itemElements.push(
-          getListItem(item, ind, item.text === selectedItem?.text)
+          getListItem(item, ind, item.val === selectedVal)
         )
       }
     } else {
       itemElements.push(
-        getListItem(item, ind, item.text === selectedItem?.text)
+        getListItem(item, ind, item.val === selectedVal)
       )
     }
   })

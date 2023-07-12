@@ -24,26 +24,38 @@ export interface INumberInputProps extends IGlobalProps {
 
 export interface INumberDropdownProps extends INumberInputProps {
     numberDropdownType: NumberDropdownType,
-    showPlusMinus: boolean
+    showPlusMinus?: boolean
 }
 
 export const NumberDropdown = (props: INumberDropdownProps) => {
     const [numberLoc, setNumberLoc] = useState<number>(0)
-    const { numberDropdownType, formLabelPlacement, showPlusMinus, min, max, unit, step = 1, number = numberLoc, setNumber = setNumberLoc, size, formLabel, tooltip } = props;
+    const { numberDropdownType = false, color, type, formLabelPlacement, showPlusMinus, min, max, unit, step = 1, number = numberLoc, setNumber = setNumberLoc, size, formLabel, tooltip } = props;
     const [isOpen, setOpen] = useState<boolean>(false);
-    let toggle = <Toggle tooltip={tooltip} size={size} icon={<>{number.toString()}{unit}</>} toggleType={ToggleType.BUTTON} type={Type.SEC} toggleStatus={isOpen}/>;
+    let toggle = <Toggle tooltip={tooltip} color={color} type={type} size={size} icon={<>{number.toString()}{unit}</>} toggleType={ToggleType.BUTTON} toggleStatus={isOpen}/>;
     
     if (showPlusMinus) {
-        toggle = <Group columnGap={0}>
-            <IconButton size={size} icon={<fa.FaMinus/>} onClick={(e) => {
-                e.stopPropagation();
-                setNumber(number - step);
-            }}/>
+        toggle = <Group columnGap={0} style={{overflow: 'hidden'}}>
+            <IconButton 
+                size={size} 
+                icon={<fa.FaMinus/>} 
+                color={color}
+                onClick={(e) => {
+                    e.stopPropagation();
+                    setNumber(number - step);
+                }}
+                tooltip={`Subtract ${step}${unit}`}
+            />
             {toggle}
-            <IconButton size={size} icon={<fa.FaPlus/>} onClick={(e) => {
-                e.stopPropagation();
-                setNumber(number + step);
-            }}/>
+            <IconButton 
+                size={size} 
+                icon={<fa.FaPlus/>} 
+                color={color}
+                onClick={(e) => {
+                    e.stopPropagation();
+                    setNumber(number + step);
+                }}
+                tooltip={`Add ${step}${unit}`}
+            />
         </Group>
     }
     
@@ -52,14 +64,21 @@ export const NumberDropdown = (props: INumberDropdownProps) => {
         case 'dropdown':
             let items: IListItemProps[] = [];
             for (let i = min; i <= max; i += step) {
+                let text = i.toString()
+                if (unit) text = i.toString() + unit
                 items.push(
                     {
-                        text: i.toString() + unit,
+                        text: text,
+                        val: i,
                         style: { textAlign: 'center' }
                     }
                 )
             }
-            popup = <ListBox items={items} />
+            popup = <ListBox 
+                selectedVal={number} 
+                setSelectedVal={(num) => setNumber(num as number)} 
+                items={items}
+            />
             break;
         case 'slider':
         default:

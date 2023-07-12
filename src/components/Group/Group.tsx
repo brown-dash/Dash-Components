@@ -18,14 +18,15 @@ export const Group = (props: IGroupProps) => {
     padding = 0,
     formLabel,
     formLabelPlacement,
-    size
+    size,
+    style
   } = props
 
   const group: JSX.Element = 
   (
     <div
       className="group-wrapper"
-      style={{ width, padding: padding }}
+      style={{ width, padding: padding, ...style }}
     >
       <div className={`group-container`}
         style={{ rowGap, columnGap }}

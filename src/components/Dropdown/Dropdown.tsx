@@ -18,9 +18,9 @@ export interface IDropdownProps extends IGlobalProps {
   placement?: Placement
   dropdownType: DropdownType
   title?: string
-  selected?: IListItemProps
+  selectedVal?: string,
+  setSelectedVal?: (val: string | number) => unknown,
   maxItems?: number,
-  color?: string
 }
 
 /**
@@ -38,7 +38,8 @@ export const Dropdown = (props: IDropdownProps) => {
     maxItems,
     items,
     dropdownType,
-    selected,
+    selectedVal,
+    setSelectedVal,
     placement = 'bottom-start',
     tooltip,
     tooltipPlacement = 'top',
@@ -51,15 +52,15 @@ export const Dropdown = (props: IDropdownProps) => {
     formLabelPlacement
   } = props
 
-  const [selectedItem, setSelectedItem] = useState<
-    IListItemProps | undefined
-  >(selected)
-
   const [active, setActive] = useState<boolean>(false)
+  const itemsMap = new Map();
+  items.forEach((item) => {
+    itemsMap.set(item.val, item)
+  })
 
   useEffect(() => {
-    console.log('rerender component', selected?.text, selectedItem?.text)
-  },[selected, selectedItem, active])
+    console.log('rerender component', selectedVal)
+  },[selectedVal, active])
 
   const getBorderColor = (): Colors | string | undefined => {
     switch(type){
@@ -95,8 +96,8 @@ export const Dropdown = (props: IDropdownProps) => {
             className={`dropdown-toggle ${type} ${inactive && 'inactive'}`}
             style={{...defaultProperties, height: getHeight(height, size), width: width }}
           >
-            {selectedItem && (
-              <ListItem size={size} {...selectedItem} style={{ color: defaultProperties.color }} inactive />
+            {selectedVal && (
+              <ListItem size={size} {...itemsMap.get(selectedVal)} style={{ color: defaultProperties.color }} inactive />
             )}
             <div className="toggle-caret">
               <IconButton
@@ -116,7 +117,7 @@ export const Dropdown = (props: IDropdownProps) => {
             className={`dropdown-toggle ${type} ${inactive && 'inactive'}`}
             style={{...defaultProperties, height: getHeight(height, size), width: width }}
           >
-            <ListItem text={title} size={size} style={{ color: defaultProperties.color }} inactive />
+            <ListItem val={'title'} text={title} size={size} style={{ color: defaultProperties.color }} inactive />
             <div className="toggle-caret">
               <IconButton
                 size={size}
@@ -138,7 +139,7 @@ export const Dropdown = (props: IDropdownProps) => {
     >
       <Popup
         toggle={
-          <Tooltip arrow={true} placement={tooltipPlacement} title={selectedItem ? selectedItem.text : title}>
+          <Tooltip arrow={true} placement={tooltipPlacement} title={itemsMap.get(selectedVal) ? itemsMap.get(selectedVal).text : title}>
             {getToggle()}
           </Tooltip>
         }
@@ -153,8 +154,8 @@ export const Dropdown = (props: IDropdownProps) => {
           <ListBox
             maxItems={maxItems}
             items={items}
-            selectedItem={selectedItem}
-            setSelectedItem={setSelectedItem}
+            selectedVal={selectedVal}
+            setSelectedVal={setSelectedVal}
             size={size}
           />
         } 

@@ -23,7 +23,8 @@ export const IconButton = (props: IButtonProps) => {
     tooltipPlacement = 'top',
     colorPicker,
     formLabel,
-    formLabelPlacement
+    formLabelPlacement,
+    hideLabel
   } = props
 
   /**
@@ -107,8 +108,8 @@ export const IconButton = (props: IButtonProps) => {
         <div className="iconButton-content">
           {icon}
           {colorPicker && type !== (Type.TERT) && <div className={`color`} style={{background: colorPicker, outlineColor: defaultProperties.color}}/>}
+          {label && !hideLabel && <div className={'label'} style={{color: defaultProperties.color}}>{label}</div>}
         </div>
-        {label && <div className={'label'} style={{color: defaultProperties.color}}>{label}</div>}
         <div className={`background ${active && 'active'} ${inactive && 'inactive'}`} style={backgroundProperties}/>
       </div>
     </Tooltip>

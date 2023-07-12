@@ -11,9 +11,9 @@ export interface IDropdownProps extends IGlobalProps {
     placement?: Placement;
     dropdownType: DropdownType;
     title?: string;
-    selected?: IListItemProps;
+    selectedVal?: string;
+    setSelectedVal?: (val: string | number) => unknown;
     maxItems?: number;
-    color?: string;
 }
 /**
  *

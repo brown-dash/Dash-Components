@@ -5,8 +5,8 @@ import { IGlobalProps } from '../../global';
 export interface IListBoxProps extends IGlobalProps {
     items: IListItemProps[];
     filter?: string;
-    selectedItem?: IListItemProps;
-    setSelectedItem?: (item: IListItemProps) => void;
+    selectedVal?: string | number;
+    setSelectedVal?: (val: string | number) => unknown;
     maxItems?: number;
 }
 /**

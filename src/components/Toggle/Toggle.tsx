@@ -27,7 +27,6 @@ export interface IToggleProps extends IGlobalProps {
 
   // Additional stylization
   iconPlacement?: Placement
-  color?: string
 }
 
 export const Toggle = (props: IToggleProps) => {
