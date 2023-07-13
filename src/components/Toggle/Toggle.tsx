@@ -49,7 +49,8 @@ export const Toggle = (props: IToggleProps) => {
     tooltipPlacement = 'top',
     size = Size.SMALL,
     formLabel,
-    formLabelPlacement
+    formLabelPlacement,
+    fillWidth
   } = props
 
   /**
@@ -80,6 +81,7 @@ export const Toggle = (props: IToggleProps) => {
           iconPlacement={iconPlacement}
           color={color}
           label={label}
+          fillWidth={fillWidth}
         />
       );
       break;
@@ -96,6 +98,7 @@ export const Toggle = (props: IToggleProps) => {
           size={size}
           color={color}
           label={label}
+          fillWidth={fillWidth}
         />
       );
       break;

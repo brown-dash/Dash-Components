@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { IGlobalProps, Size, Type, getFontSize } from '../../global'
+import { Colors, IGlobalProps, Size, Type, getFontSize } from '../../global'
 import { Popup } from '../Popup'
 import { Toggle, ToggleType } from '../Toggle'
 import { useState } from 'react'
@@ -29,9 +29,36 @@ export interface INumberDropdownProps extends INumberInputProps {
 
 export const NumberDropdown = (props: INumberDropdownProps) => {
     const [numberLoc, setNumberLoc] = useState<number>(0)
-    const { numberDropdownType = false, color, type, formLabelPlacement, showPlusMinus, min, max, unit, step = 1, number = numberLoc, setNumber = setNumberLoc, size, formLabel, tooltip } = props;
+    const { 
+        fillWidth, 
+        numberDropdownType = false, 
+        color = Colors.MEDIUM_BLUE, 
+        type,
+        formLabelPlacement, 
+        showPlusMinus, 
+        min, 
+        max, 
+        unit, 
+        step = 1, 
+        number = numberLoc, 
+        setNumber = setNumberLoc, 
+        size, 
+        formLabel, 
+        tooltip } = 
+    props;
     const [isOpen, setOpen] = useState<boolean>(false);
-    let toggle = <Toggle tooltip={tooltip} color={color} type={type} size={size} icon={<>{number.toString()}{unit}</>} toggleType={ToggleType.BUTTON} toggleStatus={isOpen}/>;
+    let toggleText = number.toString();
+    if (unit) toggleText = toggleText + unit
+    let toggle = <Toggle 
+        tooltip={tooltip} 
+        color={color} 
+        fillWidth={fillWidth} 
+        type={type} 
+        size={size} 
+        text={toggleText} 
+        toggleType={ToggleType.BUTTON} 
+        toggleStatus={isOpen}
+    />;
     
     if (showPlusMinus) {
         toggle = <Group columnGap={0} style={{overflow: 'hidden'}}>
@@ -43,6 +70,7 @@ export const NumberDropdown = (props: INumberDropdownProps) => {
                     e.stopPropagation();
                     setNumber(number - step);
                 }}
+                fillWidth={fillWidth}
                 tooltip={`Subtract ${step}${unit}`}
             />
             {toggle}
@@ -54,6 +82,7 @@ export const NumberDropdown = (props: INumberDropdownProps) => {
                     e.stopPropagation();
                     setNumber(number + step);
                 }}
+                fillWidth={fillWidth}
                 tooltip={`Add ${step}${unit}`}
             />
         </Group>
@@ -75,6 +104,7 @@ export const NumberDropdown = (props: INumberDropdownProps) => {
                 )
             }
             popup = <ListBox 
+                color={color}
                 selectedVal={number} 
                 setSelectedVal={(num) => setNumber(num as number)} 
                 items={items}
@@ -82,15 +112,15 @@ export const NumberDropdown = (props: INumberDropdownProps) => {
             break;
         case 'slider':
         default:
-            popup = <Slider size={Size.XSMALL} multithumb={false} min={min} max={max} step={step} number={number} setVal={setNumber}/>
+            popup = <Slider size={Size.SMALL} unit={unit} multithumb={false} min={min} max={max} step={step} number={number} initVal={number} setVal={setNumber}/>
             break;
         case 'input':
             popup = <Slider multithumb={false} min={min} max={max} step={step} number={number}/>
             break;
     }
 
-    const numberDropdown: JSX.Element = <div className={`numberDropdown-container`}>
-        <Popup setOpen={setOpen} placement={'bottom'} isOpen={isOpen} popup={popup} toggle={toggle}/>
+    const numberDropdown: JSX.Element = <div className={`numberDropdown-container`} style={{width: fillWidth ? '100%' : 'fit-content'}}>
+        <Popup setOpen={setOpen} placement={'bottom'} isOpen={isOpen} popup={popup} toggle={toggle} fillWidth={fillWidth}/>
     </div>
 
     return (

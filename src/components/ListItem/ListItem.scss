@@ -40,7 +40,6 @@
       gap: 5px;
       text-transform: uppercase;
       font-weight: 500;
-      color: $medium-blue;
 
       .text {
         white-space: nowrap;
@@ -53,7 +52,6 @@
     .shortcut {
       grid-area: end;
       padding: 0px 10px;
-      color: $black;
       display: flex;
       justify-content: center;
       align-items: center;

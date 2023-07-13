@@ -13,30 +13,36 @@ export default {
 const dropdownItems: IListItemProps[] = [
   {
     text: 'Facebook',
+    val: "",
     shortcut: '⌘F',
     icon: <fa.FaFacebook />,
     description: 'A hopeless company.'
   },
   {
     text: 'Google',
+    val: "",
     shortcut: '⌘G',
     icon: <fa.FaGoogle />
   },
   {
     text: 'Airbnb',
+    val: "",
     icon: <fa.FaAirbnb />,
     description: 'A housing service that does not work anymore.'
   },
   {
     text: 'Salesforce',
+    val: "",
     icon: <fa.FaSalesforce />,
     items: [
       {
         text: 'Slack',
+        val: "",
         icon: <fa.FaSlack />,
       },
       {
         text: 'Heroku',
+        val: "",
         shortcut: '⌘H',
         icon: <fa.FaAirFreshener />,
         description: 'A product that used to be brilliant - absolutely fantastic - but then decided to remove its free service.'
@@ -45,6 +51,7 @@ const dropdownItems: IListItemProps[] = [
   },
   {
     text: 'Microsoft',
+    val: "",
     icon: <fa.FaMicrosoft />,
   },
 ]

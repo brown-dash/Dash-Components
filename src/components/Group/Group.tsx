@@ -1,6 +1,6 @@
 import React from 'react'
 import './Group.scss'
-import { IGlobalProps, getFontSize } from '../../global';
+import { Colors, IGlobalProps, getFontSize, isDark } from '../../global';
 
 export interface IGroupProps extends IGlobalProps {
   children: any
@@ -19,14 +19,15 @@ export const Group = (props: IGroupProps) => {
     formLabel,
     formLabelPlacement,
     size,
-    style
+    style,
+    color
   } = props
 
   const group: JSX.Element = 
   (
     <div
       className="group-wrapper"
-      style={{ width, padding: padding, ...style }}
+      style={{ width, padding: padding, ...style, background: isDark(color) ? Colors.LIGHT_GRAY : Colors.DARK_GRAY }}
     >
       <div className={`group-container`}
         style={{ rowGap, columnGap }}

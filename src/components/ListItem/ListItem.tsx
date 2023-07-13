@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import * as fa from 'react-icons/fa'
 import { getFontSize, IGlobalProps, Type } from '../../global'
-import { Colors, Size } from '../../global/globalEnums'
+import { Size } from '../../global/globalEnums'
 import { IconButton } from '../IconButton'
 import { ListBox } from '../ListBox'
 import { Popup, PopupTrigger } from '../Popup'
@@ -42,7 +42,8 @@ export const ListItem = (props: IListItemProps) => {
     onClick,
     inactive,
     size = Size.SMALL,
-    style
+    style,
+    color
   } = props
 
   const [isHovered, setIsHovered] = useState<boolean>(false);
@@ -57,7 +58,7 @@ export const ListItem = (props: IListItemProps) => {
           setSelectedVal && setSelectedVal(val)
         }
       }}
-      style={{...style, color: selected ? Colors.BLACK : undefined, }}
+      style={{...style}}
       onPointerEnter={() => {
         setIsHovered(true)
       }}
@@ -68,21 +69,27 @@ export const ListItem = (props: IListItemProps) => {
       <div className="listItem-top">
         <div className="content" 
          style={{
-          fontSize: getFontSize(size), color: style?.color
+          fontSize: getFontSize(size), 
+          color: style && style.color ? style.color : color
          }}>
           {icon}
           <div className="text">{text}</div>
         </div>
         {shortcut && !inactive && (
-          <div className="shortcut">{shortcut}</div>
+          <div 
+            className="shortcut"
+            color={style && style.color ? style.color : color}
+          >
+            {shortcut}
+          </div>
         )}
         {items && !inactive && (
           <IconButton 
             type={Type.PRIM}
             size={Size.SMALL} 
             icon={<fa.FaCaretRight/>}
+            color={style && style.color ? style.color : color}
             inactive
-            color={style?.color}
           />
         )}
       </div>
@@ -91,7 +98,8 @@ export const ListItem = (props: IListItemProps) => {
       )}
       <div className="listItem-background" 
         style={{
-          filter: selected ? 'opacity(0.4)' : isHovered && !inactive ? 'opacity(0.2)' : 'opacity(0)'
+          background: style && style.color ? style.color : color,
+          filter: selected ? 'opacity(0.3)' : isHovered && !inactive ? 'opacity(0.2)' : 'opacity(0)'
         }}
       />
     </div>
@@ -102,8 +110,9 @@ export const ListItem = (props: IListItemProps) => {
     toggle={listItem}
     trigger={PopupTrigger.CLICK}
     popup={
-      <ListBox items={items}/>
+      <ListBox color={color} items={items}/>
     }
+    fillWidth={true}
   />
   else return <>{listItem}</>
 }

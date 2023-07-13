@@ -7,7 +7,7 @@
     width: fit-content;
     height: fit-content;
 
-    &.custom {
+    &.fillWidth {
       width: 100%;
     }
   }
@@ -19,6 +19,8 @@
   min-width: fit-content;
   width: fit-content;
   position: relative;
-  border: solid 2px;
+  border: solid 1px $black;
+  border-radius: $standard-border-radius;
+  overflow: hidden;
   background: $white;
 }

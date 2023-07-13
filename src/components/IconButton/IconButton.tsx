@@ -24,7 +24,8 @@ export const IconButton = (props: IButtonProps) => {
     colorPicker,
     formLabel,
     formLabelPlacement,
-    hideLabel
+    hideLabel,
+    fillWidth
   } = props
 
   /**
@@ -86,7 +87,7 @@ export const IconButton = (props: IButtonProps) => {
 
   const defaultProperties: React.CSSProperties = {
     height: getHeight(height, size),
-    width: getHeight(height, size),
+    width: fillWidth ? '100%' : getHeight(height, size),
     fontWeight: 500,
     fontSize: getFontSize(size, true),
     borderColor: getBorderColor(),
@@ -108,7 +109,7 @@ export const IconButton = (props: IButtonProps) => {
         <div className="iconButton-content">
           {icon}
           {colorPicker && type !== (Type.TERT) && <div className={`color`} style={{background: colorPicker, outlineColor: defaultProperties.color}}/>}
-          {label && !hideLabel && <div className={'label'} style={{color: defaultProperties.color}}>{label}</div>}
+          {label && !hideLabel && <div className={'iconButton-label'} style={{color: defaultProperties.color}}>{label}</div>}
         </div>
         <div className={`background ${active && 'active'} ${inactive && 'inactive'}`} style={backgroundProperties}/>
       </div>

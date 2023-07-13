@@ -49,7 +49,8 @@ export const Dropdown = (props: IDropdownProps) => {
     type, 
     width,
     formLabel,
-    formLabelPlacement
+    formLabelPlacement,
+    fillWidth = true
   } = props
 
   const [active, setActive] = useState<boolean>(false)
@@ -76,6 +77,7 @@ export const Dropdown = (props: IDropdownProps) => {
 
   const defaultProperties: React.CSSProperties = {
     height: getHeight(height, size),
+    width: fillWidth ? '100%' : width,
     fontWeight: 500,
     fontSize: getFontSize(size),
     fontFamily: 'sans-serif',
@@ -150,10 +152,12 @@ export const Dropdown = (props: IDropdownProps) => {
         isOpen={active}
         setOpen={setActive}
         size={size}
+        fillWidth={true}
         popup={
           <ListBox
             maxItems={maxItems}
             items={items}
+            color={color}
             selectedVal={selectedVal}
             setSelectedVal={setSelectedVal}
             size={size}

@@ -42,6 +42,7 @@ export const Button = (props: IButtonProps) => {
     colorPicker,
     formLabel,
     formLabelPlacement,
+    fillWidth
   } = props
 
   if (!text) {
@@ -112,6 +113,8 @@ export const Button = (props: IButtonProps) => {
   const defaultProperties: React.CSSProperties = {
     height: getHeight(height, size),
     minHeight: getHeight(height, size),
+    width: fillWidth ? '100%' : 'fit-content',
+    padding: fillWidth ? 0 : undefined,
     fontWeight: 500,
     fontSize: getFontSize(size),
     fontFamily: 'sans-serif',

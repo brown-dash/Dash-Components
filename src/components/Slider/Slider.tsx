@@ -141,23 +141,25 @@ export const Slider = (props: ISliderProps) => {
   }
 
   const slider: JSX.Element = (
-    <div className="slider-container" id="rs-container" ref={container} style={{height: getHeight(height, size)}}
-      onPointerDown={onPointerDown}
-    >
-      {getSlider()}
-      <div className="selected-range" style={{
-        height: getHeight(height, size) / 10,
-        background: multithumb ? Colors.LIGHT_GRAY : Colors.MEDIUM_BLUE
+    <div className={`slider-wrapper`} style={{padding: `${getHeight(height, size)}px 5px`}}>
+      <div className="slider-container" id="rs-container" ref={container} style={{height: getHeight(height, size)}}
+        onPointerDown={onPointerDown}
+      >
+        {getSlider()}
+        <div className="selected-range" style={{
+          height: getHeight(height, size) / 10,
+          background: multithumb ? Colors.LIGHT_GRAY : Colors.MEDIUM_BLUE
 
-      }}></div>
-      <div className="range" style={{
-        height: getHeight(height, size) / 10,
-        width: getLeftPos(endValue) - getLeftPos(value),
-        left: getLeftPos(value) + getHeight(height, size),
-        background: multithumb ? Colors.MEDIUM_BLUE : Colors.LIGHT_GRAY,
-      }}></div>
-      <div className="box-minmax" style={{fontSize: getFontSize(size)}}>
-         <span>{min}{unit}</span><span>{max}{unit}</span>
+        }}></div>
+        <div className="range" style={{
+          height: getHeight(height, size) / 10,
+          width: getLeftPos(endValue) - getLeftPos(value),
+          left: getLeftPos(value) + getHeight(height, size),
+          background: multithumb ? Colors.MEDIUM_BLUE : Colors.LIGHT_GRAY,
+        }}></div>
+        <div className="box-minmax" style={{fontSize: getFontSize(size)}}>
+          <span>{min}{unit}</span><span>{max}{unit}</span>
+        </div>
       </div>
     </div>
   )

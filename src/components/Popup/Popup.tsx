@@ -12,8 +12,9 @@ export enum PopupTrigger {
 
 export interface IPopupProps extends IGlobalProps {
   text?: string
-  icon?: JSX.Element | string
-  placement?: Placement
+  icon?: JSX.Element | string,
+  iconPlacement?: Placement,
+  placement?: Placement,
   size?: Size
   height?: number
   toggle?: JSX.Element;
@@ -41,6 +42,7 @@ export const Popup = (props: IPopupProps) => {
     icon,
     popup,
     type,
+    color,
     isOpen = locIsOpen,
     setOpen = locSetOpen,
     toggle,
@@ -48,7 +50,9 @@ export const Popup = (props: IPopupProps) => {
     trigger = PopupTrigger.CLICK,
     placement = 'bottom-start',
     width,
-    height
+    height,
+    fillWidth,
+    iconPlacement = 'left'
   } = props
   
   const triggerRef = useRef(null);
@@ -58,7 +62,7 @@ export const Popup = (props: IPopupProps) => {
   return (
     <div className={`popup-wrapper`}>
       <div
-        className={`trigger-container ${toggle && 'custom'}`}
+        className={`trigger-container ${fillWidth && 'fillWidth'}`}
         ref={triggerRef}
         onClick={() => {
           if (trigger === PopupTrigger.CLICK) setOpen (!isOpen)
@@ -83,15 +87,18 @@ export const Popup = (props: IPopupProps) => {
           tooltip={tooltip}
           size={size}
           type={type}
+          color={color}
           toggleType={ToggleType.BUTTON}
           toggleStatus={isOpen}
           icon={icon}
+          iconPlacement={iconPlacement}
           text={text}
           onClick={() => {
             if (trigger === PopupTrigger.CLICK) {
               setOpen(!isOpen)
             }
           }}
+          fillWidth={fillWidth}
         />
         }
       </div>

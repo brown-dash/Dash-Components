@@ -16,7 +16,8 @@ export interface IColorPickerProps extends IGlobalProps {
 }
 
 export const ColorPicker = (props: IColorPickerProps) => {
-  const { text, colorPickerType="chrome", formLabelPlacement, size = Size.SMALL, type = Type.TERT, icon, selectedColor, setSelectedColor, tooltip, color='black', formLabel } = props
+  const [selectedColorLoc, setSelectedColorLoc] = useState();
+  const { text, colorPickerType="chrome", formLabelPlacement, size = Size.SMALL, type = Type.TERT, icon, selectedColor = selectedColorLoc, setSelectedColor = setSelectedColorLoc, tooltip, color='black', formLabel } = props
   const [isOpen, setOpen] = useState<boolean>(false)
   const onChange = (color: any) => {
     setSelectedColor(color.hex)
@@ -118,7 +119,7 @@ export const ColorPicker = (props: IColorPickerProps) => {
         tooltip={tooltip}
         size={size}
         popup={getPopup()}
-        />
+      />
   )
 
   return (

@@ -6,6 +6,7 @@ export interface IGlobalProps {
   size?: Size
   height?: number
   width?: number
+  fillWidth?: boolean
   color?: string
 
   // Type

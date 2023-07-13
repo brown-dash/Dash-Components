@@ -63,6 +63,7 @@ interface IGlobalProps {
     size?: Size;
     height?: number;
     width?: number;
+    fillWidth?: boolean;
     color?: string;
     type?: Type;
     inactive?: boolean;
@@ -72,6 +73,7 @@ interface IGlobalProps {
     hideLabel?: boolean;
     formLabel?: string;
     formLabelPlacement?: Placement;
+    style?: React.CSSProperties;
     onPointerDown?: PointerEventHandler | undefined;
     onPointerDownCapture?: PointerEventHandler | undefined;
     onPointerMove?: PointerEventHandler | undefined;
@@ -92,7 +94,6 @@ interface IGlobalProps {
     onGotPointerCaptureCapture?: PointerEventHandler | undefined;
     onLostPointerCapture?: PointerEventHandler | undefined;
     onLostPointerCaptureCapture?: PointerEventHandler | undefined;
-    style?: React.CSSProperties;
 }
 declare enum Type {
     PRIM = "primary",
@@ -216,6 +217,7 @@ declare enum PopupTrigger {
 interface IPopupProps extends IGlobalProps {
     text?: string;
     icon?: JSX.Element | string;
+    iconPlacement?: Placement;
     placement?: Placement;
     size?: Size;
     height?: number;
@@ -262,7 +264,7 @@ interface INumberInputProps extends IGlobalProps {
 }
 interface INumberDropdownProps extends INumberInputProps {
     numberDropdownType: NumberDropdownType;
-    showPlusMinus: boolean;
+    showPlusMinus?: boolean;
 }
 declare const NumberDropdown: (props: INumberDropdownProps) => JSX.Element;
 
