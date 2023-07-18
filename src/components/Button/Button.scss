@@ -17,6 +17,7 @@
   transition: 0.4s;
   border: solid 1px;
   border-color: transparent;
+  pointer-events: all;
 
   &.icon {
     padding: 0;
