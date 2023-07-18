@@ -47,6 +47,18 @@ export const Toggle = (props: IToggleProps) => {
   } = props
 
   /**
+   * Pointer down
+   * @param e
+   */
+  const handlePointerDown = (e: React.PointerEvent) => {
+    if (!inactive && onPointerDown){
+      e.stopPropagation();
+      e.preventDefault();
+      onPointerDown(e)
+    } 
+  }
+
+  /**
    * Single click
    * @param e
    */
@@ -54,7 +66,12 @@ export const Toggle = (props: IToggleProps) => {
     if (toggleStatus === toggleStatusLoc) {
       setToggleStatusLoc(!toggleStatus)
     }
-    if (!inactive && onClick) onClick(e)
+    
+    if (!inactive && onClick) {
+      e.stopPropagation();
+      e.preventDefault();
+      onClick(e);
+    } 
   }
 
   const defaultProperties = {
@@ -71,6 +88,7 @@ export const Toggle = (props: IToggleProps) => {
           text={text}
           tooltip={tooltip}
           icon={toggleStatus ? icon : iconFalse}
+          onPointerDown={handlePointerDown}
           onClick={handleClick}
           active={toggleStatus}
           type={type}
@@ -90,6 +108,7 @@ export const Toggle = (props: IToggleProps) => {
             toggleStatus ? <bi.BiCheck/> : undefined
           }
           tooltip={tooltip}
+          onPointerDown={handlePointerDown}
           onClick={handleClick}
           active={toggleStatus}
           type={type}
@@ -107,7 +126,7 @@ export const Toggle = (props: IToggleProps) => {
         <Tooltip arrow={true} placement={tooltipPlacement} title={tooltip}>
           <div
             className={`toggle-container ${toggleType}`}
-            onPointerDown={onPointerDown}
+            onPointerDown={handlePointerDown}
             onClick={handleClick}
             style={{
               width: 2*getHeight(height, size),

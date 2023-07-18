@@ -29,14 +29,17 @@ export const IconButton = (props: IButtonProps) => {
     fillWidth
   } = props
 
-   /**
-   * Single click
+  /**
+   * Pointer down
    * @param e
    */
-   const handlePointerDown = (e: React.PointerEvent) => {
-    e.stopPropagation();
-    e.preventDefault();
-    if (!inactive && onPointerDown) onPointerDown(e)
+  const handlePointerDown = (e: React.PointerEvent) => {
+    
+    if (!inactive && onPointerDown) {
+      e.stopPropagation();
+      e.preventDefault();
+      onPointerDown(e)
+    }
   }
 
   /**
@@ -44,7 +47,11 @@ export const IconButton = (props: IButtonProps) => {
    * @param e
    */
   const handleClick = (e: React.MouseEvent) => {
-    if (!inactive && onClick) onClick(e)
+    if (!inactive && onClick) {
+      e.stopPropagation();
+      e.preventDefault();
+      onClick(e)
+    } 
   }
 
   /**
@@ -52,7 +59,11 @@ export const IconButton = (props: IButtonProps) => {
    * @param e
    */
   const handleDoubleClick = (e: React.MouseEvent) => {
-    if (!inactive && onDoubleClick) onDoubleClick(e)
+    if (!inactive && onDoubleClick){
+      e.stopPropagation();
+      e.preventDefault();
+      onDoubleClick(e)
+    } 
   }
 
   const getBorderColor = (): Colors | string | undefined => {
