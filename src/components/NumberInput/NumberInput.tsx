@@ -21,7 +21,7 @@ export const NumberInput = (props: INumberInputProps) => {
         showPlusMinus, 
         min, 
         max, 
-        unit, 
+        unit = '', 
         width,
         fillWidth = width ? true : false, 
         step = 1, 
@@ -36,7 +36,7 @@ export const NumberInput = (props: INumberInputProps) => {
         color={color}
         type={type}
         size={size}
-        val={number}
+        val={number.toString() + unit}
         // width={getHeight(undefined, size)}
         textAlign={'center'}
         fillWidth={fillWidth}
@@ -72,7 +72,18 @@ export const NumberInput = (props: INumberInputProps) => {
         </Group>
     }
 
-    return <div className={`numberInput-container`} style={{width: fillWidth ? '100%' : 'fit-content'}}>
-        {input}
-    </div>
+
+    return (
+        formLabel ? 
+        <div className={`form-wrapper ${formLabelPlacement}`} style={{ width: fillWidth ? '100%' : undefined}}>
+            <div className={'formLabel'} style={{fontSize: getFormLabelSize(size)}}>{formLabel}</div>
+            <div className={`numberInput-container`} style={{width: fillWidth ? '100%' : 'fit-content'}}>
+                {input}
+            </div>
+        </div>
+        :
+        <div className={`numberInput-container`} style={{width: fillWidth ? '100%' : 'fit-content'}}>
+            {input}
+        </div>
+    )
 }

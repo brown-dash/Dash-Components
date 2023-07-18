@@ -46,6 +46,7 @@ export const NumberDropdown = (props: INumberDropdownProps) => {
         fillWidth={fillWidth} 
         type={type} 
         size={size} 
+        align={'center'}
         text={toggleText} 
         toggleType={ToggleType.BUTTON} 
         toggleStatus={isOpen}

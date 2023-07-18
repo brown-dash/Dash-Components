@@ -118,6 +118,7 @@ $TREE_BULLET_WIDTH: 20px;
     font-family: $default-font;
     text-transform: uppercase;
     opacity: 0.8;
+    min-width: 'fit-content'
   }
 
   &.left {
