@@ -55,21 +55,28 @@ export const Button = (props: IButtonProps) => {
   }
 
   /**
-   * Single click
+   * Pointer down
    * @param e
    */
   const handlePointerDown = (e: React.PointerEvent) => {
-    e.stopPropagation();
-    e.preventDefault();
-    if (!inactive && onPointerDown) onPointerDown(e)
+    
+    if (!inactive && onPointerDown) {
+      e.stopPropagation();
+      e.preventDefault();
+      onPointerDown(e)
+    }
   }
 
   /**
-   * Single click
+   * In the event that there is a single click
    * @param e
    */
   const handleClick = (e: React.MouseEvent) => {
-    if (!inactive && onClick) onClick(e)
+    if (!inactive && onClick) {
+      e.stopPropagation();
+      e.preventDefault();
+      onClick(e)
+    } 
   }
 
   /**
@@ -77,7 +84,11 @@ export const Button = (props: IButtonProps) => {
    * @param e
    */
   const handleDoubleClick = (e: React.MouseEvent) => {
-    if (!inactive && onDoubleClick) onDoubleClick(e)
+    if (!inactive && onDoubleClick){
+      e.stopPropagation();
+      e.preventDefault();
+      onDoubleClick(e)
+    } 
   }
 
   const getBorderColor = (): Colors | string | undefined => {
