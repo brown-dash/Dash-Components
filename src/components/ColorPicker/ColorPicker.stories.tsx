@@ -1,7 +1,7 @@
 import { Meta, Story } from '@storybook/react'
 import React from 'react'
 import * as fa from 'react-icons/fa'
-import { Type } from '../../global'
+import { Type , getFormLabelSize } from '../../global'
 import { ColorPicker, IColorPickerProps } from './ColorPicker'
 
 export default {

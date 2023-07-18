@@ -3,7 +3,7 @@
 .button-container {
   position: relative;
   width: fit-content;
-  padding: 0px 20px;
+  padding: $padding;
   cursor: pointer;
   overflow: hidden;
   user-select: none;
@@ -27,16 +27,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: fit-content;
     height: 100%;
     z-index: 1;
     gap: 5px;
+
+    .icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 
   .background {
     width: 100%;
     height: 100%;
     z-index: 0;
+    left: 0;
+    top: 0;
     position: absolute;
     transition: 0.4s;
   }
@@ -84,6 +92,10 @@
   &.tertiary {
     &:hover{
       box-shadow: $standard-shadow;
+    }
+
+    .background {
+      filter: opacity(1) !important;
     }
 
     &:hover{

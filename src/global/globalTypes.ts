@@ -53,6 +53,15 @@ export interface IGlobalProps {
   onLostPointerCaptureCapture?: PointerEventHandler | undefined;
 }
 
+export interface INumberProps extends IGlobalProps {
+  min: number,
+  max: number,
+  step?: number,
+  number: number
+  setNumber?: (num: number) => unknown,
+  unit?: string
+}
+
 export enum Type {
   PRIM = "primary",
   SEC = "secondary",
@@ -71,3 +80,7 @@ export type Placement = 'bottom-end'
                       | 'top-end'
                       | 'top-start'
                       | 'top'
+
+export type Alignment = 'flex-start' | 'flex-end' | 'center'
+
+export type TextAlignment = 'center' | 'left' | 'right'

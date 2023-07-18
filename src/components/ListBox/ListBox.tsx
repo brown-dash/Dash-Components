@@ -1,7 +1,7 @@
 import React from 'react'
 import { IListItemProps, ListItem } from '../ListItem'
 import './ListBox.scss'
-import { Colors, IGlobalProps, isDark } from '../../global'
+import { Colors, IGlobalProps, isDark , getFormLabelSize } from '../../global'
 
 export interface IListBoxProps extends IGlobalProps {
   items: IListItemProps[]
@@ -26,7 +26,7 @@ export const ListBox = (props: IListBoxProps) => {
     selectedVal,
     setSelectedVal,
     filter,
-    color
+    color = Colors.MEDIUM_BLUE
   } = props
 
   const getListItem = (
@@ -70,7 +70,6 @@ export const ListBox = (props: IListBoxProps) => {
       className="listBox-container"
       style={{
         color: color,
-        background: isDark(color) ? Colors.LIGHT_GRAY : Colors.DARK_GRAY,
         height:
           maxItems && itemElements.length >= maxItems
             ? maxItems * 30

@@ -1,7 +1,7 @@
 @import '../../global/globalCssVariables.scss';
 
 .group-wrapper {
-  overflow: scroll;
+  overflow: hidden;
 
   .group-container {
     width: fit-content;

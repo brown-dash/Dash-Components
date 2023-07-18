@@ -1,6 +1,6 @@
 import { Tooltip } from '@mui/material'
 import React from 'react'
-import { Colors, Size, Type, getFontSize, getHeight, isDark } from '../../global'
+import { Colors, Size, Type, getFontSize, getHeight, isDark, getFormLabelSize } from '../../global'
 import { IButtonProps } from '../Button'
 import './IconButton.scss'
 
@@ -12,6 +12,7 @@ export const IconButton = (props: IButtonProps) => {
     icon,
     onClick,
     onDoubleClick,
+    onPointerDown,
     inactive,
     type = Type.PRIM,
     color = Colors.MEDIUM_BLUE,
@@ -27,6 +28,16 @@ export const IconButton = (props: IButtonProps) => {
     hideLabel,
     fillWidth
   } = props
+
+   /**
+   * Single click
+   * @param e
+   */
+   const handlePointerDown = (e: React.PointerEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    if (!inactive && onPointerDown) onPointerDown(e)
+  }
 
   /**
    * In the event that there is a single click
@@ -88,6 +99,7 @@ export const IconButton = (props: IButtonProps) => {
   const defaultProperties: React.CSSProperties = {
     height: getHeight(height, size),
     width: fillWidth ? '100%' : getHeight(height, size),
+    minWidth: getHeight(height, size),
     fontWeight: 500,
     fontSize: getFontSize(size, true),
     borderColor: getBorderColor(),
@@ -104,6 +116,7 @@ export const IconButton = (props: IButtonProps) => {
         className={`iconButton-container ${type} ${inactive && 'inactive'}`}
         onClick={handleClick}
         onDoubleClick={handleDoubleClick}
+        onPointerDown={handlePointerDown}
         style={{...defaultProperties, ...style}}
       >
         <div className="iconButton-content">
@@ -118,8 +131,9 @@ export const IconButton = (props: IButtonProps) => {
 
   return (
     formLabel ? 
-      <div className={`form-wrapper ${formLabelPlacement}`}>
-        <div className={'formLabel'} style={{fontSize: getFontSize(size)}}>{formLabel}</div>
+      <div className={`form-wrapper ${formLabelPlacement}`}
+style={{ width: fillWidth ? '100%' : undefined}}>
+        <div className={'formLabel'} style={{fontSize: getFormLabelSize(size)}}>{formLabel}</div>
         {iconButton}
       </div>
     :

@@ -1,7 +1,8 @@
 /// <reference types="react" />
 import { IGlobalProps } from '../../global';
 import './ColorPicker.scss';
-export declare type ColorPickerType = "chrome" | "github" | "block" | "slider";
+export declare const ColorPickerArray: string[];
+export declare type ColorPickerType = typeof ColorPickerArray[number];
 export interface IColorPickerProps extends IGlobalProps {
     text?: string;
     icon?: JSX.Element | string;

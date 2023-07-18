@@ -14,6 +14,7 @@ export interface IDropdownProps extends IGlobalProps {
     selectedVal?: string;
     setSelectedVal?: (val: string | number) => unknown;
     maxItems?: number;
+    uppercase?: boolean;
 }
 /**
  *

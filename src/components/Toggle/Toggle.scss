@@ -24,7 +24,7 @@
   font-size: $medium-fontSize;
   border-radius: 100px;
   white-space: nowrap;
-  transition: 0.4s;
+  transition: 0.4s ease;
   border: solid 1px;
   border-color: $medium-blue;
 
@@ -34,7 +34,16 @@
     }
   }
 
+  &.switch {
+    &:hover {
+      .toggle-background {
+        filter: opacity(0);
+      }
+    }
+  }
+
   .toggle-content {
+    position: absolute;
     display: flex;
     align-items: center;
     width: 100%;
@@ -58,6 +67,7 @@
     z-index: 0;
     position: absolute;
     background: $medium-blue;
+    transition: 0.4s ease;
     filter: opacity(0);
 
     &.active {

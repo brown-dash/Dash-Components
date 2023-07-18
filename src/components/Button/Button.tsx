@@ -1,6 +1,6 @@
 import { Tooltip } from '@mui/material'
 import React from 'react'
-import { IGlobalProps, Placement, Type } from '../../global'
+import { Alignment, IGlobalProps, Placement, Type , getFormLabelSize } from '../../global'
 import { Colors, Size } from '../../global/globalEnums'
 import { getFontSize, getHeight, isDark } from '../../global/globalUtils'
 import { IconButton } from '../IconButton'
@@ -19,7 +19,9 @@ export interface IButtonProps extends IGlobalProps {
   // Additional stylization
   iconPlacement?: Placement
   color?: string
-  colorPicker?: string
+  colorPicker?: string,
+  uppercase?: boolean,
+  align?: Alignment 
 }
 
 export const Button = (props: IButtonProps) => {
@@ -28,11 +30,13 @@ export const Button = (props: IButtonProps) => {
     icon,
     onClick,
     onDoubleClick,
+    onPointerDown,
     active,
     height,
     inactive,
     type = Type.PRIM,
     label,
+    uppercase = false,
     iconPlacement = 'right',
     size = Size.SMALL,
     color = Colors.MEDIUM_BLUE,
@@ -42,11 +46,22 @@ export const Button = (props: IButtonProps) => {
     colorPicker,
     formLabel,
     formLabelPlacement,
-    fillWidth
+    fillWidth,
+    align = fillWidth ? 'flex-start' : 'center'
   } = props
 
   if (!text) {
     return <IconButton {...props}/>
+  }
+
+  /**
+   * Single click
+   * @param e
+   */
+  const handlePointerDown = (e: React.PointerEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    if (!inactive && onPointerDown) onPointerDown(e)
   }
 
   /**
@@ -70,6 +85,7 @@ export const Button = (props: IButtonProps) => {
       case Type.PRIM:
         return undefined;
       case Type.SEC:
+        if (colorPicker) return colorPicker;
         return color;
       case Type.TERT:
         if (colorPicker) return colorPicker;
@@ -114,13 +130,14 @@ export const Button = (props: IButtonProps) => {
     height: getHeight(height, size),
     minHeight: getHeight(height, size),
     width: fillWidth ? '100%' : 'fit-content',
-    padding: fillWidth ? 0 : undefined,
+    justifyContent: align ? align : undefined,
+    padding: fillWidth && align === 'center' ? 0 : undefined,
     fontWeight: 500,
     fontSize: getFontSize(size),
     fontFamily: 'sans-serif',
-    textTransform: 'uppercase',
+    textTransform: uppercase ? 'uppercase' : undefined,
     borderColor: getBorderColor(),
-    color: getColor()
+    color: getColor(),
   }
 
   const backgroundProperties: React.CSSProperties = {
@@ -133,12 +150,19 @@ export const Button = (props: IButtonProps) => {
         className={`button-container ${type} ${active && 'active'} ${inactive && 'inactive'}`}
         onClick={handleClick}
         onDoubleClick={handleDoubleClick}
+        onPointerDown={handlePointerDown}
         style={{...defaultProperties, ...style}}
       >
-        <div className={`button-content`}>
-          {iconPlacement == 'left' ? icon : null}
+        <div className={`button-content`} 
+          style={{justifyContent: align}}
+        >
+          {iconPlacement == 'left' && icon ? <div className={`icon`} style={{
+            fontSize: getFontSize(size, true)
+          }}>{icon}</div> : null}
           {text}
-          {iconPlacement == 'right' ? icon : null}
+          {iconPlacement == 'right' && icon ? <div className={`icon`} style={{
+            fontSize: getFontSize(size, true)
+          }}>{icon}</div> : null}
         </div>
         <div className={`background ${active && 'active'}`} style={backgroundProperties}/>
       </div>
@@ -147,8 +171,8 @@ export const Button = (props: IButtonProps) => {
 
   return (
     formLabel ? 
-      <div className={`form-wrapper ${formLabelPlacement}`}>
-        <div className={'formLabel'} style={{fontSize: getFontSize(size)}}>{formLabel}</div>
+      <div className={`form-wrapper ${formLabelPlacement}`} style={{ width: fillWidth ? '100%' : undefined}}>
+        <div className={'formLabel'} style={{fontSize: getFormLabelSize(size)}}>{formLabel}</div>
         {button}
       </div>
     :

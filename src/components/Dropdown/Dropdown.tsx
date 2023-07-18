@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import * as fa from 'react-icons/fa'
+import { FaCaretDown, FaCaretLeft, FaCaretRight, FaCaretUp } from 'react-icons/fa'
 import { Popup, PopupTrigger } from '..'
-import { Colors, IGlobalProps, Placement, Type, getFontSize, getHeight, isDark } from '../../global'
+import { Colors, IGlobalProps, Placement, Type, getFontSize, getHeight, isDark , getFormLabelSize } from '../../global'
 import { IconButton } from '../IconButton'
 import { ListBox } from '../ListBox'
 import { IListItemProps, ListItem } from '../ListItem'
@@ -21,6 +21,7 @@ export interface IDropdownProps extends IGlobalProps {
   selectedVal?: string,
   setSelectedVal?: (val: string | number) => unknown,
   maxItems?: number,
+  uppercase?: boolean
 }
 
 /**
@@ -50,7 +51,8 @@ export const Dropdown = (props: IDropdownProps) => {
     width,
     formLabel,
     formLabelPlacement,
-    fillWidth = true
+    fillWidth = true,
+    uppercase
   } = props
 
   const [active, setActive] = useState<boolean>(false)
@@ -81,13 +83,30 @@ export const Dropdown = (props: IDropdownProps) => {
     fontWeight: 500,
     fontSize: getFontSize(size),
     fontFamily: 'sans-serif',
-    textTransform: 'uppercase',
+    textTransform: uppercase ? 'uppercase' : undefined,
     borderColor: getBorderColor(),
     color: type == (Type.TERT) ? isDark(color) ? Colors.WHITE : Colors.BLACK : color
   }
 
   const backgroundProperties: React.CSSProperties = {
     background: color
+  }
+
+  const getCaretDirection = (): JSX.Element => {
+    switch (placement) {
+      case 'bottom':
+        if (active) return <FaCaretUp/>
+        return <FaCaretDown/>
+      case 'right':
+        if (active) return <FaCaretLeft/>
+        return <FaCaretRight/>
+      case 'top':
+        if (active) return <FaCaretDown/>
+        return <FaCaretUp/>
+      default: 
+        if (active) return <FaCaretUp/>
+        return <FaCaretDown/>
+    }
   }
 
   const getToggle = () => {
@@ -104,7 +123,7 @@ export const Dropdown = (props: IDropdownProps) => {
             <div className="toggle-caret">
               <IconButton
                 size={size}
-                icon={<fa.FaCaretDown />}
+                icon={getCaretDirection()}
                 color={defaultProperties.color}
                 inactive
               />
@@ -123,7 +142,7 @@ export const Dropdown = (props: IDropdownProps) => {
             <div className="toggle-caret">
               <IconButton
                 size={size}
-                icon={<fa.FaCaretDown />}
+                icon={getCaretDirection()}
                 color={defaultProperties.color}
                 inactive
               />
@@ -153,6 +172,7 @@ export const Dropdown = (props: IDropdownProps) => {
         setOpen={setActive}
         size={size}
         fillWidth={true}
+        color={color}
         popup={
           <ListBox
             maxItems={maxItems}
@@ -169,8 +189,9 @@ export const Dropdown = (props: IDropdownProps) => {
 
   return (
     formLabel ? 
-      <div className={`form-wrapper ${formLabelPlacement}`}>
-        <div className={'formLabel'} style={{fontSize: getFontSize(size)}}>{formLabel}</div>
+      <div className={`form-wrapper ${formLabelPlacement}`}
+style={{ width: fillWidth ? '100%' : undefined}}>
+        <div className={'formLabel'} style={{fontSize: getFormLabelSize(size)}}>{formLabel}</div>
         {dropdown}
       </div>
     :

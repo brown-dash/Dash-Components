@@ -54,7 +54,8 @@ interface ILocation {
     height: number;
     override?: 'left' | 'bottom' | 'top' | 'right';
 }
-declare const getFontSize: (size: Size | undefined, icon?: boolean | undefined) => "11px" | "7px" | "15px" | "9px" | "17px" | "22px";
+declare const getFormLabelSize: (size: Size | undefined) => "7px" | "10px" | "13px" | "14px";
+declare const getFontSize: (size: Size | undefined, icon?: boolean | undefined) => "14px" | "11px" | "9px" | "15px" | "17px" | "22px" | "12px";
 declare const getHeight: (height: number | undefined, size: Size | undefined) => number;
 declare const colorConvert: (color: any) => any;
 declare const isDark: (color: any) => boolean;
@@ -95,12 +96,22 @@ interface IGlobalProps {
     onLostPointerCapture?: PointerEventHandler | undefined;
     onLostPointerCaptureCapture?: PointerEventHandler | undefined;
 }
+interface INumberProps extends IGlobalProps {
+    min: number;
+    max: number;
+    step?: number;
+    number: number;
+    setNumber?: (num: number) => unknown;
+    unit?: string;
+}
 declare enum Type {
     PRIM = "primary",
     SEC = "secondary",
     TERT = "tertiary"
 }
 declare type Placement = 'bottom-end' | 'bottom-start' | 'bottom' | 'left-end' | 'left-start' | 'left' | 'right-end' | 'right-start' | 'right' | 'top-end' | 'top-start' | 'top';
+declare type Alignment = 'flex-start' | 'flex-end' | 'center';
+declare type TextAlignment = 'center' | 'left' | 'right';
 
 interface IButtonProps extends IGlobalProps {
     onClick?: (event: React$1.MouseEvent) => void;
@@ -112,10 +123,13 @@ interface IButtonProps extends IGlobalProps {
     iconPlacement?: Placement;
     color?: string;
     colorPicker?: string;
+    uppercase?: boolean;
+    align?: Alignment;
 }
 declare const Button: (props: IButtonProps) => JSX.Element;
 
-declare type ColorPickerType = "chrome" | "github" | "block" | "slider";
+declare const ColorPickerArray: string[];
+declare type ColorPickerType = typeof ColorPickerArray[number];
 interface IColorPickerProps extends IGlobalProps {
     text?: string;
     icon?: JSX.Element | string;
@@ -136,6 +150,7 @@ interface IListItemProps extends IGlobalProps {
     selected?: boolean;
     setSelectedVal?: (val: string | number) => unknown;
     onClick?: () => void;
+    uppercase?: boolean;
 }
 /**
  *
@@ -159,6 +174,7 @@ interface IDropdownProps extends IGlobalProps {
     selectedVal?: string;
     setSelectedVal?: (val: string | number) => unknown;
     maxItems?: number;
+    uppercase?: boolean;
 }
 /**
  *
@@ -171,14 +187,16 @@ interface IDropdownProps extends IGlobalProps {
 declare const Dropdown: (props: IDropdownProps) => JSX.Element;
 
 interface IEditableTextProps extends IGlobalProps {
-    text?: string;
+    val?: string | number;
+    setVal?: (newText: string | number) => unknown;
+    setEditing?: (bool: boolean) => unknown;
     placeholder?: string;
-    editing: boolean;
-    onEdit: (newText: string) => void;
-    setEditing: (editing: boolean) => void;
-    backgroundColor?: string;
+    editing?: boolean;
     size?: Size;
     height?: number;
+    multiline?: boolean;
+    textAlign?: TextAlignment;
+    password?: boolean;
 }
 /**
  * Editable Text is used for inline renaming of some text.
@@ -226,6 +244,7 @@ interface IPopupProps extends IGlobalProps {
     trigger?: PopupTrigger;
     isOpen?: boolean;
     setOpen?: (b: boolean) => void;
+    background?: string;
 }
 /**
  *
@@ -253,27 +272,10 @@ interface IGroupProps extends IGlobalProps {
 }
 declare const Group: (props: IGroupProps) => JSX.Element;
 
-declare type NumberDropdownType = 'slider' | 'dropdown' | 'input';
-interface INumberInputProps extends IGlobalProps {
-    min: number;
-    max: number;
-    step?: number;
-    number: number;
-    setNumber?: (num: number) => unknown;
-    unit?: string;
-}
-interface INumberDropdownProps extends INumberInputProps {
-    numberDropdownType: NumberDropdownType;
-    showPlusMinus?: boolean;
-}
-declare const NumberDropdown: (props: INumberDropdownProps) => JSX.Element;
-
-interface ISliderProps extends INumberInputProps {
+interface ISliderProps extends INumberProps {
     multithumb: boolean;
-    initVal?: number;
-    initEndVal?: number;
-    setVal?: (newVal: number) => void;
-    setEndVal?: (newVal: number) => void;
+    endNumber?: number;
+    setEndNumber?: (newVal: number) => void;
     step?: number;
     minDiff?: number;
 }
@@ -284,14 +286,10 @@ declare enum ToggleType {
     CHECKBOX = "checkbox",
     SWITCH = "switch"
 }
-interface IToggleProps extends IGlobalProps {
-    toggleStatus: boolean;
-    onClick?: (event: React$1.MouseEvent) => void;
+interface IToggleProps extends IButtonProps {
+    toggleStatus?: boolean;
     toggleType?: ToggleType;
-    text?: string;
-    icon?: JSX.Element | string;
     iconFalse?: JSX.Element | string;
-    iconPlacement?: Placement;
 }
 declare const Toggle: (props: IToggleProps) => JSX.Element;
 
@@ -300,4 +298,16 @@ interface IOverlayProps {
 }
 declare const Overlay: (props: IOverlayProps) => JSX.Element;
 
-export { Borders, Button, ColorPicker, ColorPickerType, Colors, Dropdown, DropdownType, EditableText, FontSize, Group, IButtonProps, IColorPickerProps, IDropdownProps, IEditableTextProps, IGlobalProps, IGroupProps, IIconButtonProps, IListBoxProps, IListItemProps, ILocation, IModalProps, INumberDropdownProps, INumberInputProps, IOverlayProps, IPopupProps, ISliderProps, IToggleProps, IconButton, IconSizes, ListBox, ListItem, Modal, NumberDropdown, NumberDropdownType, Overlay, Padding, Placement, Popup, PopupTrigger, Shadows, Size, Slider, Toggle, ToggleType, Type, colorConvert, getFontSize, getHeight, isDark };
+declare type NumberDropdownType = 'slider' | 'dropdown' | 'input';
+interface INumberDropdownProps extends INumberProps {
+    numberDropdownType: NumberDropdownType;
+    showPlusMinus?: boolean;
+}
+declare const NumberDropdown: (props: INumberDropdownProps) => JSX.Element;
+
+interface INumberInputProps extends INumberProps {
+    showPlusMinus?: boolean;
+}
+declare const NumberInput: (props: INumberInputProps) => JSX.Element;
+
+export { Alignment, Borders, Button, ColorPicker, ColorPickerArray, ColorPickerType, Colors, Dropdown, DropdownType, EditableText, FontSize, Group, IButtonProps, IColorPickerProps, IDropdownProps, IEditableTextProps, IGlobalProps, IGroupProps, IIconButtonProps, IListBoxProps, IListItemProps, ILocation, IModalProps, INumberDropdownProps, INumberInputProps, INumberProps, IOverlayProps, IPopupProps, ISliderProps, IToggleProps, IconButton, IconSizes, ListBox, ListItem, Modal, NumberDropdown, NumberDropdownType, NumberInput, Overlay, Padding, Placement, Popup, PopupTrigger, Shadows, Size, Slider, TextAlignment, Toggle, ToggleType, Type, colorConvert, getFontSize, getFormLabelSize, getHeight, isDark };

@@ -1,7 +1,7 @@
 import { Meta, Story } from '@storybook/react'
 import React, { useState } from 'react'
 import { INumberDropdownProps, NumberDropdown } from './NumberDropdown'
-import { Size } from '../../global'
+import { Size , getFormLabelSize } from '../../global'
 
 export default {
   title: 'Dash/NumberDropdown',

@@ -3,6 +3,7 @@ import { Story, Meta } from '@storybook/react';
 import { Colors, Size } from '../../global/globalEnums';
 import * as fa from 'react-icons/fa'
 import { EditableText, IEditableTextProps } from '..';
+import { Type , getFormLabelSize } from '../../global';
 
 export default {
   title: 'Dash/Editable Text',
@@ -14,19 +15,18 @@ const Template: Story<IEditableTextProps> = (args) => <EditableText {...args}/>;
 
 export const Primary = Template.bind({});
 Primary.args = {
-    text: 'hello', 
-    placeholder: '...',
+    type: Type.PRIM,
     size: Size.MEDIUM,
-    editing: true,
-    onEdit: (val) => console.log(val),
+    fillWidth: true,
+    placeholder: '...'
 };
 
-export const Background = Template.bind({});
-Background.args = {
-    text: 'hello', 
-    placeholder: '...',
-    size: Size.MEDIUM,
-    editing: true,
-    backgroundColor: Colors.LIGHT_GRAY,
-    onEdit: (val) => console.log(val),
-};
+// export const Background = Template.bind({});
+// Background.args = {
+//     text: 'hello', 
+//     placeholder: '...',
+//     size: Size.MEDIUM,
+//     editing: true,
+//     backgroundColor: Colors.LIGHT_GRAY,
+//     onEdit: (val) => console.log(val),
+// };

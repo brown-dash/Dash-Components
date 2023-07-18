@@ -1,15 +1,17 @@
 /// <reference types="react" />
-import { IGlobalProps, Size } from '../../global';
+import { IGlobalProps, Size, TextAlignment } from '../../global';
 import './EditableText.scss';
 export interface IEditableTextProps extends IGlobalProps {
-    text?: string;
+    val?: string | number;
+    setVal?: (newText: string | number) => unknown;
+    setEditing?: (bool: boolean) => unknown;
     placeholder?: string;
-    editing: boolean;
-    onEdit: (newText: string) => void;
-    setEditing: (editing: boolean) => void;
-    backgroundColor?: string;
+    editing?: boolean;
     size?: Size;
     height?: number;
+    multiline?: boolean;
+    textAlign?: TextAlignment;
+    password?: boolean;
 }
 /**
  * Editable Text is used for inline renaming of some text.

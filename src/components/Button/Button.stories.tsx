@@ -3,7 +3,7 @@ import React from 'react'
 import * as bi from 'react-icons/bi'
 import { Button, IButtonProps } from '..'
 import { Colors, Size } from '../../global/globalEnums'
-import { Type } from '../../global'
+import { Type , getFormLabelSize } from '../../global'
 
 export default {
   title: 'Dash/Button',

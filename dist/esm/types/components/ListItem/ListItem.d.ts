@@ -12,6 +12,7 @@ export interface IListItemProps extends IGlobalProps {
     selected?: boolean;
     setSelectedVal?: (val: string | number) => unknown;
     onClick?: () => void;
+    uppercase?: boolean;
 }
 /**
  *

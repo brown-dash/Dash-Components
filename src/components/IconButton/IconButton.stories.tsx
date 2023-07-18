@@ -2,7 +2,7 @@ import { Meta, Story } from '@storybook/react'
 import React from 'react'
 import * as bi from 'react-icons/bi'
 import { IButtonProps, IconButton } from '..'
-import { Type, Size } from '../../global'
+import { Type, Size , getFormLabelSize } from '../../global'
 
 export default {
   title: 'Dash/Icon Button',

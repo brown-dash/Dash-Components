@@ -1,5 +1,5 @@
 import React from 'react';
-import { IGlobalProps, Placement, Type } from '../../global';
+import { Alignment, IGlobalProps, Placement, Type } from '../../global';
 import './Button.scss';
 export interface IButtonProps extends IGlobalProps {
     onClick?: (event: React.MouseEvent) => void;
@@ -11,5 +11,7 @@ export interface IButtonProps extends IGlobalProps {
     iconPlacement?: Placement;
     color?: string;
     colorPicker?: string;
+    uppercase?: boolean;
+    align?: Alignment;
 }
 export declare const Button: (props: IButtonProps) => JSX.Element;

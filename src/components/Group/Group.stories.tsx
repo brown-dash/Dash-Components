@@ -5,7 +5,7 @@ import { Dropdown, DropdownType } from '../Dropdown'
 import { IconButton } from '../IconButton'
 import { Popup, PopupTrigger } from '../Popup'
 import { Group, IGroupProps } from './Group'
-import { Type } from '../../global'
+import { Type , getFormLabelSize } from '../../global'
 
 export default {
   title: 'Dash/Group',
@@ -19,11 +19,13 @@ const Template: Story<IGroupProps> = (args) => (
       items={[
         {
           text: 'Hello',
-          description: 'You need to watch out!'
+          description: 'You need to watch out!',
+          val: ''
         },
         {
           text: 'Hello',
-          description: 'You need to watch out!'
+          description: 'You need to watch out!',
+          val: ''
         }
       ]} 
       dropdownType={DropdownType.CLICK}
@@ -45,10 +47,12 @@ const Template: Story<IGroupProps> = (args) => (
     <IconButton
       icon={<bi.BiAlarmAdd />}
       type={Type.SEC}
+      fillWidth
     />
     <IconButton
       icon={<bi.BiAlarmExclamation />}
       type={Type.SEC}
+      fillWidth
     />
     <Popup
       icon={<bi.BiBookOpen />}
