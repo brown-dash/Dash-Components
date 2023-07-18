@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
-import { Colors, Size, Type } from '../../global';
+import { Colors, Size, Type , getFormLabelSize } from '../../global';
 import { IconButton } from '../IconButton';
 import './Modal.scss';
 

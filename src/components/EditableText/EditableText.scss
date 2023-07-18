@@ -1,34 +1,131 @@
 @import '../../global/globalCssVariables.scss';
 
-.editableText {
-  -webkit-appearance: none;
-  width: calc(100% - 10px);
-  overflow: hidden;
-  font-size: inherit;
-  font-family: $default-font;  
-  border: none;
-  outline: none;
-  margin: 0px !important;
-  padding: 0px !important;
-  padding-left: 10px !important;
-  box-shadow: none !important;
+.editableText-container {
+  position: relative;
+  width: fit-content;
+  border: solid 1px;
+  border-color: transparent;
   border-radius: $standard-border-radius;
-  background: none;
+  font-family: $default-font;
+  overflow: hidden;
+  padding: $padding;
 
-  &:focus {
-    // outline: solid 1px $medium-blue;
-    // outline-offset: -1px;
-    // background-color: $light-blue;
+  .password {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    right: 0;
+    top: 0;
+  }
+
+  .editableText-background {
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    position: absolute;
+    transition: 0.4s;
+    top: 0;
+    left: 0;
+  }
+
+  &.primary {
+
+    &:focus-within {
+      .editableText-background {
+        filter: opacity(0.2) !important;
+      }
+    }
+
+    .editableText-background {
+      filter: opacity(0);
+
+      &.active {
+        filter: opacity(0.2) !important;
+      }
+    }
+
+    &:hover{
+      .editableText-background {
+        filter: opacity(0.2)
+      }
+    }
+  }
+
+  &.secondary {
+    &:focus-within {
+      .editableText-background {
+        filter: opacity(0.2) !important;
+      }
+    }
+
+    .editableText-background {
+      filter: opacity(0);
+
+      &.active {
+        filter: opacity(0.2) !important;
+      }
+    }
+
+    &:hover{
+      .editableText-background {
+        filter: opacity(0.2)
+      }
+    }
+  }
+
+  &.tertiary {
+    &:hover{
+      box-shadow: $standard-shadow;
+    }
+
+    &:hover{
+      .editableText-background {
+        filter: brightness(0.8);
+      }
+    }
+  }
+
+  .editableText {
+    -webkit-appearance: none;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: inherit;
+    border: none;
+    outline: none;
+    margin: 0px !important;
+    padding: 0px !important;
+    box-shadow: none !important;
+    background: transparent;
+    color: inherit;
+    z-index: 1;
+
+    &.center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  
+  .displayText {
+    cursor: text !important;
+    width: 100%;
+    height: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    font-size: inherit;
+    color: inherit;
+    z-index: 1;
+
+    &.center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }
 
-.displayText {
-  cursor: text !important;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  font-size: inherit;
-  font-family: $default-font;
-  padding:5px;  
-}

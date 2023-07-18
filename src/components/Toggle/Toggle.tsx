@@ -1,10 +1,10 @@
 import { Tooltip } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import * as bi from 'react-icons/bi'
-import { IGlobalProps, Placement, Type } from '../../global'
+import { IGlobalProps, Placement, Type , getFormLabelSize } from '../../global'
 import { Size } from '../../global/globalEnums'
 import { getFontSize, getHeight } from '../../global/globalUtils'
-import { Button } from '../Button'
+import { Button, IButtonProps } from '../Button'
 import { IconButton } from '../IconButton'
 import './Toggle.scss'
 
@@ -14,24 +14,16 @@ export enum ToggleType {
   SWITCH = "switch",
 }
 
-export interface IToggleProps extends IGlobalProps {
-  toggleStatus: boolean // true -> selected, false -> unselected
-  onClick?: (event: React.MouseEvent) => void
+export interface IToggleProps extends IButtonProps {
+  toggleStatus?: boolean // true -> selected, false -> unselected
   toggleType?: ToggleType
-
-  // Content
-  text?: string
-  icon?: JSX.Element | string
   iconFalse?: JSX.Element | string
-
-
-  // Additional stylization
-  iconPlacement?: Placement
 }
 
 export const Toggle = (props: IToggleProps) => {
+  const [toggleStatusLoc, setToggleStatusLoc] = useState<boolean>(true);
   const {
-    toggleStatus,
+    toggleStatus = toggleStatusLoc,
     toggleType = ToggleType.CHECKBOX,
     type = Type.SEC,
     style,
@@ -50,7 +42,8 @@ export const Toggle = (props: IToggleProps) => {
     size = Size.SMALL,
     formLabel,
     formLabelPlacement,
-    fillWidth
+    fillWidth,
+    align
   } = props
 
   /**
@@ -58,11 +51,15 @@ export const Toggle = (props: IToggleProps) => {
    * @param e
    */
   const handleClick = (e: React.MouseEvent) => {
-    if (!inactive && onClick) onClick(e);
+    if (toggleStatus === toggleStatusLoc) {
+      setToggleStatusLoc(!toggleStatus)
+    }
+    if (!inactive && onClick) onClick(e)
   }
 
   const defaultProperties = {
     height: getHeight(height, size),
+    borderColor: color
   }
 
   let toggleElement: JSX.Element;
@@ -82,6 +79,7 @@ export const Toggle = (props: IToggleProps) => {
           color={color}
           label={label}
           fillWidth={fillWidth}
+          align={align}
         />
       );
       break;
@@ -99,6 +97,7 @@ export const Toggle = (props: IToggleProps) => {
           color={color}
           label={label}
           fillWidth={fillWidth}
+          align={align}
         />
       );
       break;
@@ -110,12 +109,25 @@ export const Toggle = (props: IToggleProps) => {
             className={`toggle-container ${toggleType}`}
             onPointerDown={onPointerDown}
             onClick={handleClick}
-            style={defaultProperties}
+            style={{
+              width: 2*getHeight(height, size),
+              ...defaultProperties
+            }}
           >
-            <div className="toggle-content" style={{fontSize: getFontSize(size), width: 2*getHeight(height, size), justifyContent: toggleStatus ? 'flex-end' : 'flex-start'}}>
-              <div className="toggle-switch" style={{width: getHeight(height, size), height: getHeight(height, size)}}></div>  
+            <div className="toggle-content" style={{
+              fontSize: getFontSize(size), 
+              borderColor: color, 
+              left: toggleStatus ? '0%' : `calc(100% - ${getHeight(height, size)}px)`
+            }}>
+              <div className="toggle-switch" style={{
+                width: getHeight(height, size), 
+                height: getHeight(height, size),
+                background: color
+              }}></div>  
             </div>
-            <div className={`toggle-background ${toggleStatus && 'active'}`}/>
+            <div className={`toggle-background ${toggleStatus && 'active'}`}
+              style={{ background: color }}
+            />
           </div>
         </Tooltip>
       );
@@ -126,7 +138,7 @@ export const Toggle = (props: IToggleProps) => {
   return (
     formLabel ? 
     <div className={`form-wrapper ${formLabelPlacement}`}>
-        <div className={'formLabel'} style={{fontSize: getFontSize(size)}}>{formLabel}</div>
+        <div className={'formLabel'} style={{fontSize: getFormLabelSize(size)}}>{formLabel}</div>
         {toggleElement}
     </div>
     :

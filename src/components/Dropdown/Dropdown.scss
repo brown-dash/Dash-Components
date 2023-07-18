@@ -28,7 +28,7 @@
   }
 
   .dropdown-toggle {
-    width: 100%;
+    width: calc(100% - 2px);
     display: grid;
     grid-template-columns: calc(100% - 30px) 30px;
     grid-template-areas: 'button end';

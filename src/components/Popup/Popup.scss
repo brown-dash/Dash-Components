@@ -1,7 +1,11 @@
 @import '../../global/globalCssVariables.scss';
 
 .popup-wrapper {
-  width: 100%;
+  width: fit-content;
+
+  &.fillWidth {
+    width: 100%;
+  }
   
   .trigger-container {
     width: fit-content;

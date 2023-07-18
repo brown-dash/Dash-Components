@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { IGlobalProps } from '../../global'
+import { IGlobalProps , getFormLabelSize } from '../../global'
 
 export interface ITemplateProps extends IGlobalProps {
 

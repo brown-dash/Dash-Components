@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import * as fa from 'react-icons/fa'
 import { EditableText, Popup, PopupTrigger } from '..'
-import { IGlobalProps, Placement, Size, getHeight } from '../../global'
+import { IGlobalProps, Placement, Size, getHeight , getFormLabelSize } from '../../global'
 import { IconButton } from '../IconButton'
 import { ListBox } from '../ListBox'
 import { IListItemProps } from '../ListItem'
@@ -41,7 +41,8 @@ export const DropdownSearch = (props: IDropdownSearchProps) => {
     tooltip,
     title = "DropdownSearch",
     type, 
-    width
+    width,
+    color
   } = props
 
   // const [selectedItem, setSelectedItem] = useState<
@@ -72,9 +73,9 @@ export const DropdownSearch = (props: IDropdownSearchProps) => {
                   text={searchTerm}
                   placeholder={'...'}
                   editing={true}
-                  onEdit={(val) => {
-                    setSearchTerm(val)
-                  }}
+                  // onEdit={(val) => {
+                  //   setSearchTerm(val)
+                  // }}
                   size={Size.SMALL}
                   setEditing={setIsEditing}
                 />
@@ -111,6 +112,7 @@ export const DropdownSearch = (props: IDropdownSearchProps) => {
         isOpen={active}
         setOpen={setActive}
         size={size}
+        color={color}
         popup={
           <ListBox
             maxItems={maxItems}

@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { IGlobalProps, Placement, Size } from '../../global'
+import { Colors, IGlobalProps, Placement, Size , getFormLabelSize, isDark } from '../../global'
 import { Toggle, ToggleType } from '../Toggle'
 import './Popup.scss'
 import { Popper } from '@mui/material'
@@ -21,7 +21,8 @@ export interface IPopupProps extends IGlobalProps {
   popup: JSX.Element | string
   trigger?: PopupTrigger
   isOpen?: boolean;
-  setOpen?: (b: boolean) => void
+  setOpen?: (b: boolean) => void;
+  background?: string
 }
 
 /**
@@ -52,7 +53,8 @@ export const Popup = (props: IPopupProps) => {
     width,
     height,
     fillWidth,
-    iconPlacement = 'left'
+    iconPlacement = 'left',
+    background = isDark(color) ? Colors.LIGHT_GRAY : Colors.DARK_GRAY
   } = props
   
   const triggerRef = useRef(null);
@@ -60,7 +62,7 @@ export const Popup = (props: IPopupProps) => {
   let timeout = setTimeout(() => {});
 
   return (
-    <div className={`popup-wrapper`}>
+    <div className={`popup-wrapper ${fillWidth && 'fillWidth'}`}>
       <div
         className={`trigger-container ${fillWidth && 'fillWidth'}`}
         ref={triggerRef}
@@ -111,7 +113,7 @@ export const Popup = (props: IPopupProps) => {
         ]}
       >
         <div className={`popup-container`}
-          style={{width: width, height: height}}
+          style={{width: width, height: height, background: background}}
           onPointerEnter={() => {
             if (trigger === PopupTrigger.HOVER || trigger === PopupTrigger.HOVER_DELAY) {
               clearTimeout(timeout);

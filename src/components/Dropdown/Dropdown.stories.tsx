@@ -2,9 +2,9 @@ import { Meta, Story } from '@storybook/react'
 import React from 'react'
 import * as fa from 'react-icons/fa'
 import { Dropdown, DropdownType, IDropdownProps } from '..'
-import { Size } from '../../global/globalEnums'
+import { Colors, Size } from '../../global/globalEnums'
 import { IListItemProps } from '../ListItem'
-import { Type } from '../../global'
+import { Type , getFormLabelSize } from '../../global'
 
 export default {
   title: 'Dash/Dropdown',
@@ -64,6 +64,7 @@ Select.args = {
   items: dropdownItems,
   size: Size.SMALL,
   selectedVal: 'facebook-marketplace',
+  color: Colors.WHITE
 }
 
 export const Click = Template.bind({})
@@ -73,4 +74,5 @@ Click.args = {
   dropdownType: DropdownType.CLICK,
   items: dropdownItems,
   size: Size.SMALL,
+  color: Colors.SUCCESS_GREEN
 }

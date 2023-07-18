@@ -9,6 +9,23 @@ export interface ILocation {
   override?: 'left' | 'bottom' | 'top' | 'right'
 }
 
+export const getFormLabelSize = (
+  size: Size | undefined,
+) => {
+  switch (size) {
+    case Size.XSMALL:
+      return '7px'
+    case Size.SMALL:
+      return '10px'
+    case Size.MEDIUM:
+      return '13px'
+    case Size.LARGE:
+      return '14px'
+    default:
+      return '10px'
+  }
+}
+
 export const getFontSize = (
   size: Size | undefined,
   icon?: boolean
@@ -16,19 +33,19 @@ export const getFontSize = (
   switch (size) {
     case Size.XSMALL:
       if (icon) return '11px'
-      return '7px'
+      return '9px'
     case Size.SMALL:
       if (icon) return '15px'
-      return '9px'
+      return '11px'
     case Size.MEDIUM:
       if (icon) return '17px'
-      return '11px'
+      return '14px'
     case Size.LARGE:
       if (icon) return '22px'
-      return '15px'
+      return '17px'
     default:
       if (icon) return '15px'
-      return '11px'
+      return '12px'
   }
 }
 

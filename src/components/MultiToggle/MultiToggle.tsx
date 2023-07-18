@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { IGlobalProps, Type } from '../../global'
+import { IGlobalProps, Type , getFormLabelSize } from '../../global'
 import { Popup } from '../Popup'
 import { IIconButtonProps, IconButton } from '../IconButton'
 import { Group } from '../Group'
@@ -31,6 +31,7 @@ export const MultiToggle = (props: IMultiToggleProps) => {
                 tooltip={tooltip}
                 tooltipPlacement={tooltipPlacement}
             />}
+            color={color}
             popup={<Group padding={5} color={color} columnGap={0} style={{overflow: 'hidden'}}>
                 {items.map((item) => {
                     console.log(item)

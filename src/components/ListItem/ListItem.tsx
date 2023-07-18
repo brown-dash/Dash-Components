@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import * as fa from 'react-icons/fa'
-import { getFontSize, IGlobalProps, Type } from '../../global'
+import { getFontSize, IGlobalProps, Type , getFormLabelSize } from '../../global'
 import { Size } from '../../global/globalEnums'
 import { IconButton } from '../IconButton'
 import { ListBox } from '../ListBox'
@@ -18,6 +18,7 @@ export interface IListItemProps extends IGlobalProps {
   selected?: boolean
   setSelectedVal?: (val: string | number) => unknown
   onClick?: () => void
+  uppercase?: boolean
 }
 
 /**
@@ -43,7 +44,8 @@ export const ListItem = (props: IListItemProps) => {
     inactive,
     size = Size.SMALL,
     style,
-    color
+    color,
+    uppercase
   } = props
 
   const [isHovered, setIsHovered] = useState<boolean>(false);
@@ -73,7 +75,9 @@ export const ListItem = (props: IListItemProps) => {
           color: style && style.color ? style.color : color
          }}>
           {icon}
-          <div className="text">{text}</div>
+          <div className="text" style={{
+            textTransform: uppercase ? 'uppercase' : undefined
+          }}>{text}</div>
         </div>
         {shortcut && !inactive && (
           <div 
@@ -108,6 +112,7 @@ export const ListItem = (props: IListItemProps) => {
   if (items && !inactive) return <Popup
     placement={'right'}
     toggle={listItem}
+    color={color}
     trigger={PopupTrigger.CLICK}
     popup={
       <ListBox color={color} items={items}/>

@@ -1,30 +1,39 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Colors, getFontSize, getHeight, IGlobalProps, Size } from '../../global'
+import { Colors, getFontSize, getHeight, IGlobalProps, Size , getFormLabelSize, isDark, INumberProps } from '../../global'
 import './Slider.scss'
-import { INumberInputProps } from '../NumberDropdown'
 
-export interface ISliderProps extends INumberInputProps {
+export interface ISliderProps extends INumberProps {
   multithumb: boolean
-  initVal?: number
-  initEndVal?: number
-  setVal?: (newVal: number) => void
-  setEndVal?: (newVal: number) => void
+  endNumber?: number
+  setEndNumber?: (newVal: number) => void
   step?: number
   minDiff?: number
 }
 
 export const Slider = (props: ISliderProps) => {
-  const { formLabel, formLabelPlacement, multithumb, min = 0, max = 100, step = 1, initVal = 0, initEndVal = max, minDiff, size = Size.SMALL, height, unit, onPointerDown, setVal, setEndVal } = props
-  const [value, setValue] = useState<number>(initVal);
-  const [endValue, setEndValue] = useState<number>(initEndVal);
-  const [isActive, setIsActive] = useState<boolean>(false);
-  const container = useRef(null);
+  const [valLoc, setNumberLoc] = useState<number>(0);
+  const [endNumberLoc, setEndNumberLoc] = useState<number>(10);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsActive(true)
-    }, 1)
-  },[])
+  const { 
+    formLabel, 
+    formLabelPlacement, 
+    multithumb, 
+    min = 0, 
+    max = 100, 
+    step = 1, 
+    number = valLoc, 
+    endNumber = endNumberLoc, 
+    minDiff, 
+    size = Size.SMALL, 
+    height, 
+    unit, 
+    onPointerDown, 
+    setNumber = setNumberLoc, 
+    setEndNumber = setEndNumberLoc,
+    color = Colors.MEDIUM_BLUE,
+    fillWidth
+  } = props
+  const container = useRef(null);
 
   const getLeftPos = (locVal: number) => {
     if (container && container.current) {
@@ -38,15 +47,16 @@ export const Slider = (props: ISliderProps) => {
     return (<div id="rs-bullet" className="rs-label-container" 
             style={{
               left: `${getLeftPos(locVal)}px`,
-              opacity: isActive ? 1 : 0, 
+              background: color,
+              color: isDark(color) ? Colors.LIGHT_GRAY : Colors.DARK_GRAY,
               fontSize: getFontSize(size),
               height: getHeight(height, size),
               width: getHeight(height, size),
-              top: - getHeight(height, size)
+              top: 0
             }}
             >
             <span className="rs-label">
-              {locVal}{unit}
+              {locVal}
             </span>
           </div>)
   }
@@ -55,58 +65,56 @@ export const Slider = (props: ISliderProps) => {
     if (multithumb) {
       return [
         <div className={`range-slider ${size}`}>
-          {getValueLabel(endValue)}
+          {getValueLabel(endNumber)}
           <input
             type="range"
+            color={color}
             min={min}
             max={max}
             height={getHeight(height, size)}
             step={step}
-            value={endValue}
+            value={endNumber}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               e.stopPropagation()
               if (minDiff) {
-                setEndValue(Math.max(value + minDiff, Number(e.target.value)))
-                setEndVal && setEndVal(Math.max(value + minDiff, Number(e.target.value)))
+                setEndNumber(Math.max(number + minDiff, Number(e.target.value)))
+                setEndNumber && setEndNumber(Math.max(number + minDiff, Number(e.target.value)))
               } else {
-                setEndValue(Math.max(value, Number(e.target.value)))
-                setEndVal && setEndVal(Math.max(value, Number(e.target.value)))
+                setEndNumber(Math.max(number, Number(e.target.value)))
+                setEndNumber && setEndNumber(Math.max(number, Number(e.target.value)))
               }
             }}
             onPointerDown={() => {
-              setIsActive(true)
             }}
             onPointerUp={() => {
-              setIsActive(false)
             }}
             className={`rs-range ${size}`}
             id="rs-range"
           />
           </div>,
         <div className={`range-slider ${size}`}>
-          {getValueLabel(value)}
+          {getValueLabel(number)}
             <input
             type="range"
+            color={color}
             min={min}
             max={max}
             height={getHeight(height, size)}
             step={step}
-            value={value}
+            value={number}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               e.stopPropagation()
               if (minDiff) {
-                setValue(Math.min(endValue - minDiff, Number(e.target.value)))
-                setVal && setVal(Math.min(endValue - minDiff, Number(e.target.value)))
+                setNumber(Math.min(endNumber - minDiff, Number(e.target.value)))
+                setNumber && setNumber(Math.min(endNumber - minDiff, Number(e.target.value)))
               } else {
-                setValue(Math.min(endValue, Number(e.target.value)))
-                setVal && setVal(Math.min(endValue, Number(e.target.value)))
+                setNumber(Math.min(endNumber, Number(e.target.value)))
+                setNumber && setNumber(Math.min(endNumber, Number(e.target.value)))
               }
             }}
             onPointerDown={() => {
-              setIsActive(true)
             }}
             onPointerUp={() => {
-              setIsActive(false)
             }}
             className={`rs-range ${size}`}
             id="rs-range"
@@ -116,23 +124,21 @@ export const Slider = (props: ISliderProps) => {
     } else {
       return ([
         <div className={`range-slider ${size}`}>
-          {getValueLabel(value)}
+          {getValueLabel(number)}
           <input id="rs-range-line" 
             className={`rs-range ${size}`}
             type="range" 
             step={step}
-            value={value}
+            value={number}
             min={min}
             max={max}
             onPointerDown={() => {
-              setIsActive(true)
             }}
             onPointerUp={() => {
-              setIsActive(false)
             }}
             onChange={(e) => {
-              setValue(Number(e.target.value))
-              setVal && setVal(Number(e.target.value))
+              setNumber(Number(e.target.value))
+              setNumber && setNumber(Number(e.target.value))
             }}
           />
         </div>
@@ -141,23 +147,29 @@ export const Slider = (props: ISliderProps) => {
   }
 
   const slider: JSX.Element = (
-    <div className={`slider-wrapper`} style={{padding: `${getHeight(height, size)}px 5px`}}>
+    <div className={`slider-wrapper`} style={{
+      padding: `5px 0px ${getHeight(height, size)}px 0px`,
+      width: fillWidth ? '100%' : 'fit-content'
+    }}>
       <div className="slider-container" id="rs-container" ref={container} style={{height: getHeight(height, size)}}
         onPointerDown={onPointerDown}
       >
         {getSlider()}
         <div className="selected-range" style={{
           height: getHeight(height, size) / 10,
-          background: multithumb ? Colors.LIGHT_GRAY : Colors.MEDIUM_BLUE
+          background: multithumb ? Colors.LIGHT_GRAY : color
 
         }}></div>
         <div className="range" style={{
           height: getHeight(height, size) / 10,
-          width: getLeftPos(endValue) - getLeftPos(value),
-          left: getLeftPos(value) + getHeight(height, size),
-          background: multithumb ? Colors.MEDIUM_BLUE : Colors.LIGHT_GRAY,
+          width: getLeftPos(endNumber) - getLeftPos(number),
+          left: getLeftPos(number) + getHeight(height, size),
+          background: multithumb ? color : Colors.LIGHT_GRAY,
         }}></div>
-        <div className="box-minmax" style={{fontSize: getFontSize(size)}}>
+        <div className="box-minmax" style={{
+          fontSize: getFontSize(size),
+          color: color
+        }}>
           <span>{min}{unit}</span><span>{max}{unit}</span>
         </div>
       </div>
@@ -167,7 +179,7 @@ export const Slider = (props: ISliderProps) => {
   return (
     formLabel ? 
     <div className={`form-wrapper ${formLabelPlacement}`}>
-        <div className={'formLabel'} style={{fontSize: getFontSize(size)}}>{formLabel}</div>
+        <div className={'formLabel'} style={{fontSize: getFormLabelSize(size)}}>{formLabel}</div>
         {slider}
     </div>
     :
