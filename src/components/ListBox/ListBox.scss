@@ -3,6 +3,8 @@
 .listBox-container {
     position: relative;
     width: fit-content;
+    max-height: 50vh;
+    overflow: scroll;
     height: fit-content;
     display: flex;
     flex-direction: column;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import * as fa from 'react-icons/fa'
-import { getFontSize, IGlobalProps, Type , getFormLabelSize } from '../../global'
+import { getFontSize, IGlobalProps, Type , getFormLabelSize, getHeight } from '../../global'
 import { Size } from '../../global/globalEnums'
 import { IconButton } from '../IconButton'
 import { ListBox } from '../ListBox'
@@ -60,7 +60,10 @@ export const ListItem = (props: IListItemProps) => {
           setSelectedVal && setSelectedVal(val)
         }
       }}
-      style={{...style}}
+      style={{
+        minHeight: getHeight(undefined, size),
+        ...style
+      }}
       onPointerEnter={() => {
         setIsHovered(true)
       }}

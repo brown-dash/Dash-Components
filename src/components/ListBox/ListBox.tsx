@@ -22,7 +22,6 @@ export interface IListBoxProps extends IGlobalProps {
 export const ListBox = (props: IListBoxProps) => {
   const {
     items,
-    maxItems,
     selectedVal,
     setSelectedVal,
     filter,
@@ -68,13 +67,7 @@ export const ListBox = (props: IListBoxProps) => {
   return (
     <div
       className="listBox-container"
-      style={{
-        color: color,
-        height:
-          maxItems && itemElements.length >= maxItems
-            ? maxItems * 30
-            : undefined,
-      }}
+      style={{ color: color }}
     >
       {itemElements}
     </div>
