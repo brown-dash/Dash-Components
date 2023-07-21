@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import { Colors, IGlobalProps, Placement, Size , getFormLabelSize, isDark } from '../../global'
 import { Toggle, ToggleType } from '../Toggle'
 import './Popup.scss'
-import { Popper } from '@mui/material'
+import { ClickAwayListener, Popper } from '@mui/material'
 
 export enum PopupTrigger {
   CLICK = "click",
@@ -61,6 +61,10 @@ export const Popup = (props: IPopupProps) => {
 
   let timeout = setTimeout(() => {});
 
+  const handleClickAway = () => {
+    setOpen(false);
+  }
+
   return (
     <div className={`popup-wrapper ${fillWidth && 'fillWidth'}`}>
       <div
@@ -112,22 +116,24 @@ export const Popup = (props: IPopupProps) => {
         modifiers={[
         ]}
       >
-        <div className={`popup-container`}
-          style={{width: width, height: height, background: background}}
-          onPointerEnter={() => {
-            if (trigger === PopupTrigger.HOVER || trigger === PopupTrigger.HOVER_DELAY) {
-              clearTimeout(timeout);
-              setOpen(true);
-            }
-          }}
-          onPointerLeave={() => {
-            if (trigger === PopupTrigger.HOVER || trigger === PopupTrigger.HOVER_DELAY) {
-              timeout = setTimeout(() => setOpen(false), 200);
-            }
-          }}
-        >
-          {popup}
-        </div>
+        <ClickAwayListener onClickAway={handleClickAway}>
+          <div className={`popup-container`}
+            style={{width: width, height: height, background: background}}
+            onPointerEnter={() => {
+              if (trigger === PopupTrigger.HOVER || trigger === PopupTrigger.HOVER_DELAY) {
+                clearTimeout(timeout);
+                setOpen(true);
+              }
+            }}
+            onPointerLeave={() => {
+              if (trigger === PopupTrigger.HOVER || trigger === PopupTrigger.HOVER_DELAY) {
+                timeout = setTimeout(() => setOpen(false), 200);
+              }
+            }}
+          >
+            {popup}
+          </div>
+        </ClickAwayListener>
       </Popper>
     </div>
   )
