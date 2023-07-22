@@ -50,6 +50,7 @@ export const NumberDropdown = (props: INumberDropdownProps) => {
         text={toggleText} 
         toggleType={ToggleType.BUTTON} 
         toggleStatus={isOpen}
+        onPointerDown={() => setOpen(!isOpen)}
     />;
     
     if (showPlusMinus) {
@@ -97,7 +98,7 @@ export const NumberDropdown = (props: INumberDropdownProps) => {
             }
             popup = <ListBox 
                 color={color}
-                selectedVal={number} 
+                selectedVal={number}
                 setSelectedVal={(num) => setNumber(num as number)} 
                 items={items}
             />

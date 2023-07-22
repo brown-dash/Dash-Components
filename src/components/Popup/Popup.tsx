@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Colors, IGlobalProps, Placement, Size , getFormLabelSize, isDark } from '../../global'
 import { Toggle, ToggleType } from '../Toggle'
 import './Popup.scss'
@@ -61,6 +61,16 @@ export const Popup = (props: IPopupProps) => {
 
   let timeout = setTimeout(() => {});
 
+  const handlePointerAwayDown = (e: PointerEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setOpen(false);
+  }
+
+  useEffect(() => {
+    window.addEventListener("pointerdown", handlePointerAwayDown, {once: true});
+  }, [isOpen])
+  
   return (
     <div className={`popup-wrapper ${fillWidth && 'fillWidth'}`}>
       <div
@@ -112,22 +122,26 @@ export const Popup = (props: IPopupProps) => {
         modifiers={[
         ]}
       >
-        <div className={`popup-container`}
-          style={{width: width, height: height, background: background}}
-          onPointerEnter={() => {
-            if (trigger === PopupTrigger.HOVER || trigger === PopupTrigger.HOVER_DELAY) {
-              clearTimeout(timeout);
-              setOpen(true);
-            }
-          }}
-          onPointerLeave={() => {
-            if (trigger === PopupTrigger.HOVER || trigger === PopupTrigger.HOVER_DELAY) {
-              timeout = setTimeout(() => setOpen(false), 200);
-            }
-          }}
-        >
-          {popup}
-        </div>
+          <div className={`popup-container`}
+            style={{width: width, height: height, background: background}}
+            onPointerDown={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+            }}
+            onPointerEnter={() => {
+              if (trigger === PopupTrigger.HOVER || trigger === PopupTrigger.HOVER_DELAY) {
+                clearTimeout(timeout);
+                setOpen(true);
+              }
+            }}
+            onPointerLeave={() => {
+              if (trigger === PopupTrigger.HOVER || trigger === PopupTrigger.HOVER_DELAY) {
+                timeout = setTimeout(() => setOpen(false), 200);
+              }
+            }}
+          >
+            {popup}
+          </div>
       </Popper>
     </div>
   )
