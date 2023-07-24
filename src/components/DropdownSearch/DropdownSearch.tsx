@@ -70,7 +70,7 @@ export const DropdownSearch = (props: IDropdownSearchProps) => {
               <div className="toggle-button">
                 <EditableText
                   type={type}
-                  text={searchTerm}
+                  val={searchTerm}
                   placeholder={'...'}
                   editing={true}
                   // onEdit={(val) => {
