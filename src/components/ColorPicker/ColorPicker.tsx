@@ -22,8 +22,17 @@ export const ColorPicker = (props: IColorPickerProps) => {
   const [selectedColorLoc, setSelectedColorLoc] = useState();
   const { text, colorPickerType, fillWidth, formLabelPlacement, size = Size.SMALL, type = Type.TERT, icon, selectedColor = selectedColorLoc, setSelectedColor = setSelectedColorLoc, tooltip, color='black', formLabel } = props
   const [isOpen, setOpen] = useState<boolean>(false)
+  const decimalToHexString = (number: number) => {
+    if (number < 0) {
+        number = 0xffffffff + number + 1;
+    }
+    return (number < 16 ? '0' : '') + number.toString(16).toUpperCase();
+}
+  const colorString = (color: any ) => {
+    return color.hex.startsWith('#') ? color.hex + (color.rgb.a ? decimalToHexString(Math.round(color.rgb.a * 255)) : 'ff') : color.hex;
+  }
   const onChange = (color: any) => {
-    setSelectedColor(color.hex)
+    setSelectedColor(colorString(color.hex));
   }
   const [picker, setPicker] = useState<string>("Chrome")
 
