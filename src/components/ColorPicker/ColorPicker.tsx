@@ -29,10 +29,10 @@ export const ColorPicker = (props: IColorPickerProps) => {
     return (number < 16 ? '0' : '') + number.toString(16).toUpperCase();
 }
   const colorString = (color: any ) => {
-    return color.hex.startsWith('#') ? color.hex + (color.rgb.a ? decimalToHexString(Math.round(color.rgb.a * 255)) : 'ff') : color.hex;
+    return color.hex + (color.rgb.a ? decimalToHexString(Math.round(color.rgb.a * 255)) : 'ff');
   }
   const onChange = (color: any) => {
-    setSelectedColor(colorString(color.hex));
+    setSelectedColor(colorString(color) as any);
   }
   const [picker, setPicker] = useState<string>("Chrome")
 
