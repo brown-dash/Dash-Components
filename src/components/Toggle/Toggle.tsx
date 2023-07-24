@@ -51,9 +51,8 @@ export const Toggle = (props: IToggleProps) => {
    * @param e
    */
   const handlePointerDown = (e: React.PointerEvent) => {
+    console.log("pointer down")
     if (!inactive && onPointerDown){
-      e.stopPropagation();
-      e.preventDefault();
       onPointerDown(e)
     } 
   }

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Colors, IGlobalProps, Placement, Size , getFormLabelSize, isDark } from '../../global'
 import { Toggle, ToggleType } from '../Toggle'
 import './Popup.scss'
-import { Popper } from '@mui/material'
+import { ClickAwayListener, Popper } from '@mui/material'
 
 export enum PopupTrigger {
   CLICK = "click",
@@ -61,22 +61,16 @@ export const Popup = (props: IPopupProps) => {
 
   let timeout = setTimeout(() => {});
 
-  const handlePointerAwayDown = (e: PointerEvent) => {
-    e.stopPropagation();
-    e.preventDefault();
+  const handleClickAway = () => {
     setOpen(false);
   }
-
-  useEffect(() => {
-    window.addEventListener("pointerdown", handlePointerAwayDown, {once: true});
-  }, [isOpen])
   
   return (
     <div className={`popup-wrapper ${fillWidth && 'fillWidth'}`}>
       <div
         className={`trigger-container ${fillWidth && 'fillWidth'}`}
         ref={triggerRef}
-        onClick={() => {
+        onClick={(e) => {
           if (trigger === PopupTrigger.CLICK) setOpen (!isOpen)
         }}
         onPointerEnter={() => {
@@ -122,6 +116,7 @@ export const Popup = (props: IPopupProps) => {
         modifiers={[
         ]}
       >
+        <ClickAwayListener onClickAway={handleClickAway}>
           <div className={`popup-container`}
             style={{width: width, height: height, background: background}}
             onPointerDown={(e) => {
@@ -142,6 +137,7 @@ export const Popup = (props: IPopupProps) => {
           >
             {popup}
           </div>
+        </ClickAwayListener>
       </Popper>
     </div>
   )

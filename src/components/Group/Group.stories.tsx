@@ -40,9 +40,9 @@ const Template: Story<IGroupProps> = (args) => (
       type={Type.SEC}
     />
     <Popup
-      icon={<bi.BiAlarmSnooze />}
+      icon={<bi.BiCycling />}
       type={Type.SEC}
-      popup={<div>HELLO</div>}
+      popup={<div style={{padding: 10, color: "white"}}>Going on a bike ride...</div>}
     />
     <IconButton
       icon={<bi.BiAlarmAdd />}

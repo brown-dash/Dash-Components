@@ -36,6 +36,7 @@ export const IconButton = (props: IButtonProps) => {
   const handlePointerDown = (e: React.PointerEvent) => {
     
     if (!inactive && onPointerDown) {
+      console.log("poitner down")
       e.stopPropagation();
       e.preventDefault();
       onPointerDown(e)
@@ -48,6 +49,7 @@ export const IconButton = (props: IButtonProps) => {
    */
   const handleClick = (e: React.MouseEvent) => {
     if (!inactive && onClick) {
+      console.log("click")
       e.stopPropagation();
       e.preventDefault();
       onClick(e)
