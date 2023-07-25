@@ -35,6 +35,15 @@ export interface IPopupProps extends IGlobalProps {
  */
 export const Popup = (props: IPopupProps) => {
   
+  React.useEffect(
+    () => {
+      window.addEventListener("pointerdown", handlePointerAwayDown, {capture:true});
+      return () => {
+        window.removeEventListener("pointerdown", handlePointerAwayDown, {capture:true});
+      }
+    },
+    [props]
+  )
   const [locIsOpen, locSetOpen] = useState<boolean>(false)
 
   const {
@@ -58,21 +67,29 @@ export const Popup = (props: IPopupProps) => {
   } = props
   
   const triggerRef = useRef(null);
+  const popperRef = useRef(null);
 
   let timeout = setTimeout(() => {});
 
   const handlePointerAwayDown = (e: PointerEvent) => {
+    if (!popperRef.current) return;
+    const rect = (popperRef.current as any).getBoundingClientRect();
+    if (rect.left < e.clientX && rect.top < e.clientY && rect.right > e.clientX && rect.bottom > e.clientY) {
+      return;
+    }
+    console.log("POPUP: pointerdown", encodeURI)
     e.stopPropagation();
     e.preventDefault();
     setOpen(false);
   }
 
   useEffect(() => {
-    window.addEventListener("pointerdown", handlePointerAwayDown, {once: true});
+    console.log("Popup: add window listener");
+    window.addEventListener("pointerdown", handlePointerAwayDown, {capture:true});
   }, [isOpen])
   
   return (
-    <div className={`popup-wrapper ${fillWidth && 'fillWidth'}`}>
+    <div className={`popup-wrapper ${fillWidth && 'fillWidth'}`} >
       <div
         className={`trigger-container ${fillWidth && 'fillWidth'}`}
         ref={triggerRef}
@@ -122,7 +139,7 @@ export const Popup = (props: IPopupProps) => {
         modifiers={[
         ]}
       >
-          <div className={`popup-container`}
+          <div className={`popup-container`}  ref={popperRef}
             style={{width: width, height: height, background: background}}
             onPointerDown={(e) => {
               e.stopPropagation();
