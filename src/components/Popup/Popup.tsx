@@ -126,7 +126,6 @@ export const Popup = (props: IPopupProps) => {
             style={{width: width, height: height, background: background}}
             onPointerDown={(e) => {
               e.stopPropagation();
-              e.preventDefault();
             }}
             onPointerEnter={() => {
               if (trigger === PopupTrigger.HOVER || trigger === PopupTrigger.HOVER_DELAY) {
