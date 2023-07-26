@@ -175,6 +175,7 @@ interface IDropdownProps extends IGlobalProps {
     setSelectedVal?: (val: string | number) => unknown;
     maxItems?: number;
     uppercase?: boolean;
+    activeChanged?: (isOpen: boolean) => void;
 }
 /**
  *
@@ -245,6 +246,7 @@ interface IPopupProps extends IGlobalProps {
     isOpen?: boolean;
     setOpen?: (b: boolean) => void;
     background?: string;
+    popupContainsPt?: (x: number, y: number) => boolean;
 }
 /**
  *

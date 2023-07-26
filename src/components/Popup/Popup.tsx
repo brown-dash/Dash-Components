@@ -22,7 +22,8 @@ export interface IPopupProps extends IGlobalProps {
   trigger?: PopupTrigger
   isOpen?: boolean;
   setOpen?: (b: boolean) => void;
-  background?: string
+  background?: string,
+  popupContainsPt?: (x:number, y:number) => boolean
 }
 
 /**
@@ -72,21 +73,16 @@ export const Popup = (props: IPopupProps) => {
   let timeout = setTimeout(() => {});
 
   const handlePointerAwayDown = (e: PointerEvent) => {
-    if (!popperRef.current) return;
-    const rect = (popperRef.current as any).getBoundingClientRect();
-    if (rect.left < e.clientX && rect.top < e.clientY && rect.right > e.clientX && rect.bottom > e.clientY) {
-      return;
+    const rect = (popperRef.current as any)?.getBoundingClientRect();
+    if (rect && !(rect.left < e.clientX && rect.top < e.clientY && rect.right > e.clientX && rect.bottom > e.clientY) &&
+        !props.popupContainsPt?.(e.clientX, e.clientY)) {
+      e.stopPropagation();
+      e.preventDefault();
+      setOpen(false);
     }
-    console.log("POPUP: pointerdown", encodeURI)
-    e.stopPropagation();
-    e.preventDefault();
-    setOpen(false);
   }
 
-  useEffect(() => {
-    console.log("Popup: add window listener");
-    window.addEventListener("pointerdown", handlePointerAwayDown, {capture:true});
-  }, [isOpen])
+  useEffect(() => window.addEventListener("pointerdown", handlePointerAwayDown, {capture:true}), [isOpen])
   
   return (
     <div className={`popup-wrapper ${fillWidth && 'fillWidth'}`} >

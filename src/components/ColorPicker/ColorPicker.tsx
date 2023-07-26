@@ -22,6 +22,7 @@ export const ColorPicker = (props: IColorPickerProps) => {
   const [selectedColorLoc, setSelectedColorLoc] = useState();
   const { text, colorPickerType, fillWidth, formLabelPlacement, size = Size.SMALL, type = Type.TERT, icon, selectedColor = selectedColorLoc, setSelectedColor = setSelectedColorLoc, tooltip, color='black', formLabel } = props
   const [isOpen, setOpen] = useState<boolean>(false)
+  const [pickerSelectorOpen, setPickerSelectorOpen] = useState<boolean>(false);
   const decimalToHexString = (number: number) => {
     if (number < 0) {
         number = 0xffffffff + number + 1;
@@ -128,6 +129,8 @@ export const ColorPicker = (props: IColorPickerProps) => {
         );
     }
   }
+  const openChanged = (isOpen:boolean) => setPickerSelectorOpen(isOpen);
+  const pickerIsOpen = (x:number, y:number) => pickerSelectorOpen;
 
   const getPopup = ():JSX.Element => {
     if (colorPickerType){
@@ -143,6 +146,7 @@ export const ColorPicker = (props: IColorPickerProps) => {
               }
             })
           }
+          activeChanged={openChanged}
           placement={'right'}
           color={selectedColor}
           type={Type.PRIM}
@@ -167,6 +171,7 @@ export const ColorPicker = (props: IColorPickerProps) => {
         size={size}
         color={selectedColor}
         popup={getPopup()}
+        popupContainsPt={pickerIsOpen} // this should prohbably test to see if the click pt is actually within the picker selector list popup.
       />
   )
 

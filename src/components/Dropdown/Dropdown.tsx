@@ -21,7 +21,8 @@ export interface IDropdownProps extends IGlobalProps {
   selectedVal?: string,
   setSelectedVal?: (val: string | number) => unknown,
   maxItems?: number,
-  uppercase?: boolean
+  uppercase?: boolean,
+  activeChanged?: (isOpen:boolean) => void,
 }
 
 /**
@@ -60,10 +61,6 @@ export const Dropdown = (props: IDropdownProps) => {
   items.forEach((item) => {
     itemsMap.set(item.val, item)
   })
-
-  useEffect(() => {
-    console.log('rerender component', selectedVal)
-  },[selectedVal, active])
 
   const getBorderColor = (): Colors | string | undefined => {
     switch(type){
@@ -152,6 +149,11 @@ export const Dropdown = (props: IDropdownProps) => {
         )
     }
   }
+  
+  const setActiveChanged = (active:boolean) => {
+    setActive(active);
+    props.activeChanged?.(active);
+  }
 
   const dropdown: JSX.Element = 
   (
@@ -169,7 +171,7 @@ export const Dropdown = (props: IDropdownProps) => {
         tooltipPlacement={tooltipPlacement}
         trigger={PopupTrigger.CLICK}
         isOpen={active}
-        setOpen={setActive}
+        setOpen={setActiveChanged}
         size={size}
         fillWidth={true}
         color={color}
