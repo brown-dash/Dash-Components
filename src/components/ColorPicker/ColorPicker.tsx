@@ -30,7 +30,7 @@ export const ColorPicker = (props: IColorPickerProps) => {
     return (number < 16 ? '0' : '') + number.toString(16).toUpperCase();
 }
   const colorString = (color: any ) => {
-    return color.hex + (color.rgb.a ? decimalToHexString(Math.round(color.rgb.a * 255)) : 'ff');
+    return color.hex === 'transparent' ? color.hex: color.hex + (color.rgb.a ? decimalToHexString(Math.round(color.rgb.a * 255)) : 'ff');
   }
   const onChange = (color: any) => {
     setSelectedColor(colorString(color) as any);
@@ -85,7 +85,7 @@ export const ColorPicker = (props: IColorPickerProps) => {
 
   const getColorPicker = (pickerType: ColorPickerType):JSX.Element => {
     const colorPalette = ["FFFFFF", "#F9F6F2", "#E2E2E2", "#D1D1D1", "#737576", "#4b4a4d", "#222021", 
-    '#EB9694', '#FAD0C3', '#FEF3BD', '#C1E1C5', '#BEDADC', '#C4DEF6', '#BED3F3', '#D4C4FB'
+    '#EB9694', '#FAD0C3', '#FEF3BD', '#C1E1C5', '#BEDADC', '#C4DEF6', '#BED3F3', '#D4C4FB', "transparent"
     ]
     switch(pickerType) {
       case "Block":
@@ -148,7 +148,7 @@ export const ColorPicker = (props: IColorPickerProps) => {
           }
           activeChanged={openChanged}
           placement={'right'}
-          color={selectedColor}
+          color={selectedColor === 'transparent' ? "white":selectedColor}
           type={Type.PRIM}
           dropdownType={DropdownType.SELECT}
           selectedVal={picker}
