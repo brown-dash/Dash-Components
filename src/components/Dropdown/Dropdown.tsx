@@ -162,7 +162,7 @@ export const Dropdown = (props: IDropdownProps) => {
     >
       <Popup
         toggle={
-          <Tooltip arrow={true} placement={tooltipPlacement} title={itemsMap.get(selectedVal) ? itemsMap.get(selectedVal).text : title}>
+          <Tooltip disableInteractive={true} arrow={true} placement={tooltipPlacement} title={itemsMap.get(selectedVal) ? itemsMap.get(selectedVal).text : title}>
             {getToggle()}
           </Tooltip>
         }

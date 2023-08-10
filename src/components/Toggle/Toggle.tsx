@@ -123,7 +123,7 @@ export const Toggle = (props: IToggleProps) => {
     case ToggleType.SWITCH:
     default:
       toggleElement =  (
-        <Tooltip arrow={true} placement={tooltipPlacement} title={tooltip}>
+        <Tooltip disableInteractive={true} arrow={true} placement={tooltipPlacement} title={tooltip}>
           <div
             className={`toggle-container ${toggleType}`}
             onPointerDown={handlePointerDown}

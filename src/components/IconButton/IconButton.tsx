@@ -122,7 +122,7 @@ export const IconButton = (props: IButtonProps) => {
   }
 
   const iconButton: JSX.Element = (
-    <Tooltip arrow={true} placement={tooltipPlacement} title={tooltip}>
+    <Tooltip disableInteractive={true} arrow={true} placement={tooltipPlacement} title={tooltip}>
       <div
         className={`iconButton-container ${type} ${inactive && 'inactive'}`}
         onClick={handleClick}
