@@ -27,6 +27,7 @@ export const MultiToggle = (props: IMultiToggleProps) => {
         <Popup
             toggle={<IconButton
                 color={color}
+                label={props.label}
                 {...itemsMap.get(selectedVal)}
                 tooltip={tooltip}
                 tooltipPlacement={tooltipPlacement}

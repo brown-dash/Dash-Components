@@ -13,6 +13,7 @@ const MultiToggleStory: Story<IMultiToggleProps> = (args) => <MultiToggle {...ar
 export const MultiToggleOne = MultiToggleStory.bind({})
 MultiToggleOne.args = {
   tooltip: "Text alignment",
+  label: "Alignment",
   items: [
     {
       icon: <FaAlignLeft/>,
