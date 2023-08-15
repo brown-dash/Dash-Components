@@ -16,11 +16,12 @@ export interface IColorPickerProps extends IGlobalProps {
   colorPickerType?: ColorPickerType
   selectedColor?: string
   setSelectedColor: (color: any) => unknown
+  setFinalColor: (color:any) => unknown
 }
 
 export const ColorPicker = (props: IColorPickerProps) => {
   const [selectedColorLoc, setSelectedColorLoc] = useState();
-  const { text, colorPickerType, fillWidth, formLabelPlacement, size = Size.SMALL, type = Type.TERT, icon, selectedColor = selectedColorLoc, setSelectedColor = setSelectedColorLoc, tooltip, color='black', formLabel } = props
+  const { text, colorPickerType, fillWidth, formLabelPlacement, size = Size.SMALL, type = Type.TERT, icon, selectedColor = selectedColorLoc, setSelectedColor = setSelectedColorLoc, setFinalColor = setSelectedColorLoc, tooltip, color='black', formLabel } = props
   const [isOpen, setOpen] = useState<boolean>(false)
   const [pickerSelectorOpen, setPickerSelectorOpen] = useState<boolean>(false);
   const decimalToHexString = (number: number) => {
@@ -34,6 +35,9 @@ export const ColorPicker = (props: IColorPickerProps) => {
   }
   const onChange = (color: any) => {
     setSelectedColor(colorString(color) as any);
+  }
+  const onChangeComplete = (color: any) => {
+    setFinalColor(colorString(color) as any);
   }
   const [picker, setPicker] = useState<string>("Chrome")
 
@@ -95,7 +99,7 @@ export const ColorPicker = (props: IColorPickerProps) => {
             triangle={'hide'}
             colors={colorPalette}
             onChange={onChange}
-            onChangeComplete={onChange}
+            onChangeComplete={onChangeComplete}
           />
         );
       case "Chrome":
@@ -104,7 +108,7 @@ export const ColorPicker = (props: IColorPickerProps) => {
           <ChromePicker
             color={selectedColor}
             onChange={onChange}
-            onChangeComplete={onChange}
+            onChangeComplete={onChangeComplete}
           />
         );
       case "GitHub":
@@ -114,7 +118,7 @@ export const ColorPicker = (props: IColorPickerProps) => {
             colors={colorPalette}
             triangle={'hide'}
             onChange={onChange}
-            onChangeComplete={onChange}
+            onChangeComplete={onChangeComplete}
           />
         );
       case "Slider":
@@ -123,7 +127,7 @@ export const ColorPicker = (props: IColorPickerProps) => {
           <SliderPicker
             color={selectedColor}
             onChange={onChange}
-            onChangeComplete={onChange}
+            onChangeComplete={onChangeComplete}
           />
           </div>
         );

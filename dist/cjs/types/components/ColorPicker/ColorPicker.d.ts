@@ -9,5 +9,6 @@ export interface IColorPickerProps extends IGlobalProps {
     colorPickerType?: ColorPickerType;
     selectedColor?: string;
     setSelectedColor: (color: any) => unknown;
+    setFinalColor: (color: any) => unknown;
 }
 export declare const ColorPicker: (props: IColorPickerProps) => JSX.Element;
