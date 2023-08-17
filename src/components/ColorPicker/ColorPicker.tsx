@@ -6,6 +6,7 @@ import { IconButton } from '../IconButton'
 import { Popup, PopupTrigger } from '../Popup'
 import './ColorPicker.scss'
 import { Dropdown, DropdownType } from '../Dropdown'
+import { elementTypeAcceptingRef } from '@mui/utils'
 
 export const ColorPickerArray= ["Chrome", "GitHub", "Block", "Slider"]
 export type ColorPickerType= typeof ColorPickerArray[number];
@@ -140,6 +141,9 @@ export const ColorPicker = (props: IColorPickerProps) => {
     if (colorPickerType){
       return getColorPicker(colorPickerType)
     } else {
+      // Todo: this would be much easier if the selectedColor was a Color, not a string.
+      const newColor =  (selectedColor === 'transparent' ? 'white': selectedColor?.startsWith("#") ? selectedColor.substring(0,7):
+                         selectedColor?.startsWith('rgba') ? selectedColor?.replace(/,[0-9]*\)/,"1)") : selectedColor);
       return <div style={{height: 'fit-content'}}>
         <Dropdown
           items={
@@ -152,7 +156,7 @@ export const ColorPicker = (props: IColorPickerProps) => {
           }
           activeChanged={openChanged}
           placement={'right'}
-          color={selectedColor === 'transparent' ? "white":selectedColor}
+          color={newColor}
           type={Type.PRIM}
           dropdownType={DropdownType.SELECT}
           selectedVal={picker}
