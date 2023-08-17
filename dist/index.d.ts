@@ -134,6 +134,7 @@ interface IColorPickerProps extends IGlobalProps {
     text?: string;
     icon?: JSX.Element | string;
     colorPickerType?: ColorPickerType;
+    defaultPickerType?: ColorPickerType;
     selectedColor?: string;
     setSelectedColor: (color: any) => unknown;
     setFinalColor: (color: any) => unknown;

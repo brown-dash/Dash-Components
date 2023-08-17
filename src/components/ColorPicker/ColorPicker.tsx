@@ -1,20 +1,20 @@
 import React, { useState } from 'react'
-import { GithubPicker, ChromePicker, BlockPicker, SliderPicker } from 'react-color'
-import { getFontSize, IGlobalProps, Size, Type , getFormLabelSize } from '../../global'
+import { GithubPicker, ChromePicker, BlockPicker, SliderPicker, SketchPicker } from 'react-color'
+import { IGlobalProps, Size, Type , getFormLabelSize } from '../../global'
 import { Button } from '../Button'
 import { IconButton } from '../IconButton'
 import { Popup, PopupTrigger } from '../Popup'
 import './ColorPicker.scss'
 import { Dropdown, DropdownType } from '../Dropdown'
-import { elementTypeAcceptingRef } from '@mui/utils'
 
-export const ColorPickerArray= ["Chrome", "GitHub", "Block", "Slider"]
+export const ColorPickerArray= ["Classic", "Chrome", "GitHub", "Block", "Slider"]
 export type ColorPickerType= typeof ColorPickerArray[number];
 
 export interface IColorPickerProps extends IGlobalProps {
   text?: string
   icon?: JSX.Element | string
   colorPickerType?: ColorPickerType
+  defaultPickerType?: ColorPickerType
   selectedColor?: string
   setSelectedColor: (color: any) => unknown
   setFinalColor: (color:any) => unknown
@@ -22,7 +22,7 @@ export interface IColorPickerProps extends IGlobalProps {
 
 export const ColorPicker = (props: IColorPickerProps) => {
   const [selectedColorLoc, setSelectedColorLoc] = useState();
-  const { text, colorPickerType, fillWidth, formLabelPlacement, size = Size.SMALL, type = Type.TERT, icon, selectedColor = selectedColorLoc, setSelectedColor = setSelectedColorLoc, setFinalColor = setSelectedColorLoc, tooltip, color='black', formLabel } = props
+  const { defaultPickerType, text, colorPickerType, fillWidth, formLabelPlacement, size = Size.SMALL, type = Type.TERT, icon, selectedColor = selectedColorLoc, setSelectedColor = setSelectedColorLoc, setFinalColor = setSelectedColorLoc, tooltip, color='black', formLabel } = props
   const [isOpen, setOpen] = useState<boolean>(false)
   const [pickerSelectorOpen, setPickerSelectorOpen] = useState<boolean>(false);
   const decimalToHexString = (number: number) => {
@@ -40,7 +40,7 @@ export const ColorPicker = (props: IColorPickerProps) => {
   const onChangeComplete = (color: any) => {
     setFinalColor(colorString(color) as any);
   }
-  const [picker, setPicker] = useState<string>("Chrome")
+  const [picker, setPicker] = useState<string>(defaultPickerType ?? "Classic")
 
   const getToggle = () => {
     if (icon && !text) {
@@ -103,6 +103,13 @@ export const ColorPicker = (props: IColorPickerProps) => {
             onChangeComplete={onChangeComplete}
           />
         );
+      case "Classic":
+        return (<SketchPicker
+          onChange={onChange}
+          onChangeComplete={onChangeComplete}
+          presetColors={['#D0021B', '#F5A623', '#F8E71C', '#8B572A', '#7ED321', '#417505', '#9013FE', '#4A90E2', '#50E3C2', '#B8E986', '#000000', '#4A4A4A', '#9B9B9B', '#FFFFFF', '#f1efeb', 'transparent']}
+          color={selectedColor}
+        />);
       case "Chrome":
       default:
         return (

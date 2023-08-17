@@ -20,6 +20,7 @@ Primary.args = {
   onChange: (color) => {
     console.log(color)
   },
+  defaultPickerType: "Slider",
   color: "black",
   tooltip: 'Choose your color'
 }
