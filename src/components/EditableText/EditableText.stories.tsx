@@ -18,7 +18,9 @@ Primary.args = {
     type: Type.PRIM,
     size: Size.MEDIUM,
     fillWidth: true,
-    placeholder: '...'
+    placeholder: '...',
+    onchange: (val) => console.log(val),
+    onEdit: (val) => console.log(val),
 };
 
 // export const Background = Template.bind({});

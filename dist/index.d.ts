@@ -192,6 +192,7 @@ declare const Dropdown: (props: IDropdownProps) => JSX.Element;
 interface IEditableTextProps extends IGlobalProps {
     val?: string | number;
     setVal?: (newText: string | number) => unknown;
+    onEnter?: (newText: string | number) => unknown;
     setEditing?: (bool: boolean) => unknown;
     placeholder?: string;
     editing?: boolean;

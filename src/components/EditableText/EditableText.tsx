@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { Colors, IGlobalProps, Size, TextAlignment, Type, getFontSize, getFormLabelSize, getHeight, isDark } from '../../global'
 import './EditableText.scss'
-import { IconButton } from '../IconButton'
 import { Toggle, ToggleType } from '../Toggle'
 import { FaEye, FaEyeSlash} from 'react-icons/fa'
 
 export interface IEditableTextProps extends IGlobalProps {
   val?: string | number
   setVal?: (newText: string | number) => unknown
+  onEnter?: (newText: string | number) => unknown
   setEditing?: (bool: boolean) => unknown
   placeholder?: string
   editing?: boolean
@@ -32,6 +32,7 @@ export const EditableText = (props: IEditableTextProps) => {
     size,
     val = valLoc,
     setVal = setValLoc,
+    onEnter,
     setEditing = setEditingLoc,
     color = Colors.MEDIUM_BLUE,
     type = Type.PRIM,
@@ -50,6 +51,11 @@ export const EditableText = (props: IEditableTextProps) => {
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setVal(event.target.value)
+  }
+  const handleKeyPress = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      onEnter?.((event.target as HTMLInputElement).value)
+    }
   }
 
   const getBorderColor = (): Colors | string | undefined => {
@@ -120,6 +126,7 @@ export const EditableText = (props: IEditableTextProps) => {
         type={password && !showPassword ? 'password' : undefined}
         autoFocus
         onChange={handleOnChange}
+        onKeyPress={handleKeyPress}
         onBlur={() => {
           !password && setEditing(false)
         }}
