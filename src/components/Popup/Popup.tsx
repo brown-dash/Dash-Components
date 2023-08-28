@@ -113,6 +113,7 @@ export const Popup = (props: IPopupProps) => {
           size={size}
           type={type}
           color={color}
+          background={background}
           toggleType={ToggleType.BUTTON}
           toggleStatus={isOpen}
           icon={icon}
@@ -136,7 +137,7 @@ export const Popup = (props: IPopupProps) => {
         ]}
       >
           <div className={`popup-container`}  ref={popperRef}
-            style={{width: width, height: height, background: background}}
+            style={{width, height, background}}
             onPointerDown={(e) => {
               e.stopPropagation();
             }}

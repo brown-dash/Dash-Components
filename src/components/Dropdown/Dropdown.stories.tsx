@@ -70,9 +70,11 @@ Select.args = {
 export const Click = Template.bind({})
 Click.args = {
   title: 'Scroll Options',
-  type: Type.PRIM,
+  type: Type.TERT,
+  color: 'red',
+  background: 'blue',
   dropdownType: DropdownType.CLICK,
   items: dropdownItems,
   size: Size.SMALL,
-  color: Colors.SUCCESS_GREEN
+  //color: Colors.SUCCESS_GREEN
 }

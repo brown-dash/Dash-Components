@@ -45,6 +45,7 @@ export const ListItem = (props: IListItemProps) => {
     size = Size.SMALL,
     style,
     color,
+    background,
     uppercase
   } = props
 
@@ -75,7 +76,7 @@ export const ListItem = (props: IListItemProps) => {
         <div className="content" 
          style={{
           fontSize: getFontSize(size), 
-          color: style && style.color ? style.color : color
+          color: style?.color ? style.color : color
          }}>
           {icon}
           <div className="text" style={{
@@ -85,7 +86,7 @@ export const ListItem = (props: IListItemProps) => {
         {shortcut && !inactive && (
           <div 
             className="shortcut"
-            color={style && style.color ? style.color : color}
+            color={style?.color ? style.color : color}
           >
             {shortcut}
           </div>
@@ -95,7 +96,8 @@ export const ListItem = (props: IListItemProps) => {
             type={Type.PRIM}
             size={Size.SMALL} 
             icon={<fa.FaCaretRight/>}
-            color={style && style.color ? style.color : color}
+            color={style?.color ? style.color : color}
+            background={background}
             inactive
           />
         )}
@@ -105,7 +107,7 @@ export const ListItem = (props: IListItemProps) => {
       )}
       <div className="listItem-background" 
         style={{
-          background: style && style.color ? style.color : color,
+          background: background ? background : style?.color ? style.color : color,
           filter: selected ? 'opacity(0.3)' : isHovered && !inactive ? 'opacity(0.2)' : 'opacity(0)'
         }}
       />
@@ -116,9 +118,10 @@ export const ListItem = (props: IListItemProps) => {
     placement={'right'}
     toggle={listItem}
     color={color}
+    background={background}
     trigger={PopupTrigger.CLICK}
     popup={
-      <ListBox color={color} items={items}/>
+      <ListBox color={color} background={background} items={items}/>
     }
     fillWidth={true}
   />

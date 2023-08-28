@@ -83,11 +83,12 @@ export const Dropdown = (props: IDropdownProps) => {
     fontFamily: 'sans-serif',
     textTransform: uppercase ? 'uppercase' : undefined,
     borderColor: getBorderColor(),
+    background,
     color: color && background? color :  type == (Type.TERT) ? isDark(color) ? Colors.WHITE : Colors.BLACK : color
   }
 
   const backgroundProperties: React.CSSProperties = {
-    background: color
+    background: background ?? color
   }
 
   const getCaretDirection = (): JSX.Element => {
@@ -116,7 +117,7 @@ export const Dropdown = (props: IDropdownProps) => {
             style={{...defaultProperties, height: getHeight(height, size), width: width }}
           >
             {selectedVal && (
-              <ListItem size={size} {...itemsMap.get(selectedVal)} style={{ color: defaultProperties.color }} inactive />
+              <ListItem size={size} {...itemsMap.get(selectedVal)} style={{ color: defaultProperties.color, background: defaultProperties.background}} inactive />
             )}
             <div className="toggle-caret">
               <IconButton
@@ -136,7 +137,7 @@ export const Dropdown = (props: IDropdownProps) => {
             className={`dropdown-toggle ${type} ${inactive && 'inactive'}`}
             style={{...defaultProperties, height: getHeight(height, size), width: width }}
           >
-            <ListItem val={'title'} text={title} size={size} style={{ color: defaultProperties.color }} inactive />
+            <ListItem val={'title'} text={title} size={size} style={{ color: defaultProperties.color , background: defaultProperties.backdropFilter}} inactive />
             <div className="toggle-caret">
               <IconButton
                 size={size}
