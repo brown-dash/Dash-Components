@@ -16,6 +16,7 @@ export const IconButton = (props: IButtonProps) => {
     inactive,
     type = Type.PRIM,
     color = Colors.MEDIUM_BLUE,
+    background,
     label,
     height,
     size = Size.SMALL,
@@ -96,6 +97,7 @@ export const IconButton = (props: IButtonProps) => {
   }
 
   const getBackground = (): Colors | string | undefined => {
+    if(background) return background;
     switch(type){
       case Type.PRIM:
         return color;

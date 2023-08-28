@@ -28,6 +28,7 @@ export const Toggle = (props: IToggleProps) => {
     type = Type.SEC,
     style,
     color,
+    background,
     text,
     icon,
     iconFalse = icon,
@@ -95,6 +96,7 @@ export const Toggle = (props: IToggleProps) => {
           size={size}
           iconPlacement={iconPlacement}
           color={color}
+          background={background}
           label={label}
           fillWidth={fillWidth}
           align={align}
@@ -114,6 +116,7 @@ export const Toggle = (props: IToggleProps) => {
           type={type}
           size={size}
           color={color}
+          background={background}
           label={label}
           fillWidth={fillWidth}
           align={align}
@@ -145,7 +148,7 @@ export const Toggle = (props: IToggleProps) => {
               }}></div>  
             </div>
             <div className={`toggle-background ${toggleStatus && 'active'}`}
-              style={{ background: color }}
+              style={{ background: color}}
             />
           </div>
         </Tooltip>

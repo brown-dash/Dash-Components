@@ -40,6 +40,7 @@ export const Button = (props: IButtonProps) => {
     iconPlacement = 'right',
     size = Size.SMALL,
     color = Colors.MEDIUM_BLUE,
+    background,
     style,
     tooltip,
     tooltipPlacement = 'top',
@@ -124,7 +125,8 @@ export const Button = (props: IButtonProps) => {
   }
 
   const getBackground = (): Colors | string | undefined => {
-    switch(type){
+    if (background) return background;
+    switch(type) {
       case Type.PRIM:
         if (colorPicker) return colorPicker
         return color;

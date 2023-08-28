@@ -8,6 +8,7 @@ export interface IGlobalProps {
   width?: number
   fillWidth?: boolean
   color?: string
+  background?: string
 
   // Type
   type?: Type
