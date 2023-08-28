@@ -81,6 +81,7 @@ export const IconButton = (props: IButtonProps) => {
   }
 
   const getColor = (): Colors | string | undefined => {
+    if (color && background) return color;
     switch(type){
       case Type.PRIM:
         return color;

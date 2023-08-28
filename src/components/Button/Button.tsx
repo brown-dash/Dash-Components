@@ -107,6 +107,7 @@ export const Button = (props: IButtonProps) => {
   }
 
   const getColor = (): Colors | string | undefined => {
+    if (color && background) return color;
     switch(type){
       case Type.PRIM:
         if (colorPicker) return colorPicker

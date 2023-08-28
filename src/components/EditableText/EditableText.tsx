@@ -35,6 +35,7 @@ export const EditableText = (props: IEditableTextProps) => {
     onEnter,
     setEditing = setEditingLoc,
     color = Colors.MEDIUM_BLUE,
+    background,
     type = Type.PRIM,
     placeholder,
     width,
@@ -71,6 +72,7 @@ export const EditableText = (props: IEditableTextProps) => {
   }
 
   const getColor = (): Colors | string | undefined => {
+    if (color && background) return color;
     switch(type){
       case Type.PRIM:
         return color;
@@ -83,6 +85,7 @@ export const EditableText = (props: IEditableTextProps) => {
   }
 
   const getBackground = (): Colors | string | undefined => {
+    if (background) return background;
     switch(type){
       case Type.PRIM:
         return color;
