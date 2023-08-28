@@ -66,6 +66,7 @@ interface IGlobalProps {
     width?: number;
     fillWidth?: boolean;
     color?: string;
+    background?: string;
     type?: Type;
     inactive?: boolean;
     tooltip?: string;
