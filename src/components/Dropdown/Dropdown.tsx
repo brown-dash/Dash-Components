@@ -47,6 +47,7 @@ export const Dropdown = (props: IDropdownProps) => {
     tooltipPlacement = 'top',
     inactive,
     color = Colors.MEDIUM_BLUE,
+    background,
     title = "Dropdown",
     type, 
     width,
@@ -82,7 +83,7 @@ export const Dropdown = (props: IDropdownProps) => {
     fontFamily: 'sans-serif',
     textTransform: uppercase ? 'uppercase' : undefined,
     borderColor: getBorderColor(),
-    color: type == (Type.TERT) ? isDark(color) ? Colors.WHITE : Colors.BLACK : color
+    color: color && background? color :  type == (Type.TERT) ? isDark(color) ? Colors.WHITE : Colors.BLACK : color
   }
 
   const backgroundProperties: React.CSSProperties = {
