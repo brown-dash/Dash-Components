@@ -23,6 +23,8 @@ export interface IDropdownProps extends IGlobalProps {
   maxItems?: number,
   uppercase?: boolean,
   activeChanged?: (isOpen:boolean) => void,
+  onDown?: (e:React.PointerEvent, val:string|number) => void,
+  onItemDown?: (e:React.PointerEvent, val:number | string) => void,
 }
 
 /**
@@ -54,6 +56,8 @@ export const Dropdown = (props: IDropdownProps) => {
     formLabel,
     formLabelPlacement,
     fillWidth = true,
+    onItemDown,
+    onDown,
     uppercase
   } = props
 
@@ -117,7 +121,7 @@ export const Dropdown = (props: IDropdownProps) => {
             style={{...defaultProperties, height: getHeight(height, size), width: width }}
           >
             {selectedVal && (
-              <ListItem size={size} {...itemsMap.get(selectedVal)} style={{ color: defaultProperties.color, background: defaultProperties.background}} inactive />
+              <ListItem size={size} onItemDown={(e,val) => onDown?.(e, val)} {...itemsMap.get(selectedVal)} style={{ color: defaultProperties.color, background: defaultProperties.background}} inactive />
             )}
             <div className="toggle-caret">
               <IconButton
@@ -137,7 +141,7 @@ export const Dropdown = (props: IDropdownProps) => {
             className={`dropdown-toggle ${type} ${inactive && 'inactive'}`}
             style={{...defaultProperties, height: getHeight(height, size), width: width }}
           >
-            <ListItem val={'title'} text={title} size={size} style={{ color: defaultProperties.color , background: defaultProperties.backdropFilter}} inactive />
+            <ListItem val={'title'} onItemDown={(e,val) => onDown?.(e, val)} text={title} size={size} style={{ color: defaultProperties.color , background: defaultProperties.backdropFilter}} inactive />
             <div className="toggle-caret">
               <IconButton
                 size={size}
@@ -182,6 +186,7 @@ export const Dropdown = (props: IDropdownProps) => {
             maxItems={maxItems}
             items={items}
             color={color}
+            onItemDown={onItemDown}
             selectedVal={selectedVal}
             setSelectedVal={setSelectedVal}
             size={size}

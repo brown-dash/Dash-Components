@@ -18,6 +18,7 @@ export interface IListItemProps extends IGlobalProps {
   selected?: boolean
   setSelectedVal?: (val: string | number) => unknown
   onClick?: () => void
+  onItemDown?: (e:React.PointerEvent, val:string| number) => void
   uppercase?: boolean
 }
 
@@ -41,6 +42,7 @@ export const ListItem = (props: IListItemProps) => {
     selected,
     setSelectedVal,
     onClick,
+    onItemDown,
     inactive,
     size = Size.SMALL,
     style,
@@ -54,6 +56,7 @@ export const ListItem = (props: IListItemProps) => {
   let listItem:JSX.Element = (
     <div
       className="listItem-container"
+      onPointerDown={(e) => onItemDown?.(e, val)}
       onClick={(e: React.MouseEvent) => {
         if (!items) {
           onClick && !inactive && onClick()
@@ -63,6 +66,7 @@ export const ListItem = (props: IListItemProps) => {
       }}
       style={{
         minHeight: getHeight(undefined, size),
+        userSelect: 'none',
         ...style
       }}
       onPointerEnter={() => {

@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 import { IGlobalProps } from '../../global';
 import './ListItem.scss';
 export interface IListItemProps extends IGlobalProps {
@@ -12,6 +12,7 @@ export interface IListItemProps extends IGlobalProps {
     selected?: boolean;
     setSelectedVal?: (val: string | number) => unknown;
     onClick?: () => void;
+    onItemDown?: (e: React.PointerEvent, val: string | number) => void;
     uppercase?: boolean;
 }
 /**

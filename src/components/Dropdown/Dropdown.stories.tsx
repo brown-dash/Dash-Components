@@ -76,5 +76,7 @@ Click.args = {
   dropdownType: DropdownType.CLICK,
   items: dropdownItems,
   size: Size.SMALL,
+  onDown: (e, val) => console.log("DOWN" + val),
+  onItemDown: (e, val) => console.log("ITEM DOWN" + val)
   //color: Colors.SUCCESS_GREEN
 }

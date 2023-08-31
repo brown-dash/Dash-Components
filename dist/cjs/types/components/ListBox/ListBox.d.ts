@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 import { IListItemProps } from '../ListItem';
 import './ListBox.scss';
 import { IGlobalProps } from '../../global';
@@ -8,6 +8,7 @@ export interface IListBoxProps extends IGlobalProps {
     selectedVal?: string | number;
     setSelectedVal?: (val: string | number) => unknown;
     maxItems?: number;
+    onItemDown?: (e: React.PointerEvent, val: number | string) => void;
 }
 /**
  *

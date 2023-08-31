@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactText } from 'react'
 import { IListItemProps, ListItem } from '../ListItem'
 import './ListBox.scss'
 import { Colors, IGlobalProps, isDark , getFormLabelSize } from '../../global'
@@ -9,6 +9,7 @@ export interface IListBoxProps extends IGlobalProps {
   selectedVal?: string | number
   setSelectedVal?: (val: string | number) => unknown
   maxItems?: number
+  onItemDown?: (e:React.PointerEvent, val:number|string) => void
 }
 
 /**
@@ -25,6 +26,7 @@ export const ListBox = (props: IListBoxProps) => {
     selectedVal,
     setSelectedVal,
     filter,
+    onItemDown,
     color = Colors.MEDIUM_BLUE
   } = props
 
@@ -37,6 +39,7 @@ export const ListBox = (props: IListBoxProps) => {
       <ListItem
         key={ind}
         ind={ind}
+        onItemDown={onItemDown}
         selected={selected}
         color={color}
         onClick={() => {

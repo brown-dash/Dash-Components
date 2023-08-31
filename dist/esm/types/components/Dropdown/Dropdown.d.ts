@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 import { IGlobalProps, Placement } from '../../global';
 import { IListItemProps } from '../ListItem';
 import './Dropdown.scss';
@@ -16,6 +16,8 @@ export interface IDropdownProps extends IGlobalProps {
     maxItems?: number;
     uppercase?: boolean;
     activeChanged?: (isOpen: boolean) => void;
+    onDown?: (e: React.PointerEvent, val: string | number) => void;
+    onItemDown?: (e: React.PointerEvent, val: number | string) => void;
 }
 /**
  *

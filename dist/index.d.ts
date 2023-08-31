@@ -153,6 +153,7 @@ interface IListItemProps extends IGlobalProps {
     selected?: boolean;
     setSelectedVal?: (val: string | number) => unknown;
     onClick?: () => void;
+    onItemDown?: (e: React$1.PointerEvent, val: string | number) => void;
     uppercase?: boolean;
 }
 /**
@@ -179,6 +180,8 @@ interface IDropdownProps extends IGlobalProps {
     maxItems?: number;
     uppercase?: boolean;
     activeChanged?: (isOpen: boolean) => void;
+    onDown?: (e: React$1.PointerEvent, val: string | number) => void;
+    onItemDown?: (e: React$1.PointerEvent, val: number | string) => void;
 }
 /**
  *
@@ -243,6 +246,7 @@ interface IListBoxProps extends IGlobalProps {
     selectedVal?: string | number;
     setSelectedVal?: (val: string | number) => unknown;
     maxItems?: number;
+    onItemDown?: (e: React$1.PointerEvent, val: number | string) => void;
 }
 /**
  *

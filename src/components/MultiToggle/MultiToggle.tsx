@@ -35,7 +35,6 @@ export const MultiToggle = (props: IMultiToggleProps) => {
             color={color}
             popup={<Group padding={5} color={color} columnGap={0} style={{overflow: 'hidden'}}>
                 {items.map((item) => {
-                    console.log(item)
                     return <Toggle color={color} icon={item.icon} tooltip={item.tooltip} toggleStatus={selectedVal === item.val} 
                     type={Type.PRIM}
                     toggleType={ToggleType.BUTTON}
