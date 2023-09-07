@@ -18,7 +18,7 @@ export interface IPopupProps extends IGlobalProps {
   size?: Size
   height?: number
   toggle?: JSX.Element;
-  popup: JSX.Element | string
+  popup: JSX.Element | string | (() => JSX.Element)
   trigger?: PopupTrigger
   isOpen?: boolean;
   setOpen?: (b: boolean) => void;
@@ -153,7 +153,7 @@ export const Popup = (props: IPopupProps) => {
               }
             }}
           >
-            {popup}
+            {typeof popup === 'function' ? popup() : popup}
           </div>
       </Popper>
     </div>
