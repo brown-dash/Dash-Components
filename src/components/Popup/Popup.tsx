@@ -153,7 +153,7 @@ export const Popup = (props: IPopupProps) => {
               }
             }}
           >
-            {typeof popup === 'function' ? popup() : popup}
+            {!isOpen ? (null): typeof popup === 'function' ? popup() : popup}
           </div>
       </Popper>
     </div>
