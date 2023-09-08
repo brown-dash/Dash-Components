@@ -42,10 +42,8 @@ export const ListBox = (props: IListBoxProps) => {
         onItemDown={onItemDown}
         selected={selected}
         color={color}
-        onClick={() => {
-          item.onClick && item.onClick()
-          setSelectedVal && setSelectedVal(item.val)
-        }}
+        setSelectedVal={setSelectedVal}
+        onClick={item.onClick}
         {...item}
       />
     )

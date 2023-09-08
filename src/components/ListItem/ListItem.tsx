@@ -56,12 +56,12 @@ export const ListItem = (props: IListItemProps) => {
   let listItem:JSX.Element = (
     <div
       className="listItem-container"
-      onPointerDown={(e) => onItemDown?.(e, val)}
+      onPointerDown={(e) => onItemDown?.(e, val) && setSelectedVal?.(val)}
       onClick={(e: React.MouseEvent) => {
         if (!items) {
-          onClick && !inactive && onClick()
-          onClick && !inactive && e.stopPropagation()
-          setSelectedVal && setSelectedVal(val)
+          !inactive && onClick?.()
+          !inactive && onClick && e.stopPropagation()
+          setSelectedVal?.(val)
         }
       }}
       style={{

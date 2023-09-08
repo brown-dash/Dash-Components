@@ -74,13 +74,11 @@ Click.args = {
   type: Type.TERT,
   color: 'red',
   background: 'blue',
-  width: 20,
-  height: 20,
-  dropdownType: DropdownType.CLICK,
+  dropdownType: DropdownType.SELECT,
   items: dropdownItems,
   closeOnSelect: true,
-  size: Size.SMALL,
-  onDown: (e, val) => console.log("DOWN" + val),
-  onItemDown: (e, val) => console.log("ITEM DOWN" + val)
+  size: Size.XSMALL,
+  setSelectedVal: (val) => console.log("SET sel = "+  val),
+  onItemDown: (e, val) => { console.log("ITEM DOWN" + val); return true; }
   //color: Colors.SUCCESS_GREEN
 }
