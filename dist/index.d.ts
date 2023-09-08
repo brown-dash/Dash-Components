@@ -175,6 +175,8 @@ interface IDropdownProps extends IGlobalProps {
     placement?: Placement;
     dropdownType: DropdownType;
     title?: string;
+    closeOnSelect?: boolean;
+    iconProvider?: (active: boolean, placement?: Placement) => JSX.Element;
     selectedVal?: string;
     setSelectedVal?: (val: string | number) => unknown;
     maxItems?: number;

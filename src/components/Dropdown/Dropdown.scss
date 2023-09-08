@@ -26,7 +26,7 @@
     top: 100%;
     width: 100%;
   }
-
+  .dropdown-toggle-mini,
   .dropdown-toggle {
     width: calc(100% - 2px);
     display: grid;
@@ -124,6 +124,12 @@
       justify-content: flex-end;
       align-items: center;
       justify-self: center;
+    }
+  }
+  .dropdown-toggle-mini {
+    .toggle-caret {
+      position: absolute;
+      top:0; left:0;
     }
   }
 }

@@ -64,17 +64,21 @@ Select.args = {
   items: dropdownItems,
   size: Size.SMALL,
   selectedVal: 'facebook-marketplace',
+  background: 'blue',
   color: Colors.WHITE
 }
 
 export const Click = Template.bind({})
 Click.args = {
-  title: 'Scroll Options',
+  title: '',
   type: Type.TERT,
   color: 'red',
   background: 'blue',
+  width: 20,
+  height: 20,
   dropdownType: DropdownType.CLICK,
   items: dropdownItems,
+  closeOnSelect: true,
   size: Size.SMALL,
   onDown: (e, val) => console.log("DOWN" + val),
   onItemDown: (e, val) => console.log("ITEM DOWN" + val)

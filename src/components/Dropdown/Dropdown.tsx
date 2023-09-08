@@ -18,6 +18,8 @@ export interface IDropdownProps extends IGlobalProps {
   placement?: Placement
   dropdownType: DropdownType
   title?: string
+  closeOnSelect?: boolean;
+  iconProvider?: (active:boolean, placement?:Placement) => JSX.Element,
   selectedVal?: string,
   setSelectedVal?: (val: string | number) => unknown,
   maxItems?: number,
@@ -44,12 +46,14 @@ export const Dropdown = (props: IDropdownProps) => {
     dropdownType,
     selectedVal,
     setSelectedVal,
+    iconProvider,
     placement = 'bottom-start',
     tooltip,
     tooltipPlacement = 'top',
     inactive,
     color = Colors.MEDIUM_BLUE,
     background,
+    closeOnSelect,
     title = "Dropdown",
     type, 
     width,
@@ -95,7 +99,8 @@ export const Dropdown = (props: IDropdownProps) => {
     background: background ?? color
   }
 
-  const getCaretDirection = (): JSX.Element => {
+  const getCaretDirection = (active: boolean, placement:Placement = 'left'): JSX.Element => {
+    if (iconProvider) return iconProvider(active, placement);
     switch (placement) {
       case 'bottom':
         if (active) return <FaCaretUp/>
@@ -117,16 +122,23 @@ export const Dropdown = (props: IDropdownProps) => {
       case DropdownType.SELECT:
         return (
           <div
-            className={`dropdown-toggle ${type} ${inactive && 'inactive'}`}
+            className={`dropdown-toggle${!selectedVal?"-mini":""} ${type} ${inactive && 'inactive'}`}
             style={{...defaultProperties, height: getHeight(height, size), width: width }}
           >
             {selectedVal && (
-              <ListItem size={size} onItemDown={(e,val) => onDown?.(e, val)} {...itemsMap.get(selectedVal)} style={{ color: defaultProperties.color, background: defaultProperties.background}} inactive />
+              <ListItem size={size} onItemDown={(e,val) => {
+                    onDown?.(e, val);
+                    closeOnSelect && (setActive(false))
+                }} 
+                {...itemsMap.get(selectedVal)} 
+                style={{ color: defaultProperties.color, background: defaultProperties.background}} 
+                inactive 
+              />
             )}
             <div className="toggle-caret">
               <IconButton
                 size={size}
-                icon={getCaretDirection()}
+                icon={getCaretDirection(active,placement)}
                 color={defaultProperties.color}
                 inactive
               />
@@ -138,14 +150,22 @@ export const Dropdown = (props: IDropdownProps) => {
       default:
         return (
           <div
-            className={`dropdown-toggle ${type} ${inactive && 'inactive'}`}
+            className={`dropdown-toggle${!selectedVal?"-mini":""} ${type} ${inactive && 'inactive'}`}
             style={{...defaultProperties, height: getHeight(height, size), width: width }}
           >
-            <ListItem val={'title'} onItemDown={(e,val) => onDown?.(e, val)} text={title} size={size} style={{ color: defaultProperties.color , background: defaultProperties.backdropFilter}} inactive />
+            <ListItem val={'title'} onItemDown={(e,val) => {
+                    onDown?.(e, val);
+                    closeOnSelect && (setActive(false))
+                }} 
+                text={title} 
+                size={size} 
+                style={{ color: defaultProperties.color, background: defaultProperties.backdropFilter}} 
+                inactive 
+            />
             <div className="toggle-caret">
               <IconButton
                 size={size}
-                icon={getCaretDirection()}
+                icon={getCaretDirection(active,placement)}
                 color={defaultProperties.color}
                 inactive
               />
@@ -186,7 +206,10 @@ export const Dropdown = (props: IDropdownProps) => {
             maxItems={maxItems}
             items={items}
             color={color}
-            onItemDown={onItemDown}
+            onItemDown={(e,val) => {
+                onItemDown?.(e,val);
+                closeOnSelect && setActive(false);
+            }}
             selectedVal={selectedVal}
             setSelectedVal={setSelectedVal}
             size={size}
