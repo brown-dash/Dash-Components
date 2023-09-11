@@ -19,6 +19,7 @@ let lastVal = 0;  // bcz: WHY do I have to do this??  the pointerdown event lock
 let lastEndVal = 0;
 
 export const Slider = (props: ISliderProps) => {
+  useEffect(() => console.log(props),[props])
   const [width, setWidth] = useState<number>(100);
   const [valLoc, setNumberLoc] = useState<number>(props.number??(props.min + (props.max-props.min)/2));
   const [endNumberLoc, setEndNumberLoc] = useState<number>(props.endNumber??(props.min + (props.max-props.min)/2));
@@ -85,120 +86,77 @@ export const Slider = (props: ISliderProps) => {
     }
   }
 
-  const getSlider = (): JSX.Element[] => {
-    const pointerup = (e:PointerEvent) => {
-      document.removeEventListener?.('pointerup', pointerup, true);
-      setFinalNumber?.(lastVal)
-      checkAutorange()
-    };
-    if (multithumb) {
-      const pointerEndup = (e:PointerEvent) => {
-        document.removeEventListener?.('pointerup', pointerEndup, true);
-        setFinalEndNumber?.(lastEndVal)
-        checkAutorange()
-      };
-      return [
-        <div className={`range-slider ${size}`}>
-          {getValueLabel(endNumberLoc)}
+  const valSlider = (which: string, val:number, onchange: (val:number) => void, setFinal: () => void) => {
+    const valPointerup = (e:PointerEvent) => {
+        document.removeEventListener('pointerup', valPointerup, true)
+        setFinal();
+        checkAutorange();
+    }
+    return (<div key={which} className={`range-slider ${size}`}>
+          {getValueLabel(val)}
           <input
+            className={`rs-range ${size}`}
             type="range"
             color={color}
             min={min}
             max={max}
-            height={getHeight(height, size)}
             step={step}
-            value={endNumber}
+            defaultValue={val}
+            onPointerDown={e => document.addEventListener('pointerup', valPointerup, true)}
             onChange={e => {
+              onchange(+e.target.value);
               e.stopPropagation();
-              setEndNumber?.(lastEndVal = Math.max(number + (minDiff??0), Number(e.target.value)))
-              setEndNumberLoc(lastEndVal = Math.max(number + (minDiff??0), Number(e.target.value)))
-            }}
-            onPointerDown={e => document.addEventListener('pointerup', pointerEndup, true)}
-            className={`rs-range ${size}`}
-          />
-          </div>,
-        <div className={`range-slider ${size}`}>
-          {getValueLabel(valLoc)}
-            <input
-              type="range"
-              color={color}
-              min={min}
-              max={max}
-              height={getHeight(height, size)}
-              step={step}
-              value={number}
-              onChange={e => {
-                e.stopPropagation();
-                setNumber?.(lastVal = Math.min(endNumber - (minDiff??0), Number(e.target.value)))
-                setNumberLoc(lastVal = Math.min(endNumber - (minDiff??0), Number(e.target.value)))
-              }}
-              onPointerDown={e => document.addEventListener('pointerup', pointerup, true)}
-              className={`rs-range ${size}`}
-            />
-          </div>
-          ]
-    } else {
-      return ([
-        <div className={`range-slider ${size}`}>
-          {getValueLabel(valLoc)}
-          <input 
-            className={`rs-range ${size}`}
-            type="range" 
-            step={step}
-            defaultValue={number}
-            min={min}
-            max={max}
-            draggable={false}
-            onPointerDown={e => document.addEventListener('pointerup', pointerup, true)}
-            onChange={e => {
-              e.stopPropagation();
-              setNumber?.(lastVal = +e.target.value);
-              setNumberLoc(lastVal = +e.target.value);
             }}
           />
-        </div>
-        ])
-    }
+      </div>);
   }
+  const onchange = (val:number) => {
+      setNumber?.(lastVal = Math.min(multithumb ? endNumber - (minDiff??0):Number.MAX_VALUE, val))
+      setNumberLoc(lastVal = Math.min(multithumb ? endNumber - (minDiff??0):Number.MAX_VALUE, val))
+  }
+  const onendchange = (val:number) => {
+    setEndNumber?.(lastEndVal = Math.max(number + (minDiff??0), val))
+    setEndNumberLoc(lastEndVal = Math.max(number + (minDiff??0), val))
+  }
+  const Slider:(JSX.Element|null)[] = [
+      !multithumb ? (null) : valSlider("end", endNumberLoc,onendchange, () => setFinalEndNumber?.(lastEndVal)),
+      valSlider("start", valLoc, onchange, () => setFinalNumber?.(lastVal))
+  ];
 
   const slider: JSX.Element = (
     <div className={`slider-wrapper`} 
-    onPointerEnter={e => {
-      lastVal = valLoc;
-      lastEndVal = endNumberLoc;
-      console.log("Last = " + lastVal, lastEndVal)
-    }}
-    style={{
-      padding: `5px 0px ${getHeight(height, size)}px 0px`,
-      width: fillWidth ? '100%' : 'fit-content'
-    }}>
-      <div className="slider-container" ref={r => {
-          if (r) {
-             new ResizeObserver(() => setWidth(+(r?.clientWidth??100))).observe(r);
-          }
-          setWidth(+(r?.clientWidth??100));
-        }} 
-        style={{height: getHeight(height, size)}}
-        onPointerDown={onPointerDown}
+      onPointerEnter={e => {
+        lastVal = valLoc;
+        lastEndVal = endNumberLoc;
+      }}
+      style={{
+        padding: `5px 0px ${getHeight(height, size)}px 0px`,
+        width: fillWidth ? '100%' : 'fit-content'
+      }}>
+      <div className="slider-container" 
+            ref={r => {
+              r && new ResizeObserver(() => setWidth(+(r?.clientWidth??100))).observe(r);
+              setWidth(+(r?.clientWidth??100));
+            }} 
+            style={{height: getHeight(height, size)}}
+            onPointerDown={onPointerDown}
       >
-        {getSlider()}
-        <div className="selected-range" style={{
-          height: getHeight(height, size) / 10,
-          background: multithumb ? Colors.LIGHT_GRAY : color
+          {Slider}
+          <div className="selected-range" style={{
+            height: getHeight(height, size) / 10,
+            background: multithumb ? Colors.LIGHT_GRAY : color
 
-        }}/>
-        <div className="range" style={{
-          height: getHeight(height, size) / 10,
-          width: getLeftPos(endNumber) - getLeftPos(number),
-          left: getLeftPos(number) + getHeight(height, size),
-          display: multithumb ? undefined: 'none',
-          background: color,
-        }}/>
-        <div className="box-minmax" style={{
-          fontSize: getFontSize(size),
-          color
-        }}>
-          <span>{min}{unit}</span><span>{max}{unit}</span>
+          }}/>
+          <div className="range" style={{
+            height: getHeight(height, size) / 10,
+            width: getLeftPos(endNumber) - getLeftPos(number),
+            left: getLeftPos(number) + getHeight(height, size),
+            display: multithumb ? undefined: 'none',
+            background: color,
+          }}/>
+          <div className="box-minmax" style={{ fontSize: getFontSize(size), color }}>
+          <span>{min}{unit}</span>
+          <span>{max}{unit}</span>
         </div>
       </div>
     </div>
