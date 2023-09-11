@@ -4,6 +4,8 @@ import './Slider.scss'
 
 export interface ISliderProps extends INumberProps {
   multithumb: boolean
+  initialVal?: number
+  initialEndVal?: number
   endNumber?: number
   setEndNumber?: (newVal: number) => void
   setFinalNumber?: (newVal: number) => void
@@ -13,15 +15,16 @@ export interface ISliderProps extends INumberProps {
 }
 
 export const Slider = (props: ISliderProps) => {
-  const [valLoc, setNumberLoc] = useState<number>(0);
-  const [endNumberLoc, setEndNumberLoc] = useState<number>(10);
+  const [width, setWidth] = useState<number>(100);
+  const [valLoc, setNumberLoc] = useState<number>(props.initialVal??(props.min + (props.max-props.min)/2));
+  const [endNumberLoc, setEndNumberLoc] = useState<number>(props.initialEndVal??(props.min + (props.max-props.min)/2));
 
   const { 
     formLabel, 
     formLabelPlacement, 
     multithumb, 
     min = 0, 
-    max = 100, 
+    max = 100,
     step = 1, 
     number = valLoc, 
     endNumber = endNumberLoc, 
@@ -37,18 +40,15 @@ export const Slider = (props: ISliderProps) => {
     color = Colors.MEDIUM_BLUE,
     fillWidth
   } = props
-  const container = useRef(null);
 
   const getLeftPos = (locVal: number) => {
-    if (container && container.current) {
-      const width = (container.current as any).getBoundingClientRect().width - getHeight(height, size);
-      return ((locVal / max) * width)
-    }
-    return locVal;
+    const dragger = getHeight(height,size)
+    console.log(`locVal=${locVal} min=${min} max=${max} width=${width} dragger=${dragger}==> ratio=${((locVal-min)/ (max-min))} newwidt=${(width-dragger)} ${(((locVal-min)/ (max-min)) * (width-dragger))}`)
+      return (((locVal-min)/ (max-min)) * (width-dragger))
   }
 
   const getValueLabel = (locVal: number): JSX.Element => {
-    return (<div id="rs-bullet" className="rs-label-container" 
+    return (<div className="rs-label-container" 
             style={{
               left: `${getLeftPos(locVal)}px`,
               background: color,
@@ -88,7 +88,6 @@ export const Slider = (props: ISliderProps) => {
               setFinalEndNumber?.(endNumberLoc)
             }}
             className={`rs-range ${size}`}
-            id="rs-range"
           />
           </div>,
         <div className={`range-slider ${size}`}>
@@ -111,7 +110,6 @@ export const Slider = (props: ISliderProps) => {
               setFinalNumber?.(valLoc)
             }}
             className={`rs-range ${size}`}
-            id="rs-range"
           />
           </div>
           ]
@@ -119,7 +117,7 @@ export const Slider = (props: ISliderProps) => {
       return ([
         <div className={`range-slider ${size}`}>
           {getValueLabel(number)}
-          <input id="rs-range-line" 
+          <input 
             className={`rs-range ${size}`}
             type="range" 
             step={step}
@@ -145,7 +143,7 @@ export const Slider = (props: ISliderProps) => {
       padding: `5px 0px ${getHeight(height, size)}px 0px`,
       width: fillWidth ? '100%' : 'fit-content'
     }}>
-      <div className="slider-container" id="rs-container" ref={container} style={{height: getHeight(height, size)}}
+      <div className="slider-container" ref={r => setWidth(+(r?.clientWidth??100))} style={{height: getHeight(height, size)}}
         onPointerDown={onPointerDown}
       >
         {getSlider()}
@@ -153,16 +151,17 @@ export const Slider = (props: ISliderProps) => {
           height: getHeight(height, size) / 10,
           background: multithumb ? Colors.LIGHT_GRAY : color
 
-        }}></div>
+        }}/>
         <div className="range" style={{
           height: getHeight(height, size) / 10,
           width: getLeftPos(endNumber) - getLeftPos(number),
           left: getLeftPos(number) + getHeight(height, size),
-          background: multithumb ? color : Colors.LIGHT_GRAY,
-        }}></div>
+          display: multithumb ? undefined: 'none',
+          background: color,
+        }}/>
         <div className="box-minmax" style={{
           fontSize: getFontSize(size),
-          color: color
+          color
         }}>
           <span>{min}{unit}</span><span>{max}{unit}</span>
         </div>
