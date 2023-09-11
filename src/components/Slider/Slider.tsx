@@ -141,7 +141,13 @@ export const Slider = (props: ISliderProps) => {
       padding: `5px 0px ${getHeight(height, size)}px 0px`,
       width: fillWidth ? '100%' : 'fit-content'
     }}>
-      <div className="slider-container" ref={r => setWidth(+(r?.clientWidth??100))} style={{height: getHeight(height, size)}}
+      <div className="slider-container" ref={r => {
+          if (r) {
+             new ResizeObserver(() => setWidth(+(r?.clientWidth??100))).observe(r);
+          }
+          setWidth(+(r?.clientWidth??100));
+        }} 
+        style={{height: getHeight(height, size)}}
         onPointerDown={onPointerDown}
       >
         {getSlider()}
