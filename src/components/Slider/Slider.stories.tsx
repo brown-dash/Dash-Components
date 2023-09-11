@@ -18,6 +18,7 @@ Value.args = {
   step: 1,
   minDiff: 0.1,
   onPointerDown: (e) => console.log("Slider Down"),
+  setNumber: (e) => console.log("Set num", e),
   setFinalNumber: (v) => console.log("Slider final:" + v)
 }
 

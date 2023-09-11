@@ -34,8 +34,8 @@ export const Slider = (props: ISliderProps) => {
     height, 
     unit, 
     onPointerDown, 
-    setNumber = setNumberLoc, 
-    setEndNumber = setEndNumberLoc,
+    setNumber, 
+    setEndNumber,
     setFinalNumber, 
     setFinalEndNumber,
     color = Colors.MEDIUM_BLUE,
@@ -88,7 +88,8 @@ export const Slider = (props: ISliderProps) => {
             value={endNumber}
             onChange={e => {
               e.stopPropagation();
-              setEndNumber(lastEndVal = Math.max(number + (minDiff??0), Number(e.target.value)))
+              setEndNumber?.(lastEndVal = Math.max(number + (minDiff??0), Number(e.target.value)))
+              setEndNumberLoc(lastEndVal = Math.max(number + (minDiff??0), Number(e.target.value)))
             }}
             onPointerDown={e => document.addEventListener('pointerup', pointerEndup, true)}
             className={`rs-range ${size}`}
@@ -106,7 +107,8 @@ export const Slider = (props: ISliderProps) => {
               value={number}
               onChange={e => {
                 e.stopPropagation();
-                setNumber(lastVal = Math.min(endNumber - (minDiff??0), Number(e.target.value)))
+                setNumber?.(lastVal = Math.min(endNumber - (minDiff??0), Number(e.target.value)))
+                setNumberLoc(lastVal = Math.min(endNumber - (minDiff??0), Number(e.target.value)))
               }}
               onPointerDown={e => document.addEventListener('pointerup', pointerup, true)}
               className={`rs-range ${size}`}
@@ -128,7 +130,8 @@ export const Slider = (props: ISliderProps) => {
             onPointerDown={e => document.addEventListener('pointerup', pointerup, true)}
             onChange={e => {
               e.stopPropagation();
-              setNumber(lastVal = +e.target.value);
+              setNumber?.(lastVal = +e.target.value);
+              setNumberLoc(lastVal = +e.target.value);
             }}
           />
         </div>
