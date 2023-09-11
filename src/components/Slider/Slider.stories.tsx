@@ -15,6 +15,7 @@ Value.args = {
   min: -1100,
   max: -100,
   number: -200,
+  autorange: 500,
   step: 1,
   minDiff: 0.1,
   onPointerDown: (e) => console.log("Slider Down"),
@@ -30,6 +31,8 @@ MultiThumb.args = {
   max: 100,
   step: 0.1,
   minDiff: 0.3,
+  autorangeMin: 100,
+  autorangeMultiplier: 2,
   onPointerDown: (e) => console.log("Slider Down"),
   setFinalNumber: (v) => console.log("Slider final:" + v),
   setFinalEndNumber: (v) => console.log("Slider end final:" + v)

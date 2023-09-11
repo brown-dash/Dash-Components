@@ -4,6 +4,9 @@ import './Slider.scss'
 
 export interface ISliderProps extends INumberProps {
   multithumb: boolean
+  autorangeMin?: number
+  autorange?: number
+  autorangeMultiplier?: number
   endNumber?: number
   setEndNumber?: (newVal: number) => void
   setFinalNumber?: (newVal: number) => void
@@ -19,13 +22,15 @@ export const Slider = (props: ISliderProps) => {
   const [width, setWidth] = useState<number>(100);
   const [valLoc, setNumberLoc] = useState<number>(props.number??(props.min + (props.max-props.min)/2));
   const [endNumberLoc, setEndNumberLoc] = useState<number>(props.endNumber??(props.min + (props.max-props.min)/2));
-  
+  const [min, setMin] = useState<number>(props.min);
+  const [max, setMax] = useState<number>(props.max);
   const { 
     formLabel, 
     formLabelPlacement, 
     multithumb, 
-    min = 0, 
-    max = 100,
+    autorange,
+    autorangeMin,
+    autorangeMultiplier,
     step = 1, 
     number = valLoc, 
     endNumber = endNumberLoc, 
@@ -64,16 +69,33 @@ export const Slider = (props: ISliderProps) => {
             </span>
           </div>)
   }
+  const checkAutorange = () => {
+    if (autorange || autorangeMultiplier) {
+      const minval = multithumb ? Math.min(lastVal, lastEndVal) : lastVal;
+      const maxval = multithumb ? Math.max(lastVal, lastEndVal) : lastVal;
+      const autosize = Math.max(autorangeMin??0,(autorange ?? (maxval-minval)))/2;
+      if ((Math.abs((minval - min)/(max-min)) < .15) ||
+          (Math.abs((max - maxval)/(max-min)) < .15)) {
+        setMin(minval - autosize)
+        setMax(maxval + autosize)
+      } else if (multithumb && (maxval - minval < (max-min)/5 && autosize < max-min)) {
+        setMin(minval - autosize)
+        setMax(maxval + autosize)
+      }
+    }
+  }
 
   const getSlider = (): JSX.Element[] => {
     const pointerup = (e:PointerEvent) => {
       document.removeEventListener?.('pointerup', pointerup, true);
       setFinalNumber?.(lastVal)
+      checkAutorange()
     };
     if (multithumb) {
       const pointerEndup = (e:PointerEvent) => {
         document.removeEventListener?.('pointerup', pointerEndup, true);
         setFinalEndNumber?.(lastEndVal)
+        checkAutorange()
       };
       return [
         <div className={`range-slider ${size}`}>
@@ -140,7 +162,13 @@ export const Slider = (props: ISliderProps) => {
   }
 
   const slider: JSX.Element = (
-    <div className={`slider-wrapper`} style={{
+    <div className={`slider-wrapper`} 
+    onPointerEnter={e => {
+      lastVal = valLoc;
+      lastEndVal = endNumberLoc;
+      console.log("Last = " + lastVal, lastEndVal)
+    }}
+    style={{
       padding: `5px 0px ${getHeight(height, size)}px 0px`,
       width: fillWidth ? '100%' : 'fit-content'
     }}>
@@ -178,7 +206,7 @@ export const Slider = (props: ISliderProps) => {
 
   return (
     formLabel ? 
-    <div className={`form-wrapper ${formLabelPlacement}`}>
+    <div  className={`form-wrapper ${formLabelPlacement}`}>
         <div className={'formLabel'} style={{fontSize: getFormLabelSize(size)}}>{formLabel}</div>
         {slider}
     </div>
