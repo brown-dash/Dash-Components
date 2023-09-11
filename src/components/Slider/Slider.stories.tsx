@@ -17,6 +17,8 @@ Value.args = {
   max: 10,
   step: 1,
   minDiff: 0.1,
+  onPointerDown: (e) => console.log("Slider Down"),
+  setFinalNumber: (v) => console.log("Slider final:" + v)
 }
 
 export const MultiThumb = Template.bind({})
@@ -27,4 +29,7 @@ MultiThumb.args = {
   max: 100,
   step: 0.1,
   minDiff: 0.3,
+  onPointerDown: (e) => console.log("Slider Down"),
+  setFinalNumber: (v) => console.log("Slider final:" + v),
+  setFinalEndNumber: (v) => console.log("Slider end final:" + v)
 }

@@ -6,6 +6,8 @@ export interface ISliderProps extends INumberProps {
   multithumb: boolean
   endNumber?: number
   setEndNumber?: (newVal: number) => void
+  setFinalNumber?: (newVal: number) => void
+  setFinalEndNumber?: (newVal: number) => void
   step?: number
   minDiff?: number
 }
@@ -30,6 +32,8 @@ export const Slider = (props: ISliderProps) => {
     onPointerDown, 
     setNumber = setNumberLoc, 
     setEndNumber = setEndNumberLoc,
+    setFinalNumber, 
+    setFinalEndNumber,
     color = Colors.MEDIUM_BLUE,
     fillWidth
   } = props
@@ -76,17 +80,12 @@ export const Slider = (props: ISliderProps) => {
             value={endNumber}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               e.stopPropagation()
-              if (minDiff) {
-                setEndNumber(Math.max(number + minDiff, Number(e.target.value)))
-                setEndNumber && setEndNumber(Math.max(number + minDiff, Number(e.target.value)))
-              } else {
-                setEndNumber(Math.max(number, Number(e.target.value)))
-                setEndNumber && setEndNumber(Math.max(number, Number(e.target.value)))
-              }
+              setEndNumber(Math.max(number + (minDiff??0), Number(e.target.value)))
             }}
             onPointerDown={() => {
             }}
             onPointerUp={() => {
+              setFinalEndNumber?.(endNumberLoc)
             }}
             className={`rs-range ${size}`}
             id="rs-range"
@@ -104,17 +103,12 @@ export const Slider = (props: ISliderProps) => {
             value={number}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               e.stopPropagation()
-              if (minDiff) {
-                setNumber(Math.min(endNumber - minDiff, Number(e.target.value)))
-                setNumber && setNumber(Math.min(endNumber - minDiff, Number(e.target.value)))
-              } else {
-                setNumber(Math.min(endNumber, Number(e.target.value)))
-                setNumber && setNumber(Math.min(endNumber, Number(e.target.value)))
-              }
+              setNumber(Math.min(endNumber - (minDiff??0), Number(e.target.value)))
             }}
             onPointerDown={() => {
             }}
             onPointerUp={() => {
+              setFinalNumber?.(valLoc)
             }}
             className={`rs-range ${size}`}
             id="rs-range"
@@ -135,10 +129,10 @@ export const Slider = (props: ISliderProps) => {
             onPointerDown={() => {
             }}
             onPointerUp={() => {
+              setFinalNumber?.(valLoc)
             }}
             onChange={(e) => {
               setNumber(Number(e.target.value))
-              setNumber && setNumber(Number(e.target.value))
             }}
           />
         </div>

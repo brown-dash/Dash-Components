@@ -309,6 +309,8 @@ interface ISliderProps extends INumberProps {
     multithumb: boolean;
     endNumber?: number;
     setEndNumber?: (newVal: number) => void;
+    setFinalNumber?: (newVal: number) => void;
+    setFinalEndNumber?: (newVal: number) => void;
     step?: number;
     minDiff?: number;
 }
