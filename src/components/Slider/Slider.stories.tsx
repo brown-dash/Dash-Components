@@ -12,9 +12,9 @@ const Template: Story<ISliderProps> = (args) => <Slider {...args} />
 export const Value = Template.bind({})
 Value.args = {
   multithumb: false,
-  initialVal: -100,
   min: -1100,
   max: -100,
+  number: -200,
   step: 1,
   minDiff: 0.1,
   onPointerDown: (e) => console.log("Slider Down"),

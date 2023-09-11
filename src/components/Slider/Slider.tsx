@@ -4,8 +4,6 @@ import './Slider.scss'
 
 export interface ISliderProps extends INumberProps {
   multithumb: boolean
-  initialVal?: number
-  initialEndVal?: number
   endNumber?: number
   setEndNumber?: (newVal: number) => void
   setFinalNumber?: (newVal: number) => void
@@ -14,11 +12,14 @@ export interface ISliderProps extends INumberProps {
   minDiff?: number
 }
 
+let lastVal = 0;  // bcz: WHY do I have to do this??  the pointerdown event locks in the value of 'valLoc' when it's created so need some other way to get the current value to that old handler...
+let lastEndVal = 0;
+
 export const Slider = (props: ISliderProps) => {
   const [width, setWidth] = useState<number>(100);
-  const [valLoc, setNumberLoc] = useState<number>(props.initialVal??(props.min + (props.max-props.min)/2));
-  const [endNumberLoc, setEndNumberLoc] = useState<number>(props.initialEndVal??(props.min + (props.max-props.min)/2));
-
+  const [valLoc, setNumberLoc] = useState<number>(props.number??(props.min + (props.max-props.min)/2));
+  const [endNumberLoc, setEndNumberLoc] = useState<number>(props.endNumber??(props.min + (props.max-props.min)/2));
+  
   const { 
     formLabel, 
     formLabelPlacement, 
@@ -43,8 +44,7 @@ export const Slider = (props: ISliderProps) => {
 
   const getLeftPos = (locVal: number) => {
     const dragger = getHeight(height,size)
-    console.log(`locVal=${locVal} min=${min} max=${max} width=${width} dragger=${dragger}==> ratio=${((locVal-min)/ (max-min))} newwidt=${(width-dragger)} ${(((locVal-min)/ (max-min)) * (width-dragger))}`)
-      return (((locVal-min)/ (max-min)) * (width-dragger))
+    return (((locVal-min)/ (max-min)) * (width-dragger))
   }
 
   const getValueLabel = (locVal: number): JSX.Element => {
@@ -66,10 +66,18 @@ export const Slider = (props: ISliderProps) => {
   }
 
   const getSlider = (): JSX.Element[] => {
+    const pointerup = (e:PointerEvent) => {
+      document.removeEventListener?.('pointerup', pointerup, true);
+      setFinalNumber?.(lastVal)
+    };
     if (multithumb) {
+      const pointerEndup = (e:PointerEvent) => {
+        document.removeEventListener?.('pointerup', pointerEndup, true);
+        setFinalEndNumber?.(lastEndVal)
+      };
       return [
         <div className={`range-slider ${size}`}>
-          {getValueLabel(endNumber)}
+          {getValueLabel(endNumberLoc)}
           <input
             type="range"
             color={color}
@@ -78,59 +86,49 @@ export const Slider = (props: ISliderProps) => {
             height={getHeight(height, size)}
             step={step}
             value={endNumber}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              e.stopPropagation()
-              setEndNumber(Math.max(number + (minDiff??0), Number(e.target.value)))
+            onChange={e => {
+              e.stopPropagation();
+              setEndNumber(lastEndVal = Math.max(number + (minDiff??0), Number(e.target.value)))
             }}
-            onPointerDown={() => {
-            }}
-            onPointerUp={() => {
-              setFinalEndNumber?.(endNumberLoc)
-            }}
+            onPointerDown={e => document.addEventListener('pointerup', pointerEndup, true)}
             className={`rs-range ${size}`}
           />
           </div>,
         <div className={`range-slider ${size}`}>
-          {getValueLabel(number)}
+          {getValueLabel(valLoc)}
             <input
-            type="range"
-            color={color}
-            min={min}
-            max={max}
-            height={getHeight(height, size)}
-            step={step}
-            value={number}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              e.stopPropagation()
-              setNumber(Math.min(endNumber - (minDiff??0), Number(e.target.value)))
-            }}
-            onPointerDown={() => {
-            }}
-            onPointerUp={() => {
-              setFinalNumber?.(valLoc)
-            }}
-            className={`rs-range ${size}`}
-          />
+              type="range"
+              color={color}
+              min={min}
+              max={max}
+              height={getHeight(height, size)}
+              step={step}
+              value={number}
+              onChange={e => {
+                e.stopPropagation();
+                setNumber(lastVal = Math.min(endNumber - (minDiff??0), Number(e.target.value)))
+              }}
+              onPointerDown={e => document.addEventListener('pointerup', pointerup, true)}
+              className={`rs-range ${size}`}
+            />
           </div>
           ]
     } else {
       return ([
         <div className={`range-slider ${size}`}>
-          {getValueLabel(number)}
+          {getValueLabel(valLoc)}
           <input 
             className={`rs-range ${size}`}
             type="range" 
             step={step}
-            value={number}
+            defaultValue={number}
             min={min}
             max={max}
-            onPointerDown={() => {
-            }}
-            onPointerUp={() => {
-              setFinalNumber?.(valLoc)
-            }}
-            onChange={(e) => {
-              setNumber(Number(e.target.value))
+            draggable={false}
+            onPointerDown={e => document.addEventListener('pointerup', pointerup, true)}
+            onChange={e => {
+              e.stopPropagation();
+              setNumber(lastVal = +e.target.value);
             }}
           />
         </div>
