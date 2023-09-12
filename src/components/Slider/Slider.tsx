@@ -11,6 +11,7 @@ export interface ISliderProps extends INumberProps {
   setEndNumber?: (newVal: number) => void
   setFinalNumber?: (newVal: number) => void
   setFinalEndNumber?: (newVal: number) => void
+  decimals?: number; 
   step?: number
   minDiff?: number
 }
@@ -19,10 +20,9 @@ let lastVal = 0;  // bcz: WHY do I have to do this??  the pointerdown event lock
 let lastEndVal = 0;
 
 export const Slider = (props: ISliderProps) => {
-  useEffect(() => console.log(props),[props])
   const [width, setWidth] = useState<number>(100);
   const [valLoc, setNumberLoc] = useState<number>(props.number??(props.min + (props.max-props.min)/2));
-  const [endNumberLoc, setEndNumberLoc] = useState<number>(props.endNumber??(props.min + (props.max-props.min)/2));
+  const [endNumberLoc, setEndNumberLoc] = useState<number>(props.endNumber??(props.min + 2*(props.max-props.min)/3));
   const [min, setMin] = useState<number>(props.min);
   const [max, setMax] = useState<number>(props.max);
   const { 
@@ -32,10 +32,11 @@ export const Slider = (props: ISliderProps) => {
     autorange,
     autorangeMin,
     autorangeMultiplier,
+    decimals,
     step = 1, 
     number = valLoc, 
     endNumber = endNumberLoc, 
-    minDiff, 
+    minDiff = (max-min)/20, 
     size = Size.SMALL, 
     height, 
     unit, 
@@ -47,6 +48,8 @@ export const Slider = (props: ISliderProps) => {
     color = Colors.MEDIUM_BLUE,
     fillWidth
   } = props
+
+  const toDecimal = (num:number) => decimals !== undefined ? Math.round(num*Math.pow(10,decimals))/Math.pow(10,decimals): num;
 
   const getLeftPos = (locVal: number) => {
     const dragger = getHeight(height,size)
@@ -66,7 +69,7 @@ export const Slider = (props: ISliderProps) => {
             }}
             >
             <span className="rs-label">
-              {locVal}
+              {toDecimal(locVal)}
             </span>
           </div>)
   }
@@ -101,7 +104,7 @@ export const Slider = (props: ISliderProps) => {
             min={min}
             max={max}
             step={step}
-            defaultValue={val}
+            value={val}
             onPointerDown={e => document.addEventListener('pointerup', valPointerup, true)}
             onChange={e => {
               onchange(+e.target.value);
@@ -155,8 +158,8 @@ export const Slider = (props: ISliderProps) => {
             background: color,
           }}/>
           <div className="box-minmax" style={{ fontSize: getFontSize(size), color }}>
-          <span>{min}{unit}</span>
-          <span>{max}{unit}</span>
+          <span>{toDecimal(min)}{unit}</span>
+          <span>{toDecimal(max)}{unit}</span>
         </div>
       </div>
     </div>

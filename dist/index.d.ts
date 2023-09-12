@@ -314,6 +314,7 @@ interface ISliderProps extends INumberProps {
     setEndNumber?: (newVal: number) => void;
     setFinalNumber?: (newVal: number) => void;
     setFinalEndNumber?: (newVal: number) => void;
+    decimals?: number;
     step?: number;
     minDiff?: number;
 }

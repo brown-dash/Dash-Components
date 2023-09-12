@@ -12,12 +12,12 @@ const Template: Story<ISliderProps> = (args) => <Slider {...args} />
 export const Value = Template.bind({})
 Value.args = {
   multithumb: false,
-  min: -1100,
-  max: -100,
-  number: -200,
+  min: -1100.34234234234,
+  max: -100.2323423423423,
+  number: -200.234234333,
   autorange: 500,
+  decimals: 0,
   step: 1,
-  minDiff: 0.1,
   onPointerDown: (e) => console.log("Slider Down"),
   setNumber: (e) => console.log("Set num", e),
   setFinalNumber: (v) => console.log("Slider final:" + v)
@@ -26,11 +26,12 @@ Value.args = {
 export const MultiThumb = Template.bind({})
 MultiThumb.args = {
   multithumb: true,
-  initialVal: 2,
-  min: 0,
-  max: 100,
-  step: 0.1,
-  minDiff: 0.3,
+  value: 33.333,
+  min: 0.3242342,
+  max: 100.234234234,
+  step: 0.1111,
+  decimals: 1,
+  minDiff: 1,
   autorangeMin: 100,
   autorangeMultiplier: 2,
   onPointerDown: (e) => console.log("Slider Down"),

@@ -49,9 +49,12 @@
 
       .rs-label {
         display: flex;
+        font-size: smaller;
         white-space: nowrap;
         border-radius: 100%;
         text-align: center;
+        text-wrap: wrap;
+        word-break: break-all;
         justify-content: center;
         align-items: center;
         font-family: $default-font;
