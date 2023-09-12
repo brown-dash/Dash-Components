@@ -4,9 +4,9 @@ import './Slider.scss'
 
 export interface ISliderProps extends INumberProps {
   multithumb: boolean
-  autorangeMin?: number
-  autorange?: number
-  autorangeMultiplier?: number
+  autorangeMinVal?: number // minimimum value that min can have when autoranging
+  autorangeMinSize?: number // minimum difference between min and max when autoranging
+  autorange?: number        // automatically adjust min/max to be +/- autorange/2 around the current value when the thumb is 15% from the min/max, or when the multithumbs are within 20% of the range and the range is bigger than autorange
   endNumber?: number
   setEndNumber?: (newVal: number) => void
   setFinalNumber?: (newVal: number) => void
@@ -30,8 +30,8 @@ export const Slider = (props: ISliderProps) => {
     formLabelPlacement, 
     multithumb, 
     autorange,
-    autorangeMin,
-    autorangeMultiplier,
+    autorangeMinVal,
+    autorangeMinSize,
     decimals,
     step = 1, 
     number = valLoc, 
@@ -74,17 +74,16 @@ export const Slider = (props: ISliderProps) => {
           </div>)
   }
   const checkAutorange = () => {
-    if (autorange || autorangeMultiplier) {
+    if (autorange) {
       const minval = multithumb ? Math.min(lastVal, lastEndVal) : lastVal;
       const maxval = multithumb ? Math.max(lastVal, lastEndVal) : lastVal;
-      const autosize = Math.max(autorangeMin??0,(autorange ?? (maxval-minval)))/2;
-      if ((Math.abs((minval - min)/(max-min)) < .15) ||
-          (Math.abs((max - maxval)/(max-min)) < .15)) {
-        setMin(minval - autosize)
-        setMax(maxval + autosize)
-      } else if (multithumb && (maxval - minval < (max-min)/5 && autosize < max-min)) {
-        setMin(minval - autosize)
-        setMax(maxval + autosize)
+      const autosize = Math.max(autorangeMinSize??0,(autorange ?? (maxval-minval)))/2;
+      if ((Math.abs((minval - min)/(max-min)) < .15) || (Math.abs((max - maxval)/(max-min)) < .15) ||
+          (multithumb && maxval - minval < (max-min)/5 && autosize < max-min)
+       ) {
+        const newminval = autorangeMinVal !== undefined && minval-autosize < autorangeMinVal? autorangeMinVal : minval-autosize;
+        setMin(newminval)
+        setMax(newminval !== minval ? Math.max(maxval + autosize, newminval +autosize): maxval+autosize )
       }
     }
   }
@@ -114,6 +113,7 @@ export const Slider = (props: ISliderProps) => {
       </div>);
   }
   const onchange = (val:number) => {
+      if (autorangeMinVal && val < autorangeMinVal) val = autorangeMinVal;
       setNumber?.(lastVal = Math.min(multithumb ? endNumber - (minDiff??0):Number.MAX_VALUE, val))
       setNumberLoc(lastVal = Math.min(multithumb ? endNumber - (minDiff??0):Number.MAX_VALUE, val))
   }
