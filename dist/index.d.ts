@@ -307,9 +307,9 @@ declare const Group: (props: IGroupProps) => JSX.Element;
 
 interface ISliderProps extends INumberProps {
     multithumb: boolean;
-    autorangeMin?: number;
+    autorangeMinVal?: number;
+    autorangeMinSize?: number;
     autorange?: number;
-    autorangeMultiplier?: number;
     endNumber?: number;
     setEndNumber?: (newVal: number) => void;
     setFinalNumber?: (newVal: number) => void;
