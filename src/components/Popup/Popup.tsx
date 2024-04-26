@@ -25,6 +25,7 @@ export interface IPopupProps extends IGlobalProps {
   setOpen?: (b: boolean) => void;
   background?: string,
   isToggle?: boolean;
+  toggleFunc?: () => void;
   popupContainsPt?: (x:number, y:number) => boolean
 }
 
@@ -115,7 +116,7 @@ export const Popup = (props: IPopupProps) => {
           size={size}
           type={type}
           color={color}
-          background={background}
+          background={props.isToggle ? undefined : background}
           toggleType={ToggleType.BUTTON}
           icon={icon}
           iconPlacement={iconPlacement}
@@ -123,8 +124,12 @@ export const Popup = (props: IPopupProps) => {
           label={props.label}
           toggleStatus={isOpen || props.toggleStatus}
           onClick={() => {
-            if (trigger === PopupTrigger.CLICK && (!props.isToggle || props.toggleStatus)) {
-              setOpen(!isOpen)
+            if (trigger === PopupTrigger.CLICK) {
+              if (!props.isToggle || props.toggleStatus) {
+                  setOpen(!isOpen)
+              } else {
+                  props.toggleFunc?.();
+              }
             }
           }}
           fillWidth={fillWidth}

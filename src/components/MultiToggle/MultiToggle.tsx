@@ -33,6 +33,11 @@ export const MultiToggle = (props: IMultiToggleProps) => {
                 tooltipPlacement={tooltipPlacement}
             />}
             isToggle={props.isToggle}
+            toggleFunc={() => {
+                const selItem = items.find(item => selectedVal === item.val);
+                selItem && setSelectedVal?.(selItem.val);
+            }}
+            type={props.type}
             label={props.isToggle ? props.label : undefined}
             icon={props.isToggle ? items.find(item => item.val == selectedVal)?.icon : undefined}
             toggleStatus={props.isToggle ? props.toggleStatus : undefined}

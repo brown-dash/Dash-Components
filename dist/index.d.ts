@@ -281,6 +281,7 @@ interface IPopupProps extends IGlobalProps {
     setOpen?: (b: boolean) => void;
     background?: string;
     isToggle?: boolean;
+    toggleFunc?: () => void;
     popupContainsPt?: (x: number, y: number) => boolean;
 }
 /**
