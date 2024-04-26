@@ -20,10 +20,11 @@ export interface IPopupProps extends IGlobalProps {
   toggle?: JSX.Element;
   popup: JSX.Element | string | (() => JSX.Element)
   trigger?: PopupTrigger
+  toggleStatus?: boolean;
   isOpen?: boolean;
   setOpen?: (b: boolean) => void;
   background?: string,
-  noOpen?: boolean;
+  isToggle?: boolean;
   popupContainsPt?: (x:number, y:number) => boolean
 }
 
@@ -91,7 +92,7 @@ export const Popup = (props: IPopupProps) => {
         className={`trigger-container ${fillWidth && 'fillWidth'}`}
         ref={triggerRef}
         onClick={() => {
-          if (trigger === PopupTrigger.CLICK && !props.noOpen) setOpen (!isOpen)
+          if (trigger === PopupTrigger.CLICK) setOpen (!isOpen)
         }}
         onPointerEnter={() => {
           if (trigger === PopupTrigger.HOVER || trigger === PopupTrigger.HOVER_DELAY) {
@@ -116,12 +117,13 @@ export const Popup = (props: IPopupProps) => {
           color={color}
           background={background}
           toggleType={ToggleType.BUTTON}
-          toggleStatus={isOpen}
           icon={icon}
           iconPlacement={iconPlacement}
           text={text}
+          label={props.label}
+          toggleStatus={isOpen || props.toggleStatus}
           onClick={() => {
-            if (trigger === PopupTrigger.CLICK) {
+            if (trigger === PopupTrigger.CLICK && (!props.isToggle || props.toggleStatus)) {
               setOpen(!isOpen)
             }
           }}

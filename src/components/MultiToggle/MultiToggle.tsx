@@ -14,7 +14,8 @@ export interface IMultiToggleProps extends IGlobalProps {
     items: IToggleItemProps[]
     selectedVal?: string,
     setSelectedVal?: (val: string | number) => unknown,
-    noOpen?: boolean;
+    isToggle?: boolean;
+    toggleStatus?: boolean;
 }
 
 export const MultiToggle = (props: IMultiToggleProps) => {
@@ -24,14 +25,17 @@ export const MultiToggle = (props: IMultiToggleProps) => {
     items.forEach((item) => itemsMap.set(item.val, item));
     return <div className={`multiToggle-container`}>
         <Popup
-            toggle={<IconButton
+            toggle={props.isToggle? undefined : <IconButton
                 color={color}
                 label={props.label}
                 {...itemsMap.get(selectedVal)}
                 tooltip={tooltip}
                 tooltipPlacement={tooltipPlacement}
             />}
-            noOpen={props.noOpen}
+            isToggle={props.isToggle}
+            label={props.isToggle ? props.label : undefined}
+            icon={props.isToggle ? items.find(item => item.val == selectedVal)?.icon : undefined}
+            toggleStatus={props.isToggle ? props.toggleStatus : undefined}
             color={color}
             popup={<Group padding={5} color={color} columnGap={0} style={{overflow: 'hidden'}}>
                 {items.map((item, i) =>
