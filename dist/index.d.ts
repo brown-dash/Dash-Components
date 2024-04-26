@@ -234,6 +234,7 @@ interface IMultiToggleProps extends IGlobalProps {
     items: IToggleItemProps[];
     selectedVal?: string;
     setSelectedVal?: (val: string | number) => unknown;
+    noOpen?: boolean;
 }
 declare const MultiToggle: (props: IMultiToggleProps) => JSX.Element;
 
@@ -277,6 +278,7 @@ interface IPopupProps extends IGlobalProps {
     isOpen?: boolean;
     setOpen?: (b: boolean) => void;
     background?: string;
+    noOpen?: boolean;
     popupContainsPt?: (x: number, y: number) => boolean;
 }
 /**
