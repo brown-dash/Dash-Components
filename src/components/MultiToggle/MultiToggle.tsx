@@ -14,6 +14,7 @@ export interface IMultiToggleProps extends IGlobalProps {
     items: IToggleItemProps[]
     selectedVal?: string,
     setSelectedVal?: (val: string | number) => unknown,
+    noOpen?: boolean;
 }
 
 export const MultiToggle = (props: IMultiToggleProps) => {
@@ -30,6 +31,7 @@ export const MultiToggle = (props: IMultiToggleProps) => {
                 tooltip={tooltip}
                 tooltipPlacement={tooltipPlacement}
             />}
+            noOpen={props.noOpen}
             color={color}
             popup={<Group padding={5} color={color} columnGap={0} style={{overflow: 'hidden'}}>
                 {items.map((item, i) =>

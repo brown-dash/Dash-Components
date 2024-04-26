@@ -14,6 +14,7 @@ export const MultiToggleOne = MultiToggleStory.bind({})
 MultiToggleOne.args = {
   tooltip: "Text alignment",
   label: "Alignment",
+  noOpen: false,
   items: [
     {
       icon: <FaAlignLeft/>,

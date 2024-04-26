@@ -1,6 +1,6 @@
 {
   "name": "browndash-components",
-  "version": "0.1.36",
+  "version": "0.1.37",
   "description": "Component library as used by Dash.",
   "main": "dist/cjs/index.js",
   "types": "dist/cjs/types/index.d.ts",
@@ -73,7 +73,6 @@
     "npm": "^9.8.1",
     "react-color": "^2.19.3",
     "react-icons": "^4.3.1",
-    "react-measure": "^2.5.2",
-    "styled-components": "^6.0.3"
+    "react-measure": "^2.5.2"
   }
 }

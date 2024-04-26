@@ -23,6 +23,7 @@ export interface IPopupProps extends IGlobalProps {
   isOpen?: boolean;
   setOpen?: (b: boolean) => void;
   background?: string,
+  noOpen?: boolean;
   popupContainsPt?: (x:number, y:number) => boolean
 }
 
@@ -90,7 +91,7 @@ export const Popup = (props: IPopupProps) => {
         className={`trigger-container ${fillWidth && 'fillWidth'}`}
         ref={triggerRef}
         onClick={() => {
-          if (trigger === PopupTrigger.CLICK) setOpen (!isOpen)
+          if (trigger === PopupTrigger.CLICK && !props.noOpen) setOpen (!isOpen)
         }}
         onPointerEnter={() => {
           if (trigger === PopupTrigger.HOVER || trigger === PopupTrigger.HOVER_DELAY) {

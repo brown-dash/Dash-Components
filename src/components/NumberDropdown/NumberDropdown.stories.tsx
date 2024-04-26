@@ -11,7 +11,7 @@ export default {
 
 // const [number, setNumber] = useState<number>(0)
 
-const Template: Story<INumberDropdownProps> = (args) => <NumberDropdown {...args} />
+const Template: Story<INumberDropdownProps> = (args) => <NumberDropdown {...args} setNumber={val => console.log(val)} />
 export const NumberInputOne = Template.bind({})
 NumberInputOne.args = {
   min: 0,
