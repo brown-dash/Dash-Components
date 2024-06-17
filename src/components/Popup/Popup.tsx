@@ -127,9 +127,8 @@ export const Popup = (props: IPopupProps) => {
             if (trigger === PopupTrigger.CLICK) {
               if (!props.isToggle || props.toggleStatus) {
                   setOpen(!isOpen)
-              } else {
-                  props.toggleFunc?.();
               }
+              props.toggleFunc?.();
             }
           }}
           fillWidth={fillWidth}
