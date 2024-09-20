@@ -14,6 +14,7 @@ export const MultiToggleOne = MultiToggleStory.bind({})
 MultiToggleOne.args = {
   tooltip: "Text alignment",
   label: "Alignment",
+  defaultSelectedVal: "center",
   items: [
     {
       icon: <FaAlignLeft/>,
@@ -40,5 +41,25 @@ MultiToggleOne.args = {
 
 export const MultiToggleTwo = MultiToggleStory.bind({})
 MultiToggleTwo.args = {
-
+  tooltip: "Text Tags",
+  label: "Tags",
+  defaultSelectedVal : ["left"],
+  multiSelect: true,
+  items: [
+    {
+      icon: <FaAlignLeft/>,
+      tooltip: 'Like',
+      val: "left"
+    },
+    {
+      icon: <FaAlignCenter/>,
+      tooltip: 'Todo',
+      val: "center"
+    },
+    {
+      icon: <FaAlignRight/>,
+      tooltip: 'Idea',
+      val: "right"
+    },
+  ]
 }
