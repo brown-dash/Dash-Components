@@ -13,9 +13,9 @@ export interface IToggleItemProps extends IToggleProps {
 export interface IMultiToggleProps extends IGlobalProps {
     items: IToggleItemProps[]
     multiSelect?: boolean;
-    defaultSelectedVal?: (string|number) | ((string|number)[]),
-    selectedVal?: (string | number) | ((string|number)[]),
-    setSelectedVal?: (val: (string|number) | (string|number)[]) => unknown,
+    defaultSelectedItems?: (string|number) | ((string|number)[]),
+    selectedItems?: (string | number) | ((string|number)[]),
+    onSelectionChange?: (val: (string|number) | (string|number)[], added: boolean) => unknown,
     isToggle?: boolean;
     toggleStatus?: boolean;
 }
@@ -29,11 +29,11 @@ function promoteToArray(d : (string|number)[]|(string|number)|undefined) {
 
 export const MultiToggle = (props: IMultiToggleProps) => {
     let init = true;
-    const initVal = (!init ? undefined : promoteToArrayOrUndefined(props.defaultSelectedVal)) ?? promoteToArrayOrUndefined(props.selectedVal) ?? [];
+    const initVal = (!init ? undefined : promoteToArrayOrUndefined(props.defaultSelectedItems)) ?? promoteToArrayOrUndefined(props.selectedItems) ?? [];
     init = false;
 
-    const [selectedValLoc, setSelectedValLoc] = useState(initVal as (string|number) | ((string|number)[]));
-    const { items, selectedVal = selectedValLoc, tooltip, tooltipPlacement = 'top', setSelectedVal = setSelectedValLoc, color } = props;
+    const [selectedItemsLocal, setSelectedItemsLocal] = useState(initVal as (string|number) | ((string|number)[]));
+    const { items, selectedItems = selectedItemsLocal, tooltip, tooltipPlacement = 'top', onSelectionChange, color } = props;
     const itemsMap = new Map();
     items.forEach((item) => itemsMap.set(item.val, item));
     console.log("Color = ", color)
@@ -43,19 +43,19 @@ export const MultiToggle = (props: IMultiToggleProps) => {
                 <IconButton
                     color={color}
                     label={props.label}
-                    {...(itemsMap.get(promoteToArray(selectedVal)[0]) ?? {})}
+                    {...(itemsMap.get(promoteToArray(selectedItems)[0]) ?? {})}
                     tooltip={tooltip}
                     tooltipPlacement={tooltipPlacement}
                 />
-                {promoteToArray(selectedVal).length < 2 ? null : 
+                {promoteToArray(selectedItems).length < 2 ? null : 
                     <div style={{position: "absolute", top: "0", left: "0", color: color ?? Colors.MEDIUM_BLUE}}>
                         +
                     </div>}
             </div>}
             isToggle={props.isToggle}
             toggleFunc={() => {
-                const selItem = items.find(item => promoteToArray(selectedVal).includes(item.val));
-                selItem && setSelectedVal?.([selItem.val]);
+                const selItem = items.find(item => promoteToArray(selectedItems).includes(item.val));
+                selItem && setSelectedItemsLocal([selItem.val]);
             }}
             type={props.type}
             label={props.isToggle ? props.label : undefined}
@@ -64,15 +64,17 @@ export const MultiToggle = (props: IMultiToggleProps) => {
             popup={<Group padding={5} color={color} columnGap={0} style={{overflow: 'hidden'}}>
                 {items.map((item, i) =>
                     <Toggle key={i} color={color} icon={item.icon} tooltip={item.tooltip}
-                        toggleStatus={promoteToArray(selectedVal).includes(item.val)} 
+                        toggleStatus={promoteToArray(selectedItems).includes(item.val)} 
                         type={Type.PRIM}
                         toggleType={ToggleType.BUTTON}
                         onClick={e => {
                             const selected = new Set<string|number>();
-                            promoteToArray(selectedVal).forEach(val => val && selected.add(val));
-                            if (props.multiSelect && selected.has(item.val)) selected.delete(item.val);
+                            promoteToArray(selectedItems).forEach(val => val && selected.add(val));
+                            const toAdd = !props.multiSelect || !selected.has(item.val)
+                            if (!toAdd) selected.delete(item.val);
                             else item.val && selected.add(item.val);
-                            setSelectedVal?.(props.multiSelect ? Array.from(selected) : item.val);
+                            onSelectionChange?.(item.val, toAdd);
+                            setSelectedItemsLocal(props.multiSelect ? Array.from(selected) : item.val);
                             e.stopPropagation();
                         }}/>
                 )}

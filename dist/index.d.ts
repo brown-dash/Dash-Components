@@ -233,9 +233,9 @@ interface IToggleItemProps extends IToggleProps {
 interface IMultiToggleProps extends IGlobalProps {
     items: IToggleItemProps[];
     multiSelect?: boolean;
-    defaultSelectedVal?: (string | number) | ((string | number)[]);
-    selectedVal?: (string | number) | ((string | number)[]);
-    setSelectedVal?: (val: (string | number) | (string | number)[]) => unknown;
+    defaultSelectedItems?: (string | number) | ((string | number)[]);
+    selectedItems?: (string | number) | ((string | number)[]);
+    onSelectionChange?: (val: (string | number) | (string | number)[], added: boolean) => unknown;
     isToggle?: boolean;
     toggleStatus?: boolean;
 }
