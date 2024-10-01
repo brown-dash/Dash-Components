@@ -44,6 +44,8 @@ MultiToggleTwo.args = {
   tooltip: "Text Tags",
   label: "Tags",
   defaultSelectedItems : ["left"],
+  background: "green",
+  color: 'white',
   multiSelect: true,
   items: [
     {

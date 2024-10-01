@@ -33,16 +33,18 @@ export const MultiToggle = (props: IMultiToggleProps) => {
     init = false;
 
     const [selectedItemsLocal, setSelectedItemsLocal] = useState(initVal as (string|number) | ((string|number)[]));
-    const { items, selectedItems = selectedItemsLocal, tooltip, tooltipPlacement = 'top', onSelectionChange, color } = props;
+    const { items, selectedItems = selectedItemsLocal, tooltip, tooltipPlacement = 'top', onSelectionChange, color, background } = props;
     const itemsMap = new Map();
     items.forEach((item) => itemsMap.set(item.val, item));
-    console.log("Color = ", color)
     return <div className={`multiToggle-container`}>
         <Popup
-            toggle={props.isToggle? undefined : <div style={{position: "relative",}}>
+            toggle={props.isToggle? undefined : <div style={{position: "relative"}}>
                 <IconButton
                     color={color}
+                    borderColor={background ? color : undefined}
                     label={props.label}
+                    background={background}
+                    type={color && background ? Type.TERT : undefined}
                     {...(itemsMap.get(promoteToArray(selectedItems)[0]) ?? {})}
                     tooltip={tooltip}
                     tooltipPlacement={tooltipPlacement}
