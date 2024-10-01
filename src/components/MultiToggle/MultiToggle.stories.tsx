@@ -15,6 +15,8 @@ MultiToggleOne.args = {
   tooltip: "Text alignment",
   label: "Alignment",
   defaultSelectedItems: "center",
+  toggleStatus: true,
+  isToggle: false,
   items: [
     {
       icon: <FaAlignLeft/>,

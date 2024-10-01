@@ -43,6 +43,7 @@ export const MultiToggle = (props: IMultiToggleProps) => {
                     color={color}
                     borderColor={background ? color : undefined}
                     label={props.label}
+                    active={props.toggleStatus}
                     background={background}
                     type={color && background ? Type.TERT : undefined}
                     {...(itemsMap.get(promoteToArray(selectedItems)[0]) ?? {})}
