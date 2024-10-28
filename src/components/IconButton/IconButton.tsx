@@ -132,6 +132,7 @@ export const IconButton = (props: IButtonProps) => {
         onDoubleClick={handleDoubleClick}
         onPointerDown={handlePointerDown}
         style={{...defaultProperties, ...style}}
+        tabIndex={-1}
       >
         <div className="iconButton-content">
           {icon}

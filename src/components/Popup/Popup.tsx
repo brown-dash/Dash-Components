@@ -26,7 +26,7 @@ export interface IPopupProps extends IGlobalProps {
   background?: string,
   isToggle?: boolean;
   toggleFunc?: () => void;
-  popupContainsPt?: (x:number, y:number) => boolean
+  popupContainsPt?: (x:number, y:number) => boolean;
 }
 
 /**
@@ -39,15 +39,6 @@ export interface IPopupProps extends IGlobalProps {
  */
 export const Popup = (props: IPopupProps) => {
   
-  React.useEffect(
-    () => {
-      window.addEventListener("pointerdown", handlePointerAwayDown, {capture:true});
-      return () => {
-        window.removeEventListener("pointerdown", handlePointerAwayDown, {capture:true});
-      }
-    },
-    [props]
-  )
   const [locIsOpen, locSetOpen] = useState<boolean>(false)
 
   const {
@@ -67,7 +58,8 @@ export const Popup = (props: IPopupProps) => {
     height,
     fillWidth,
     iconPlacement = 'left',
-    background = isDark(color) ? Colors.LIGHT_GRAY : Colors.DARK_GRAY
+    background = isDark(color) ? Colors.LIGHT_GRAY : Colors.DARK_GRAY,
+    popupContainsPt
   } = props
   
   const triggerRef = useRef(null);
@@ -78,14 +70,20 @@ export const Popup = (props: IPopupProps) => {
   const handlePointerAwayDown = (e: PointerEvent) => {
     const rect = (popperRef.current as any)?.getBoundingClientRect();
     if (rect && !(rect.left < e.clientX && rect.top < e.clientY && rect.right > e.clientX && rect.bottom > e.clientY) &&
-        !props.popupContainsPt?.(e.clientX, e.clientY)) {
-      e.stopPropagation();
+        !popupContainsPt?.(e.clientX, e.clientY)) {
       e.preventDefault();
       setOpen(false);
     }
   }
 
-  useEffect(() => window.addEventListener("pointerdown", handlePointerAwayDown, {capture:true}), [isOpen])
+  useEffect(() => {
+    if (isOpen) {
+      window.removeEventListener("pointerdown", handlePointerAwayDown, {capture:true})
+      window.addEventListener("pointerdown", handlePointerAwayDown, {capture:true});
+      return () => {
+          window.removeEventListener("pointerdown", handlePointerAwayDown, {capture:true});
+      }
+    }}, [isOpen, popupContainsPt])
   
   return (
     <div className={`popup-wrapper ${fillWidth && 'fillWidth'}`} >

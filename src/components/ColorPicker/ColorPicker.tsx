@@ -142,7 +142,6 @@ export const ColorPicker = (props: IColorPickerProps) => {
     }
   }
   const openChanged = (isOpen:boolean) => setPickerSelectorOpen(isOpen);
-  const pickerIsOpen = (x:number, y:number) => pickerSelectorOpen;
 
   const getPopup = ():JSX.Element => {
     if (colorPickerType){
@@ -175,6 +174,8 @@ export const ColorPicker = (props: IColorPickerProps) => {
     } 
   }
 
+  const popupContainsPt = (x:number, y:number) => pickerSelectorOpen;
+
   const colorPicker: JSX.Element = 
   (
     <Popup
@@ -186,7 +187,7 @@ export const ColorPicker = (props: IColorPickerProps) => {
         size={size}
         color={selectedColor}
         popup={getPopup()}
-        popupContainsPt={pickerIsOpen} // this should prohbably test to see if the click pt is actually within the picker selector list popup.
+        popupContainsPt={popupContainsPt} // this should prohbably test to see if the click pt is actually within the picker selector list popup.
       />
   )
 
