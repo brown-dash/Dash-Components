@@ -55,6 +55,7 @@ export const ListItem = (props: IListItemProps) => {
 
   let listItem:JSX.Element = (
     <div
+      tabIndex={-1}
       className="listItem-container"
       onPointerDown={(e) => onItemDown?.(e, val) && setSelectedVal?.(val)}
       onClick={(e: React.MouseEvent) => {

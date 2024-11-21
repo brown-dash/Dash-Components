@@ -128,8 +128,8 @@ export const NumberDropdown = (props: INumberDropdownProps) => {
         formLabel ? 
         <div className={`form-wrapper ${formLabelPlacement}`}
 style={{ width: fillWidth ? '100%' : undefined}}>
-            <div className={'formLabel'} style={{fontSize: getFormLabelSize(size)}}>{formLabel}</div>
             {numberDropdown}
+            <div className={'formLabel'} style={{fontSize: getFormLabelSize(size)}}>{formLabel}</div>
         </div>
         :
         numberDropdown
